@@ -3,93 +3,77 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtoty <jtoty@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lmartin <lmartin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/28 12:19:22 by jtoty             #+#    #+#             */
-/*   Updated: 2021/11/22 02:31:42 by changhle         ###   ########.fr       */
+/*   Created: 2019/10/09 14:26:18 by lmartin           #+#    #+#             */
+/*   Updated: 2021/11/23 20:30:17 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <unistd.h>
 #include "libft.h"
+#include <unistd.h>
+#include <string.h>
 
-void	ft_print_result(char const *s)
+t_list	*ft_lstnewone(void *content)
 {
-	int		len;
+	t_list	*elem;
 
-	len = 0;
-	while (s[len])
-		len++;
-	write(1, s, len);
+	elem = (t_list *)malloc(sizeof(t_list));
+	if (!elem)
+		return (NULL);
+	if (!content)
+		elem->content = NULL;
+	else
+		elem->content = content;
+	elem->next = NULL;
+	return (elem);
 }
 
-int		main(int argc, const char *argv[])
+int main(int argc, const char *argv[])
 {
-	int		arg;
+	int			i;
+	char		*content;
+	t_list		*val;
+	t_list		*elem;
+	t_list		*elem2;
+	t_list		*elem3;
+	t_list		*elem4;
+	char		*str = strdup("lorem");
+	char		*str2 = strdup("ipsum");
+	char		*str3 = strdup("dolor");
+	char		*str4 = strdup("sit");
 
+	elem = ft_lstnewone(str);
+	elem2 = ft_lstnewone(str2);
+	elem3 = ft_lstnewone(str3);
+	elem4 = ft_lstnewone(str4);
 	alarm(5);
-	if (argc == 1)
+	if (argc == 1 || !elem || !elem2 || !elem3 || !elem4)
 		return (0);
-	else if ((arg = atoi(argv[1])) == 1)
+	else if (atoi(argv[1]) == 1)
 	{
-		char *res = ft_itoa(0);
-		ft_print_result(res);
-		free(res);
-	}
-	else if (arg == 2)
-	{
-		char *res = ft_itoa(9);
-		ft_print_result(res);
-		free(res);
-	}
-	else if (arg == 3)
-	{
-		char *res = ft_itoa(-9);
-		ft_print_result(res);
-		free(res);
-	}
-	else if (arg == 4)
-	{
-		char *res = ft_itoa(10);
-		ft_print_result(res);
-		free(res);
-	}
-	else if (arg == 5)
-	{
-		char *res = ft_itoa(-10);
-		ft_print_result(res);
-		free(res);
-	}
-	else if (arg == 6)
-	{
-		char *res = ft_itoa(8124);
-		ft_print_result(res);
-		free(res);
-	}
-	else if (arg == 7)
-	{
-		char *res = ft_itoa(-9874);
-		ft_print_result(res);
-		free(res);
-	}
-	else if (arg == 8)
-	{
-		char *res = ft_itoa(543000);
-		ft_print_result(res);
-		free(res);
-	}
-	else if (arg == 9)
-	{
-		char *res = ft_itoa(-2147483648LL);
-		ft_print_result(res);
-		free(res);
-	}
-	else if (arg == 10)
-	{
-		char *res = ft_itoa(2147483647);
-		ft_print_result(res);
-		free(res);
+		elem->next = elem2;
+		elem2->next = elem3;
+		elem3->next = elem4;
+		val = ft_lstlast(elem);
+		i = 0;
+		content = val->content;
+		while (content[i])
+			write(1, &(content[i++]), 1);
+		write(1, "\n", 1);
+		elem->next = NULL;
+		val = ft_lstlast(elem);
+		content = val->content;
+		i = 0;
+		while (content[i])
+			write(1, &(content[i++]), 1);
+		write(1, "\n", 1);
+		elem = NULL;
+		val = ft_lstlast(elem);
+		if (val == NULL)
+			write(1, "NULL", 4);
+		write(1, "\n", 1);
 	}
 	return (0);
 }
