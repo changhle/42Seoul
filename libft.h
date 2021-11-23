@@ -47,5 +47,12 @@ void	ft_putnbr_fd(int n, int fd);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int	ft_strncmp(const char* str1, const char* str2, size_t n);
+t_list  *ft_lstnew(void *content);
+
+typedef struct  s_list
+{
+    void    *content;
+    struct s_list   *next;
+}   t_list;
 
 #endif
