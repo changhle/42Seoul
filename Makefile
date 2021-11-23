@@ -6,7 +6,7 @@
 #    By: changhle <changhle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/17 20:25:28 by changhle          #+#    #+#              #
-#    Updated: 2021/11/17 21:27:35 by changhle         ###   ########.fr        #
+#    Updated: 2021/11/23 18:55:53 by changhle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ fclean : clean
 	rm -f $(NAME)
 re : fclean all
 
+bonus : re
 
 $(NAME) : $(OBJS)
 	$(AR) $(ARFLAGS) $@ $?

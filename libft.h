@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 20:24:30 by changhle          #+#    #+#             */
-/*   Updated: 2021/11/21 23:19:21 by changhle         ###   ########.fr       */
+/*   Updated: 2021/11/23 18:43:08 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,13 @@ void	ft_putnbr_fd(int n, int fd);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int	ft_strncmp(const char* str1, const char* str2, size_t n);
-t_list  *ft_lstnew(void *content);
 
 typedef struct  s_list
 {
     void    *content;
     struct s_list   *next;
 }   t_list;
+
+t_list  *ft_lstnew(void *content);
 
 #endif
