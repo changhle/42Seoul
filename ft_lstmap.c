@@ -1,16 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 19:52:26 by changhle          #+#    #+#             */
-/*   Updated: 2021/11/23 19:52:26 by changhle         ###   ########.fr       */
+/*   Created: 2021/11/23 22:16:45 by changhle          #+#    #+#             */
+/*   Updated: 2021/11/23 22:16:45 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void ft_lstadd_back(t_list **lst, t_list *new)
+#include <stdlib.h>
+#include "libft.h"
+
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	while ()
+	t_list	*lst_cpy;
+
+	lst_cpy = malloc(sizeof(t_list));
+	if (!lst_cpy)
+		return (NULL);
+	while (lst != NULL)
+	{
+		lst_cpy->content = f(lst->content);
+		ft_lstmap(lst->next, f, del);
+	}
 }

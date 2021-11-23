@@ -1,16 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 19:52:26 by changhle          #+#    #+#             */
-/*   Updated: 2021/11/23 19:52:26 by changhle         ###   ########.fr       */
+/*   Created: 2021/11/23 21:53:27 by changhle          #+#    #+#             */
+/*   Updated: 2021/11/23 21:53:27 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void ft_lstadd_back(t_list **lst, t_list *new)
+#include <stdlib.h>
+#include "libft.h"
+
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	while ()
+	while (lst != NULL)
+	{
+		f(lst->content)
+		lst = lst->next;
+	}
 }
