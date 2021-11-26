@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 19:39:42 by changhle          #+#    #+#             */
-/*   Updated: 2021/11/23 20:00:45 by changhle         ###   ########.fr       */
+/*   Updated: 2021/11/26 18:22:57 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 
 int	ft_lstsize(t_list *lst)
 {
-	int	cnt;
+	size_t	size;
 
-	cnt = 0;
-	while (lst != NULL)
+	size = 0;
+	while (lst)
 	{
-		cnt++;
+		size++;
 		lst = lst->next;
 	}
-	return (cnt);
+	return (size);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmartin <lmartin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jtoty <jtoty@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/09 14:26:18 by lmartin           #+#    #+#             */
-/*   Updated: 2021/11/23 20:30:17 by changhle         ###   ########.fr       */
+/*   Created: 2017/02/28 15:16:21 by jtoty             #+#    #+#             */
+/*   Updated: 2021/11/26 18:30:05 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,18 @@
 #include "libft.h"
 #include <unistd.h>
 #include <string.h>
+#include <stdio.h>
+
+void	ft_print_result(t_list *elem)
+{
+	int		len;
+
+	len = 0;
+	while (((char *)elem->content)[len])
+		len++;
+	write(1, ((char *)elem->content), len);
+	write(1, "\n", 1);
+}
 
 t_list	*ft_lstnewone(void *content)
 {
@@ -30,15 +42,33 @@ t_list	*ft_lstnewone(void *content)
 	return (elem);
 }
 
+void	*ft_map(void *ct)
+{
+	int i;
+	void	*c;
+	char	*pouet;
+
+	c = ct;
+	i = -1;
+	pouet = (char *)c;
+	while (pouet[++i])
+		if (pouet[i] == 'o')
+			pouet[i] = 'a';
+	return (c);
+}
+
+void    ft_del(void *content)
+{
+	free(content);
+}
+
 int main(int argc, const char *argv[])
 {
-	int			i;
-	char		*content;
-	t_list		*val;
 	t_list		*elem;
 	t_list		*elem2;
 	t_list		*elem3;
 	t_list		*elem4;
+	t_list		*list;
 	char		*str = strdup("lorem");
 	char		*str2 = strdup("ipsum");
 	char		*str3 = strdup("dolor");
@@ -51,29 +81,24 @@ int main(int argc, const char *argv[])
 	alarm(5);
 	if (argc == 1 || !elem || !elem2 || !elem3 || !elem4)
 		return (0);
-	else if (atoi(argv[1]) == 1)
+	elem->next = elem2;
+	elem2->next = elem3;
+	elem3->next = elem4;
+	if (atoi(argv[1]) == 1)
 	{
-		elem->next = elem2;
-		elem2->next = elem3;
-		elem3->next = elem4;
-		val = ft_lstlast(elem);
+		if (!(list = ft_lstmap(elem, &ft_map, &ft_del)))
+			return (0);
+		if (list == elem)
+			write(1, "A new list is not returned\n", 27);
+		int i;
 		i = 0;
-		content = val->content;
-		while (content[i])
-			write(1, &(content[i++]), 1);
-		write(1, "\n", 1);
-		elem->next = NULL;
-		val = ft_lstlast(elem);
-		content = val->content;
-		i = 0;
-		while (content[i])
-			write(1, &(content[i++]), 1);
-		write(1, "\n", 1);
-		elem = NULL;
-		val = ft_lstlast(elem);
-		if (val == NULL)
-			write(1, "NULL", 4);
-		write(1, "\n", 1);
+		ft_print_result(list);
+		while (list->next)
+		{
+			list = list->next;
+			ft_print_result(list);
+			i++;
+		}
 	}
 	return (0);
 }
