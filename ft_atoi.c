@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	isspace(char c)
+#include "libft.h"
+
+static int	ft_isspace(char c)
 {
 	if (c == ' ' || c == '\n' || c == '\t'
 		|| c == '\v' || c == '\f' || c == '\r')
@@ -18,7 +20,7 @@ static int	isspace(char c)
 	return (0);
 }
 
-static int	isdigit(char c)
+static int	ft_isdigit(char c)
 {
 	if (c >= 48 && c <= 57)
 		return (1);
@@ -32,7 +34,7 @@ int	ft_atoi(const char *str)
 
 	sign = 1;
 	result = 0;
-	while (isspace(*str))
+	while (ft_ispace(*str))
 		str++;
 	if (*str == '+' || *str == '-')
 	{
@@ -40,7 +42,7 @@ int	ft_atoi(const char *str)
 			sign = -1;
 		str++;
 	}
-	while (isdigit(*str))
+	while (ft_issdigit(*str))
 	{
 		result = result * 10 + *str - 48;
 		str++;
