@@ -12,16 +12,6 @@
 
 #include "libft.h"
 
-static int	ft_strlen(const char *s)
-{
-	int	len;
-
-	len = 0;
-	while (s[len] != '\0')
-		len++;
-	return (len);
-}
-
 char	*ft_strdup(const char *s1)
 {
 	char	*str;

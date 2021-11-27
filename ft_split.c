@@ -35,7 +35,7 @@ static int	count_word(char const *s, char c)
 	return (cnt);
 }
 
-static char	*ft_strdup(char *str, int len)
+static char	*ft_strndup(char *str, int len)
 {
 	char	*s;
 	char	*ret_s;
@@ -71,7 +71,7 @@ static void	fill_word(char const *s, char **arr, char c)
 		else if (word == 1 && (*s == c || *s == '\0'))
 		{
 			word = 0;
-			arr[i++] = ft_strdup(start, s - start);
+			arr[i++] = ft_strndup(start, s - start);
 		}
 		arr[i] = 0;
 		if (*s == '\0')

@@ -12,16 +12,6 @@
 
 #include "libft.h"
 
-static int	ft_strlen(char const *s)
-{
-	int	len;
-
-	len = 0;
-	while (s[len] != '\0')
-		len++;
-	return (len);
-}
-
 static int	check_set(char c, char const *set)
 {
 	while (*set != '\0')
@@ -33,7 +23,7 @@ static int	check_set(char c, char const *set)
 	return (0);
 }
 
-static char	*ft_strdup(char const *s, int start, int len)
+static char	*ft_strndup(char const *s, int start, int len)
 {
 	char	*str;
 	int		i;
@@ -66,13 +56,13 @@ char	*ft_strtrim(char const *s1, char const *set)
 		i++;
 	}
 	if (i == len)
-		return (ft_strdup(s1, 0, 0));
+		return (ft_strndup(s1, 0, 0));
 	while (len > 0)
 	{
 		if (!check_set(s1[len - 1], set))
 			break ;
 		len--;
 	}
-	str = ft_strdup(s1, i, len - i);
+	str = ft_strndup(s1, i, len - i);
 	return (str);
 }

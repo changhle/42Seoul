@@ -12,29 +12,6 @@
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void *content)
-{
-	t_list	*lst;
-
-	lst = malloc(sizeof(t_list));
-	if (!lst)
-		return (lst);
-	lst->content = content;
-	lst->next = NULL;
-	return (lst);
-}
-
-void	ft_lstclear(t_list **lst, void (*del)(void *))
-{
-	while (*lst)
-	{
-		ft_lstclear(&(*lst)->next, del);
-		del((*lst)->content);
-		free(*lst);
-	}
-	*lst = NULL;
-}
-
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
 	t_list	*lst_f;

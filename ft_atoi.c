@@ -20,13 +20,6 @@ static int	ft_isspace(char c)
 	return (0);
 }
 
-static int	ft_isdigit(char c)
-{
-	if (c >= 48 && c <= 57)
-		return (1);
-	return (0);
-}
-
 int	ft_atoi(const char *str)
 {
 	int	result;
@@ -34,7 +27,7 @@ int	ft_atoi(const char *str)
 
 	sign = 1;
 	result = 0;
-	while (ft_ispace(*str))
+	while (ft_isspace(*str))
 		str++;
 	if (*str == '+' || *str == '-')
 	{
@@ -42,7 +35,7 @@ int	ft_atoi(const char *str)
 			sign = -1;
 		str++;
 	}
-	while (ft_issdigit(*str))
+	while (ft_isdigit(*str))
 	{
 		result = result * 10 + *str - 48;
 		str++;
