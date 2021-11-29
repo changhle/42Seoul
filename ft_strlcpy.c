@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 01:22:22 by changhle          #+#    #+#             */
-/*   Updated: 2021/11/30 01:22:22 by changhle         ###   ########.fr       */
+/*   Updated: 2021/11/30 02:17:26 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	size_t	i;
 
 	i = 0;
-	if (!dst || !src)
-		return (0);
 	while (src[i] != '\0' && i + 1 < dstsize)
 	{
 		dst[i] = src[i];

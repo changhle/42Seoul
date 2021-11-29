@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 01:22:40 by changhle          #+#    #+#             */
-/*   Updated: 2021/11/30 01:22:40 by changhle         ###   ########.fr       */
+/*   Updated: 2021/11/30 02:09:10 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	ft_strncmp(const char *str1, const char *str2, size_t n)
 		str1++;
 		str2++;
 		n--;
+		if (!*str1 || !*str2)
+			break ;
 	}
 	return (*(unsigned char *)str1 - *(unsigned char *)str2);
 }

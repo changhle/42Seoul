@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 01:18:21 by changhle          #+#    #+#             */
-/*   Updated: 2021/11/30 01:18:21 by changhle         ###   ########.fr       */
+/*   Updated: 2021/11/30 03:33:32 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	*ft_calloc(size_t count, size_t size)
 	char	*arr;
 
 	i = 0;
+	arr = NULL;
 	arr = malloc(count * size);
 	if (!arr)
 		return (arr);
@@ -26,5 +27,5 @@ void	*ft_calloc(size_t count, size_t size)
 		arr[i] = 0;
 		i++;
 	}
-	return ((void *)arr);
+	return (arr);
 }
