@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 18:43:51 by changhle          #+#    #+#             */
-/*   Updated: 2021/11/17 21:26:11 by changhle         ###   ########.fr       */
+/*   Updated: 2021/11/30 00:57:33 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	ft_memset(s, 0, n)
+	ft_memset(s, 0, n);
 }
