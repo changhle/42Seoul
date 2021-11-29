@@ -7,7 +7,7 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 17:44:01 by changhle          #+#    #+#             */
 /*   Updated: 2021/11/17 21:32:59 by changhle         ###   ########.fr       */
-/*                                                                            */
+/*                                                                            
 /* ************************************************************************** */
 
 #include "libft.h"
@@ -19,7 +19,7 @@ void	*ft_memset(void *b, int c, size_t len)
 	i = 0;
 	while (i < len)
 	{
-		((char *)b)[i] = (char)c;
+		(char *)b[i] = (char)c;
 		i++;
 	}
 	return (b);

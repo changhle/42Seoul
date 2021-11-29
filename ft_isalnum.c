@@ -14,7 +14,11 @@
 
 int	ft_isalnum(int c)
 {
-	if (ft_isalpha(c) || ft_isdigit(c))
+	if (ft_isalpha(c) == 1)
 		return (1);
+	else if (ft_isalpha(c) == 2)
+		return (2);
+	else if (ft_isdigit(c) == 1)
+		return (4);
 	return (0);
 }

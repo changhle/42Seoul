@@ -21,6 +21,8 @@ char	*ft_strrchr(const char *s, int c)
 	{
 		if (*s == c)
 			ret = (char *)s;
+		if (*s == '\0')
+			break ;
 		s++;
 	}
 	return (ret);
