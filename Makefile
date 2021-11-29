@@ -10,13 +10,13 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME := libft.a
-SRCS := *.c
-OBJS := $(SRCS:.c=.o)
-AR := ar
-ARFLAGS := -rc
-CC := gcc
-CFLAGS := -Wall -Wextra -Werror
+NAME = libft.a
+SRCS = *.c
+OBJS = $(SRCS:.c=.o)
+AR = ar
+ARFLAGS = -rcs
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror -I.
 
 all : $(NAME)
 
@@ -26,11 +26,9 @@ fclean : clean
 	rm -f $(NAME)
 re : fclean all
 
-bonus : re
-
 $(NAME) : $(OBJS)
-	$(AR) $(ARFLAGS) $@ $?
+	$(AR) $(ARFLAGS) $@ $^
 %.o : %.c
-	$(CC) $(CFLAGS) -c $<
+	$(CC) $(CFLAGS) -c $^
 
-.PHONY : all clean fclean
+.PHONY : all clean fclean re
