@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 00:40:18 by changhle          #+#    #+#             */
-/*   Updated: 2021/12/02 00:40:18 by changhle         ###   ########.fr       */
+/*   Updated: 2021/12/02 00:57:49 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 	i = 0;
 	while (s[i])
 	{
-		f(s[i], s);
+		f(i, s + i);
 		i++;
 	}
 }
