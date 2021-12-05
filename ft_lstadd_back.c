@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 19:52:26 by changhle          #+#    #+#             */
-/*   Updated: 2021/11/26 18:21:09 by changhle         ###   ########.fr       */
+/*   Updated: 2021/12/05 23:33:39 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,12 @@
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	while (*lst)
+	if (!(*lst))
+	{
+		*lst = new;
+		return ;
+	}
+	while (*lst && (*lst)->next)
 		*lst = (*lst)->next;
-	*lst = new;
+	(*lst)->next = new;
 }

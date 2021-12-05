@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 01:20:15 by changhle          #+#    #+#             */
-/*   Updated: 2021/11/30 01:20:15 by changhle         ###   ########.fr       */
+/*   Updated: 2021/12/05 21:01:54 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	i = 0;
 	while (i < n)
 	{
-		if (((char *)s)[i] == (char)c)
+		if (*((char *)s + i) == (char)c)
 			return ((void *)s + i);
 		i++;
 	}
