@@ -19,7 +19,7 @@ char	*ft_strrchr(const char *s, int c)
 	ret = NULL;
 	while (1)
 	{
-		if (*s == c)
+		if (*s == (unsigned char)c)
 			ret = (char *)s;
 		if (*s == '\0')
 			break ;

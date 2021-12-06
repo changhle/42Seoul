@@ -22,12 +22,12 @@ static int	count_word(char const *s, char c)
 	while (1)
 	{
 		if (word == 0 && *s != c)
-		{
 			word = 1;
+		else if (word == 1 && (*s == c || *s == '\0'))
+		{
+			word = 0;
 			cnt++;
 		}
-		else if (word == 1 && (*s == c || *s == '\0'))
-			word = 0;
 		if (*s == '\0')
 			break ;
 		s++;
@@ -73,7 +73,7 @@ static void	fill_word(char const *s, char **arr, char c)
 			word = 0;
 			arr[i++] = ft_strndup(start, s - start);
 		}
-		arr[i] = 0;
+		arr[i] = NULL;
 		if (*s == '\0')
 			break ;
 		s++;
@@ -84,6 +84,8 @@ char	**ft_split(char const *s, char c)
 {
 	char	**arr;
 
+	if (!s)
+		return (NULL);
 	arr = (char **)malloc(sizeof(char *) * (count_word(s, c) + 1));
 	if (!arr)
 		return (NULL);
