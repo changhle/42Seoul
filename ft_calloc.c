@@ -14,12 +14,10 @@
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	size_t	i;
 	char	*arr;
 
 	if (count * size == 0)
 		return (NULL);
-	i = 0;
 	arr = malloc(count * size);
 	if (!arr)
 		return (arr);
