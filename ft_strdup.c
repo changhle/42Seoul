@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 01:21:48 by changhle          #+#    #+#             */
-/*   Updated: 2021/11/30 01:21:48 by changhle         ###   ########.fr       */
+/*   Updated: 2021/12/07 03:48:38 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ char	*ft_strdup(const char *s1)
 	size_t	len;
 	size_t	i;
 
-	if (!s1)
-		return (NULL);
 	len = ft_strlen(s1);
 	str = (char *)malloc((len + 1) * sizeof(char));
 	if (str)

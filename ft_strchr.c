@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 01:21:43 by changhle          #+#    #+#             */
-/*   Updated: 2021/11/30 01:21:43 by changhle         ###   ########.fr       */
+/*   Updated: 2021/12/07 03:45:15 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	if (!s)
-		return (NULL);
 	while (1)
 	{
 		if (*s == (unsigned char)c)
