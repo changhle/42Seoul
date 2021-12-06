@@ -16,7 +16,8 @@ char	*ft_strrchr(const char *s, int c)
 {
 	char	*ret;
 
-	ret = NULL;
+	if (!s)
+		return (NULL);
 	while (1)
 	{
 		if (*s == (unsigned char)c)
@@ -25,5 +26,5 @@ char	*ft_strrchr(const char *s, int c)
 			break ;
 		s++;
 	}
-	return (ret);
+	return (NULL);
 }
