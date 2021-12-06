@@ -6,7 +6,7 @@
 #    By: changhle <changhle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/17 20:25:28 by changhle          #+#    #+#              #
-#    Updated: 2021/11/23 18:55:53 by changhle         ###   ########.fr        #
+#    Updated: 2021/12/07 01:08:48 by changhle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,12 @@ ARFLAGS = -rcs
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I.
 
+ifdef WITH_BONUS
+	OBJ_FILES = $(OBJS) $(BONUS_OBJS)
+else
+	OBJ_FILES = $(OBJS)
+endif
+
 all : $(NAME)
 
 clean :
@@ -28,11 +34,12 @@ fclean : clean
 	rm -f $(NAME)
 re : fclean all
 
-bonus : $(BONUS_OBJS)
-	$(AR) $(ARFLAGS) $(NAME) $(OBJS) $(BONUS_OBJS)
+bonus :
+	make WITH_BONUS=1 all
 
-$(NAME) : $(OBJS)
+$(NAME) : $(OBJ_FILES)
 	$(AR) $(ARFLAGS) $@ $^
+
 %.o : %.c
 	$(CC) $(CFLAGS) -c $^
 
