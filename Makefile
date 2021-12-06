@@ -6,7 +6,7 @@
 #    By: changhle <changhle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/17 20:25:28 by changhle          #+#    #+#              #
-#    Updated: 2021/12/07 01:08:48 by changhle         ###   ########.fr        #
+#    Updated: 2021/12/07 04:06:19 by changhle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,16 +15,11 @@ SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strle
 OBJS = $(SRCS:.c=.o)
 BONUS_SRCS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
 BONUS_OBJS = $(BONUS_SRCS:.c=.o)
+OBJS_B = $(BONUS_OBJS) $(OBJS)
 AR = ar
 ARFLAGS = -rcs
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I.
-
-ifdef WITH_BONUS
-	OBJ_FILES = $(OBJS) $(BONUS_OBJS)
-else
-	OBJ_FILES = $(OBJS)
-endif
 
 all : $(NAME)
 
@@ -34,10 +29,10 @@ fclean : clean
 	rm -f $(NAME)
 re : fclean all
 
-bonus :
-	make WITH_BONUS=1 all
+bonus : $(OBJS_B)
+	$(AR) $(ARFLAGS) $(NAME) $^
 
-$(NAME) : $(OBJ_FILES)
+$(NAME) : $(OBJS)
 	$(AR) $(ARFLAGS) $@ $^
 
 %.o : %.c
