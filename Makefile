@@ -15,34 +15,25 @@ SRCS_M = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_str
 SRCS_B = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
 OBJS_M = $(SRCS_M:.c=.o)
 OBJS_B = $(SRCS_B:.c=.o)
-AR = ar
-ARFLAGS = -rcs
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I.
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
 
-ifdef WITH_BONUS
-	OBJS = $(OBJS_M) $(OBJS_B)
-else
-	OBJS = $(OBJS_M)
-endif
+all : $(NAME) ;
 
-all : $(NAME)
+mandatory : $(NAME)($(OBJS_M)) ;
 
-$(NAME) : $(OBJS)
-	$(AR) $(ARFLAGS) $@ $^
+bonus : $(NAME)($(OBJS_B)) ;
 
-bonus :
-	@make WITH_BONUS=1 all
+$(NAME) : mandatory ;
+
 
 clean :
-	rm -f $(OBJS_M) $(OBJS_B)
+	rm -f $(OBJS_M)
+	rm -f $(OBJS_B)
 
-fclean : clean
+fclean : clean	
 	rm -f $(NAME)
 
-re : fclean all
+re : fclean all ;
 
-%.o : %.c
-	$(CC) $(CFLAGS) -c $^
-
-.PHONY : all clean fclean re bonus
+.PHONY : all clean fclean re
