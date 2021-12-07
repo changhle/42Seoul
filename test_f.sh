@@ -20,6 +20,8 @@ cd ..
 echo -e "\033[32;1m"unit-test"\033[m"
 read $a
 git clone https://github.com/alelievr/libft-unit-test.git
+make all
+make bonus
 cd libft-unit-test/
 sed -i "" 's/LIBFTDIR	=	..\/libft/LIBFTDIR	=	..\//' Makefile
 make f
@@ -29,17 +31,18 @@ read $a
 git clone https://github.com/Tripouille/libftTester.git
 cd libftTester/
 make a
+make fclean
 cd ..
 rm -rf Libftest/ libft-war-machine/ libft-unit-test/ libftTester/
-echo -e "\033[32;1m"make fclean"\033[m"
-read $a
-make
-make fclean
-ls
 echo -e "\033[32;1m"make clean"\033[m"
 read $a
 make
 make clean
+ls
+echo -e "\033[32;1m"make fclean"\033[m"
+read $a
+make
+make fclean
 ls
 echo -e "\033[32;1m"make all"\033[m"
 read $a

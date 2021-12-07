@@ -6,7 +6,7 @@
 #    By: changhle <changhle@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/17 20:25:28 by changhle          #+#    #+#              #
-#    Updated: 2021/12/07 17:14:06 by changhle         ###   ########.fr        #
+#    Updated: 2021/12/08 02:37:32 by changhle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,5 +35,3 @@ fclean : clean
 	rm -f $(NAME)
 
 re : fclean all ;
-
-.PHONY : all clean fclean re
