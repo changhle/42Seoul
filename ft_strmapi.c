@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 01:22:35 by changhle          #+#    #+#             */
-/*   Updated: 2021/11/30 01:22:35 by changhle         ###   ########.fr       */
+/*   Updated: 2021/12/08 17:15:40 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 
 	if (!s)
 		return (NULL);
-	str = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
+	str = (char *)malloc(sizeof(char) * (ft_strlen((const char *)s) + 1));
 	if (!str)
 		return (NULL);
 	i = 0;
