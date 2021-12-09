@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 16:27:20 by changhle          #+#    #+#             */
-/*   Updated: 2021/12/09 15:18:56 by changhle         ###   ########.fr       */
+/*   Updated: 2021/12/09 15:20:21 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ char	*ft_strchr(const char *s, int c)
 		s++;
 	}
 	return (NULL);
+}
 
 size_t	ft_strlen(const char *s)
 {
