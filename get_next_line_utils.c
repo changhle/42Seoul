@@ -6,27 +6,23 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 16:27:20 by changhle          #+#    #+#             */
-/*   Updated: 2021/12/09 15:17:25 by changhle         ###   ########.fr       */
+/*   Updated: 2021/12/09 15:18:56 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strrchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
-	char	*ret;
-
-	ret = NULL;
 	while (1)
 	{
 		if (*s == (unsigned char)c)
-			ret = (char *)s;
+			return ((char *)s);
 		if (*s == '\0')
 			break ;
 		s++;
 	}
-	return (ret);
-}
+	return (NULL);
 
 size_t	ft_strlen(const char *s)
 {
