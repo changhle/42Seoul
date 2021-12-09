@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 16:27:20 by changhle          #+#    #+#             */
-/*   Updated: 2021/12/09 15:16:25 by changhle         ###   ########.fr       */
+/*   Updated: 2021/12/09 15:17:25 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ char	*ft_read_str(int fd, char *str)
 	if (!buffer)
 		return (NULL);
 	bytes = 1;
-	while (!strchr(str, '\n') && bytes != 0)
+	while (!ft_strchr(str, '\n') && bytes != 0)
 	{
 		bytes = read(fd, buffer, 10);
 		if (bytes == -1)
