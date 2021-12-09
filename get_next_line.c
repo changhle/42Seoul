@@ -6,11 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 14:47:43 by changhle          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/12/09 18:29:48 by changhle         ###   ########.fr       */
-=======
-/*   Updated: 2021/12/09 15:30:57 by changhle         ###   ########.fr       */
->>>>>>> 9655f9c294e09c9e1b6ab68cf8e15c2bcd4db5f7
+/*   Updated: 2021/12/10 02:46:33 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +26,7 @@ char *get_next_line(int fd)
 	if (!s_str)
 		return (NULL);
 	str = ft_get_newline(s_str);
-	while (s_str[i] && s_str[i] == '\n')
-		i++;
-	if (!s_str[i])
-		return (str);
-	
+	s_str = ft_get_remain_str(s_str);
 	return (str);
 }
 
@@ -45,11 +37,11 @@ int	main()
 
 	fd = open("test.txt", O_RDONLY);
 	str = get_next_line(fd);
-	printf("%s", str);
+	printf("%s\n", str);
 	str = get_next_line(fd);
-	printf("%s", str);
+	printf("%s\n", str);
 	str = get_next_line(fd);
-	printf("%s", str);
+	printf("%s\n", str);
 	str = get_next_line(fd);
-	printf("%s", str);
+	printf("%s\n", str);
 }

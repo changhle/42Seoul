@@ -6,11 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 16:27:20 by changhle          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/12/09 15:37:34 by changhle         ###   ########.fr       */
-=======
-/*   Updated: 2021/12/09 15:31:00 by changhle         ###   ########.fr       */
->>>>>>> 9655f9c294e09c9e1b6ab68cf8e15c2bcd4db5f7
+/*   Updated: 2021/12/10 02:46:26 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +14,8 @@
 
 char	*ft_strchr(const char *s, int c)
 {
+	if (!s)
+		return (NULL);
 	while (1)
 	{
 		if (*s == (unsigned char)c)
@@ -33,6 +31,8 @@ size_t	ft_strlen(const char *s)
 {
 	size_t	len;
 
+	if (!s)
+		return (0);
 	len = 0;
 	while (s[len])
 		len++;
@@ -79,21 +79,21 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	return (dst_len + src_len);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s_str, char const *s2)
 {
 	char	*str;
 
-	if (!s1 || !s2)
+	if (!s_str || !s2)
 		return (NULL);
-	str = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	str = (char *)malloc((ft_strlen(s_str) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
-	ft_strlcpy(str, s1, ft_strlen(s1) + 1);
-	ft_strlcat(str, s2, ft_strlen(s1) + ft_strlen(s2) + 1);
+	ft_strlcpy(str, s_str, ft_strlen(s_str) + 1);
+	ft_strlcat(str, s2, ft_strlen(s_str) + ft_strlen(s2) + 1);
 	return (str);
 }
 
-char	*ft_read_str(int fd, char *str)
+char	*ft_read_str(int fd, char *s_str)
 {
 	int		bytes;
 	char	*buffer;
@@ -102,7 +102,7 @@ char	*ft_read_str(int fd, char *str)
 	if (!buffer)
 		return (NULL);
 	bytes = 1;
-	while (!ft_strchr(str, '\n') && bytes != 0)
+	while (!ft_strchr(s_str, '\n') && bytes != 0)
 	{
 		bytes = read(fd, buffer, BUFFER_SIZE);
 		if (bytes == -1)
@@ -111,28 +111,30 @@ char	*ft_read_str(int fd, char *str)
 			return (NULL);
 		}
 		buffer[bytes] = '\0';
-		str = ft_strjoin(str, buffer);
+		s_str = ft_strjoin(s_str, buffer);
 	}
 	free(buffer);
-	return (str);
+	return (s_str);
 }
 
-char	*ft_get_newline(char *str)
+char	*ft_get_newline(char *s_str)
 {
 	int		i;
 	char	*newline;
 
 	i = 0;
-	while (str[i] && str[i] != '\n')
+	if (!s_str[i])
+		return (NULL);
+	while (s_str[i] && s_str[i] != '\n')
 		i++;
 	newline = (char *)malloc(sizeof(char) * (i + 2));
 	if (!newline)
 		return (NULL);
 	i = 0;
-	while (str[i])
+	while (s_str[i] && s_str[i] != '\n')
 	{
-		newline[i] = str[i];
-		if (str[i] == '\n')
+		newline[i] = s_str[i];
+		if (s_str[i] == '\n')
 		{
 			i++;
 			break ;
@@ -140,6 +142,29 @@ char	*ft_get_newline(char *str)
 		i++;
 	}
 	newline[i] = '\0';
-	free(str);
 	return (newline);
+}
+
+char	*ft_get_remain_str(char *str)
+{
+	int		i;
+	int		j;
+	char	*s_str;
+
+	s_str = (char *)malloc(BUFFER_SIZE * sizeof(char));
+	if (!s_str)
+		return (NULL);
+	i = 0;
+	while (str[i] || str[i] == '\n')
+		i++;
+	if (!str[i])
+		return (NULL);
+	j = 0;
+	while (str[i])
+	{
+		s_str[j] = s_str[i];
+		j++;
+		i++;
+	}
+	return (s_str);
 }

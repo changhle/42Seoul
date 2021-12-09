@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 16:13:08 by changhle          #+#    #+#             */
-/*   Updated: 2021/12/09 15:15:14 by changhle         ###   ########.fr       */
+/*   Updated: 2021/12/10 01:16:01 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@
 
 char	*ft_read_str(int fd, char *str);
 char	*ft_get_newline(char *str);
+char	*ft_get_remain_str(char *str);
 
 #endif
