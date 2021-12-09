@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 16:27:20 by changhle          #+#    #+#             */
-/*   Updated: 2021/12/09 15:20:21 by changhle         ###   ########.fr       */
+/*   Updated: 2021/12/09 15:37:34 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,13 +94,13 @@ char	*ft_read_str(int fd, char *str)
 	int		bytes;
 	char	*buffer;
 
-	buffer = (char *)malloc(sizeof(char) * (10 + 1));
+	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
 		return (NULL);
 	bytes = 1;
 	while (!ft_strchr(str, '\n') && bytes != 0)
 	{
-		bytes = read(fd, buffer, 10);
+		bytes = read(fd, buffer, BUFFER_SIZE);
 		if (bytes == -1)
 		{
 			free(buffer);
