@@ -6,14 +6,11 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 14:47:43 by changhle          #+#    #+#             */
-/*   Updated: 2021/12/10 23:49:06 by changhle         ###   ########.fr       */
+/*   Updated: 2021/12/10 23:56:07 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
 
 char *get_next_line(int fd)
 {
@@ -28,20 +25,4 @@ char *get_next_line(int fd)
 	str = ft_get_newline(s_str);
 	s_str = ft_get_remain_str(s_str);
 	return (str);
-}
-
-int	main()
-{
-	int fd;
-	char *str;
-
-	fd = open("test.txt", O_RDONLY);
-	str = get_next_line(fd);
-	printf("%s", str);
-	str = get_next_line(fd);
-	printf("%s", str);
-	str = get_next_line(fd);
-	printf("%s", str);
-	str = get_next_line(fd);
-	printf("%s", str);
 }

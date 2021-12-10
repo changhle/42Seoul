@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 16:27:20 by changhle          #+#    #+#             */
-/*   Updated: 2021/12/10 23:49:06 by changhle         ###   ########.fr       */
+/*   Updated: 2021/12/11 00:13:37 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	return (dst_len + src_len);
 }
 
-char	*ft_strjoin(char const *s_str, char const *s2)
+char	*ft_strjoin(char *s_str, char *s2)
 {
 	char	*str;
 
@@ -92,6 +92,8 @@ char	*ft_strjoin(char const *s_str, char const *s2)
 		return (NULL);
 	ft_strlcpy(str, s_str, ft_strlen(s_str) + 1);
 	ft_strlcat(str, s2, ft_strlen(s_str) + ft_strlen(s2) + 1);
+	if (s_str)
+		free(s_str);
 	return (str);
 }
 
@@ -175,5 +177,6 @@ char	*ft_get_remain_str(char *s_str)
 		j++;
 		i++;
 	}
+	free(s_str);
 	return (str);
 }
