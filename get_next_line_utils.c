@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 16:27:20 by changhle          #+#    #+#             */
-/*   Updated: 2021/12/10 02:46:26 by changhle         ###   ########.fr       */
+/*   Updated: 2021/12/10 17:30:46 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	i;
 
+	if (!src)
+		return (0);
 	i = 0;
 	if (dstsize > 0)
 	{
@@ -83,7 +85,7 @@ char	*ft_strjoin(char const *s_str, char const *s2)
 {
 	char	*str;
 
-	if (!s_str || !s2)
+	if (!s2)
 		return (NULL);
 	str = (char *)malloc((ft_strlen(s_str) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!str)
