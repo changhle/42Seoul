@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 14:47:43 by changhle          #+#    #+#             */
-/*   Updated: 2021/12/10 17:32:45 by changhle         ###   ########.fr       */
+/*   Updated: 2021/12/10 23:49:06 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ int	main()
 
 	fd = open("test.txt", O_RDONLY);
 	str = get_next_line(fd);
-	printf("%s\n", str);
+	printf("%s", str);
 	str = get_next_line(fd);
-	printf("%s\n", str);
+	printf("%s", str);
 	str = get_next_line(fd);
-	printf("%s\n", str);
+	printf("%s", str);
 	str = get_next_line(fd);
-	printf("%s\n", str);
+	printf("%s", str);
 }

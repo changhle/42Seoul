@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 16:27:20 by changhle          #+#    #+#             */
-/*   Updated: 2021/12/10 17:30:46 by changhle         ###   ########.fr       */
+/*   Updated: 2021/12/10 23:49:06 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ char	*ft_get_newline(char *s_str)
 	if (!newline)
 		return (NULL);
 	i = 0;
-	while (s_str[i] && s_str[i] != '\n')
+	while (s_str[i])
 	{
 		newline[i] = s_str[i];
 		if (s_str[i] == '\n')
@@ -147,26 +147,33 @@ char	*ft_get_newline(char *s_str)
 	return (newline);
 }
 
-char	*ft_get_remain_str(char *str)
+char	*ft_get_remain_str(char *s_str)
 {
 	int		i;
 	int		j;
-	char	*s_str;
+	char	*str;
 
-	s_str = (char *)malloc(BUFFER_SIZE * sizeof(char));
-	if (!s_str)
+	str = (char *)malloc(BUFFER_SIZE * sizeof(char));
+	if (!str)
 		return (NULL);
 	i = 0;
-	while (str[i] || str[i] == '\n')
-		i++;
-	if (!str[i])
-		return (NULL);
 	j = 0;
-	while (str[i])
+	while (s_str[i])
 	{
-		s_str[j] = s_str[i];
+		if (s_str[i] == '\n')
+		{
+			i++;
+			break ;
+		}
+		i++;
+	}
+	if (!s_str[i])
+		return (NULL);
+	while (s_str[i])
+	{
+		str[j] = s_str[i];
 		j++;
 		i++;
 	}
-	return (s_str);
+	return (str);
 }
