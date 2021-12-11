@@ -6,14 +6,14 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 14:47:43 by changhle          #+#    #+#             */
-/*   Updated: 2021/12/11 15:01:43 by changhle         ###   ########.fr       */
+/*   Updated: 2021/12/11 15:41:07 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-//#include <stdio.h>
-//#include <fcntl.h>
-//#include <unistd.h>
+#include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
 
 char *get_next_line(int fd)
 {
@@ -30,7 +30,7 @@ char *get_next_line(int fd)
 	return (str);
 }
 
-/*int	main()
+int	main()
 {
 	int fd;
 
@@ -39,4 +39,4 @@ char *get_next_line(int fd)
 	printf("%s", get_next_line(fd));
 	printf("%s", get_next_line(fd));
 	printf("%s", get_next_line(fd));	
-}*/
+}

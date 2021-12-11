@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 16:27:20 by changhle          #+#    #+#             */
-/*   Updated: 2021/12/11 15:00:43 by changhle         ###   ########.fr       */
+/*   Updated: 2021/12/11 18:32:28 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,20 +155,13 @@ char	*ft_get_remain_str(char *s_str)
 	int		j;
 	char	*str;
 
-	str = (char *)malloc(BUFFER_SIZE * sizeof(char));
+	str = (char *)malloc(ft_strlen(s_str) * sizeof(char));
 	if (!str)
 		return (NULL);
 	i = 0;
 	j = 0;
-	while (s_str[i])
-	{
-		if (s_str[i] == '\n')
-		{
-			i++;
-			break ;
-		}
+	while (s_str[i] && s_str[i - 1] != '\n')
 		i++;
-	}
 	if (!s_str[i])
 	{
 		free(s_str);
