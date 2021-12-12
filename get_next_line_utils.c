@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 16:27:20 by changhle          #+#    #+#             */
-/*   Updated: 2021/12/12 20:37:52 by changhle         ###   ########.fr       */
+/*   Updated: 2021/12/12 21:05:57 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,7 @@ char	*ft_get_remain_str(char *s_str)
 		i++;
 		j++;
 	}
+	str[j] = '\0';
 	free(s_str);
 	return (str);
 }

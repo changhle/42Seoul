@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 14:47:43 by changhle          #+#    #+#             */
-/*   Updated: 2021/12/12 20:40:13 by changhle         ###   ########.fr       */
+/*   Updated: 2021/12/12 20:57:49 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char *get_next_line(int fd)
 	return (str);
 }
 
-/* int	main()
+int	main()
 {
 	int fd;
 	char *str;
@@ -54,4 +54,4 @@ char *get_next_line(int fd)
 	str = get_next_line(fd);
 	printf("%s", str);	
 	free(str);
-} */
+}
