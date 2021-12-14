@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 18:09:22 by changhle          #+#    #+#             */
-/*   Updated: 2021/12/15 01:57:10 by changhle         ###   ########.fr       */
+/*   Updated: 2021/12/15 02:28:11 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char *get_next_line(int fd)
 	char		*str;
 	static char	*s_str[OPEN_MAX];
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0)
 		return (NULL);
 	s_str[fd] = ft_read_str(fd, s_str[fd]);
 	if (!s_str[fd])
@@ -36,7 +36,7 @@ char	*ft_read_str(int fd, char *s_str)
 	if (!buffer)
 		return (NULL);
 	bytes = 1;
-	while (!ft_strchr(s_str, '\n') && bytes != 0)
+	while (!ft_isnewline(s_str, '\n') && bytes != 0)
 	{
 		bytes = read(fd, buffer, BUFFER_SIZE);
 		if (bytes == -1)
