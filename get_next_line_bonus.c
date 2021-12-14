@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: changhle <changhle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 18:09:22 by changhle          #+#    #+#             */
-/*   Updated: 2021/12/14 21:57:38 by changhle         ###   ########.fr       */
+/*   Updated: 2021/12/15 00:40:07 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,24 @@
 char *get_next_line(int fd)
 {
 	char			*str;
+	fd_list			new;
 	static fd_list	lst;
 
+	while (lst && lst.fd != fd)
+		lst = *(lst.next);
+	if (!lst)
+	{
+		new.fd = fd;
+		new.next = NULL;
+		lst = new;
+	}
+	else if (lst.fd != fd)
+	{
+		new.fd = fd;
+		new.next = NULL;
+		lst.next = &new;
+		lst = *(lst.next);
+	}
 	if (lst.fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	lst.str = ft_read_str(lst.fd, lst.str);
