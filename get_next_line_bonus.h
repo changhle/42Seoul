@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: changhle <changhle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 16:13:08 by changhle          #+#    #+#             */
-/*   Updated: 2021/12/14 19:12:15 by changhle         ###   ########.fr       */
+/*   Updated: 2021/12/15 01:29:38 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <limits.h>
 
 typedef struct fd_list
 {
