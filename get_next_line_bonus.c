@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 18:09:22 by changhle          #+#    #+#             */
-/*   Updated: 2021/12/15 01:26:50 by changhle         ###   ########.fr       */
+/*   Updated: 2021/12/15 01:31:23 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ char *get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	s_str = ft_read_str(fd, s_str);
-	if (!s_str)
+	s_str[fd] = ft_read_str(fd, s_str[fd]);
+	if (!s_str[fd])
 		return (NULL);
-	str = ft_get_newline(s_str);
-	s_str = ft_get_remain_str(s_str);
+	str = ft_get_newline(s_str[fd]);
+	s_str[fd] = ft_get_remain_str(s_str[fd]);
 	return (str);
 }
 
