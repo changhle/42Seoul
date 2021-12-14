@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 18:09:22 by changhle          #+#    #+#             */
-/*   Updated: 2021/12/15 01:35:46 by changhle         ###   ########.fr       */
+/*   Updated: 2021/12/15 01:41:26 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,8 @@ char	*ft_get_newline(char *s_str)
 	{
 		newline[i] = s_str[i];
 		i++;
-	}
-	if (s_str[i] == '\n')
-	{
-		newline[i] = s_str[i];
-		i++;
+		if (s_str[i - 1] == '\n')
+			break ;
 	}
 	newline[i] = '\0';
 	/* while (1)
