@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: changhle <changhle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 16:13:08 by changhle          #+#    #+#             */
-/*   Updated: 2021/12/14 19:03:22 by changhle         ###   ########.fr       */
+/*   Updated: 2021/12/15 02:38:32 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 # define GET_NEXT_LINE_H
 
 #include <stdlib.h>
-#include <stdio.h>
-#include <fcntl.h>
 #include <unistd.h>
+#include <limits.h>
 
 char	*get_next_line(int fd);
 char	*ft_read_str(int fd, char *str);
-char	*ft_get_newline(char *str);
+char	*ft_get_str(char *str);
 char	*ft_get_remain_str(char *str);
+size_t	ft_strlen(char *s);
+int     ft_isnewline(char *s, int c);
+char	*ft_strjoin(char *s1, char *s2);
 
 #endif
