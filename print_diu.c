@@ -1,0 +1,143 @@
+#include "ft_printf.h"
+
+int	print_sign(t_flag *flag, long nbr)
+{
+	int	ret;
+
+	ret = 0;
+	if (flag->f_plus > -1 && nbr >= 0)
+	{
+		write(1, "+", 1);
+		ret++;
+	}
+	else if (!(flag->f_plus > -1) && flag->f_space > -1 && nbr >= 0)
+	{
+		write(1, " " ,1);
+		ret++;
+	}
+	else if (nbr < 0)
+	{
+		write(1, "-", 1);
+		ret++;
+	}
+	return (ret);
+}
+
+int	print_nbr(t_flag *flag, long nbr)
+{
+	int	nbr_len;
+
+	nbr_len = ft_nbr_len(nbr);
+	if (nbr < 0)
+		nbr_len--;
+	while (flag->precision > nbr_len)
+	{
+		write(1, "0", 1);
+		nbr_len++;
+	}
+	if (flag->dot == 1 && flag->precision == 0 && nbr == 0)
+		return (0);
+	ft_putnbr(nbr);
+	return (nbr_len);
+}
+
+int	print_space(t_flag *flag, long nbr)
+{
+	int	nbr_len;
+	int	ret;
+
+	ret = 0;
+	nbr_len = ft_nbr_len(nbr);
+	// if (nbr < 0)
+	// 	nbr--;
+	if (flag->precision >= nbr_len)
+	{
+		nbr_len = flag->precision;
+		if (nbr < 0)
+			nbr_len++;
+	}
+		if (flag->dot == 1 && flag->precision == 0 && nbr == 0)
+		nbr_len = 0;
+	if (!(flag->f_minus > -1 || flag->dot == 1) && flag->f_zero > -1)
+	{
+		while (flag->width > nbr_len + ret)
+		{
+			write(1, "0", 1);
+			ret++;
+		}
+	}
+	else
+	{
+		while (flag->width > nbr_len + ret)
+		{
+			write(1, " ", 1);
+			ret++;
+		}
+	}
+	return (ret);
+}
+
+int	print_di(t_flag *flag, va_list ap)
+{
+	int	ret;
+	int	nbr;
+	int	nbr_len;
+
+	ret = 0;
+	nbr = va_arg(ap, int);
+	// printf("%d\n", nbr);
+	nbr_len = ft_nbr_len(nbr);
+	if (flag->f_minus > -1)
+	{
+		ret += print_sign(flag, nbr);
+		ret += print_nbr(flag, nbr);
+		ret += print_space(flag, nbr);
+	}
+	else
+	{
+		if (flag->f_zero > -1 && (flag->width <= flag->precision || !flag->precision))
+		{
+			ret += print_sign(flag, nbr);
+			ret += print_space(flag, nbr);
+		}
+		else
+		{
+			ret += print_space(flag, nbr);
+			ret += print_sign(flag, nbr);
+		}
+		ret += print_nbr(flag, nbr);
+	}
+	return (ret);
+}
+
+int	print_u(t_flag *flag, va_list ap)
+{
+	int		ret;
+	long	nbr;
+	int		nbr_len;
+
+	ret = 0;
+	nbr = va_arg(ap, unsigned int);
+	nbr_len = ft_nbr_len(nbr);
+	if (flag->f_minus > -1)
+	{
+		ret += print_sign(flag, nbr);
+		ret += print_nbr(flag, nbr);
+		ret += print_space(flag, nbr);
+	}
+	else
+	{
+		if (flag->f_zero > -1)
+		{
+			ret += print_sign(flag, nbr);
+			ret += print_space(flag, nbr);
+		}
+		else
+		{
+			ret += print_space(flag, nbr);
+			ret += print_sign(flag, nbr);
+		}
+		ret += print_nbr(flag, nbr);
+	}
+	return (ret);
+}
