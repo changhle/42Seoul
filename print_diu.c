@@ -159,17 +159,22 @@ int	print_u(t_flag *flag, va_list ap)
 	}
 	else
 	{
-		if (flag->f_zero > -1)
-		{
-			ret += print_sign(flag, nbr);
-			ret += print_space(flag, nbr);
-		}
-		else
-		{
-			ret += print_space(flag, nbr);
-			ret += print_sign(flag, nbr);
-		}
+		
+		ret += print_space(flag, nbr);
+		ret += print_sign(flag, nbr);
+		ret += print_zero(flag, nbr);
 		ret += print_nbr(flag, nbr);
+		// if (flag->f_zero > -1)
+		// {
+		// 	ret += print_sign(flag, nbr);
+		// 	ret += print_space(flag, nbr);
+		// }
+		// else
+		// {
+		// 	ret += print_space(flag, nbr);
+		// 	ret += print_sign(flag, nbr);
+		// }
+		// ret += print_nbr(flag, nbr);
 	}
 	return (ret);
 }
