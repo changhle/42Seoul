@@ -13,14 +13,12 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include <stdio.h>
-# include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
 # include <limits.h>
 # include "libft/libft.h"
 
-typedef struct	s_flag
+typedef struct s_flag
 {
 	int	f_minus;
 	int	f_plus;
@@ -33,8 +31,6 @@ typedef struct	s_flag
 	int	type;
 }	t_flag;
 
-// size_t	ft_strlen(const char *s);
-// char	*ft_strchr(const char *s, int c);
 int		ft_nbr_len(long nbr);
 void	ft_putnbr(long n);
 int		ft_xnbr_len(unsigned long long xnbr);
