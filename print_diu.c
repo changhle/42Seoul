@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-int	print_sign(t_flag *flag, long nbr)
+int	print_diu_sign(t_flag *flag, long nbr)
 {
 	int	ret;
 
@@ -35,7 +35,7 @@ int	print_sign(t_flag *flag, long nbr)
 	return (ret);
 }
 
-int	print_nbr(t_flag *flag, long nbr)
+int	print_diu_nbr(t_flag *flag, long nbr)
 {
 	int	nbr_len;
 
@@ -53,7 +53,7 @@ int	print_nbr(t_flag *flag, long nbr)
 	return (nbr_len);
 }
 
-int	print_zero(t_flag *flag, long nbr)
+int	print_diu_zero(t_flag *flag, long nbr)
 {
 	int	nbr_len;
 	int	ret;
@@ -79,7 +79,7 @@ int	print_zero(t_flag *flag, long nbr)
 	return (ret);
 }
 
-int	print_space(t_flag *flag, long nbr)
+int	print_diu_space(t_flag *flag, long nbr)
 {
 	int	nbr_len;
 	int	ret;
@@ -105,52 +105,54 @@ int	print_space(t_flag *flag, long nbr)
 	return (ret);
 }
 
-int	print_di(t_flag *flag, va_list ap)
-{
-	int	ret;
-	int	nbr;
-	int	nbr_len;
-
-	ret = 0;
-	nbr = va_arg(ap, int);
-	nbr_len = ft_nbr_len(nbr);
-	if (flag->f_minus > -1)
-	{
-		ret += print_sign(flag, nbr);
-		ret += print_nbr(flag, nbr);
-		ret += print_space(flag, nbr);
-	}
-	else
-	{
-		ret += print_space(flag, nbr);
-		ret += print_sign(flag, nbr);
-		ret += print_zero(flag, nbr);
-		ret += print_nbr(flag, nbr);
-	}
-	return (ret);
-}
-
-int	print_u(t_flag *flag, va_list ap)
+int	print_diu(t_flag *flag, va_list ap)
 {
 	int		ret;
 	long	nbr;
 	int		nbr_len;
 
 	ret = 0;
-	nbr = va_arg(ap, unsigned int);
+	if (flag->type == 'u')
+		nbr = va_arg(ap, unsigned int);
+	else
+		nbr = va_arg(ap, int);
 	nbr_len = ft_nbr_len(nbr);
 	if (flag->f_minus > -1)
 	{
-		ret += print_sign(flag, nbr);
-		ret += print_nbr(flag, nbr);
-		ret += print_space(flag, nbr);
+		ret += print_diu_sign(flag, nbr);
+		ret += print_diu_nbr(flag, nbr);
+		ret += print_diu_space(flag, nbr);
 	}
 	else
 	{
-		ret += print_space(flag, nbr);
-		ret += print_sign(flag, nbr);
-		ret += print_zero(flag, nbr);
-		ret += print_nbr(flag, nbr);
+		ret += print_diu_space(flag, nbr);
+		ret += print_diu_sign(flag, nbr);
+		ret += print_diu_zero(flag, nbr);
+		ret += print_diu_nbr(flag, nbr);
 	}
 	return (ret);
 }
+
+// int	print_u(t_flag *flag, va_list ap)
+// {
+// 	int		ret;
+// 	long	nbr;
+// 	int		nbr_len;
+
+// 	ret = 0;
+// 	nbr_len = ft_nbr_len(nbr);
+// 	if (flag->f_minus > -1)
+// 	{
+// 		ret += print_diu_sign(flag, nbr);
+// 		ret += print_diu_nbr(flag, nbr);
+// 		ret += print_diu_space(flag, nbr);
+// 	}
+// 	else
+// 	{
+// 		ret += print_diu_space(flag, nbr);
+// 		ret += print_diu_sign(flag, nbr);
+// 		ret += print_diu_zero(flag, nbr);
+// 		ret += print_diu_nbr(flag, nbr);
+// 	}
+// 	return (ret);
+// }
