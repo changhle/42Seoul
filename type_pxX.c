@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_pxX.c                                        :+:      :+:    :+:   */
+/*   type_pxX.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 22:12:47 by changhle          #+#    #+#             */
-/*   Updated: 2022/03/05 16:42:51 by changhle         ###   ########.fr       */
+/*   Updated: 2022/03/05 23:48:20 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	print_pxX_xnbr(t_flag *flag, unsigned long long xnbr)
 	return (xnbr_len);
 }
 
-int	print_pxX(t_flag *flag, va_list ap)
+int	type_pxX(t_flag *flag, va_list ap)
 {
 	int					ret;
 	unsigned long long	xnbr;

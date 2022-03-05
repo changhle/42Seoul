@@ -45,17 +45,15 @@ int	print(t_flag *flag, va_list ap)
 
 	ret = 0;
 	if (flag->type == 'c')
-		ret = print_c(flag, ap);
+		ret = type_c(flag, ap);
 	else if (flag->type == 's')
-		ret = print_s(flag, ap);
+		ret = type_s(flag, ap);
 	else if (flag->type == 'd' || flag->type == 'i' || flag->type == 'u')
-		ret = print_diu(flag, ap);
-	// else if (flag->type == 'u')
-	// 	ret = print_u(flag, ap);
+		ret = type_diu(flag, ap);
 	else if (flag->type == 'x' || flag->type == 'X' || flag->type == 'p')
-		ret = print_pxX(flag, ap);
+		ret = type_pxX(flag, ap);
 	else if (flag->type == '%')
-		ret = print_percent(flag);
+		ret = type_percent(flag);
 	return (ret);
 }
 

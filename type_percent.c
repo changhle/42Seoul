@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_percent.c                                    :+:      :+:    :+:   */
+/*   type_percent.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 22:12:42 by changhle          #+#    #+#             */
-/*   Updated: 2022/03/04 22:12:43 by changhle         ###   ########.fr       */
+/*   Updated: 2022/03/05 23:45:21 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	print_percent_space(t_flag *flag)
 	return (ret);
 }
 
-int	print_percent(t_flag *flag)
+int	type_percent(t_flag *flag)
 {
 	int	ret;
 

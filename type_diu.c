@@ -105,7 +105,7 @@ int	print_diu_space(t_flag *flag, long nbr)
 	return (ret);
 }
 
-int	print_diu(t_flag *flag, va_list ap)
+int	type_diu(t_flag *flag, va_list ap)
 {
 	int		ret;
 	long	nbr;
@@ -132,27 +132,3 @@ int	print_diu(t_flag *flag, va_list ap)
 	}
 	return (ret);
 }
-
-// int	print_u(t_flag *flag, va_list ap)
-// {
-// 	int		ret;
-// 	long	nbr;
-// 	int		nbr_len;
-
-// 	ret = 0;
-// 	nbr_len = ft_nbr_len(nbr);
-// 	if (flag->f_minus > -1)
-// 	{
-// 		ret += print_diu_sign(flag, nbr);
-// 		ret += print_diu_nbr(flag, nbr);
-// 		ret += print_diu_space(flag, nbr);
-// 	}
-// 	else
-// 	{
-// 		ret += print_diu_space(flag, nbr);
-// 		ret += print_diu_sign(flag, nbr);
-// 		ret += print_diu_zero(flag, nbr);
-// 		ret += print_diu_nbr(flag, nbr);
-// 	}
-// 	return (ret);
-// }

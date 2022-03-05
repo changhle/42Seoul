@@ -49,7 +49,7 @@ int	print_s_space(t_flag *flag, char *str)
 	return (ret);
 }
 
-int	print_s(t_flag *flag, va_list ap)
+int	type_s(t_flag *flag, va_list ap)
 {
 	int		ret;
 	char	*str;

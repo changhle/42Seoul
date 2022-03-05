@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_c.c                                          :+:      :+:    :+:   */
+/*   type_c.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 22:12:30 by changhle          #+#    #+#             */
-/*   Updated: 2022/03/04 22:12:31 by changhle         ###   ########.fr       */
+/*   Updated: 2022/03/05 23:48:52 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	print_c_space(t_flag *flag)
 	return (ret);
 }
 
-int	print_c(t_flag *flag, va_list ap)
+int	type_c(t_flag *flag, va_list ap)
 {
 	int		ret;
 	char	c;
