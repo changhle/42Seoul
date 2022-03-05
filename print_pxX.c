@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 22:12:47 by changhle          #+#    #+#             */
-/*   Updated: 2022/03/04 22:12:48 by changhle         ###   ########.fr       */
+/*   Updated: 2022/03/05 16:30:04 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	print_xnbr(t_flag *flag, unsigned long long xnbr)
 	return (xnbr_len);
 }
 
-int	print_xspace(t_flag *flag, unsigned long long xnbr)
+int	print_xzero(t_flag *flag, unsigned long long xnbr)
 {
 	int	ret;
 	int	xnbr_len;
@@ -70,7 +70,23 @@ int	print_xspace(t_flag *flag, unsigned long long xnbr)
 			ret++;
 		}
 	}
-	else
+	return (ret);
+}
+
+int	print_xspace(t_flag *flag, unsigned long long xnbr)
+{
+	int	ret;
+	int	xnbr_len;
+
+	ret = 0;
+	xnbr_len = ft_xnbr_len(xnbr);
+	if (flag->precision > xnbr_len)
+		xnbr_len = flag->precision;
+	if (flag->f_hash > -1 || flag->type == 'p')
+		xnbr_len += 2;
+	if (flag->dot == 1 && flag->precision == 0 && xnbr == 0)
+		xnbr_len = 0;
+	if ((flag->f_minus > -1 || flag->dot == 1) || !(flag->f_zero > -1))
 	{
 		while (flag->width > xnbr_len + ret)
 		{
@@ -100,6 +116,7 @@ int	print_pxX(t_flag *flag, va_list ap)
 	else
 	{
 		ret += print_xspace(flag, xnbr);
+		ret += print_xzero(flag, xnbr);
 		ret += print_hash(flag, xnbr);
 		ret += print_xnbr(flag, xnbr);
 	}
