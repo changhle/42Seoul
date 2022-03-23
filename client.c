@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 16:47:04 by changhle          #+#    #+#             */
-/*   Updated: 2022/03/11 16:49:16 by changhle         ###   ########.fr       */
+/*   Updated: 2022/03/12 05:07:27 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	send(int pid, char *str)
 			else
 				kill(pid, SIGUSR2);
 			i--;
-			usleep(10);
+			usleep(100);
 		}
 		if (!(*str))
 			break ;
