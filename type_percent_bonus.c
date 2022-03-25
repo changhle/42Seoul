@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type_c.c                                           :+:      :+:    :+:   */
+/*   type_percent_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/04 22:12:30 by changhle          #+#    #+#             */
-/*   Updated: 2022/03/25 19:57:08 by changhle         ###   ########.fr       */
+/*   Created: 2022/03/04 22:12:42 by changhle          #+#    #+#             */
+/*   Updated: 2022/03/25 17:18:44 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printf_bonus.h"
 
-int	print_c_space(t_flag *flag)
+int	print_percent_space(t_flag *flag)
 {
 	int	ret;
 
@@ -36,22 +36,20 @@ int	print_c_space(t_flag *flag)
 	return (ret);
 }
 
-int	type_c(t_flag *flag, va_list ap)
+int	type_percent(t_flag *flag)
 {
-	int		ret;
-	char	c;
+	int	ret;
 
 	ret = 0;
-	c = (char)va_arg(ap, int);
 	if (flag->f_minus > -1)
 	{
-		write(1, &c, 1);
-		ret = print_c_space(flag);
+		write(1, "%", 1);
+		ret = print_percent_space(flag);
 	}
 	else
 	{
-		ret = print_c_space(flag);
-		write(1, &c, 1);
+		ret = print_percent_space(flag);
+		write (1, "%", 1);
 	}
 	return (ret);
 }
