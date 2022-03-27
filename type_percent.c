@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 22:12:42 by changhle          #+#    #+#             */
-/*   Updated: 2022/03/05 23:45:21 by changhle         ###   ########.fr       */
+/*   Updated: 2022/03/27 14:39:13 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,13 @@ int	print_percent_space(t_flag *flag)
 	int	ret;
 
 	ret = 1;
-	if (!(flag->f_minus > -1) && flag->f_zero > -1)
+	while (flag->width > ret)
 	{
-		while (flag->width > ret)
-		{
+		if (!(flag->f_minus > -1) && flag->f_zero > -1)
 			write(1, "0", 1);
-			ret++;
-		}
-	}
-	else
-	{
-		while (flag->width > ret)
-		{
+		else
 			write(1, " ", 1);
-			ret++;
-		}
+		ret++;
 	}
 	return (ret);
 }

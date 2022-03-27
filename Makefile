@@ -6,7 +6,7 @@
 #    By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/06 21:02:37 by changhle          #+#    #+#              #
-#    Updated: 2022/03/25 19:45:31 by changhle         ###   ########.fr        #
+#    Updated: 2022/03/27 15:20:51 by changhle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,10 +33,18 @@ SRCS_BONUS = ft_printf_bonus.c \
 OBJS = $(SRCS:.c=.o)
 OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
-$(NAME) : $(OBJS)
+ifdef WITH_BONUS
+	OBJS_FILES = $(OBJS) $(OBJS_BONUS)
+else
+	OBJS_FILES = $(OBJS)
+endif
+
+all : $(NAME)
+
+$(NAME) : $(OBJS_FILES)
 	make -C $(LIBFT) all
 	cp $(LIBFT)/$(LIBFT_LIB) $(NAME)
-	ar rcs $(NAME) $(OBJS)
+	ar rcs $(NAME) $(OBJS_FILES)
 
 $(OBJS) : $(SRCS)
 	$(CC) $(CFLAGS) -c $(SRCS)
@@ -44,10 +52,8 @@ $(OBJS) : $(SRCS)
 $(OBJS_BONUS) : $(SRCS_BONUS)
 	$(CC) $(CFLAGS) -c $(SRCS_BONUS)
 
-all : $(NAME)
-
-bonus : all $(OBJS_BONUS)
-	ar rcs $(NAME) $(OBJS_BONUS)
+bonus : $(OBJS_BONUS)
+	make WITH_BONUS=1 all
 
 clean :
 	make -C $(LIBFT) clean
