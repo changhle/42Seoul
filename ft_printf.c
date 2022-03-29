@@ -85,16 +85,15 @@ int	ft_printf(const char *format, ...)
 	int		index;
 	int		ret;
 	va_list	ap;
-	t_flag	*flag;
+	t_flag	flag;
 
 	va_start(ap, format);
 	index = 0;
 	ret = 0;
-	flag = malloc(sizeof(t_flag));
 	while (format[index])
 	{
 		if (format[index] == '%')
-			ret += parse(format, &index, flag, ap);
+			ret += parse(format, &index, &flag, ap);
 		else
 		{
 			write(1, &format[index], 1);
@@ -103,6 +102,5 @@ int	ft_printf(const char *format, ...)
 		index++;
 	}
 	va_end(ap);
-	free(flag);
 	return (ret);
 }
