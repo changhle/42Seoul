@@ -6,8 +6,10 @@
 
 typedef struct	s_param
 {
-	int	x;
-	int	y;
+	int	width;
+	int	hight;
+	int	p_x;
+	int	p_y;ß
 }	t_param;
 
 #endif
