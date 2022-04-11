@@ -15,7 +15,6 @@
 
 # include <unistd.h>
 # include <stdarg.h>
-# include <limits.h>
 # include "libft/libft.h"
 
 typedef struct s_flag
@@ -39,7 +38,7 @@ int		ft_printf(const char *format, ...);
 int		type_c(t_flag *flag, va_list ap);
 int		type_s(t_flag *flag, va_list ap);
 int		type_diu(t_flag *flag, va_list ap);
-int		type_pxX(t_flag *flag, va_list ap);
+int		type_px(t_flag *flag, va_list ap);
 int		type_percent(t_flag *flag);
 
 #endif

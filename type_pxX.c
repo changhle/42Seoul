@@ -6,13 +6,13 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 22:12:47 by changhle          #+#    #+#             */
-/*   Updated: 2022/03/05 23:48:20 by changhle         ###   ########.fr       */
+/*   Updated: 2022/04/10 17:19:53 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	print_pxX_hash(t_flag *flag, unsigned long long xnbr)
+int	print_px_hash(t_flag *flag, unsigned long long xnbr)
 {
 	int	ret;
 
@@ -33,7 +33,7 @@ int	print_pxX_hash(t_flag *flag, unsigned long long xnbr)
 	return (ret);
 }
 
-int	print_pxX_zero(t_flag *flag, unsigned long long xnbr)
+int	print_px_zero(t_flag *flag, unsigned long long xnbr)
 {
 	int	ret;
 	int	xnbr_len;
@@ -57,7 +57,7 @@ int	print_pxX_zero(t_flag *flag, unsigned long long xnbr)
 	return (ret);
 }
 
-int	print_pxX_space(t_flag *flag, unsigned long long xnbr)
+int	print_px_space(t_flag *flag, unsigned long long xnbr)
 {
 	int	ret;
 	int	xnbr_len;
@@ -81,7 +81,7 @@ int	print_pxX_space(t_flag *flag, unsigned long long xnbr)
 	return (ret);
 }
 
-int	print_pxX_xnbr(t_flag *flag, unsigned long long xnbr)
+int	print_px_xnbr(t_flag *flag, unsigned long long xnbr)
 {
 	int	xnbr_len;
 
@@ -97,7 +97,7 @@ int	print_pxX_xnbr(t_flag *flag, unsigned long long xnbr)
 	return (xnbr_len);
 }
 
-int	type_pxX(t_flag *flag, va_list ap)
+int	type_px(t_flag *flag, va_list ap)
 {
 	int					ret;
 	unsigned long long	xnbr;
@@ -109,16 +109,16 @@ int	type_pxX(t_flag *flag, va_list ap)
 		xnbr = va_arg(ap, unsigned int);
 	if (flag->f_minus > -1)
 	{
-		ret += print_pxX_hash(flag, xnbr);
-		ret += print_pxX_xnbr(flag, xnbr);
-		ret += print_pxX_space(flag, xnbr);
+		ret += print_px_hash(flag, xnbr);
+		ret += print_px_xnbr(flag, xnbr);
+		ret += print_px_space(flag, xnbr);
 	}
 	else
 	{
-		ret += print_pxX_space(flag, xnbr);
-		ret += print_pxX_zero(flag, xnbr);
-		ret += print_pxX_hash(flag, xnbr);
-		ret += print_pxX_xnbr(flag, xnbr);
+		ret += print_px_space(flag, xnbr);
+		ret += print_px_hash(flag, xnbr);
+		ret += print_px_zero(flag, xnbr);
+		ret += print_px_xnbr(flag, xnbr);
 	}
 	return (ret);
 }

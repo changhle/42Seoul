@@ -51,7 +51,7 @@ int	print(t_flag *flag, va_list ap)
 	else if (flag->type == 'd' || flag->type == 'i' || flag->type == 'u')
 		ret = type_diu(flag, ap);
 	else if (flag->type == 'x' || flag->type == 'X' || flag->type == 'p')
-		ret = type_pxX(flag, ap);
+		ret = type_px(flag, ap);
 	else if (flag->type == '%')
 		ret = type_percent(flag);
 	return (ret);
@@ -66,13 +66,13 @@ int	parse(const char *format, int *index, t_flag *flag, va_list ap)
 	while (ft_strchr("-0#+ ", format[*index]))
 		set_flag(format, (*index)++, flag);
 	while (ft_strchr("0123456789", format[*index]))
-		flag->width = flag->width * 10 + format[(*index)++] - '0';
+		flag->width = flag->width * 10 + (format[(*index)++] - '0');
 	if (format[*index] == '.')
 	{
 		flag->dot = 1;
 		(*index)++;
 		while (ft_strchr("0123456789", format[*index]))
-			flag->precision = flag->precision * 10 + format[(*index)++] - '0';
+			flag->precision = flag->precision * 10 + (format[(*index)++] - '0');
 	}
 	if (ft_strchr("cspdiuxX%", format[*index]))
 		flag->type = format[*index];
