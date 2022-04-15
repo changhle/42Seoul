@@ -6,13 +6,13 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 16:47:04 by changhle          #+#    #+#             */
-/*   Updated: 2022/03/23 16:22:14 by changhle         ###   ########.fr       */
+/*   Updated: 2022/04/15 14:00:24 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-void	s_send(int pid, char *str)
+static void	s_send(int pid, char *str)
 {
 	int	i;
 
@@ -34,10 +34,10 @@ void	s_send(int pid, char *str)
 	}
 }
 
-void	c_receive(int signo)
+static void	c_receive(int signo)
 {
 	static int	bytes = 0;
-	
+
 	if (signo == SIGUSR1)
 		bytes++;
 	else if (signo == SIGUSR2)
