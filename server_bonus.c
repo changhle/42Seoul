@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 16:47:01 by changhle          #+#    #+#             */
-/*   Updated: 2022/04/17 16:25:00 by changhle         ###   ########.fr       */
+/*   Updated: 2022/04/17 15:38:09 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "minitalk_bonus.h"
 
 static void	s_receive_send(int signo, siginfo_t *info, void *none)
 {
@@ -26,7 +26,6 @@ static void	s_receive_send(int signo, siginfo_t *info, void *none)
 		{
 			write(1, &c, 1);
 			write(1, "\n", 1);
-			c = 0;
 			kill(info->si_pid, SIGUSR2);
 			return ;
 		}
