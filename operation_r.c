@@ -1,7 +1,9 @@
 #include "push_swap.h"
 
-void	ra(t_info *info)
+void ra(t_info *info)
 {
+	t_node *temp;
+
 	if (info->a_size > 1)
 	{
 		temp = info->a_top;
@@ -15,8 +17,10 @@ void	ra(t_info *info)
 	}
 }
 
-void	rb(t_info *info)
+void rb(t_info *info)
 {
+	t_node *temp;
+
 	if (info->b_size > 1)
 	{
 		temp = info->b_top;
@@ -30,7 +34,7 @@ void	rb(t_info *info)
 	}
 }
 
-void	rr(t_info *info)
+void rr(t_info *info)
 {
 	if (info->a_size > 1 && info->b_size > 1)
 	{
