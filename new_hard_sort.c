@@ -5,8 +5,8 @@ void a_3(t_info *info)
 	int a, b, c;
 
 	c = info->a_top->content;
-	b = info->a_top->prev->content;
-	a = info->a_top->prev->prev->content;
+	b = info->a_top->next->content;
+	a = info->a_top->next->next->content;
 	// if (c < b && b < a)
 	// 	return;
 	if ((a < b && b < c) || (b < a && a < c))
@@ -26,8 +26,8 @@ void b_3(t_info *info)
 	int a, b, c;
 
 	c = info->b_top->content;
-	b = info->b_top->prev->content;
-	a = info->b_top->prev->prev->content;
+	b = info->b_top->next->content;
+	a = info->b_top->next->next->content;
 	if ((c < b && b < a) || (c < a && a < b) || (a < c && c < b))
 		sb(info);
 	if ((b < a && (c < b || a < b)))
@@ -44,6 +44,7 @@ void b_3(t_info *info)
 	}
 	if (a < b && b < c)
 		pa(info);
+	pa(info);
 }
 
 void a_2(t_info *info)
@@ -51,7 +52,7 @@ void a_2(t_info *info)
 	int a, b;
 
 	b = info->a_top->content;
-	a = info->a_top->prev->content;
+	a = info->a_top->next->content;
 	if (a < b)
 		sa(info);
 }
@@ -61,9 +62,10 @@ void b_2(t_info *info)
 	int a, b;
 
 	b = info->b_top->content;
-	a = info->b_top->prev->content;
+	a = info->b_top->next->content;
 	if (a > b)
 		sb(info);
+	pa(info);
 }
 
 void hard_sort(t_info *info, int size, char stack)

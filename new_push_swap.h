@@ -32,6 +32,7 @@ int ft_isdigit(int c);
 long long ft_atoll(const char *str);
 void select_pivot(t_info *info, int r, int *s_pivot, int *l_pivot, char stack);
 void print_stack(t_info *info);
+void hard_sort(t_info *info, int size, char stack);
 
 void pa(t_info *info);
 void pb(t_info *info);

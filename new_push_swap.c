@@ -44,13 +44,9 @@ void a_to_b(t_info *info, int r)
 	int l_pivot;
 	int s_pivot;
 
-	if (r < 3)
+	if (r <= 3)
 	{
-		if (r == 2)
-		{
-			if (info->a_top->content > info->a_top->next->content)
-				sa(info);
-		}
+		hard_sort(info, r, 'a');
 		return;
 	} // hard sorting!!
 	select_pivot(info, r, &s_pivot, &l_pivot, 'a');
@@ -103,14 +99,9 @@ void b_to_a(t_info *info, int r)
 	int l_pivot;
 	int s_pivot;
 
-	if (r < 3)
+	if (r <= 3)
 	{
-		if (r == 2)
-		{
-			if (info->b_top->content < info->b_top->next->content)
-				rb(info);
-			pa(info);
-		}
+		hard_sort(info, r, 'b');
 		pa(info);
 		return;
 	} // hard sorting!!
