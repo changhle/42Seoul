@@ -37,14 +37,20 @@ void push_to_stack_a(char *arr, t_info *info)
 void a_to_b(t_info *info, int r)
 {
 	int i;
+	int tmp;
 	int ra_cnt;
 	int rb_cnt;
 	int pb_cnt;
 	int l_pivot;
 	int s_pivot;
 
-	if (r <= 1)
+	if (r < 3)
 	{
+		if (r == 2)
+		{
+			if (info->a_top->content > info->a_top->next->content)
+				sa(info);
+		}
 		return;
 	} // hard sorting!!
 	select_pivot(info, r, &s_pivot, &l_pivot, 'a');
@@ -61,9 +67,10 @@ void a_to_b(t_info *info, int r)
 		}
 		else
 		{
+			tmp = info->a_top->content;
 			pb(info);
 			pb_cnt++;
-			if (info->a_top->content < s_pivot)
+			if (tmp >= s_pivot)
 			{
 				rb(info);
 				rb_cnt++;
@@ -77,9 +84,9 @@ void a_to_b(t_info *info, int r)
 		rrr(info);
 		i++;
 	}
-	while (i < ra_cnt)
+	while (i++ < ra_cnt)
 		rra(info);
-	while (i < rb_cnt)
+	while (i++ < rb_cnt)
 		rrb(info);
 	a_to_b(info, ra_cnt);
 	b_to_a(info, rb_cnt);
@@ -89,14 +96,21 @@ void a_to_b(t_info *info, int r)
 void b_to_a(t_info *info, int r)
 {
 	int i;
+	int tmp;
 	int ra_cnt;
 	int rb_cnt;
 	int pa_cnt;
 	int l_pivot;
 	int s_pivot;
 
-	if (r <= 1)
+	if (r < 3)
 	{
+		if (r == 2)
+		{
+			if (info->b_top->content < info->b_top->next->content)
+				rb(info);
+			pa(info);
+		}
 		pa(info);
 		return;
 	} // hard sorting!!
@@ -111,9 +125,10 @@ void b_to_a(t_info *info, int r)
 		}
 		else
 		{
+			tmp = info->b_top->content;
 			pa(info);
 			pa_cnt++;
-			if (info->b_top->content < l_pivot)
+			if (tmp < l_pivot)
 			{
 				ra(info);
 				ra_cnt++;
@@ -128,9 +143,9 @@ void b_to_a(t_info *info, int r)
 		rrr(info);
 		i++;
 	}
-	while (i < ra_cnt)
+	while (i++ < ra_cnt)
 		rra(info);
-	while (i < rb_cnt)
+	while (i++ < rb_cnt)
 		rrb(info);
 	a_to_b(info, ra_cnt);
 	b_to_a(info, rb_cnt);

@@ -7,6 +7,7 @@ void pa(t_info *info)
 	if (info->b_size < 1)
 		return;
 	temp = info->b_top;
+	info->b_top = info->b_top->next;
 	if (info->b_size == 1)
 	{
 		info->b_top = NULL;
@@ -24,10 +25,13 @@ void pa(t_info *info)
 		temp->next = info->a_top;
 		info->a_top = temp;
 	}
+	if (info->b_size > 1)
+		info->b_top->prev = NULL;
 	info->a_size++;
 	info->b_size--;
 	info->cmd++;
 	write(1, "pa\n", 3);
+	print_stack(info);
 }
 
 void pb(t_info *info)
@@ -37,6 +41,7 @@ void pb(t_info *info)
 	if (info->a_size < 1)
 		return;
 	temp = info->a_top;
+	info->a_top = info->a_top->next;
 	if (info->a_size == 1)
 	{
 		info->a_top = NULL;
@@ -54,8 +59,11 @@ void pb(t_info *info)
 		temp->next = info->b_top;
 		info->b_top = temp;
 	}
+	if (info->a_size > 1)
+		info->a_top->prev = NULL;
 	info->a_size--;
 	info->b_size++;
 	info->cmd++;
 	write(1, "pb\n", 3);
+	print_stack(info);
 }
