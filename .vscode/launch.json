@@ -9,7 +9,7 @@
 			"request": "launch",
 			"name": "Debug",
 			"program": "/Users/changhee/42Seoul/push_swap_v3/a.out",
-			"args": ["8 7 6 5 4 3 2 1"],
+			"args": ["11 10 9 8 7 6 5 4 3 2 1"],
 			"cwd": "${fileDirname}"
 		}
 	]

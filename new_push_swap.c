@@ -148,12 +148,14 @@ int main(int argc, char **argv)
 	int j;
 	int count;
 	char **arr;
-	t_info info;
-	t_info s_list;
+	t_info *info;
+	t_info *s_list;
 	t_node *temp;
 
-	init_info(&info);
-	init_info(&s_list);
+	info = malloc(sizeof(t_info));
+	s_list = malloc(sizeof(t_info));
+	init_info(info);
+	init_info(s_list);
 	if (argc < 2)
 		return (0);
 	i = 1;
@@ -164,22 +166,22 @@ int main(int argc, char **argv)
 		j = 0;
 		while (arr[j])
 		{
-			push_to_stack_a(arr[j], &info);
-			push_to_stack_a(arr[j], &s_list);
+			push_to_stack_a(arr[j], info);
+			push_to_stack_a(arr[j], s_list);
 			count++;
 			j++;
 		}
 		i++;
 	}
-	sort(&s_list);
-	a_to_b(&info, info.a_size);
+	sort(s_list);
+	a_to_b(info, info->a_size);
 	i = 0;
-	temp = info.a_top;
-	while (i < info.a_size)
+	temp = info->a_top;
+	while (i < info->a_size)
 	{
 		printf("%d ", temp->content);
 		temp = temp->next;
 		i++;
 	}
-	printf("\n");
+	printf("\ncmd : %d\n", info->cmd);
 }

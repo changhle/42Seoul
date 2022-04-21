@@ -1,4 +1,4 @@
-#include "push_swap.h"
+#include "new_push_swap.h"
 
 void a_3(t_info *info)
 {
