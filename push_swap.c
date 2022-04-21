@@ -69,7 +69,7 @@ void add_to_stack_a(char *arr, t_info *info)
 	{
 		info->a_top->next = temp;
 		temp->prev = info->a_top;
-		info->a_top = temp;
+		info->a_bottom = temp;
 	}
 	else
 	{
