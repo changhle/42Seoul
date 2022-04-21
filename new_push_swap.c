@@ -36,6 +36,7 @@ void push_to_stack_a(char *arr, t_info *info)
 
 void a_to_b(t_info *info, int r)
 {
+	printf("a----->b | r = %d\n", r);
 	int i;
 	int tmp;
 	int ra_cnt;
@@ -47,6 +48,7 @@ void a_to_b(t_info *info, int r)
 	if (r <= 3)
 	{
 		hard_sort(info, r, 'a');
+		printf("(-------------------hard_sort---------------------)\n");
 		return;
 	} // hard sorting!!
 	select_pivot(info, r, &s_pivot, &l_pivot, 'a');
@@ -87,10 +89,12 @@ void a_to_b(t_info *info, int r)
 	a_to_b(info, ra_cnt);
 	b_to_a(info, rb_cnt);
 	b_to_a(info, pb_cnt - rb_cnt);
+	printf("(----------------------------------------)\n");
 }
 
 void b_to_a(t_info *info, int r)
 {
+	printf("b----->a | r = %d\n", r);
 	int i;
 	int tmp;
 	int ra_cnt;
@@ -103,10 +107,14 @@ void b_to_a(t_info *info, int r)
 	{
 		hard_sort(info, r, 'b');
 		pa(info);
+		printf("(-------------------hard_sort---------------------)\n");
 		return;
 	} // hard sorting!!
 	select_pivot(info, r, &s_pivot, &l_pivot, 'b');
 	i = 0;
+	ra_cnt = 0;
+	rb_cnt = 0;
+	pa_cnt = 0;
 	while (i < r)
 	{
 		if (info->b_top->content < s_pivot)
@@ -140,6 +148,7 @@ void b_to_a(t_info *info, int r)
 		rrb(info);
 	a_to_b(info, ra_cnt);
 	b_to_a(info, rb_cnt);
+	printf("(----------------------------------------)\n");
 }
 
 int main(int argc, char **argv)
