@@ -74,30 +74,30 @@ void select_pivot(t_info *info, int r, int *s_pivot, int *l_pivot, char stack)
 	*s_pivot = arr[r / 3];
 	*l_pivot = arr[(r * 2) / 3];
 	free(arr);
-	printf("sp = %d\nlp = %d\n", *s_pivot, *l_pivot);
+	// printf("sp = %d\nlp = %d\n", *s_pivot, *l_pivot);
 }
 
 void print_stack(t_info *info)
 {
-	int i;
-	t_node *temp;
+	// int i;
+	// t_node *temp;
 
-	i = 0;
-	temp = info->a_top;
-	printf("A | ");
-	while (temp)
-	{
-		printf("%d ", temp->content);
-		temp = temp->next;
-	}
-	printf("\n");
-	temp = info->b_top;
-	printf("B | ");
-	i = 0;
-	while (temp)
-	{
-		printf("%d ", temp->content);
-		temp = temp->next;
-	}
-	printf("\n");
+	// i = 0;
+	// temp = info->a_top;
+	// printf("A | ");
+	// while (temp)
+	// {
+	// 	printf("%d ", temp->content);
+	// 	temp = temp->next;
+	// }
+	// printf("\n");
+	// temp = info->b_top;
+	// printf("B | ");
+	// i = 0;
+	// while (temp)
+	// {
+	// 	printf("%d ", temp->content);
+	// 	temp = temp->next;
+	// }
+	// printf("\n");
 }
