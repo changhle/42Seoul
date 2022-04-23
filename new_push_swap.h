@@ -33,9 +33,9 @@ long long ft_atoll(const char *str);
 void select_pivot(t_info *info, int r, int *s_pivot, int *l_pivot, char stack);
 void print_stack(t_info *info);
 void hard_sort(t_info *info, int size, char stack);
-int is_sorted(t_info *info, int r);
+int is_sorted(t_info *info, int r, int pivot);
 void sort_arr(int *arr, int r);
-int is_rsorted(t_info *info, int r);
+int is_rsorted(t_info *info, int r, int pivot);
 
 void pa(t_info *info);
 void pb(t_info *info);

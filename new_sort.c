@@ -77,18 +77,18 @@ void select_pivot(t_info *info, int r, int *s_pivot, int *l_pivot, char stack)
 	// printf("sp = %d\nlp = %d\n", *s_pivot, *l_pivot);
 }
 
-int is_sorted(t_info *info, int r)
+int is_sorted(t_info *info, int r, int pivot)
 {
 	int i;
 	t_node *temp;
 
-	if (r == 1)
-		return (0);
+	// if (r == 1)
+	// 	return (0);
 	i = 0;
 	temp = info->a_top;
-	while (i < r - 1)
+	while (i < r)
 	{
-		if (temp->content > temp->next->content)
+		if (temp->content < pivot)
 			return (0);
 		temp = temp->next;
 		i++;
@@ -96,18 +96,18 @@ int is_sorted(t_info *info, int r)
 	return (1);
 }
 
-int is_rsorted(t_info *info, int r)
+int is_rsorted(t_info *info, int r, int pivot)
 {
 	int i;
 	t_node *temp;
 
-	if (r == 1)
-		return (0);
+	// if (r == 1)
+	// 	return (0);
 	i = 0;
 	temp = info->b_top;
-	while (i < r - 1)
+	while (i < r)
 	{
-		if (temp->content < temp->next->content)
+		if (temp->content >= pivot)
 			return (0);
 		temp = temp->next;
 		i++;
