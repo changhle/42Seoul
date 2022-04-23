@@ -45,7 +45,9 @@ void a_to_b(t_info *info, int r)
 	int l_pivot;
 	int s_pivot;
 
-	if (r <= 2)
+	if (is_sorted(info, r))
+		return;
+	if (r <= 6)
 	{
 		hard_sort(info, r, 'a');
 		// printf("(-------------------hard_sort---------------------)\n");
@@ -103,10 +105,21 @@ void b_to_a(t_info *info, int r)
 	int l_pivot;
 	int s_pivot;
 
-	if (r <= 2)
+	i = 0;
+	if (is_rsorted(info, r))
 	{
-		hard_sort(info, r, 'b');
-		pa(info);
+		while (i++ < r)
+			pa(info);
+		return;
+	}
+	if (r <= 6)
+	{
+		if (r == 1)
+
+			pa(info);
+		else
+			hard_sort(info, r, 'b');
+		// pa(info);
 		// printf("(-------------------hard_sort---------------------)\n");
 		return;
 	} // hard sorting!!

@@ -8,10 +8,8 @@
 			"type": "lldb",
 			"request": "launch",
 			"name": "Debug",
-			"program": "/home/changhle/42seoul/push_swap/a.out",
-			"args": [
-				"11 10 9 8 7 6 5 4 3 2 1"
-			],
+			"program": "/Users/changhee/42Seoul/push_swap_v3/a.out",
+			"args": ["641    3       383     136     425     291     42      922     730     123     971     440     200     673     107     850     684     231     340     575     356     597       333     1000    281     264     51      451     2       29"],
 			"cwd": "${fileDirname}"
 		}
 	]

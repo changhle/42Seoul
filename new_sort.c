@@ -77,6 +77,40 @@ void select_pivot(t_info *info, int r, int *s_pivot, int *l_pivot, char stack)
 	// printf("sp = %d\nlp = %d\n", *s_pivot, *l_pivot);
 }
 
+int is_sorted(t_info *info, int r)
+{
+	int i;
+	t_node *temp;
+
+	i = 0;
+	temp = info->a_top;
+	while (i < r - 1)
+	{
+		if (temp->content > temp->next->content)
+			return (0);
+		temp = temp->next;
+		i++;
+	}
+	return (1);
+}
+
+int is_rsorted(t_info *info, int r)
+{
+	int i;
+	t_node *temp;
+
+	i = 0;
+	temp = info->b_top;
+	while (i < r - 1)
+	{
+		if (temp->content < temp->next->content)
+			return (0);
+		temp = temp->next;
+		i++;
+	}
+	return (1);
+}
+
 void print_stack(t_info *info)
 {
 	// int i;
