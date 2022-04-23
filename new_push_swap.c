@@ -62,8 +62,11 @@ void a_to_b(t_info *info, int r)
 	{
 		if (info->a_top->content >= l_pivot)
 		{
-			ra(info);
-			ra_cnt++;
+			if (!is_sorted(info, r - ra_cnt))
+			{
+				ra(info);
+				ra_cnt++;
+			}
 		}
 		else
 		{

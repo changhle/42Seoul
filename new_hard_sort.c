@@ -176,8 +176,8 @@ void hard_sort(t_info *info, int size, char stack)
 			i = 0;
 			while (i++ < rb_cnt)
 				rrb(info);
-			hard_sort(info, size - pa_cnt, 'a');
-			hard_sort(info, pa_cnt, 'b');
+			hard_sort(info, pa_cnt, 'a');
+			hard_sort(info, size - pa_cnt, 'b');
 		}
 	}
 }
