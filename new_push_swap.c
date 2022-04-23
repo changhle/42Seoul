@@ -45,8 +45,8 @@ void a_to_b(t_info *info, int r)
 	int l_pivot;
 	int s_pivot;
 
-	if (is_sorted(info, r))
-		return;
+	// if (is_sorted(info, r))
+	// 	return;
 	if (r <= 6)
 	{
 		hard_sort(info, r, 'a');
@@ -62,7 +62,7 @@ void a_to_b(t_info *info, int r)
 	{
 		if (info->a_top->content >= l_pivot)
 		{
-			if (!is_sorted(info, r - ra_cnt))
+			if (!is_sorted(info, r - ra_cnt - pb_cnt))
 			{
 				ra(info);
 				ra_cnt++;
@@ -87,11 +87,17 @@ void a_to_b(t_info *info, int r)
 		rrr(info);
 		i++;
 	}
-	while (i++ < ra_cnt)
+	while (i < ra_cnt)
+	{
 		rra(info);
-	while (i++ < rb_cnt)
+		i++;
+	}
+	while (i < rb_cnt)
+	{
 		rrb(info);
-	a_to_b(info, ra_cnt);
+		i++;
+	}
+	a_to_b(info, r - pb_cnt);
 	b_to_a(info, rb_cnt);
 	b_to_a(info, pb_cnt - rb_cnt);
 	// printf("(----------------------------------------)\n");
@@ -135,8 +141,11 @@ void b_to_a(t_info *info, int r)
 	{
 		if (info->b_top->content < s_pivot)
 		{
+			// if (!is_rsorted(info, r - rb_cnt - pa_cnt))
+			// {
 			rb(info);
 			rb_cnt++;
+			// }
 		}
 		else
 		{
@@ -158,10 +167,16 @@ void b_to_a(t_info *info, int r)
 		rrr(info);
 		i++;
 	}
-	while (i++ < ra_cnt)
+	while (i < ra_cnt)
+	{
 		rra(info);
-	while (i++ < rb_cnt)
+		i++;
+	}
+	while (i < rb_cnt)
+	{
 		rrb(info);
+		i++;
+	}
 	a_to_b(info, ra_cnt);
 	b_to_a(info, rb_cnt);
 	// printf("(----------------------------------------)\n");

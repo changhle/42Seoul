@@ -120,7 +120,7 @@ void hard_sort(t_info *info, int size, char stack)
 			a_3(info);
 		else if (size == 2)
 			a_2(info);
-		else
+		else if (size > 3)
 		{
 			select_mid_pivot(info, size, &pivot, 'a');
 			while (pb_cnt < size / 2)
@@ -157,7 +157,7 @@ void hard_sort(t_info *info, int size, char stack)
 			b_3(info);
 		else if (size == 2)
 			b_2(info);
-		else
+		else if (size > 3)
 		{
 			select_mid_pivot(info, size, &pivot, 'b');
 			while (pa_cnt < (size + 1) / 2)

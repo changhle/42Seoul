@@ -82,6 +82,8 @@ int is_sorted(t_info *info, int r)
 	int i;
 	t_node *temp;
 
+	if (r == 1)
+		return (0);
 	i = 0;
 	temp = info->a_top;
 	while (i < r - 1)
@@ -99,6 +101,8 @@ int is_rsorted(t_info *info, int r)
 	int i;
 	t_node *temp;
 
+	if (r == 1)
+		return (0);
 	i = 0;
 	temp = info->b_top;
 	while (i < r - 1)
