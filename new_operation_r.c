@@ -14,7 +14,8 @@ void ra(t_info *info)
 		temp->prev = info->a_bottom;
 		info->a_bottom = temp;
 		info->cmd++;
-		write(1, "ra\n", 3);
+		push_to_stack_command(info, "ra\n");
+		// write(1, "ra\n", 3);
 		print_stack(info);
 	}
 }
@@ -33,7 +34,8 @@ void rb(t_info *info)
 		temp->prev = info->b_bottom;
 		info->b_bottom = temp;
 		info->cmd++;
-		write(1, "rb\n", 3);
+		push_to_stack_command(info, "rb\n");
+		// write(1, "rb\n", 3);
 		print_stack(info);
 	}
 }
@@ -63,6 +65,7 @@ void rr(t_info *info)
 		info->b_bottom = temp;
 	}
 	info->cmd++;
-	write(1, "rr\n", 3);
+	push_to_stack_command(info, "rr\n");
+	// write(1, "rr\n", 3);
 	print_stack(info);
 }

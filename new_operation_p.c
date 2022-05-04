@@ -30,7 +30,8 @@ void pa(t_info *info)
 	info->a_size++;
 	info->b_size--;
 	info->cmd++;
-	write(1, "pa\n", 3);
+	push_to_stack_command(info, "pa\n");
+	// write(1, "pa\n", 3);
 	print_stack(info);
 }
 
@@ -64,6 +65,7 @@ void pb(t_info *info)
 	info->a_size--;
 	info->b_size++;
 	info->cmd++;
-	write(1, "pb\n", 3);
+	push_to_stack_command(info, "pb\n");
+	// write(1, "pb\n", 3);
 	print_stack(info);
 }

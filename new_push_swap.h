@@ -9,6 +9,7 @@
 typedef struct s_node
 {
 	int content;
+	char *command;
 	struct s_node *prev;
 	struct s_node *next;
 } t_node;
@@ -22,7 +23,19 @@ typedef struct s_info
 	t_node *a_bottom;
 	t_node *b_top;
 	t_node *b_bottom;
+	t_node *cmd_top;
+	t_node *cmd_bottom;
 } t_info;
+
+typedef struct s_var
+{
+	int ra_cnt;
+	int rb_cnt;
+	int pa_cnt;
+	int pb_cnt;
+	int l_pivot;
+	int s_pivot;
+} t_var;
 
 void a_to_b(t_info *info, int r);
 void b_to_a(t_info *info, int r);
@@ -36,6 +49,7 @@ void hard_sort(t_info *info, int size, char stack);
 int is_sorted(t_info *info, int r, int pivot);
 void sort_arr(int *arr, int r);
 int is_rsorted(t_info *info, int r, int pivot);
+void push_to_stack_command(t_info *info, char *str);
 
 void pa(t_info *info);
 void pb(t_info *info);

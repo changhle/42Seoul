@@ -9,16 +9,28 @@ void a_3(t_info *info)
 	c = info->a_top->next->next->content;
 	// if (c < b && b < a)
 	// 	return;
-	if ((b < a && a < c) || (b < c && c < a) || (c < b && b < a))
-		sa(info);
-	if (((c < b) && (a < c || b < a)) || (c < a && (a < b || b < c)))
+	if (info->a_size > 3)
 	{
-		ra(info);
-		sa(info);
-		rra(info);
+		if ((b < a && a < c) || (b < c && c < a) || (c < b && b < a))
+			sa(info);
+		if (((c < b) && (a < c || b < a)) || (c < a && (a < b || b < c)))
+		{
+			ra(info);
+			sa(info);
+			rra(info);
+		}
+		if ((c < a && a < b) || (c < b && b < a))
+			sa(info);
 	}
-	if ((c < a && a < b) || (c < b && b < a))
-		sa(info);
+	else
+	{
+		if ((a < c && c < b) || (b < c && c < a))
+			ra(info);
+		if ((a < c && c < b) || (b < a && a < c) || (c < b && b < a))
+			sa(info);
+		if ((a < c && c < b) || (c < a && a < b) || (c < b && b < a))
+			rra(info);
+	}
 }
 
 void b_3(t_info *info)
@@ -29,24 +41,44 @@ void b_3(t_info *info)
 	b = info->b_top->next->content;
 	c = info->b_top->next->next->content;
 
-	if ((a < b && (b < c || c < a)) || (a < c && c < b))
-		sb(info);
-	if ((a < b && b < c) || (b < a && a < c))
+	if (info->b_size > 3)
 	{
-		rb(info);
-		sb(info);
-		pa(info);
-		rrb(info);
+		if ((a < c && c < b) || (c < a && a < b))
+			sb(info);
+		if ((a < b && b < c) || (b < a && a < c))
+		{
+			rb(info);
+			sb(info);
+			pa(info);
+			if (a < b && b < c)
+				pa(info);
+			rrb(info);
+		}
+		if ((a < c && c < b) || (b < c && c < a))
+		{
+			pa(info);
+			sb(info);
+		}
+		if ((a < b && b < c) || (c < a && a < b) || (c < b && b < a))
+			pa(info);
+		if (!(a < b && b < c))
+		{
+			pa(info);
+			pa(info);
+		}
 	}
-	if ((a < c && c < b) || (b < c && c < a))
+	else
 	{
+		if ((a < c && c < b) || (b < c && c < a))
+			rb(info);
+		if ((a < b && b < c) || (c < a && a < b) || (b < c && c < a))
+			sb(info);
+		if ((a < b && b < c) || (b < a && a < c) || (b < c && c < a))
+			rrb(info);
 		pa(info);
-		sb(info);
+		pa(info);
+		pa(info);
 	}
-	if ((c < b && b < a) || (c < a && a < b))
-		pa(info);
-	pa(info);
-	pa(info);
 }
 
 void a_2(t_info *info)
@@ -137,7 +169,7 @@ void hard_sort(t_info *info, int size, char stack)
 				}
 			}
 			i = 0;
-			while (i++ < ra_cnt)
+			while (info->a_size > 5 && i++ < ra_cnt)
 				rra(info);
 			hard_sort(info, size - pb_cnt, 'a');
 			hard_sort(info, pb_cnt, 'b');
@@ -174,7 +206,7 @@ void hard_sort(t_info *info, int size, char stack)
 				}
 			}
 			i = 0;
-			while (i++ < rb_cnt)
+			while (info->b_size > 5 && i++ < rb_cnt)
 				rrb(info);
 			hard_sort(info, pa_cnt, 'a');
 			hard_sort(info, size - pa_cnt, 'b');
