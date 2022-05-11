@@ -1,17 +1,12 @@
-#include "new_push_swap.h"
+#include "push_swap.h"
 
-void	select_pivot(t_info *info, int r, int *s_pivot, int *l_pivot, char stack)
+void	select_pivot(t_node *temp, int r, int *s_pivot, int *l_pivot)
 {
 	int		i;
 	int		*arr;
-	t_node	*temp;
 
 	arr = malloc(sizeof(int) * (r + 1));
 	i = 0;
-	if (stack == 'a')
-		temp = info->a_top;
-	else
-		temp = info->b_top;
 	while (i < r)
 	{
 		arr[i] = temp->content;

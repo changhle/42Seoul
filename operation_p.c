@@ -1,8 +1,8 @@
-#include "new_push_swap.h"
+#include "push_swap.h"
 
-void pa(t_info *info)
+void	pa(t_info *info)
 {
-	t_node *temp;
+	t_node	*temp;
 
 	if (info->b_size < 1)
 		return;
@@ -35,9 +35,9 @@ void pa(t_info *info)
 	print_stack(info);
 }
 
-void pb(t_info *info)
+void	pb(t_info *info)
 {
-	t_node *temp;
+	t_node	*temp;
 
 	if (info->a_size < 1)
 		return;

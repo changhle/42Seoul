@@ -1,4 +1,4 @@
-#include "new_push_swap.h"
+#include "push_swap.h"
 
 void	init_var(t_var *var)
 {

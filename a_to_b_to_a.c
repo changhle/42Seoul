@@ -1,4 +1,4 @@
-#include "new_push_swap.h"
+#include "push_swap.h"
 
 void	reverse(t_info *info, t_var *var)
 {
@@ -89,7 +89,7 @@ void	a_to_b(t_info *info, int r)
 		hard_sort(info, r, 'a');
 		return ;
 	}
-	select_pivot(info, r, &var.s_pivot, &var.l_pivot, 'a');
+	select_pivot(info->a_top, r, &var.s_pivot, &var.l_pivot);
 	i = 0;
 	while (i++ < r)
 		a_b_cmd(info, &var, r);
@@ -113,7 +113,7 @@ void	b_to_a(t_info *info, int r)
 			hard_sort(info, r, 'b');
 		return ;
 	}
-	select_pivot(info, r, &var.s_pivot, &var.l_pivot, 'b');
+	select_pivot(info->b_top, r, &var.s_pivot, &var.l_pivot);
 	i = 0;
 	init_var(&var);
 	while (i++ < r)

@@ -1,8 +1,8 @@
-#include "new_push_swap.h"
+#include "push_swap.h"
 
-void ra(t_info *info)
+void	ra(t_info *info)
 {
-	t_node *temp;
+	t_node	*temp;
 
 	if (info->a_size > 1)
 	{
@@ -20,9 +20,9 @@ void ra(t_info *info)
 	}
 }
 
-void rb(t_info *info)
+void	rb(t_info *info)
 {
-	t_node *temp;
+	t_node	*temp;
 
 	if (info->b_size > 1)
 	{
@@ -40,9 +40,9 @@ void rb(t_info *info)
 	}
 }
 
-void rr(t_info *info)
+void	rr(t_info *info)
 {
-	t_node *temp;
+	t_node	*temp;
 
 	if (info->a_size > 1)
 	{

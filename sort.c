@@ -1,20 +1,20 @@
-#include "new_push_swap.h"
+#include "push_swap.h"
 
-void swap(int *a, int *b)
+void	swap(int *a, int *b)
 {
-	int temp;
+	int	temp;
 
 	temp = *a;
 	*a = *b;
 	*b = temp;
 }
 
-void sort(t_info *info)
+void	sort(t_info *info)
 {
-	int i;
-	int j;
-	t_node *temp_i;
-	t_node *temp_j;
+	int		i;
+	int		j;
+	t_node	*temp_i;
+	t_node	*temp_j;
 
 	temp_i = info->a_top;
 	i = info->a_size - 1;
@@ -33,10 +33,10 @@ void sort(t_info *info)
 	}
 }
 
-void sort_arr(int *arr, int r)
+void	sort_arr(int *arr, int r)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = r - 1;
 	while (i > 0)
@@ -52,10 +52,10 @@ void sort_arr(int *arr, int r)
 	}
 }
 
-int is_sorted(t_info *info, int r, int pivot)
+int	is_sorted(t_info *info, int r, int pivot)
 {
-	int i;
-	t_node *temp;
+	int		i;
+	t_node	*temp;
 
 	// if (r == 1)
 	// 	return (0);
@@ -71,10 +71,10 @@ int is_sorted(t_info *info, int r, int pivot)
 	return (1);
 }
 
-int is_rsorted(t_info *info, int r, int pivot)
+int	is_rsorted(t_info *info, int r, int pivot)
 {
-	int i;
-	t_node *temp;
+	int		i;
+	t_node	*temp;
 
 	// if (r == 1)
 	// 	return (0);

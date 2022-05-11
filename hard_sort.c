@@ -1,14 +1,7 @@
-#include "new_push_swap.h"
+#include "push_swap.h"
 
-void a_3(t_info *info)
+void	a_3(t_info *info, int a, int b, int c)
 {
-	int a, b, c;
-
-	a = info->a_top->content;
-	b = info->a_top->next->content;
-	c = info->a_top->next->next->content;
-	// if (c < b && b < a)
-	// 	return;
 	if (info->a_size > 3)
 	{
 		if ((b < a && a < c) || (b < c && c < a) || (c < b && b < a))
@@ -33,14 +26,8 @@ void a_3(t_info *info)
 	}
 }
 
-void b_3(t_info *info)
+void	b_3(t_info *info, int a, int b, int c)
 {
-	int a, b, c;
-
-	a = info->b_top->content;
-	b = info->b_top->next->content;
-	c = info->b_top->next->next->content;
-
 	if (info->b_size > 3)
 	{
 		if ((a < c && c < b) || (c < a && a < b))
@@ -81,112 +68,84 @@ void b_3(t_info *info)
 	}
 }
 
-void a_2(t_info *info)
+void	a_2(t_info *info, int a, int b)
 {
-	int a, b;
-
-	b = info->a_top->content;
-	a = info->a_top->next->content;
-	if (a < b)
+	if (a > b)
 		sa(info);
 }
 
-void b_2(t_info *info)
+void	b_2(t_info *info, int a, int b)
 {
-	int a, b;
-
-	b = info->b_top->content;
-	a = info->b_top->next->content;
-	if (a > b)
+	if (a < b)
 		sb(info);
 	pa(info);
 	pa(info);
 }
 
-void hard_sort(t_info *info, int size, char stack)
+void	hard_sort(t_info *info, int size, char stack)
 {
-	int i;
-	int pivot;
-	int ra_cnt;
-	int rb_cnt;
-	int pa_cnt;
-	int pb_cnt;
+	int		i;
+	t_var	var;
 
-	ra_cnt = 0;
-	rb_cnt = 0;
-	pa_cnt = 0;
-	pb_cnt = 0;
+	init_var(&var);
 	if (stack == 'a')
 	{
-		// if (size > 3)
-		// {
-		// 	pb(info);
-		// 	pb(info);
-		// 	hard_sort(info, size - 2, 'a');
-		// 	hard_sort(info, 2, 'b');
-		// }
 		if (size == 3)
-			a_3(info);
+			a_3(info, info->a_top->content, info->a_top->next->content,
+				info->a_top->next->next->content);
 		else if (size == 2)
-			a_2(info);
+			a_2(info, info->a_top->content, info->a_top->next->content);
 		else if (size > 3)
 		{
-			select_mid_pivot(info, size, &pivot, 'a');
-			while (pb_cnt < size / 2)
+			select_mid_pivot(info, size, &var.m_pivot, 'a');
+			while (var.pb_cnt < size / 2)
 			{
-				if (info->a_top->content >= pivot)
+				if (info->a_top->content >= var.m_pivot)
 				{
 					ra(info);
-					ra_cnt++;
+					var.ra_cnt++;
 				}
 				else
 				{
 					pb(info);
-					pb_cnt++;
+					var.pb_cnt++;
 				}
 			}
 			i = 0;
-			while (info->a_size > 5 && i++ < ra_cnt)
+			while (info->a_size > 5 && i++ < var.ra_cnt)
 				rra(info);
-			hard_sort(info, size - pb_cnt, 'a');
-			hard_sort(info, pb_cnt, 'b');
+			hard_sort(info, size - var.pb_cnt, 'a');
+			hard_sort(info, var.pb_cnt, 'b');
 		}
 	}
 	else if (stack == 'b')
 	{
-		// if (size > 3)
-		// {
-		// 	pa(info);
-		// 	pa(info);
-		// 	pa(info);
-		// 	hard_sort(info, 3, 'a');
-		// 	hard_sort(info, size - 3, 'b');
-		// }
 		if (size == 3)
-			b_3(info);
+			b_3(info, info->b_top->content, info->b_top->next->content,
+				info->b_top->next->next->content);
 		else if (size == 2)
-			b_2(info);
+			b_2(info, info->b_top->content, info->b_top->next->content);
 		else if (size > 3)
 		{
-			select_mid_pivot(info, size, &pivot, 'b');
-			while (pa_cnt < (size + 1) / 2)
+			select_mid_pivot(info, size, &var.m_pivot, 'b');
+			while (var.pa_cnt < (size + 1) / 2)
 			{
-				if (info->b_top->content < pivot)
+				if (info->b_top->content < var.m_pivot)
 				{
 					rb(info);
-					rb_cnt++;
+					var.rb_cnt++;
 				}
 				else
 				{
 					pa(info);
-					pa_cnt++;
+					var.pa_cnt++;
 				}
 			}
 			i = 0;
-			while (info->b_size > 5 && i++ < rb_cnt)
+			while (info->b_size > 5 && i++ < var.rb_cnt)
 				rrb(info);
-			hard_sort(info, pa_cnt, 'a');
-			hard_sort(info, size - pa_cnt, 'b');
+			hard_sort(info, var.pa_cnt, 'a');
+			hard_sort(info, size - var.pa_cnt, 'b');
 		}
 	}
 }

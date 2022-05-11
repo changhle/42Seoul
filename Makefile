@@ -3,15 +3,15 @@ CFLALGS = -Wall -Werror -Wextra
 LIBFT = libft
 LIBFT_LIB = libft.a
 NAME = push_swap
-SRCS = new_hard_sort.c\
-	new_operation_p.c\
-	new_operation_r.c\
-	new_operation_rr.c\
-	new_operation_s.c\
+SRCS = hard_sort.c\
+	operation_p.c\
+	operation_r.c\
+	operation_rr.c\
+	operation_s.c\
 	push_swap.c\
 	a_to_b_to_a.c\
 	select_pivot.c\
-	new_sort.c\
+	sort.c\
 	ft_atoll.c\
 	ft_isdigit.c\
 	ft_split.c

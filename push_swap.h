@@ -1,5 +1,5 @@
-#ifndef NEW_PUSH_SWAP_H
-#define NEW_PUSH_SWAP_H
+#ifndef PUSH_SWAP_H
+#define PUSH_SWAP_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -35,6 +35,7 @@ typedef struct s_var
 	int pb_cnt;
 	int l_pivot;
 	int s_pivot;
+	int	m_pivot;
 } t_var;
 
 
@@ -44,7 +45,7 @@ void push_to_stack_command(t_info *info, char *str);
 void push_to_stack_a(char *arr, t_info *info);
 void a_to_b(t_info *info, int r);
 void b_to_a(t_info *info, int r);
-void	select_pivot(t_info *info, int r, int *s_pivot, int *l_pivot, char stack);
+void	select_pivot(t_node *temp, int r, int *s_pivot, int *l_pivot);
 void	select_mid_pivot(t_info *info, int r, int *pivot, char stack);
 
 void hard_sort(t_info *info, int size, char stack);

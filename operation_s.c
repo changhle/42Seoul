@@ -1,8 +1,8 @@
-#include "new_push_swap.h"
+#include "push_swap.h"
 
-void sa(t_info *info)
+void	sa(t_info *info)
 {
-	int temp;
+	int	temp;
 
 	if (info->a_size > 1)
 	{
@@ -16,9 +16,9 @@ void sa(t_info *info)
 	}
 }
 
-void sb(t_info *info)
+void	sb(t_info *info)
 {
-	int temp;
+	int	temp;
 
 	if (info->b_size > 1)
 	{
@@ -32,9 +32,9 @@ void sb(t_info *info)
 	}
 }
 
-void ss(t_info *info)
+void	ss(t_info *info)
 {
-	int temp;
+	int	temp;
 
 	if (info->a_size > 1)
 	{
