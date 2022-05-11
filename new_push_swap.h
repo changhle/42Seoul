@@ -37,19 +37,20 @@ typedef struct s_var
 	int s_pivot;
 } t_var;
 
+
+void	init_var(t_var *var);
+void	init_info(t_info *info);
+void push_to_stack_command(t_info *info, char *str);
+void push_to_stack_a(char *arr, t_info *info);
 void a_to_b(t_info *info, int r);
 void b_to_a(t_info *info, int r);
-void sort(t_info *info);
-char **ft_split(char const *s, char c);
-int ft_isdigit(int c);
-long long ft_atoll(const char *str);
-void select_pivot(t_info *info, int r, int *s_pivot, int *l_pivot, char stack);
-void print_stack(t_info *info);
+void	select_pivot(t_info *info, int r, int *s_pivot, int *l_pivot, char stack);
+void	select_mid_pivot(t_info *info, int r, int *pivot, char stack);
+
 void hard_sort(t_info *info, int size, char stack);
 int is_sorted(t_info *info, int r, int pivot);
-void sort_arr(int *arr, int r);
 int is_rsorted(t_info *info, int r, int pivot);
-void push_to_stack_command(t_info *info, char *str);
+void sort_arr(int *arr, int r);
 
 void pa(t_info *info);
 void pb(t_info *info);
@@ -62,5 +63,10 @@ void rrr(t_info *info);
 void sa(t_info *info);
 void sb(t_info *info);
 void ss(t_info *info);
+
+char **ft_split(char const *s, char c);
+int ft_isdigit(int c);
+long long ft_atoll(const char *str);
+void print_stack(t_info *info);
 
 #endif

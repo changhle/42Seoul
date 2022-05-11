@@ -8,7 +8,9 @@ SRCS = new_hard_sort.c\
 	new_operation_r.c\
 	new_operation_rr.c\
 	new_operation_s.c\
-	new_push_swap.c\
+	push_swap.c\
+	a_to_b_to_a.c\
+	select_pivot.c\
 	new_sort.c\
 	ft_atoll.c\
 	ft_isdigit.c\
