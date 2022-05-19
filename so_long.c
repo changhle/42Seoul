@@ -41,31 +41,51 @@
 // 	if (ft_strlen(get_next_line(fd)) > 0)
 // 		exit(0);
 // }
+void	init_info(t_info *info)
+{
+	info->height = 0;
+	info->width = 0;
+	info->exit = 0;
+	info->collect = 0;
+	info->player = 0;
+}
 
 int main(int argc, char **argv)
 {
 	// void	*mlx_ptr;
 	// void	*win_ptr;
 	// void	*img_ptr;
-	// int		width;
-	// int		hight;
+	int		width;
+	int		hight;
 	// int		x, y;
 	// char *map_arr;
 	// // t_param	param;
 	t_info	info;
-	void	*mlx;
-	void	*mlx_win;
+	t_ptr	ptr;
+	t_game	game;
 
+	width = 64;
+	hight = 64;
+	init_info(&info);
 	check_filename(argv[1]);
 	printf("%s\n", argv[1]);
 	get_map(argv[1], &info);
 	check_rectangle(&info);
 	check_wall(&info);
-	// check_element(&info);
+	check_element(&info);
 
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, info.width * 64, info.height * 64, "so_long");
-	mlx_loop(mlx);
+	ptr.mlx = mlx_init();
+	ptr.mlx_win = mlx_new_window(ptr.mlx, info.width * 64, info.height * 64, "so_long");
+	ptr.wall_ptr = mlx_xpm_file_to_image(ptr.mlx, "./images/tile01.xpm", &width, &hight);
+	ptr.tile_ptr = mlx_xpm_file_to_image(ptr.mlx, "./images/tile00.xpm", &width, &hight);
+	ptr.exit_ptr = mlx_xpm_file_to_image(ptr.mlx, "./images/player_S00.xpm", &width, &hight);
+	ptr.collect_ptr = mlx_xpm_file_to_image(ptr.mlx, "./images/ball.xpm", &width, &hight);
+	ptr.player_ptr = mlx_xpm_file_to_image(ptr.mlx, "./images/player_S00.xpm", &width, &hight);
+	print_image(&info, &ptr);
+	t_game.info = info;
+	t_game.ptr = ptr;
+	mlx_key_hook(ptr.win_ptr, key_press(), &t_game);
+	mlx_loop(ptr.mlx);
 	// // printf("%s\n", argv[1]);
 	// map_arr = map(map_arr, argv[1]);
 	// while (*map_arr)

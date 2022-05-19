@@ -1,6 +1,6 @@
 #include "so_long.h"
 #include "./libft/libft.h"
-#include "./libft/get_next_line.h"
+#include "./get_next_line/get_next_line.h"
 
 // void	print_error(int errno)
 // {
@@ -57,7 +57,6 @@ void	get_map(char *filename, t_info *info)
 	// printf("%s\n%s\n%s\n", filename, str, a);
 	if (!str)
 		return ;
-	info->height = 0;
 	info->width = ft_strlen(str) - 1;
 	str = delete_newline(str);
 	info->map = ft_strdup(str);
@@ -99,7 +98,31 @@ void	check_wall(t_info *info)
 }
 
 void	check_element(t_info *info)
-{}
+{
+	int	i;
+
+	i = 0;
+	while (i++ < ft_strlen(info->map))
+	{
+		if (info->map[i] == 'E')
+			info->exit++;
+		else if (info->map[i] == 'C')
+			info->collect++;
+		else if (info->map[i] == 'P')
+		{
+			if (info->player > 1)
+				info->map[i] = '0';
+			else
+				info->player = i;
+		}
+	}
+	if (info->exit == 0)
+		print_error("");
+	else if (info->collect == 0)
+		print_error("");
+	else if (info->player == 0)
+		print_error("");
+}
 
 // void	check_map(char *map_arr, t_info *info)
 // {
