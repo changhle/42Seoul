@@ -14,6 +14,7 @@ typedef struct	s_info
 	int		exit;
 	int		collect;
 	int		player;
+	int		walk;
 }	t_info;
 
 typedef struct	s_ptr
@@ -41,5 +42,6 @@ void	check_wall(t_info *info);
 void	check_element(t_info *info);
 char	*map(char *map_arr, char *map_name);
 void	print_image(t_info *info, t_ptr *ptr);
+int		key_press(int keycode, t_game *game);
 
 #endif

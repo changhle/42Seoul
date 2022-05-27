@@ -2,11 +2,11 @@
 #include "mlx/mlx.h"
 // #include "minilibx_opengl_20191021/mlx.h"
 
+#define KEY_ESC 53
 #define KEY_W 13
 #define KEY_A 0
 #define KEY_S 1
 #define KEY_D 2
-#define KEY_ESC 53
 
 // char	*check_map(char **map, t_param *param)
 // {
@@ -48,18 +48,13 @@ void	init_info(t_info *info)
 	info->exit = 0;
 	info->collect = 0;
 	info->player = 0;
+	info->walk = 0;
 }
 
 int main(int argc, char **argv)
 {
-	// void	*mlx_ptr;
-	// void	*win_ptr;
-	// void	*img_ptr;
 	int		width;
 	int		hight;
-	// int		x, y;
-	// char *map_arr;
-	// // t_param	param;
 	t_info	info;
 	t_ptr	ptr;
 	t_game	game;
@@ -82,42 +77,10 @@ int main(int argc, char **argv)
 	ptr.collect_ptr = mlx_xpm_file_to_image(ptr.mlx, "./images/ball.xpm", &width, &hight);
 	ptr.player_ptr = mlx_xpm_file_to_image(ptr.mlx, "./images/player_S00.xpm", &width, &hight);
 	print_image(&info, &ptr);
-	t_game.info = info;
-	t_game.ptr = ptr;
-	mlx_key_hook(ptr.win_ptr, key_press(), &t_game);
+	game.info = &info;
+	game.ptr = &ptr;
+	mlx_key_hook(ptr.mlx_win, key_press, &game);
 	mlx_loop(ptr.mlx);
-	// // printf("%s\n", argv[1]);
-	// map_arr = map(map_arr, argv[1]);
-	// while (*map_arr)
-	// {
-	// 	write(1, map_arr, 1);
-	// 	map_arr++;
-	// }
 	printf("%s\n", info.map);
-
-	// check_map(map, &param);
-	// printf("%s\n", map[0]);
-	// printf("%s\n", map[1]);
-	// printf("%s\n", map[2]);
-	// printf("%s\n", map[3]);
-	// printf("%s\n", map[4]);
-	// width = 1000;
-	// hight = 50;
-	// mlx_ptr = mlx_init();
-	// win_ptr = mlx_new_window(mlx_ptr, 64*10, 64*10, "so_long");
-	// img_ptr = mlx_xpm_file_to_image(mlx_ptr, "./images/tile00.xpm", &width, &hight);
-	// x = 0;
-	// while (x < 10)
-	// {
-	// 	y = 0;
-	// 	while (y < 10)
-	// 	{
-	// 		mlx_put_image_to_window(mlx_ptr, win_ptr, img_ptr, x * 64, y * 64);
-	// 		y++;
-	// 	}
-	// 	x++;
-	// }
-	// mlx_key_hook(win_ptr, &key_press, &param);
-	// mlx_loop(mlx_ptr);
 	return (0);
 }
