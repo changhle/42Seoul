@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 13:27:26 by changhle          #+#    #+#             */
-/*   Updated: 2022/06/17 13:39:49 by changhle         ###   ########.fr       */
+/*   Updated: 2022/06/17 20:02:03 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	rra(t_info *info)
 		temp->next = info->a_top;
 		temp->prev = NULL;
 		info->a_top = temp;
-		push_to_stack_command(info, "rra\n");
+		push_to_stack_command(info, "rra");
 	}
 }
 
@@ -42,7 +42,7 @@ void	rrb(t_info *info)
 		temp->next = info->b_top;
 		temp->prev = NULL;
 		info->b_top = temp;
-		push_to_stack_command(info, "rrb\n");
+		push_to_stack_command(info, "rrb");
 	}
 }
 
@@ -67,5 +67,5 @@ void	rrr(t_info *info)
 		temp->prev = NULL;
 		info->b_top = temp;
 	}
-	push_to_stack_command(info, "rrr\n");
+	push_to_stack_command(info, "rrr");
 }

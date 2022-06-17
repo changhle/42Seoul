@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 13:27:41 by changhle          #+#    #+#             */
-/*   Updated: 2022/06/17 13:38:25 by changhle         ###   ########.fr       */
+/*   Updated: 2022/06/17 19:49:24 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	pa(t_info *info)
 	}
 	info->a_size++;
 	info->b_size--;
-	push_to_stack_command(info, "pa\n");
+	push_to_stack_command(info, "pa");
 }
 
 void	pb(t_info *info)
@@ -65,5 +65,5 @@ void	pb(t_info *info)
 	}
 	info->a_size--;
 	info->b_size++;
-	push_to_stack_command(info, "pb\n");
+	push_to_stack_command(info, "pb");
 }

@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 01:17:51 by changhle          #+#    #+#             */
-/*   Updated: 2022/03/03 19:10:10 by changhle         ###   ########.fr       */
+/*   Updated: 2022/06/17 19:10:57 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,13 @@ long long	ft_atoll(const char *str)
 	}
 	while (ft_isdigit(*str))
 	{
-		result = result * 10 + *str - 48;
+		result = result * 10 + (*str - 48);
 		str++;
 	}
-	if (sign == 1 && result > 9223372036854775807)
+	if (*str)
 		return (-1);
-	else if (sign == -1 && result - 1 > 9223372036854775807)
-		return (0);
+	if ((sign == 1 && result > 2147483647)
+		|| (sign == -1 && result > 2147483648))
+		return (-1);
 	return (result * sign);
 }

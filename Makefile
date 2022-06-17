@@ -6,7 +6,7 @@
 #    By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/17 13:32:46 by changhle          #+#    #+#              #
-#    Updated: 2022/06/17 13:32:47 by changhle         ###   ########.fr        #
+#    Updated: 2022/06/17 19:33:09 by changhle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,13 +26,14 @@ SRCS = hard_sort.c\
 	sort.c\
 	ft_atoll.c\
 	ft_isdigit.c\
-	ft_split.c
+	ft_split.c\
+	optimize.c
 OBJS = $(SRCS_C:.c=.o)
 
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-	$(CC) $(SRCS) -o $(NAME)
+	$(CC) -g $(SRCS) -o $(NAME)
 
 bonus : all
 

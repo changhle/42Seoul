@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 13:32:29 by changhle          #+#    #+#             */
-/*   Updated: 2022/06/17 13:43:34 by changhle         ###   ########.fr       */
+/*   Updated: 2022/06/17 19:59:44 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,11 @@ void	push_to_stack_a(char *arr, t_info *info)
 	t_node	*temp;
 
 	temp = malloc(sizeof(t_node));
+	if (ft_atoll(arr) == -1)
+	{
+		printf("Error\n");
+		exit(1);
+	}
 	temp->content = ft_atoll(arr);
 	temp->next = NULL;
 	temp->prev = NULL;
@@ -99,10 +104,11 @@ int	main(int argc, char **argv)
 		i++;
 	}
 	a_to_b(info, info->a_size);
+	optimize(info);
 	temp = info->cmd_top;
 	while (temp)
 	{
-		printf("%s", temp->command);
+		printf("%s\n", temp->command);
 		temp = temp->next;
 	}
 }

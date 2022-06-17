@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 13:32:54 by changhle          #+#    #+#             */
-/*   Updated: 2022/06/17 13:40:28 by changhle         ###   ########.fr       */
+/*   Updated: 2022/06/17 19:04:37 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void		hard_sort(t_info *info, int size, char stack);
 int			is_sorted(t_info *info, int r, int pivot);
 int			is_rsorted(t_info *info, int r, int pivot);
 void		sort_arr(int *arr, int r);
+void		optimize(t_info *info);
 
 void		pa(t_info *info);
 void		pb(t_info *info);
