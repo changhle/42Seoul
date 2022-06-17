@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/17 13:33:17 by changhle          #+#    #+#             */
+/*   Updated: 2022/06/17 13:36:37 by changhle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	swap(int *a, int *b)
@@ -57,8 +69,6 @@ int	is_sorted(t_info *info, int r, int pivot)
 	int		i;
 	t_node	*temp;
 
-	// if (r == 1)
-	// 	return (0);
 	i = 0;
 	temp = info->a_top;
 	while (i < r)
@@ -76,8 +86,6 @@ int	is_rsorted(t_info *info, int r, int pivot)
 	int		i;
 	t_node	*temp;
 
-	// if (r == 1)
-	// 	return (0);
 	i = 0;
 	temp = info->b_top;
 	while (i < r)
@@ -88,29 +96,4 @@ int	is_rsorted(t_info *info, int r, int pivot)
 		i++;
 	}
 	return (1);
-}
-
-void print_stack(t_info *info)
-{
-	// int i;
-	// t_node *temp;
-
-	// i = 0;
-	// temp = info->a_top;
-	// printf("A | ");
-	// while (temp)
-	// {
-	// 	printf("%d ", temp->content);
-	// 	temp = temp->next;
-	// }
-	// printf("\n");
-	// temp = info->b_top;
-	// printf("B | ");
-	// i = 0;
-	// while (temp)
-	// {
-	// 	printf("%d ", temp->content);
-	// 	temp = temp->next;
-	// }
-	// printf("\n");
 }

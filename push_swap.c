@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/17 13:32:29 by changhle          #+#    #+#             */
+/*   Updated: 2022/06/17 13:43:34 by changhle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	init_var(t_var *var)
@@ -19,9 +31,9 @@ void	init_info(t_info *info)
 	info->b_bottom = NULL;
 }
 
-void push_to_stack_command(t_info *info, char *str)
+void	push_to_stack_command(t_info *info, char *str)
 {
-	t_node *temp;
+	t_node	*temp;
 
 	temp = malloc(sizeof(t_node));
 	temp->command = str;
@@ -40,13 +52,12 @@ void push_to_stack_command(t_info *info, char *str)
 	}
 }
 
-void push_to_stack_a(char *arr, t_info *info)
+void	push_to_stack_a(char *arr, t_info *info)
 {
-	t_node *temp;
+	t_node	*temp;
 
 	temp = malloc(sizeof(t_node));
 	temp->content = ft_atoll(arr);
-	// printf("%d\n", temp->content);
 	temp->next = NULL;
 	temp->prev = NULL;
 	if (info->a_size > 0)
@@ -67,20 +78,15 @@ int	main(int argc, char **argv)
 {
 	int		i;
 	int		j;
-	int		count;
 	char	**arr;
 	t_info	*info;
-	t_info	*s_list;
 	t_node	*temp;
 
 	info = malloc(sizeof(t_info));
-	s_list = malloc(sizeof(t_info));
 	init_info(info);
-	init_info(s_list);
 	if (argc < 2)
 		return (0);
 	i = 1;
-	count = 0;
 	while (argv[i])
 	{
 		arr = ft_split(argv[i], ' ');
@@ -88,15 +94,10 @@ int	main(int argc, char **argv)
 		while (arr[j])
 		{
 			push_to_stack_a(arr[j], info);
-			// push_to_stack_a(arr[j], s_list);
-			count++;
 			j++;
 		}
 		i++;
 	}
-	// sort(s_list);
-	// if (info->a_size <= 5)
-	// 	hard_sort(info, info->a_size, 'a')
 	a_to_b(info, info->a_size);
 	temp = info->cmd_top;
 	while (temp)
@@ -104,13 +105,4 @@ int	main(int argc, char **argv)
 		printf("%s", temp->command);
 		temp = temp->next;
 	}
-	// i = 0;
-	// temp = info->a_top;
-	// while (i < info->a_size)
-	// {
-	// 	printf("%d ", temp->content);
-	// 	temp = temp->next;
-	// 	i++;
-	// }
-	// printf("\ncmd : %d\n", info->cmd);
 }
