@@ -37,7 +37,6 @@ void	pa(t_info *info)
 	}
 	info->a_size++;
 	info->b_size--;
-	push_to_stack_command(info, "pa");
 }
 
 void	pb(t_info *info)
@@ -65,5 +64,4 @@ void	pb(t_info *info)
 	}
 	info->a_size--;
 	info->b_size++;
-	push_to_stack_command(info, "pb");
 }

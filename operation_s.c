@@ -22,7 +22,6 @@ void	sa(t_info *info)
 		info->a_top->content = info->a_top->next->content;
 		info->a_top->next->content = temp;
 		info->cmd++;
-		push_to_stack_command(info, "sa");
 	}
 }
 
@@ -36,7 +35,6 @@ void	sb(t_info *info)
 		info->b_top->content = info->b_top->next->content;
 		info->b_top->next->content = temp;
 		info->cmd++;
-		push_to_stack_command(info, "sb");
 	}
 }
 
@@ -54,5 +52,4 @@ void	ss(t_info *info)
 		info->b_top->next->content = temp;
 	}
 	info->cmd++;
-	push_to_stack_command(info, "ss");
 }

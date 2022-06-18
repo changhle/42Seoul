@@ -27,7 +27,8 @@ SRCS = hard_sort.c\
 	ft_atoll.c\
 	ft_isdigit.c\
 	ft_split.c\
-	optimize.c
+	optimize.c\
+	operation.c
 OBJS = $(SRCS_C:.c=.o)
 
 all : $(NAME)

@@ -35,19 +35,13 @@ void	optimize(t_info *info)
 	temp = info->cmd_top;
 	while (temp->next)
 	{
-		// printf("%s----------\n", temp->command);
-		// if (ft_strcmp(temp->command, "pa"))
-		// 	printf("--------------\n");
 		if ((!ft_strcmp(temp->command, "pa") && !ft_strcmp(temp->next->command, "pb")) ||
 			(!ft_strcmp(temp->command, "pb") && !ft_strcmp(temp->next->command, "pa")) ||
 			(!ft_strcmp(temp->command, "ra") && !ft_strcmp(temp->next->command, "rra")) ||
 			(!ft_strcmp(temp->command, "rra") && !ft_strcmp(temp->next->command, "ra")) ||
 			(!ft_strcmp(temp->command, "rb") && !ft_strcmp(temp->next->command, "rrb")) ||
 			(!ft_strcmp(temp->command, "rrb") && !ft_strcmp(temp->next->command, "rb")))
-		{
-			// printf("--------\n");
 			temp = remove_node(temp);
-		}
 		else
 			temp = temp->next;
 	}

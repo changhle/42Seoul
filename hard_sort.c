@@ -17,24 +17,24 @@ void	a_3(t_info *info, int a, int b, int c)
 	if (info->a_size > 3)
 	{
 		if ((b < a && a < c) || (b < c && c < a) || (c < b && b < a))
-			sa(info);
+			operation(info, "sa", 0);
 		if (((c < b) && (a < c || b < a)) || (c < a && (a < b || b < c)))
 		{
-			ra(info);
-			sa(info);
-			rra(info);
+			operation(info, "ra", 0);
+			operation(info, "sa", 0);
+			operation(info, "ra", 0);
 		}
 		if ((c < a && a < b) || (c < b && b < a))
-			sa(info);
+			operation(info, "sa", 0);
 	}
 	else
 	{
 		if ((a < c && c < b) || (b < c && c < a))
-			ra(info);
+			operation(info, "ra", 0);
 		if ((a < c && c < b) || (b < a && a < c) || (c < b && b < a))
-			sa(info);
+			operation(info, "sa", 0);
 		if ((a < c && c < b) || (c < a && a < b) || (c < b && b < a))
-			rra(info);
+			operation(info, "ra", 0);
 	}
 }
 
@@ -43,55 +43,55 @@ void	b_3(t_info *info, int a, int b, int c)
 	if (info->b_size > 3)
 	{
 		if ((a < c && c < b) || (c < a && a < b))
-			sb(info);
+			operation(info, "sb", 0);
 		if ((a < b && b < c) || (b < a && a < c))
 		{
-			rb(info);
-			sb(info);
-			pa(info);
+			operation(info, "rb", 0);
+			operation(info, "sb", 0);
+			operation(info, "pa", 0);
 			if (a < b && b < c)
-				pa(info);
-			rrb(info);
+				operation(info, "pa", 0);
+			operation(info, "rb", 0);
 		}
 		if ((a < c && c < b) || (b < c && c < a))
 		{
-			pa(info);
-			sb(info);
+			operation(info, "pa", 0);
+			operation(info, "sb", 0);
 		}
 		if ((a < b && b < c) || (c < a && a < b) || (c < b && b < a))
-			pa(info);
+			operation(info, "pa", 0);
 		if (!(a < b && b < c))
 		{
-			pa(info);
-			pa(info);
+			operation(info, "pa", 0);
+			operation(info, "pa", 0);
 		}
 	}
 	else
 	{
 		if ((a < c && c < b) || (b < c && c < a))
-			rb(info);
+			operation(info, "rb", 0);
 		if ((a < b && b < c) || (c < a && a < b) || (b < c && c < a))
-			sb(info);
+			operation(info, "sb", 0);
 		if ((a < b && b < c) || (b < a && a < c) || (b < c && c < a))
-			rrb(info);
-		pa(info);
-		pa(info);
-		pa(info);
+			operation(info, "rb", 0);
+		operation(info, "pa", 0);
+		operation(info, "pa", 0);
+		operation(info, "pa", 0);
 	}
 }
 
 void	a_2(t_info *info, int a, int b)
 {
 	if (a > b)
-		sa(info);
+		operation(info, "sa", 0);
 }
 
 void	b_2(t_info *info, int a, int b)
 {
 	if (a < b)
-		sb(info);
-	pa(info);
-	pa(info);
+		operation(info, "sb", 0);
+	operation(info, "pa", 0);
+	operation(info, "pa", 0);
 }
 
 void	hard_sort(t_info *info, int size, char stack)
@@ -114,18 +114,18 @@ void	hard_sort(t_info *info, int size, char stack)
 			{
 				if (info->a_top->content >= var.m_pivot)
 				{
-					ra(info);
+					operation(info, "ra", 0);
 					var.ra_cnt++;
 				}
 				else
 				{
-					pb(info);
+					operation(info, "pb", 0);
 					var.pb_cnt++;
 				}
 			}
 			i = 0;
 			while (info->a_size > 5 && i++ < var.ra_cnt)
-				rra(info);
+				operation(info, "ra", 0);
 			hard_sort(info, size - var.pb_cnt, 'a');
 			hard_sort(info, var.pb_cnt, 'b');
 		}
@@ -144,18 +144,18 @@ void	hard_sort(t_info *info, int size, char stack)
 			{
 				if (info->b_top->content < var.m_pivot)
 				{
-					rb(info);
+					operation(info, "rb", 0);
 					var.rb_cnt++;
 				}
 				else
 				{
-					pa(info);
+					operation(info, "pa", 0);
 					var.pa_cnt++;
 				}
 			}
 			i = 0;
 			while (info->b_size > 5 && i++ < var.rb_cnt)
-				rrb(info);
+				operation(info, "rb", 0);
 			hard_sort(info, var.pa_cnt, 'a');
 			hard_sort(info, size - var.pa_cnt, 'b');
 		}

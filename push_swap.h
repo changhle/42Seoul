@@ -64,6 +64,7 @@ int			is_sorted(t_info *info, int r, int pivot);
 int			is_rsorted(t_info *info, int r, int pivot);
 void		sort_arr(int *arr, int r);
 void		optimize(t_info *info);
+void		operation(t_info *info, char *opt, int bonus);
 
 void		pa(t_info *info);
 void		pb(t_info *info);
@@ -80,5 +81,6 @@ void		ss(t_info *info);
 char		**ft_split(char const *s, char c);
 int			ft_isdigit(int c);
 long long	ft_atoll(const char *str);
+int			ft_strcmp(char *str1, char *str2);
 
 #endif

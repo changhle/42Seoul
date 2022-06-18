@@ -19,17 +19,17 @@ void	reverse(t_info *info, t_var *var)
 	i = 0;
 	while (i < var->ra_cnt && i < var->rb_cnt)
 	{
-		rrr(info);
+		operation(info, "rrr", 0);
 		i++;
 	}
 	while (i < var->ra_cnt)
 	{
-		rra(info);
+		operation(info, "rra", 0);
 		i++;
 	}
 	while (i < var->rb_cnt)
 	{
-		rrb(info);
+		operation(info, "rrb", 0);
 		i++;
 	}
 }
@@ -40,23 +40,23 @@ void	a_b_cmd(t_info *info, t_var *var, int r)
 	{
 		if (info->a_size == 2 && info->a_top->next->content < var->l_pivot)
 		{
-			sa(info);
-			pb(info);
+			operation(info, "sa", 0);
+			operation(info, "pb", 0);
 			var->pb_cnt++;
 		}
 		else if (!is_sorted(info, r - var->ra_cnt - var->pb_cnt, var->l_pivot))
 		{
-			ra(info);
+			operation(info, "ra", 0);
 			var->ra_cnt++;
 		}
 	}
 	else
 	{
-		pb(info);
+		operation(info, "pb", 0);
 		var->pb_cnt++;
 		if (info->b_top->content >= var->s_pivot)
 		{
-			rb(info);
+			operation(info, "rb", 0);
 			var->rb_cnt++;
 		}
 	}
@@ -68,23 +68,23 @@ void	b_a_cmd(t_info *info, t_var *var, int r)
 	{
 		if (info->b_size == 2 && info->b_top->next->content >= var->l_pivot)
 		{
-			sb(info);
-			pa(info);
+			operation(info, "sb", 0);
+			operation(info, "pa", 0);
 			var->pa_cnt++;
 		}
 		else if (!is_rsorted(info, r - var->rb_cnt - var->pa_cnt, var->s_pivot))
 		{
-			rb(info);
+			operation(info, "rb", 0);
 			var->rb_cnt++;
 		}
 	}
 	else
 	{
-		pa(info);
+		operation(info, "pa", 0);
 		var->pa_cnt++;
 		if (info->a_top->content < var->l_pivot)
 		{
-			ra(info);
+			operation(info, "ra", 0);
 			var->ra_cnt++;
 		}
 	}
@@ -120,7 +120,7 @@ void	b_to_a(t_info *info, int r)
 	if (r <= 5)
 	{
 		if (r == 1)
-			pa(info);
+			operation(info, "pa", 0);
 		else
 			hard_sort(info, r, 'b');
 		return ;

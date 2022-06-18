@@ -26,7 +26,6 @@ void	ra(t_info *info)
 		temp->prev = info->a_bottom;
 		info->a_bottom = temp;
 		info->cmd++;
-		push_to_stack_command(info, "ra");
 	}
 }
 
@@ -44,7 +43,6 @@ void	rb(t_info *info)
 		temp->prev = info->b_bottom;
 		info->b_bottom = temp;
 		info->cmd++;
-		push_to_stack_command(info, "rb");
 	}
 }
 
@@ -70,5 +68,4 @@ void	rr(t_info *info)
 		info->b_bottom = temp;
 	}
 	info->cmd++;
-	push_to_stack_command(info, "rr");
 }
