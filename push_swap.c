@@ -108,7 +108,7 @@ int	main(int argc, char **argv)
 	temp = info->cmd_top;
 	while (temp)
 	{
-		write(1, temp->command, 2);
+		write(1, temp->command, 3);
 		write(1, "\n", 1);
 		// printf("%s\n", temp->command);
 		temp = temp->next;

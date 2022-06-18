@@ -10,10 +10,10 @@ void	operation(t_info *info, char *opt, int bonus)
 		ra(info);
 	else if (!ft_strcmp(opt, "rb"))
 		rb(info);
-	else if (!ft_strcmp(opt, "rr"))
-		rr(info);
 	else if (!ft_strcmp(opt, "rra"))
 		rra(info);
+	else if (!ft_strcmp(opt, "rr"))
+		rr(info);
 	else if (!ft_strcmp(opt, "rrb"))
 		rrb(info);
 	else if (!ft_strcmp(opt, "rrr"))

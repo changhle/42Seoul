@@ -22,7 +22,7 @@ void	a_3(t_info *info, int a, int b, int c)
 		{
 			operation(info, "ra", 0);
 			operation(info, "sa", 0);
-			operation(info, "ra", 0);
+			operation(info, "rra", 0);
 		}
 		if ((c < a && a < b) || (c < b && b < a))
 			operation(info, "sa", 0);
@@ -34,7 +34,7 @@ void	a_3(t_info *info, int a, int b, int c)
 		if ((a < c && c < b) || (b < a && a < c) || (c < b && b < a))
 			operation(info, "sa", 0);
 		if ((a < c && c < b) || (c < a && a < b) || (c < b && b < a))
-			operation(info, "ra", 0);
+			operation(info, "rra", 0);
 	}
 }
 
@@ -51,7 +51,7 @@ void	b_3(t_info *info, int a, int b, int c)
 			operation(info, "pa", 0);
 			if (a < b && b < c)
 				operation(info, "pa", 0);
-			operation(info, "rb", 0);
+			operation(info, "rrb", 0);
 		}
 		if ((a < c && c < b) || (b < c && c < a))
 		{
@@ -73,7 +73,7 @@ void	b_3(t_info *info, int a, int b, int c)
 		if ((a < b && b < c) || (c < a && a < b) || (b < c && c < a))
 			operation(info, "sb", 0);
 		if ((a < b && b < c) || (b < a && a < c) || (b < c && c < a))
-			operation(info, "rb", 0);
+			operation(info, "rrb", 0);
 		operation(info, "pa", 0);
 		operation(info, "pa", 0);
 		operation(info, "pa", 0);
@@ -125,7 +125,7 @@ void	hard_sort(t_info *info, int size, char stack)
 			}
 			i = 0;
 			while (info->a_size > 5 && i++ < var.ra_cnt)
-				operation(info, "ra", 0);
+				operation(info, "rra", 0);
 			hard_sort(info, size - var.pb_cnt, 'a');
 			hard_sort(info, var.pb_cnt, 'b');
 		}
@@ -155,7 +155,7 @@ void	hard_sort(t_info *info, int size, char stack)
 			}
 			i = 0;
 			while (info->b_size > 5 && i++ < var.rb_cnt)
-				operation(info, "rb", 0);
+				operation(info, "rrb", 0);
 			hard_sort(info, var.pa_cnt, 'a');
 			hard_sort(info, size - var.pa_cnt, 'b');
 		}
