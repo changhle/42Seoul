@@ -6,7 +6,7 @@
 #    By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/17 13:32:46 by changhle          #+#    #+#              #
-#    Updated: 2022/06/19 12:48:31 by changhle         ###   ########.fr        #
+#    Updated: 2022/06/19 13:18:26 by changhle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,6 @@ SRCS_M = main.c\
 
 SRCS_B = checker.c\
 		push_swap.c\
-		hard_sort.c\
 		operation.c\
 		operation_p.c\
 		operation_r.c\
@@ -54,18 +53,14 @@ $(BONUS) : $(OBJS_B)
 	make -C $(LIBFT) all
 	$(CC) $(CFLALGS) $(OBJS_B) $(LIBFT)/$(LIBFT_LIB) -o $(BONUS)
 
-$(OBJS_M) : $(SRCS_M)
-	$(CC) $(CFLALGS) -c $(SRCS_M)
-
-$(OBJS_B) : $(SRCS_B)
-	$(CC) $(CFLALGS) -c $(SRCS_B)
-
 bonus : $(BONUS)
 
 clean :
-	rm -f $(OBJS)
+	make -C $(LIBFT) clean
+	rm -f $(OBJS_M) $(OBJS_B)
 
 fclean : clean
-	rm -f $(NAME)
+	make -C $(LIBFT) fclean
+	rm -f $(NAME) $(BONUS)
 
 re : fclean all

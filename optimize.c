@@ -6,21 +6,11 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 07:22:02 by changhle          #+#    #+#             */
-/*   Updated: 2022/06/19 09:23:26 by changhle         ###   ########.fr       */
+/*   Updated: 2022/06/19 12:57:32 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	ft_strcmp(char *str1, char *str2)
-{
-	while ((*str1 && *str2) && (*str1 == *str2))
-	{
-		str1++;
-		str2++;
-	}
-	return (*(unsigned char *)str1 - *(unsigned char *)str2);
-}
 
 t_node	*remove_node(t_node *node)
 {

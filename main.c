@@ -6,11 +6,12 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 11:56:13 by changhle          #+#    #+#             */
-/*   Updated: 2022/06/19 12:49:17 by changhle         ###   ########.fr       */
+/*   Updated: 2022/06/19 13:01:35 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "libft.h"
 
 static void	free_all(t_info *info)
 {

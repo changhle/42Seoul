@@ -6,11 +6,12 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 07:09:03 by changhle          #+#    #+#             */
-/*   Updated: 2022/06/19 11:16:10 by changhle         ###   ########.fr       */
+/*   Updated: 2022/06/19 12:52:23 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "libft/libft.h"
 
 void	check_sort(t_node *node)
 {
