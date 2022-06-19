@@ -6,7 +6,7 @@
 #    By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/17 13:32:46 by changhle          #+#    #+#              #
-#    Updated: 2022/06/19 13:18:26 by changhle         ###   ########.fr        #
+#    Updated: 2022/06/19 19:11:42 by changhle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS_M = main.c\
 		a_to_b_to_a.c\
 		sort.c\
 		hard_sort.c\
+		small_hard_sort.c\
 		select_pivot.c\
 		operation.c\
 		operation_p.c\
@@ -47,11 +48,11 @@ all : $(NAME)
 
 $(NAME) : $(OBJS_M)
 	make -C $(LIBFT) all
-	$(CC) $(CFLALGS) $(OBJS_M) $(LIBFT)/$(LIBFT_LIB) -o $(NAME)
+	$(CC) -g $(CFLALGS) $(OBJS_M) $(LIBFT)/$(LIBFT_LIB) -o $(NAME)
 
 $(BONUS) : $(OBJS_B)
 	make -C $(LIBFT) all
-	$(CC) $(CFLALGS) $(OBJS_B) $(LIBFT)/$(LIBFT_LIB) -o $(BONUS)
+	$(CC) -g $(CFLALGS) $(OBJS_B) $(LIBFT)/$(LIBFT_LIB) -o $(BONUS)
 
 bonus : $(BONUS)
 

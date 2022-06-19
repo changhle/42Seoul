@@ -9,7 +9,7 @@
 			"request": "launch",
 			"name": "Debug",
 			"program": "/Users/changhee/42Seoul/push_swap/checker",
-			"args": ["2 1"],
+			"args": ["86 37 90 83 11 26 67 92 12 99"],
 			"cwd": "${workspaceFolder}"
 		}
 	]

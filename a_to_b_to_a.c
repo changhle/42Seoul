@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 13:28:46 by changhle          #+#    #+#             */
-/*   Updated: 2022/06/19 12:02:31 by changhle         ###   ########.fr       */
+/*   Updated: 2022/06/19 18:57:18 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ void	a_to_b(t_info *info, int r)
 	t_var	var;
 
 	init_var(&var);
-	if (r <= 5)
+	if (r <= 3)
 	{
 		hard_sort(info, r, 'a');
 		return ;
@@ -117,7 +117,7 @@ void	b_to_a(t_info *info, int r)
 	t_var	var;
 
 	i = 0;
-	if (r <= 5)
+	if (r <= 3)
 	{
 		if (r == 1)
 			operation(info, "pa", 0);

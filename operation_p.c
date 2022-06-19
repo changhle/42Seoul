@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 13:27:41 by changhle          #+#    #+#             */
-/*   Updated: 2022/06/17 19:49:24 by changhle         ###   ########.fr       */
+/*   Updated: 2022/06/19 16:06:41 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	pa(t_info *info)
 		info->b_top->prev = NULL;
 	if (info->a_size == 0)
 	{
+		temp->next = NULL;
 		info->a_top = temp;
 		info->a_bottom = temp;
 	}
@@ -53,6 +54,7 @@ void	pb(t_info *info)
 		info->a_top->prev = NULL;
 	if (info->b_size == 0)
 	{
+		temp->next = NULL;
 		info->b_top = temp;
 		info->b_bottom = temp;
 	}

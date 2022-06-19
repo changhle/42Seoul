@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 07:09:03 by changhle          #+#    #+#             */
-/*   Updated: 2022/06/19 12:52:23 by changhle         ###   ########.fr       */
+/*   Updated: 2022/06/19 16:13:09 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	main(int argc, char **argv)
 	int		j;
 	char	**arr;
 	t_info	*info;
+	t_node	*temp;
 
 	info = malloc(sizeof(t_info));
 	init_info(info);

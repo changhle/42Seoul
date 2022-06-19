@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 11:56:13 by changhle          #+#    #+#             */
-/*   Updated: 2022/06/19 13:01:35 by changhle         ###   ########.fr       */
+/*   Updated: 2022/06/19 19:07:42 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,10 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (0);
 	fill_stack(info, argv);
-	a_to_b(info, info->a_size);
+	if (info->a_size == 5)
+		sort_5(info);
+	else
+		a_to_b(info, info->a_size);
 	optimize(info);
 	temp = info->cmd_top;
 	while (temp)
