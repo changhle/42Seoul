@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/19 07:09:03 by changhle          #+#    #+#             */
+/*   Updated: 2022/06/19 11:16:10 by changhle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	check_sort(t_node *node)
@@ -14,15 +26,55 @@ void	check_sort(t_node *node)
 	write(1, "OK\n", 3);
 }
 
+void	check_command(char *buf)
+{
+	if (ft_strcmp(buf, "pa") && ft_strcmp(buf, "pb")
+		&& ft_strcmp(buf, "ra") && ft_strcmp(buf, "rb")
+		&& ft_strcmp(buf, "rra") && ft_strcmp(buf, "rrb")
+		&& ft_strcmp(buf, "rr") && ft_strcmp(buf, "rrr")
+		&& ft_strcmp(buf, "sa") && ft_strcmp(buf, "sb")
+		&& ft_strcmp(buf, "ss"))
+	{
+		write(2, "Error\n", 6);
+		exit(1);
+	}
+}
+
+void	read_input(t_info *info)
+{
+	int		i;
+	char	c;
+	char	buf[4];
+
+	i = 0;
+	while (read(0, &c, 1))
+	{
+		if (c != '\n')
+		{
+			buf[i] = c;
+			i++;
+		}
+		else
+		{
+			buf[i] = '\0';
+			check_command(buf);
+			operation(info, buf, 1);
+			i = 0;
+		}
+		if (i > 3)
+		{
+			write(2, "Error\n", 6);
+			exit(1);
+		}
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	int		i;
 	int		j;
 	char	**arr;
-	char	buf[3];
-	char	c;
 	t_info	*info;
-	t_node	*temp;
 
 	info = malloc(sizeof(t_info));
 	init_info(info);
@@ -40,45 +92,6 @@ int	main(int argc, char **argv)
 		}
 		i++;
 	}
-	i = 0;
-	while (read(0, &c, 1))
-	{
-		if (c != '\n')
-		{
-			buf[i] = c;
-			i++;
-		}
-		else
-		{
-			// write(1, buf, 3);
-			// write(1, "\n", 1);
-			// printf("-%s-\n", buf);
-			operation(info, buf, 1);
-			i = 0;
-		}
-	}
-	operation(info, buf, 1);
-	// buf = get_next_line(0);
-	// while (buf)
-	// {
-	// 	i = 0;
-	// 	printf("%s\n", buf);
-	// 	// while (buf[i])
-	// 	// {
-	// 	// 	if (buf[i] == '\n')
-	// 	// 		buf[i] = '\0';
-	// 	// 	i++;
-	// 	// }
-	// 	operation(info, buf, 1);
-	// 	buf = get_next_line(0);
-	// 	printf("%s\n", buf);
-	// }
-	// temp = info->a_top;
-	// while (temp)
-	// {
-	// 	printf("%d ", temp->content);
-	// 	// printf("%s\n", temp->command);
-	// 	temp = temp->next;
-	// }
+	read_input(info);
 	check_sort(info->a_top);
 }

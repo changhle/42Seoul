@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 13:32:29 by changhle          #+#    #+#             */
-/*   Updated: 2022/06/17 19:59:44 by changhle         ###   ########.fr       */
+/*   Updated: 2022/06/19 11:16:36 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ void	push_to_stack_a(char *arr, t_info *info)
 	t_node	*temp;
 
 	temp = malloc(sizeof(t_node));
-	if (ft_atoll(arr) == -1)
+	if (ft_atoll(arr) == 2147483648)
 	{
-		printf("Error\n");
+		write(2, "Error\n", 6);
 		exit(1);
 	}
 	temp->content = ft_atoll(arr);
@@ -79,38 +79,12 @@ void	push_to_stack_a(char *arr, t_info *info)
 	info->a_size++;
 }
 
-int	main(int argc, char **argv)
+int	ft_strlen(char *str)
 {
-	int		i;
-	int		j;
-	char	**arr;
-	t_info	*info;
-	t_node	*temp;
+	int	i;
 
-	info = malloc(sizeof(t_info));
-	init_info(info);
-	if (argc < 2)
-		return (0);
-	i = 1;
-	while (argv[i])
-	{
-		arr = ft_split(argv[i], ' ');
-		j = 0;
-		while (arr[j])
-		{
-			push_to_stack_a(arr[j], info);
-			j++;
-		}
+	i = 0;
+	while (str[i])
 		i++;
-	}
-	a_to_b(info, info->a_size);
-	optimize(info);
-	temp = info->cmd_top;
-	while (temp)
-	{
-		write(1, temp->command, 3);
-		write(1, "\n", 1);
-		// printf("%s\n", temp->command);
-		temp = temp->next;
-	}
+	return (i);
 }

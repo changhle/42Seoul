@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 13:32:54 by changhle          #+#    #+#             */
-/*   Updated: 2022/06/17 19:04:37 by changhle         ###   ########.fr       */
+/*   Updated: 2022/06/19 11:17:01 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,6 @@ char		**ft_split(char const *s, char c);
 int			ft_isdigit(int c);
 long long	ft_atoll(const char *str);
 int			ft_strcmp(char *str1, char *str2);
+int			ft_strlen(char *str);
 
 #endif
