@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 13:33:17 by changhle          #+#    #+#             */
-/*   Updated: 2022/06/17 13:36:37 by changhle         ###   ########.fr       */
+/*   Updated: 2022/06/19 12:08:06 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +19,6 @@ void	swap(int *a, int *b)
 	temp = *a;
 	*a = *b;
 	*b = temp;
-}
-
-void	sort(t_info *info)
-{
-	int		i;
-	int		j;
-	t_node	*temp_i;
-	t_node	*temp_j;
-
-	temp_i = info->a_top;
-	i = info->a_size - 1;
-	while (i > 0)
-	{
-		temp_j = temp_i;
-		j = 0;
-		while (j < i)
-		{
-			if (temp_j->content > temp_j->next->content)
-				swap(&temp_j->content, &temp_j->next->content);
-			temp_j = temp_j->next;
-			j++;
-		}
-		i--;
-	}
 }
 
 void	sort_arr(int *arr, int r)

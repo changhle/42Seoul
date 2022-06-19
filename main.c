@@ -1,17 +1,44 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/19 11:56:13 by changhle          #+#    #+#             */
+/*   Updated: 2022/06/19 12:49:17 by changhle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int	main(int argc, char **argv)
+static void	free_all(t_info *info)
+{
+	t_node	*temp;
+
+	while (info->a_top)
+	{
+		temp = info->a_top;
+		info->a_top = temp->next;
+		free(temp);
+		temp = NULL;
+	}
+	while (info->cmd_top)
+	{
+		temp = info->cmd_top;
+		info->cmd_top = temp->next;
+		free(temp);
+		temp = NULL;
+	}
+	free(info);
+}
+
+static void	fill_stack(t_info *info, char **argv)
 {
 	int		i;
 	int		j;
 	char	**arr;
-	t_info	*info;
-	t_node	*temp;
 
-	info = malloc(sizeof(t_info));
-	init_info(info);
-	if (argc < 2)
-		return (0);
 	i = 1;
 	while (argv[i])
 	{
@@ -24,15 +51,22 @@ int	main(int argc, char **argv)
 		}
 		i++;
 	}
+}
+
+int	main(int argc, char **argv)
+{
+	t_info	*info;
+	t_node	*temp;
+
+	info = malloc(sizeof(t_info));
+	if (!info)
+		return (0);
+	init_info(info);
+	if (argc < 2)
+		return (0);
+	fill_stack(info, argv);
 	a_to_b(info, info->a_size);
 	optimize(info);
-	while (info->a_top)
-	{
-		temp = info->a_top;
-		info->a_top = temp->next;
-		free(temp);
-		temp = NULL;
-	}
 	temp = info->cmd_top;
 	while (temp)
 	{
@@ -40,4 +74,6 @@ int	main(int argc, char **argv)
 		write(1, "\n", 1);
 		temp = temp->next;
 	}
+	free_all(info);
+	return (0);
 }

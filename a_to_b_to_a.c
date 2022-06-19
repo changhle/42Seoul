@@ -6,13 +6,13 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 13:28:46 by changhle          #+#    #+#             */
-/*   Updated: 2022/06/17 13:28:47 by changhle         ###   ########.fr       */
+/*   Updated: 2022/06/19 12:02:31 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	reverse(t_info *info, t_var *var)
+static void	reverse(t_info *info, t_var *var)
 {
 	int	i;
 
@@ -34,7 +34,7 @@ void	reverse(t_info *info, t_var *var)
 	}
 }
 
-void	a_b_cmd(t_info *info, t_var *var, int r)
+static void	a_b_cmd(t_info *info, t_var *var, int r)
 {
 	if (info->a_top->content >= var->l_pivot)
 	{
@@ -62,7 +62,7 @@ void	a_b_cmd(t_info *info, t_var *var, int r)
 	}
 }
 
-void	b_a_cmd(t_info *info, t_var *var, int r)
+static void	b_a_cmd(t_info *info, t_var *var, int r)
 {
 	if (info->b_top->content < var->s_pivot)
 	{
