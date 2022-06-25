@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 13:31:57 by changhle          #+#    #+#             */
-/*   Updated: 2022/06/19 13:00:55 by changhle         ###   ########.fr       */
+/*   Updated: 2022/06/20 13:09:49 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	select_mid_pivot(t_info *info, int r, int *pivot, char stack)
 	t_node	*temp;
 
 	arr = malloc(sizeof(int) * (r + 1));
+	if (!arr)
+		exit(1);
 	i = 0;
 	if (stack == 'a')
 		temp = info->a_top;

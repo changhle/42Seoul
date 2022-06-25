@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 13:32:54 by changhle          #+#    #+#             */
-/*   Updated: 2022/06/19 19:12:13 by changhle         ###   ########.fr       */
+/*   Updated: 2022/06/26 06:41:49 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ void		optimize(t_info *info);
 void		operation(t_info *info, char *opt, int bonus);
 void		a_2(t_info *info, int a, int b);
 void		b_2(t_info *info, int a, int b);
-void		sort_5(t_info *info);
+void		sort_3_5(t_info *info);
+void		print_error(int errno);
 
 void		pa(t_info *info);
 void		pb(t_info *info);

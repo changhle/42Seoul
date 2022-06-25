@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 11:56:13 by changhle          #+#    #+#             */
-/*   Updated: 2022/06/19 19:07:42 by changhle         ###   ########.fr       */
+/*   Updated: 2022/06/26 06:28:18 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,19 @@ int	main(int argc, char **argv)
 	t_info	*info;
 	t_node	*temp;
 
-	info = malloc(sizeof(t_info));
-	if (!info)
-		return (0);
-	init_info(info);
 	if (argc < 2)
 		return (0);
+	info = malloc(sizeof(t_info));
+	if (!info)
+		print_error(2);
+	init_info(info);
 	fill_stack(info, argv);
-	if (info->a_size == 5)
-		sort_5(info);
+	if (info->a_size == 3 || info->a_size == 5)
+		sort_3_5(info);
 	else
 		a_to_b(info, info->a_size);
-	optimize(info);
+	if (info->a_size >= 5)
+		optimize(info);
 	temp = info->cmd_top;
 	while (temp)
 	{

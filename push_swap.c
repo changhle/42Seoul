@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 13:32:29 by changhle          #+#    #+#             */
-/*   Updated: 2022/06/19 12:53:42 by changhle         ###   ########.fr       */
+/*   Updated: 2022/06/26 06:23:27 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,15 @@ void	init_info(t_info *info)
 	info->a_bottom = NULL;
 	info->b_top = NULL;
 	info->b_bottom = NULL;
+}
+
+void	print_error(int errno)
+{
+	if (errno == 1)
+		write(2, "Error\n", 6);
+	else if (errno == 2)
+		write(2, "Alloc Error\n", 12);
+	exit(1);
 }
 
 void	push_to_stack_command(t_info *info, char *str)
@@ -56,12 +65,11 @@ void	push_to_stack_a(char *arr, t_info *info)
 {
 	t_node	*temp;
 
-	temp = malloc(sizeof(t_node));
 	if (ft_atoll(arr) == 2147483648)
-	{
-		write(2, "Error\n", 6);
-		exit(1);
-	}
+		print_error(1);
+	temp = malloc(sizeof(t_node));
+	if (!temp)
+		print_error(2);
 	temp->content = ft_atoll(arr);
 	temp->next = NULL;
 	temp->prev = NULL;

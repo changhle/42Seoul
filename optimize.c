@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 07:22:02 by changhle          #+#    #+#             */
-/*   Updated: 2022/06/19 19:21:10 by changhle         ###   ########.fr       */
+/*   Updated: 2022/06/20 13:57:02 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,16 @@ t_node	*remove_node(t_node *node)
 	if (!node->prev)
 	{
 		node = node->next->next;
-		node->prev = node;
+		if (node)
+			node->prev = node;
 	}
 	else
 	{
 		node = node->prev;
 		node->next = node->next->next;
 		node->next = node->next->next;
-		node->next->prev = node;
+		if (node->next)
+			node->next->prev = node;
 	}
 	free(temp->next);
 	free(temp);
@@ -63,7 +65,7 @@ void	optimize(t_info *info)
 	char	*s2;
 
 	temp = info->cmd_top;
-	while (temp->next)
+	while (temp && temp->next)
 	{
 		s1 = temp->command;
 		s2 = temp->next->command;
@@ -79,12 +81,6 @@ void	optimize(t_info *info)
 		else if ((!ft_strcmp(s1, "ra") && !ft_strcmp(s2, "rb"))
 			|| (!ft_strcmp(s1, "rb") && !ft_strcmp(s2, "ra")))
 			temp = replace_node(temp, "rr");
-		else if ((!ft_strcmp(s1, "rra") && !ft_strcmp(s2, "rrb"))
-			|| (!ft_strcmp(s1, "rrb") && !ft_strcmp(s2, "rra")))
-			temp = replace_node(temp, "rrr");
-		else if ((!ft_strcmp(s1, "sa") && !ft_strcmp(s2, "sb"))
-			|| (!ft_strcmp(s1, "sb") && !ft_strcmp(s2, "sa")))
-			temp = replace_node(temp, "ss");
 		else
 			temp = temp->next;
 	}
