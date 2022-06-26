@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   a_to_b_to_a.c                                      :+:      :+:    :+:   */
+/*   quick_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 13:28:46 by changhle          #+#    #+#             */
-/*   Updated: 2022/06/19 18:57:18 by changhle         ###   ########.fr       */
+/*   Updated: 2022/06/26 08:18:10 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,12 @@ static void	reverse(t_info *info, t_var *var)
 	int	i;
 
 	i = 0;
-	while (i < var->ra_cnt && i < var->rb_cnt)
+	while (i < var->ra_cnt || i < var->rb_cnt)
 	{
-		operation(info, "rrr", 0);
-		i++;
-	}
-	while (i < var->ra_cnt)
-	{
-		operation(info, "rra", 0);
-		i++;
-	}
-	while (i < var->rb_cnt)
-	{
-		operation(info, "rrb", 0);
+		if (i < var->ra_cnt)
+			operation(info, "rra", 0);
+		if (i < var->rb_cnt)
+			operation(info, "rrb", 0);
 		i++;
 	}
 }
@@ -38,17 +31,8 @@ static void	a_b_cmd(t_info *info, t_var *var, int r)
 {
 	if (info->a_top->content >= var->l_pivot)
 	{
-		if (info->a_size == 2 && info->a_top->next->content < var->l_pivot)
-		{
-			operation(info, "sa", 0);
-			operation(info, "pb", 0);
-			var->pb_cnt++;
-		}
-		else if (!is_sorted(info, r - var->ra_cnt - var->pb_cnt, var->l_pivot))
-		{
-			operation(info, "ra", 0);
-			var->ra_cnt++;
-		}
+		operation(info, "ra", 0);
+		var->ra_cnt++;
 	}
 	else
 	{
@@ -66,17 +50,8 @@ static void	b_a_cmd(t_info *info, t_var *var, int r)
 {
 	if (info->b_top->content < var->s_pivot)
 	{
-		if (info->b_size == 2 && info->b_top->next->content >= var->l_pivot)
-		{
-			operation(info, "sb", 0);
-			operation(info, "pa", 0);
-			var->pa_cnt++;
-		}
-		else if (!is_rsorted(info, r - var->rb_cnt - var->pa_cnt, var->s_pivot))
-		{
-			operation(info, "rb", 0);
-			var->rb_cnt++;
-		}
+		operation(info, "rb", 0);
+		var->rb_cnt++;
 	}
 	else
 	{

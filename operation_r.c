@@ -6,11 +6,12 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 13:27:15 by changhle          #+#    #+#             */
-/*   Updated: 2022/06/19 19:15:45 by changhle         ###   ########.fr       */
+/*   Updated: 2022/06/26 09:12:41 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdlib.h>
 
 void	ra(t_info *info)
 {

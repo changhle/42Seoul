@@ -6,7 +6,7 @@
 #    By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/17 13:32:46 by changhle          #+#    #+#              #
-#    Updated: 2022/06/19 19:11:42 by changhle         ###   ########.fr        #
+#    Updated: 2022/06/26 09:52:23 by changhle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,27 +19,24 @@ BONUS = checker
 
 SRCS_M = main.c\
 		push_swap.c\
-		a_to_b_to_a.c\
-		sort.c\
+		quick_sort.c\
 		hard_sort.c\
-		small_hard_sort.c\
+		sort_3_5.c\
 		select_pivot.c\
-		operation.c\
 		operation_p.c\
 		operation_r.c\
 		operation_rr.c\
 		operation_s.c\
 		optimize.c\
-		ft_atoll.c
+		utils.c
 
 SRCS_B = checker.c\
 		push_swap.c\
-		operation.c\
 		operation_p.c\
 		operation_r.c\
 		operation_rr.c\
 		operation_s.c\
-		ft_atoll.c
+		utils.c
 
 OBJS_M = $(SRCS_M:.c=.o)
 OBJS_B = $(SRCS_B:.c=.o)
@@ -48,11 +45,11 @@ all : $(NAME)
 
 $(NAME) : $(OBJS_M)
 	make -C $(LIBFT) all
-	$(CC) -g $(CFLALGS) $(OBJS_M) $(LIBFT)/$(LIBFT_LIB) -o $(NAME)
+	$(CC) $(CFLALGS) $(OBJS_M) $(LIBFT)/$(LIBFT_LIB) -o $(NAME)
 
 $(BONUS) : $(OBJS_B)
 	make -C $(LIBFT) all
-	$(CC) -g $(CFLALGS) $(OBJS_B) $(LIBFT)/$(LIBFT_LIB) -o $(BONUS)
+	$(CC) $(CFLALGS) $(OBJS_B) $(LIBFT)/$(LIBFT_LIB) -o $(BONUS)
 
 bonus : $(BONUS)
 

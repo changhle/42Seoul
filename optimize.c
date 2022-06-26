@@ -6,13 +6,14 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 07:22:02 by changhle          #+#    #+#             */
-/*   Updated: 2022/06/20 13:57:02 by changhle         ###   ########.fr       */
+/*   Updated: 2022/06/26 09:13:28 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdlib.h>
 
-t_node	*remove_node(t_node *node)
+static t_node	*remove_node(t_node *node)
 {
 	t_node	*temp;
 
@@ -36,7 +37,7 @@ t_node	*remove_node(t_node *node)
 	return (node);
 }
 
-t_node	*replace_node(t_node *node, char *cmd)
+static t_node	*replace_node(t_node *node, char *cmd)
 {
 	t_node	*temp;
 
@@ -69,18 +70,17 @@ void	optimize(t_info *info)
 	{
 		s1 = temp->command;
 		s2 = temp->next->command;
-		if ((!ft_strcmp(s1, "pa") && !ft_strcmp(s2, "pb"))
-			|| (!ft_strcmp(s1, "pb") && !ft_strcmp(s2, "pa"))
-			|| (!ft_strcmp(s1, "ra") && !ft_strcmp(s2, "rra"))
+		if ((!ft_strcmp(s1, "ra") && !ft_strcmp(s2, "rra"))
 			|| (!ft_strcmp(s1, "rra") && !ft_strcmp(s2, "ra"))
 			|| (!ft_strcmp(s1, "rb") && !ft_strcmp(s2, "rrb"))
-			|| (!ft_strcmp(s1, "rrb") && !ft_strcmp(s2, "rb"))
-			|| (!ft_strcmp(s1, "rr") && !ft_strcmp(s2, "rrr"))
-			|| (!ft_strcmp(s1, "rrr") && !ft_strcmp(s2, "rr")))
+			|| (!ft_strcmp(s1, "rrb") && !ft_strcmp(s2, "rb")))
 			temp = remove_node(temp);
 		else if ((!ft_strcmp(s1, "ra") && !ft_strcmp(s2, "rb"))
 			|| (!ft_strcmp(s1, "rb") && !ft_strcmp(s2, "ra")))
 			temp = replace_node(temp, "rr");
+		else if ((!ft_strcmp(s1, "rra") && !ft_strcmp(s2, "rrb"))
+			|| (!ft_strcmp(s1, "rrb") && !ft_strcmp(s2, "rra")))
+			temp = replace_node(temp, "rrr");
 		else
 			temp = temp->next;
 	}

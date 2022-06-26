@@ -6,13 +6,13 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 13:32:23 by changhle          #+#    #+#             */
-/*   Updated: 2022/06/19 19:25:47 by changhle         ###   ########.fr       */
+/*   Updated: 2022/06/26 08:51:47 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	a_3(t_info *info, int a, int b, int c)
+static void	a_3(t_info *info, int a, int b, int c)
 {
 	if ((b < a && a < c) || (b < c && c < a) || (c < b && b < a))
 		operation(info, "sa", 0);
@@ -26,7 +26,7 @@ void	a_3(t_info *info, int a, int b, int c)
 		operation(info, "sa", 0);
 }
 
-void	b_3(t_info *info, int a, int b, int c)
+static void	b_3(t_info *info, int a, int b, int c)
 {
 	if ((a < c && c < b) || (c < a && a < b))
 		operation(info, "sb", 0);

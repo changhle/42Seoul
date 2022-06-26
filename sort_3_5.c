@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   small_hard_sort.c                                  :+:      :+:    :+:   */
+/*   sort_3_5.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 19:21:39 by changhle          #+#    #+#             */
-/*   Updated: 2022/06/26 06:28:33 by changhle         ###   ########.fr       */
+/*   Updated: 2022/06/26 09:11:53 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	small_a_3(t_info *info, int a, int b, int c)
+static void	sort_3(t_info *info, int a, int b, int c)
 {
 	if ((a < c && c < b) || (b < c && c < a))
 		operation(info, "ra", 0);
@@ -22,19 +22,6 @@ void	small_a_3(t_info *info, int a, int b, int c)
 		operation(info, "rra", 0);
 }
 
-// void	small_b_3(t_info *info, int a, int b, int c)
-// {
-// 	if ((a < c && c < b) || (b < c && c < a))
-// 		operation(info, "rb", 0);
-// 	if ((a < b && b < c) || (c < a && a < b) || (b < c && c < a))
-// 		operation(info, "sb", 0);
-// 	if ((a < b && b < c) || (b < a && a < c) || (b < c && c < a))
-// 		operation(info, "rrb", 0);
-// 	operation(info, "pa", 0);
-// 	operation(info, "pa", 0);
-// 	operation(info, "pa", 0);
-// }
-
 void	sort_3_5(t_info *info)
 {
 	int	i;
@@ -43,7 +30,7 @@ void	sort_3_5(t_info *info)
 	i = 0;
 	if (info->a_size == 5)
 	{
-		select_mid_pivot(info, 5, &m_pivot, 'a');
+		select_mid_pivot(info->a_top, 5, &m_pivot);
 		while (i < 5)
 		{
 			if (info->a_top->content >= m_pivot)
@@ -53,7 +40,7 @@ void	sort_3_5(t_info *info)
 			i++;
 		}
 	}
-	small_a_3(info, info->a_top->content, info->a_top->next->content,
+	sort_3(info, info->a_top->content, info->a_top->next->content,
 		info->a_top->next->next->content);
 	if (i == 5)
 		b_2(info, info->b_top->content, info->b_top->next->content);

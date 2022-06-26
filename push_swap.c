@@ -6,11 +6,13 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 13:32:29 by changhle          #+#    #+#             */
-/*   Updated: 2022/06/26 06:23:27 by changhle         ###   ########.fr       */
+/*   Updated: 2022/06/26 08:57:16 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "libft/libft.h"
+#include <stdlib.h>
 
 void	init_var(t_var *var)
 {
@@ -31,13 +33,24 @@ void	init_info(t_info *info)
 	info->b_bottom = NULL;
 }
 
-void	print_error(int errno)
+void	fill_stack(t_info *info, char **argv)
 {
-	if (errno == 1)
-		write(2, "Error\n", 6);
-	else if (errno == 2)
-		write(2, "Alloc Error\n", 12);
-	exit(1);
+	int		i;
+	int		j;
+	char	**arr;
+
+	i = 1;
+	while (argv[i])
+	{
+		arr = ft_split(argv[i], ' ');
+		j = 0;
+		while (arr[j])
+		{
+			push_to_stack_a(arr[j], info);
+			j++;
+		}
+		i++;
+	}
 }
 
 void	push_to_stack_command(t_info *info, char *str)
@@ -45,6 +58,8 @@ void	push_to_stack_command(t_info *info, char *str)
 	t_node	*temp;
 
 	temp = malloc(sizeof(t_node));
+	if (!temp)
+		print_error(2);
 	temp->command = str;
 	temp->next = NULL;
 	temp->prev = NULL;

@@ -6,12 +6,14 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 07:09:03 by changhle          #+#    #+#             */
-/*   Updated: 2022/06/26 06:11:41 by changhle         ###   ########.fr       */
+/*   Updated: 2022/06/26 09:45:07 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft/libft.h"
+#include <unistd.h>
+#include <stdlib.h>
 
 void	check_sort(t_node *node)
 {
@@ -35,10 +37,7 @@ void	check_command(char *buf)
 		&& ft_strcmp(buf, "rr") && ft_strcmp(buf, "rrr")
 		&& ft_strcmp(buf, "sa") && ft_strcmp(buf, "sb")
 		&& ft_strcmp(buf, "ss"))
-	{
-		write(2, "Error\n", 6);
-		exit(1);
-	}
+		print_error(1);
 }
 
 void	read_input(t_info *info)
@@ -63,10 +62,7 @@ void	read_input(t_info *info)
 			i = 0;
 		}
 		if (i > 3)
-		{
-			write(2, "Error\n", 6);
-			exit(1);
-		}
+			print_error(1);
 	}
 }
 
@@ -76,24 +72,16 @@ int	main(int argc, char **argv)
 	int		j;
 	char	**arr;
 	t_info	*info;
-	t_node	*temp;
 
-	info = malloc(sizeof(t_info));
-	init_info(info);
 	if (argc < 2)
 		return (0);
-	i = 1;
-	while (argv[i])
-	{
-		arr = ft_split(argv[i], ' ');
-		j = 0;
-		while (arr[j])
-		{
-			push_to_stack_a(arr[j], info);
-			j++;
-		}
-		i++;
-	}
+	info = malloc(sizeof(t_info));
+	if (!info)
+		print_error(2);
+	init_info(info);
+	fill_stack(info, argv);
+	check_overlap(info);
 	read_input(info);
 	check_sort(info->a_top);
+	free_all(info);
 }
