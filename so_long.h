@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/26 19:04:22 by changhle          #+#    #+#             */
+/*   Updated: 2022/06/26 19:05:04 by changhle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
 
-typedef struct	s_info
+typedef struct s_info
 {
 	char	*map;
 	int		height;
@@ -17,9 +29,8 @@ typedef struct	s_info
 	int		walk;
 }	t_info;
 
-typedef struct	s_ptr
+typedef struct s_ptr
 {
-
 	void	*mlx;
 	void	*mlx_win;
 	void	*wall_ptr;
@@ -29,7 +40,7 @@ typedef struct	s_ptr
 	void	*player_ptr;
 }	t_ptr;
 
-typedef struct	s_game
+typedef struct s_game
 {
 	t_info	*info;
 	t_ptr	*ptr;

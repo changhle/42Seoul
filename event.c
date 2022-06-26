@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   event.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/26 19:25:53 by changhle          #+#    #+#             */
+/*   Updated: 2022/06/26 19:28:45 by changhle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 #include "./libft/libft.h"
 #include "./mlx/mlx.h"
@@ -15,8 +27,8 @@ void	exit_game(t_game *game)
 
 void	w_press(t_game *game)
 {
-	t_info 	*info;
-	
+	t_info	*info;
+
 	info = game->info;
 	if (info->map[info->player - info->width] == 'C')
 		info->collect--;
@@ -26,26 +38,24 @@ void	w_press(t_game *game)
 		info->map[info->player - info->width] = 'P';
 		info->walk++;
 		ft_printf("움직인 횟수 : %d\ngame clear!!\n", info->walk);
-		// ft_putnbr_fd(info->walk, 1);
-		// ft_putstr_fd("game clear!!", 1);
 		exit_game(game);
 	}
-	if (info->map[info->player - info->width] != '1' && info->map[info->player - info->width] != 'E')
+	if (info->map[info->player - info->width] != '1'
+		&& info->map[info->player - info->width] != 'E')
 	{
 		info->map[info->player] = '0';
 		info->map[info->player - info->width] = 'P';
 		info->player -= info->width;
 		info->walk++;
 		ft_printf("움직인 횟수 : %d\n", info->walk);
-		// ft_putnbr_fd(info->walk, 1);
 		print_image(info, game->ptr);
 	}
 }
 
 void	a_press(t_game *game)
 {
-	t_info 	*info;
-	
+	t_info	*info;
+
 	info = game->info;
 	if (info->map[info->player - 1] == 'C')
 		info->collect--;
@@ -55,26 +65,24 @@ void	a_press(t_game *game)
 		info->map[info->player - 1] = 'P';
 		info->walk++;
 		ft_printf("움직인 횟수 : %d\ngame clear!!\n", info->walk);
-		// ft_putnbr_fd(info->walk, 1);
-		// ft_putstr_fd("game clear!!", 1);
 		exit_game(game);
 	}
-	if (info->map[info->player - 1] != '1' && info->map[info->player - 1] != 'E')
+	if (info->map[info->player - 1] != '1'
+		&& info->map[info->player - 1] != 'E')
 	{
 		info->map[info->player] = '0';
 		info->map[info->player - 1] = 'P';
 		info->player -= 1;
 		info->walk++;
 		ft_printf("움직인 횟수 : %d\n", info->walk);
-		// ft_putnbr_fd(info->walk, 1);
 		print_image(info, game->ptr);
 	}
 }
 
 void	s_press(t_game *game)
 {
-	t_info 	*info;
-	
+	t_info	*info;
+
 	info = game->info;
 	if (info->map[info->player + info->width] == 'C')
 		info->collect--;
@@ -84,26 +92,24 @@ void	s_press(t_game *game)
 		info->map[info->player + info->width] = 'P';
 		info->walk++;
 		ft_printf("움직인 횟수 : %d\ngame clear!!\n", info->walk);
-		// ft_putnbr_fd(info->walk, 1);
-		// ft_putstr_fd("game clear!!", 1);
 		exit_game(game);
 	}
-	if (info->map[info->player + info->width] != '1' && info->map[info->player + info->width] != 'E')
+	if (info->map[info->player + info->width] != '1'
+		&& info->map[info->player + info->width] != 'E')
 	{
 		info->map[info->player] = '0';
 		info->map[info->player + info->width] = 'P';
 		info->player += info->width;
 		info->walk++;
 		ft_printf("움직인 횟수 : %d\n", info->walk);
-		// ft_putnbr_fd(info->walk, 1);
 		print_image(info, game->ptr);
 	}
 }
 
 void	d_press(t_game *game)
 {
-	t_info 	*info;
-	
+	t_info	*info;
+
 	info = game->info;
 	if (info->map[info->player + 1] == 'C')
 		info->collect--;
@@ -113,18 +119,16 @@ void	d_press(t_game *game)
 		info->map[info->player + 1] = 'P';
 		info->walk++;
 		ft_printf("움직인 횟수 : %d\ngame clear!!\n", info->walk);
-		// ft_putnbr_fd(info->walk, 1);
-		// ft_putstr_fd("game clear!!", 1);
 		exit_game(game);
 	}
-	if (info->map[info->player + 1] != '1' && info->map[info->player + 1] != 'E')
+	if (info->map[info->player + 1] != '1'
+		&& info->map[info->player + 1] != 'E')
 	{
 		info->map[info->player] = '0';
 		info->map[info->player + 1] = 'P';
 		info->player += 1;
 		info->walk++;
 		ft_printf("움직인 횟수 : %d\n", info->walk);
-		// ft_putnbr_fd(info->walk, 1);
 		print_image(info, game->ptr);
 	}
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/26 19:19:35 by changhle          #+#    #+#             */
+/*   Updated: 2022/06/26 19:25:01 by changhle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 #include "./libft/libft.h"
 #include "./get_next_line/get_next_line.h"
@@ -37,24 +49,11 @@ void	check_filename(char *filename)
 
 void	get_map(char *filename, t_info *info)
 {
-	int 	fd;
-	// int		byte;
-	// char	map[100];
+	int		fd;
 	char	*str;
 
 	fd = open(filename, O_RDONLY);
-	// byte = read(fd, map, 100);
-	// info->map = delete_newline(map);
-	// while (byte > 0)
-	// {
-	// 	byte = read(fd, map, 100);
-	// 	delete_newline(map);
-	// 	info->map = ft_strjoin(info->map, map);
-	// }
-	// printf("%d\n", fd);
-	// read(fd, a, 10);
 	str = get_next_line(fd);
-	// printf("%s\n%s\n%s\n", filename, str, a);
 	if (!str)
 		return ;
 	info->width = ft_strlen(str) - 1;
@@ -87,8 +86,10 @@ void	check_wall(t_info *info)
 	map_len = ft_strlen(info->map);
 	while (i < map_len)
 	{
-		if (info->map[i] < info->width || info->map[i] >= map_len - info->width
-		|| map_len % info->width == 0 || map_len % info->width == info->width - 1)
+		if (info->map[i] < info->width
+			|| info->map[i] >= map_len - info->width
+			|| map_len % info->width == 0
+			|| map_len % info->width == info->width - 1)
 		{
 			if (info->map[i] != 1)
 				print_error("");
