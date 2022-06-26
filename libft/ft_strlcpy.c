@@ -6,11 +6,12 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 01:22:22 by changhle          #+#    #+#             */
-/*   Updated: 2021/12/07 03:47:24 by changhle         ###   ########.fr       */
+/*   Updated: 2022/06/26 16:34:08 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {

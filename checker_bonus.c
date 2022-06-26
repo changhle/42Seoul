@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.c                                          :+:      :+:    :+:   */
+/*   checker_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/19 07:09:03 by changhle          #+#    #+#             */
-/*   Updated: 2022/06/26 09:45:07 by changhle         ###   ########.fr       */
+/*   Updated: 2022/06/26 16:49:31 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "push_swap_bonus.h"
 #include "libft/libft.h"
 #include <unistd.h>
 #include <stdlib.h>
 
-void	check_sort(t_node *node)
+static void	check_sort(t_node *node)
 {
 	while (node->next)
 	{
@@ -29,7 +29,7 @@ void	check_sort(t_node *node)
 	write(1, "OK\n", 3);
 }
 
-void	check_command(char *buf)
+static void	check_command(char *buf)
 {
 	if (ft_strcmp(buf, "pa") && ft_strcmp(buf, "pb")
 		&& ft_strcmp(buf, "ra") && ft_strcmp(buf, "rb")
@@ -40,7 +40,7 @@ void	check_command(char *buf)
 		print_error(1);
 }
 
-void	read_input(t_info *info)
+static void	read_input(t_info *info)
 {
 	int		i;
 	char	c;
@@ -66,6 +66,29 @@ void	read_input(t_info *info)
 	}
 }
 
+static void	check_argv(char **argv)
+{
+	int	i;
+	int	j;
+	int	flag;
+
+	i = 1;
+	flag = 0;
+	while (argv[i])
+	{
+		j = 0;
+		while (argv[i][j])
+		{
+			if (ft_isdigit(argv[i][j]))
+				flag = 1;
+			j++;
+		}
+		if (flag == 0)
+			print_error(1);
+		i++;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	int		i;
@@ -79,6 +102,7 @@ int	main(int argc, char **argv)
 	if (!info)
 		print_error(2);
 	init_info(info);
+	check_argv(argv);
 	fill_stack(info, argv);
 	check_overlap(info);
 	read_input(info);

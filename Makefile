@@ -6,7 +6,7 @@
 #    By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/17 13:32:46 by changhle          #+#    #+#              #
-#    Updated: 2022/06/26 09:52:23 by changhle         ###   ########.fr        #
+#    Updated: 2022/06/26 16:50:37 by changhle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,13 +30,13 @@ SRCS_M = main.c\
 		optimize.c\
 		utils.c
 
-SRCS_B = checker.c\
-		push_swap.c\
-		operation_p.c\
-		operation_r.c\
-		operation_rr.c\
-		operation_s.c\
-		utils.c
+SRCS_B = checker_bonus.c\
+		push_swap_bonus.c\
+		operation_p_bonus.c\
+		operation_r_bonus.c\
+		operation_rr_bonus.c\
+		operation_s_bonus.c\
+		utils_bonus.c
 
 OBJS_M = $(SRCS_M:.c=.o)
 OBJS_B = $(SRCS_B:.c=.o)

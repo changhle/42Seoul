@@ -6,11 +6,12 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 01:21:37 by changhle          #+#    #+#             */
-/*   Updated: 2021/11/30 01:21:37 by changhle         ###   ########.fr       */
+/*   Updated: 2022/06/26 16:34:42 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
 static int	count_word(char const *s, char c)
 {
