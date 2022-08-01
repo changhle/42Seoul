@@ -16,16 +16,18 @@ void	wait_time(t_val *val, long long start, long long delay)
 	// if (!val->die)
 	// 	usleep(delay * 1000);
 	// long long	start;
-	long long	now;
+	// long long	now;
 
 	// start = cur_time();
-	while (!(val->die))
-	{
-		now = cur_time();
-		if ((now - start) >= delay)
-			break ;
-		usleep(10);
-	}
+	// while (!(val->die))
+	// {
+	// 	now = cur_time();
+	// 	if ((now - start) >= delay)
+	// 		break ;
+	// 	usleep(100);
+	// }
+	while (cur_time() - start < delay)
+		usleep(100);
 }
 
 void	print_philo(t_val *val, int	philo_num, char *str)
@@ -57,10 +59,10 @@ void	eating(t_val *val, t_philo *philo)
 	print_philo(val, philo->philo_num, "has taken a fork");
 	pthread_mutex_lock(&val->philo_fork[left % val->num_of_philos]);
 	print_philo(val, philo->philo_num, "has taken a fork");
-	print_philo(val, philo->philo_num, "is eating");
 	philo->last_time = cur_time();
-	philo->eat_count++;
+	print_philo(val, philo->philo_num, "is eating");
 	wait_time(val, philo->last_time, val->time_to_eat);
+	philo->eat_count++;
 	pthread_mutex_unlock(&val->philo_fork[right % val->num_of_philos]);
 	pthread_mutex_unlock(&val->philo_fork[left % val->num_of_philos]);
 }
@@ -91,6 +93,7 @@ void	*philo_thread(void *temp)
 		wait_time(val, cur_time(), val->time_to_sleep);
 		print_philo(val, philo->philo_num, "is thinking");
 	}
+	return (0);
 }
 
 void	check_die_finish(t_val *val, t_philo *philo)
