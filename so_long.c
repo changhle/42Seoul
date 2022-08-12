@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 19:03:56 by changhle          #+#    #+#             */
-/*   Updated: 2022/06/26 19:04:03 by changhle         ###   ########.fr       */
+/*   Updated: 2022/08/02 16:43:30 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	xpm_to_image(t_info *info, t_ptr *ptr)
 	ptr->tile_ptr = mlx_xpm_file_to_image(ptr->mlx,
 			"./images/tile00.xpm", &width, &hight);
 	ptr->exit_ptr = mlx_xpm_file_to_image(ptr->mlx,
-			"./images/player_S00.xpm", &width, &hight);
+			"./images/stone.xpm", &width, &hight);
 	ptr->collect_ptr = mlx_xpm_file_to_image(ptr->mlx,
 			"./images/ball.xpm", &width, &hight);
 	ptr->player_ptr = mlx_xpm_file_to_image(ptr->mlx,
@@ -98,6 +98,7 @@ int	main(int argc, char **argv)
 	check_rectangle(&info);
 	check_wall(&info);
 	check_element(&info);
+	xpm_to_image(&info, &ptr);
 	print_image(&info, &ptr);
 	game.info = &info;
 	game.ptr = &ptr;

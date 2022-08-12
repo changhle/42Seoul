@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 19:05:35 by changhle          #+#    #+#             */
-/*   Updated: 2022/06/26 19:19:03 by changhle         ###   ########.fr       */
+/*   Updated: 2022/08/02 16:43:39 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
 void	put_image_1_0_e(t_info *info, t_ptr *ptr, int x, int y)
 {
 	if (info->map[y * info->width + x] == '1')
+	{	
 		mlx_put_image_to_window(ptr->mlx, ptr->mlx_win,
 			ptr->wall_ptr, x * 64, y * 64);
+	}
 	else if (info->map[y * info->width + x] == '0')
 		mlx_put_image_to_window(ptr->mlx, ptr->mlx_win,
 			ptr->tile_ptr, x * 64, y * 64);
