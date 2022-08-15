@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/26 19:04:22 by changhle          #+#    #+#             */
-/*   Updated: 2022/06/26 19:05:04 by changhle         ###   ########.fr       */
+/*   Created: 2022/08/15 19:42:19 by changhle          #+#    #+#             */
+/*   Updated: 2022/08/15 19:42:22 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,13 @@ typedef struct s_game
 	t_ptr	*ptr;
 }	t_game;
 
-void	parse_map(char *filename, t_info *info);
+void	parse(int argc, char **argv, t_info *info);
 void	print_error(char *str);
+char	*delete_newline(char *str);
 void	xpm_to_image(t_info *info, t_ptr *ptr);
 void	print_image(t_info *info, t_ptr *ptr);
 int		key_press(int keycode, t_game *game);
+int		exit_game(t_game *game);
 
 // void	check_filename(char *filename);
 // void	get_map(char *filename, t_info *info);

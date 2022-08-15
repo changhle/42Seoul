@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/26 19:25:53 by changhle          #+#    #+#             */
-/*   Updated: 2022/08/02 16:12:43 by changhle         ###   ########.fr       */
+/*   Created: 2022/08/15 19:41:55 by changhle          #+#    #+#             */
+/*   Updated: 2022/08/15 19:41:57 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #define KEY_S 1
 #define KEY_D 2
 
-void	exit_game(t_game *game)
+int	exit_game(t_game *game)
 {
 	exit(0);
 }
@@ -36,9 +36,6 @@ static void	wasd_press(t_game *game, int move)
 			info->collect--;
 		if (!(info->map[info->player - move] == 'E' && info->collect != 0))
 		{
-			info->map[info->player - move] = 'P';
-			info->map[info->player] = '0';
-			info->player -= move;
 			info->walk++;
 			printf("움직인 횟수 : %d\n", info->walk);
 			if (info->map[info->player - move] == 'E' && info->collect == 0)
@@ -46,129 +43,13 @@ static void	wasd_press(t_game *game, int move)
 				printf("game clear!!\n");
 				exit(0);
 			}
+			info->map[info->player - move] = 'P';
+			info->map[info->player] = '0';
+			info->player -= move;
 			print_image(info, game->ptr);
 		}
 	}
-	// if (info->map[info->player - info->width] == 'C')
-	// 	info->collect--;
-	// else if (info->map[info->player - info->width] == 'E' && info->collect == 0)
-	// {
-	// 	info->map[info->player] = '0';
-	// 	info->map[info->player - info->width] = 'P';
-	// 	info->walk++;
-	// 	printf("움직인 횟수 : %d\ngame clear!!\n", info->walk);
-	// 	exit_game(game);
-	// }
-	// if (info->map[info->player - info->width] != '1'
-	// 	&& info->map[info->player - info->width] != 'E')
-	// {
-	// 	info->map[info->player] = '0';
-	// 	info->map[info->player - info->width] = 'P';
-	// 	info->player -= info->width;
-	// 	info->walk++;
-	// 	printf("움직인 횟수 : %d\n", info->walk);
-	// 	print_image(info, game->ptr);
-	// }
 }
-// if (info->map[info->player - info->width] != '1')
-// {
-// 	if (info->map[info->player - info->width] == 'C')
-// 		info->collect--;
-// 	if (!(info->map[info->player - info->width] == 'E' && info->collect != 0))
-// 	{
-// 		info->map[info->player - info->width] = 'P';
-// 		info->map[info->player] = '0';
-// 		info->player -= info->width;
-// 		info->walk++;
-// 		printf("움직인 횟수 : %d\n", info->walk);
-// 		if (info->map[info->player - info->width] == 'E' && info->collect == 0)
-// 		{
-// 			printf("game clear!!\n");
-// 			exit(0);
-// 		}
-// 		print_image(info, game->ptr);
-// 	}
-// }
-// void	a_press(t_game *game)
-// {
-// 	t_info	*info;
-
-// 	info = game->info;
-// 	if (info->map[info->player - 1] == 'C')
-// 		info->collect--;
-// 	else if (info->map[info->player - 1] == 'E' && info->collect == 0)
-// 	{
-// 		info->map[info->player] = '0';
-// 		info->map[info->player - 1] = 'P';
-// 		info->walk++;
-// 		printf("움직인 횟수 : %d\ngame clear!!\n", info->walk);
-// 		exit_game(game);
-// 	}
-// 	if (info->map[info->player - 1] != '1'
-// 		&& info->map[info->player - 1] != 'E')
-// 	{
-// 		info->map[info->player] = '0';
-// 		info->map[info->player - 1] = 'P';
-// 		info->player -= 1;
-// 		info->walk++;
-// 		printf("움직인 횟수 : %d\n", info->walk);
-// 		print_image(info, game->ptr);
-// 	}
-// }
-
-// void	s_press(t_game *game)
-// {
-// 	t_info	*info;
-
-// 	info = game->info;
-// 	if (info->map[info->player + info->width] == 'C')
-// 		info->collect--;
-// 	else if (info->map[info->player + info->width] == 'E' && info->collect == 0)
-// 	{
-// 		info->map[info->player] = '0';
-// 		info->map[info->player + info->width] = 'P';
-// 		info->walk++;
-// 		printf("움직인 횟수 : %d\ngame clear!!\n", info->walk);
-// 		exit_game(game);
-// 	}
-// 	if (info->map[info->player + info->width] != '1'
-// 		&& info->map[info->player + info->width] != 'E')
-// 	{
-// 		info->map[info->player] = '0';
-// 		info->map[info->player + info->width] = 'P';
-// 		info->player += info->width;
-// 		info->walk++;
-// 		printf("움직인 횟수 : %d\n", info->walk);
-// 		print_image(info, game->ptr);
-// 	}
-// }
-
-// void	d_press(t_game *game)
-// {
-// 	t_info	*info;
-
-// 	info = game->info;
-// 	if (info->map[info->player + 1] == 'C')
-// 		info->collect--;
-// 	else if (info->map[info->player + 1] == 'E' && info->collect == 0)
-// 	{
-// 		info->map[info->player] = '0';
-// 		info->map[info->player + 1] = 'P';
-// 		info->walk++;
-// 		printf("움직인 횟수 : %d\ngame clear!!\n", info->walk);
-// 		exit_game(game);
-// 	}
-// 	if (info->map[info->player + 1] != '1'
-// 		&& info->map[info->player + 1] != 'E')
-// 	{
-// 		info->map[info->player] = '0';
-// 		info->map[info->player + 1] = 'P';
-// 		info->player += 1;
-// 		info->walk++;
-// 		printf("움직인 횟수 : %d\n", info->walk);
-// 		print_image(info, game->ptr);
-// 	}
-// }
 
 int	key_press(int keycode, t_game *game)
 {

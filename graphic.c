@@ -1,47 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_image.c                                      :+:      :+:    :+:   */
+/*   graphic.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/26 19:05:35 by changhle          #+#    #+#             */
-/*   Updated: 2022/08/02 16:43:39 by changhle         ###   ########.fr       */
+/*   Created: 2022/08/15 19:41:42 by changhle          #+#    #+#             */
+/*   Updated: 2022/08/15 19:41:44 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include "./mlx/mlx.h"
 
-static void	put_image_1_0_e(t_info *info, t_ptr *ptr, int x, int y)
+static void	put_image(t_info *info, t_ptr *ptr, int x, int y)
 {
-	if (info->map[y * info->width + x] == '1')
+	int	loc;
+
+	loc = y * info->width + x;
+	if (info->map[loc] == '1')
 		mlx_put_image_to_window(ptr->mlx, ptr->mlx_win,
 			ptr->wall_ptr, x * 64, y * 64);
-	else if (info->map[y * info->width + x] == '0')
+	else if (info->map[loc] == '0' || info->map[loc] == 'E'
+		|| info->map[loc] == 'C' || info->map[loc] == 'P')
 		mlx_put_image_to_window(ptr->mlx, ptr->mlx_win,
 			ptr->tile_ptr, x * 64, y * 64);
-	else if (info->map[y * info->width + x] == 'E')
+	if (info->map[loc] == 'E')
 		mlx_put_image_to_window(ptr->mlx, ptr->mlx_win,
 			ptr->exit_ptr, x * 64, y * 64);
-}
-
-static void	put_image_c_p(t_info *info, t_ptr *ptr, int x, int y)
-{
-	if (info->map[y * info->width + x] == 'C')
-	{
-		mlx_put_image_to_window(ptr->mlx, ptr->mlx_win,
-			ptr->tile_ptr, x * 64, y * 64);
+	if (info->map[loc] == 'C')
 		mlx_put_image_to_window(ptr->mlx, ptr->mlx_win,
 			ptr->collect_ptr, x * 64, y * 64);
-	}
-	else if (info->map[y * info->width + x] == 'P')
-	{
-		mlx_put_image_to_window(ptr->mlx, ptr->mlx_win,
-			ptr->tile_ptr, x * 64, y * 64);
+	if (info->map[loc] == 'P')
 		mlx_put_image_to_window(ptr->mlx, ptr->mlx_win,
 			ptr->player_ptr, x * 64, y * 64);
-	}
 }
 
 void	print_image(t_info *info, t_ptr *ptr)
@@ -55,8 +47,7 @@ void	print_image(t_info *info, t_ptr *ptr)
 		x = 0;
 		while (x < info->width)
 		{
-			put_image_1_0_e(info, ptr, x, y);
-			put_image_c_p(info, ptr, x, y);
+			put_image(info, ptr, x, y);
 			x++;
 		}
 		y++;
@@ -66,7 +57,7 @@ void	print_image(t_info *info, t_ptr *ptr)
 void	xpm_to_image(t_info *info, t_ptr *ptr)
 {
 	int		width;
-	int		hight;
+	int		height;
 
 	width = 64;
 	height = 64;
