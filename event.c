@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "so_long.h"
 #include "./libft/libft.h"
 #include "./mlx/mlx.h"
