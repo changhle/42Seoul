@@ -6,16 +6,16 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 19:41:42 by changhle          #+#    #+#             */
-/*   Updated: 2022/08/15 19:41:44 by changhle         ###   ########.fr       */
+/*   Updated: 2022/08/17 02:42:35 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include "./mlx/mlx.h"
 
-static void	put_image(t_info *info, t_ptr *ptr, int x, int y)
+static void	put_image(t_info *info, t_ptr *ptr, unsigned int x, unsigned int y)
 {
-	int	loc;
+	unsigned int	loc;
 
 	loc = y * info->width + x;
 	if (info->map[loc] == '1')
@@ -38,8 +38,8 @@ static void	put_image(t_info *info, t_ptr *ptr, int x, int y)
 
 void	print_image(t_info *info, t_ptr *ptr)
 {
-	int	x;
-	int	y;
+	unsigned int	x;
+	unsigned int	y;
 
 	y = 0;
 	while (y < info->height)

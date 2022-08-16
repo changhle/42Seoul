@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 19:42:51 by changhle          #+#    #+#             */
-/*   Updated: 2022/08/15 19:42:54 by changhle         ###   ########.fr       */
+/*   Updated: 2022/08/17 03:24:22 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ void	print_error(char *str)
 
 void	delete_newline(char *str)
 {
-	int	str_len;
+	unsigned int	str_len;
 
 	str_len = ft_strlen(str);
 	if (str[str_len - 1] == '\n')
 		str[str_len - 1] = '\0';
 }
 
-char	*ft_free_strjoin(char const *s1, char const *s2)
+char	*ft_free_strjoin(char *s1, char *s2)
 {
 	char	*str;
 

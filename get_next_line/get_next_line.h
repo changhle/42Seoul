@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/28 16:13:08 by changhle          #+#    #+#             */
-/*   Updated: 2022/05/19 13:19:14 by changhle         ###   ########.fr       */
+/*   Updated: 2022/08/17 02:45:49 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
+# define BUFFER_SIZE 42
 
 char	*get_next_line(int fd);
 char	*ft_read_str(int fd, char *str);

@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 19:41:22 by changhle          #+#    #+#             */
-/*   Updated: 2022/08/15 19:43:19 by changhle         ###   ########.fr       */
+/*   Updated: 2022/08/17 02:55:28 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	main(int argc, char **argv)
 {
 	t_info	info;
 	t_ptr	ptr;
-	t_game	game;
 
 	init_info(&info);
 	parse(argc, argv, &info);

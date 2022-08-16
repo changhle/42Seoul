@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 19:41:55 by changhle          #+#    #+#             */
-/*   Updated: 2022/08/15 19:41:57 by changhle         ###   ########.fr       */
+/*   Updated: 2022/08/17 03:19:08 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,8 @@
 #define KEY_S 1
 #define KEY_D 2
 
-static void	wasd_press(t_game *game, int move)
+static void	wasd_press(t_info *info, int move)
 {
-	t_info	*info;
-
-	info = game->info;
 	if (info->map[info->player - move] != '1')
 	{
 		if (info->map[info->player - move] == 'C')
@@ -36,22 +33,22 @@ static void	wasd_press(t_game *game, int move)
 			info->map[info->player - move] = 'P';
 			info->map[info->player] = '0';
 			info->player -= move;
-			print_image(info, game->ptr);
+			print_image(info, info->ptr);
 		}
 	}
 }
 
-int	key_press(int keycode, t_game *game)
+int	key_press(int keycode, t_info *info)
 {
 	if (keycode == KEY_ESC)
 		exit_game("Press ESC button!");
 	else if (keycode == KEY_W)
-		wasd_press(game, game->info->width);
+		wasd_press(info, info->width);
 	else if (keycode == KEY_A)
-		wasd_press(game, 1);
+		wasd_press(info, 1);
 	else if (keycode == KEY_S)
-		wasd_press(game, -game->info->width);
+		wasd_press(info, -info->width);
 	else if (keycode == KEY_D)
-		wasd_press(game, -1);
+		wasd_press(info, -1);
 	return (0);
 }
