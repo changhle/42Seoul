@@ -38,10 +38,8 @@ int	main(int argc, char **argv)
 	init_info(&info);
 	parse(argc, argv, &info);
 	xpm_to_image(&info, &ptr);
-	game.info = &info;
-	game.ptr = &ptr;
-	mlx_key_hook(ptr.mlx_win, key_press, &game);
-	mlx_hook(ptr.mlx_win, 17, 0, &exit_game, &game);
+	mlx_key_hook(ptr.mlx_win, key_press, &info);
+	mlx_hook(ptr.mlx_win, 17, 0, &exit_game, "Press red button!");
 	mlx_loop(ptr.mlx);
 	return (0);
 }

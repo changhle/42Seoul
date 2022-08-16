@@ -11,20 +11,12 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include <stdlib.h>
 #include "so_long.h"
-#include "./libft/libft.h"
-#include "./mlx/mlx.h"
 #define KEY_ESC 53
 #define KEY_W 13
 #define KEY_A 0
 #define KEY_S 1
 #define KEY_D 2
-
-int	exit_game(t_game *game)
-{
-	exit(0);
-}
 
 static void	wasd_press(t_game *game, int move)
 {
@@ -40,10 +32,7 @@ static void	wasd_press(t_game *game, int move)
 			info->walk++;
 			printf("움직인 횟수 : %d\n", info->walk);
 			if (info->map[info->player - move] == 'E' && info->collect == 0)
-			{
-				printf("game clear!!\n");
-				exit(0);
-			}
+				exit_game("game clear!");
 			info->map[info->player - move] = 'P';
 			info->map[info->player] = '0';
 			info->player -= move;
@@ -55,7 +44,7 @@ static void	wasd_press(t_game *game, int move)
 int	key_press(int keycode, t_game *game)
 {
 	if (keycode == KEY_ESC)
-		exit_game(game);
+		exit_game("Press ESC button!");
 	else if (keycode == KEY_W)
 		wasd_press(game, game->info->width);
 	else if (keycode == KEY_A)

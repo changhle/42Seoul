@@ -13,20 +13,16 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-// # include <stdio.h>
-// # include <stdlib.h>
-// # include <unistd.h>
-// # include <fcntl.h>
-
 typedef struct s_info
 {
-	char	*map;
-	int		height;
-	int		width;
-	int		exit;
-	int		collect;
-	int		player;
-	int		walk;
+	struct s_ptr	ptr;
+	char			*map;
+	int				height;
+	int				width;
+	int				exit;
+	int				collect;
+	int				player;
+	int				walk;
 }	t_info;
 
 typedef struct s_ptr
@@ -40,18 +36,13 @@ typedef struct s_ptr
 	void	*player_ptr;
 }	t_ptr;
 
-typedef struct s_game
-{
-	t_info	*info;
-	t_ptr	*ptr;
-}	t_game;
-
 void	parse(int argc, char **argv, t_info *info);
+void	xpm_to_image(t_info *info, t_ptr *ptr);
+int		exit_game(t_game *game);
 void	print_error(char *str);
 char	*delete_newline(char *str);
-void	xpm_to_image(t_info *info, t_ptr *ptr);
 void	print_image(t_info *info, t_ptr *ptr);
 int		key_press(int keycode, t_game *game);
-int		exit_game(t_game *game);
+char	*ft_free_strjoin(char const *s1, char const *s2);
 
 #endif

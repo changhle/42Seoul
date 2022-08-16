@@ -65,14 +65,15 @@ void	xpm_to_image(t_info *info, t_ptr *ptr)
 	ptr->mlx_win = mlx_new_window(ptr->mlx, info->width * width,
 			info->height * height, "so_long");
 	ptr->wall_ptr = mlx_xpm_file_to_image(ptr->mlx,
-			"./images/tile01.xpm", &width, &height);
+			"./images/wall.xpm", &width, &height);
 	ptr->tile_ptr = mlx_xpm_file_to_image(ptr->mlx,
-			"./images/tile00.xpm", &width, &height);
+			"./images/tile.xpm", &width, &height);
 	ptr->exit_ptr = mlx_xpm_file_to_image(ptr->mlx,
-			"./images/stone.xpm", &width, &height);
+			"./images/exit.xpm", &width, &height);
 	ptr->collect_ptr = mlx_xpm_file_to_image(ptr->mlx,
-			"./images/ball.xpm", &width, &height);
+			"./images/collect.xpm", &width, &height);
 	ptr->player_ptr = mlx_xpm_file_to_image(ptr->mlx,
-			"./images/player_S00.xpm", &width, &height);
+			"./images/player.xpm", &width, &height);
+	info->ptr = ptr;
 	print_image(info, ptr);
 }
