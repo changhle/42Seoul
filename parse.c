@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 19:42:06 by changhle          #+#    #+#             */
-/*   Updated: 2022/08/17 03:24:11 by changhle         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:03:33 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "./libft/libft.h"
 #include "./get_next_line/get_next_line.h"
 
-static void	parse_map(char *filename, t_info *info)
+static int	parse_map(char *filename, t_info *info)
 {
 	int		fd;
 	char	*str;
@@ -23,22 +23,21 @@ static void	parse_map(char *filename, t_info *info)
 	fd = open(filename, O_RDONLY);
 	str = get_next_line(fd);
 	if (!str)
-		return ;
+		return (close(fd));
 	info->width = ft_strlen(str) - 1;
 	delete_newline(str);
-	info->map = ft_strdup(str);
 	while (str)
 	{
 		info->height++;
-		str = get_next_line(fd);
-		if (!str)
-			return ;
-		delete_newline(str);
 		info->map = ft_free_strjoin(info->map, str);
 		if (!info->map)
-			print_error("Join failed!");
+			print_error("Join failed");
+		str = get_next_line(fd);
+		if (!str)
+			return (close(fd));
+		delete_newline(str);
 	}
-	close(fd);
+	return (0);
 }
 
 static void	check_rectangle(t_info *info)

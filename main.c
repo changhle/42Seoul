@@ -6,10 +6,11 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 19:41:22 by changhle          #+#    #+#             */
-/*   Updated: 2022/08/17 02:55:28 by changhle         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:13:16 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "so_long.h"
 #include "./mlx/mlx.h"
 
@@ -21,6 +22,7 @@
 
 static void	init_info(t_info *info)
 {
+	info->map = NULL;
 	info->height = 0;
 	info->width = 0;
 	info->exit = 0;

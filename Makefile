@@ -6,7 +6,7 @@
 #    By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/17 03:24:30 by changhle          #+#    #+#              #
-#    Updated: 2022/08/17 03:24:31 by changhle         ###   ########.fr        #
+#    Updated: 2022/08/17 16:12:27 by changhle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ OBJS = $(SRCS:.c=.o)
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-	make -C libft all
+	make -s -C libft all
 	make -C mlx all
 	gcc $(CFLAGS) -L./mlx -Imlx -framework OpenGL -framework AppKit libft/libft.a mlx/libmlx.a $(OBJS) -o $(NAME)
 

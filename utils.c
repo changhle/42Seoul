@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 19:42:51 by changhle          #+#    #+#             */
-/*   Updated: 2022/08/17 03:24:22 by changhle         ###   ########.fr       */
+/*   Updated: 2022/08/17 15:57:10 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ char	*ft_free_strjoin(char *s1, char *s2)
 {
 	char	*str;
 
-	if (!s1 || !s2)
+	if (!s1 && s2)
+		return (s2);
+	else if (!s2)
 		return (NULL);
 	str = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!str)
@@ -47,5 +49,6 @@ char	*ft_free_strjoin(char *s1, char *s2)
 	ft_strlcpy(str, s1, ft_strlen(s1) + 1);
 	ft_strlcat(str, s2, ft_strlen(s1) + ft_strlen(s2) + 1);
 	free(s1);
+	free(s2);
 	return (str);
 }

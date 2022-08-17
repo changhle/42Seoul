@@ -6,14 +6,12 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 19:42:19 by changhle          #+#    #+#             */
-/*   Updated: 2022/08/17 02:47:46 by changhle         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:03:43 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
-
-#include <stdio.h>
 
 typedef struct s_info
 {
