@@ -9,35 +9,32 @@
 void	*check_ate(void	*temp)
 {
 	int	i;
-	t_ob	*data;
+	t_data	*data;
 
-	data = (t_ob *)temp;
-	// printf("%d\n", data->info->pid);
+	data = (t_data *)temp;
+	// printf("pid : %d\nn_philo : %d\n", data->pid, data->info->num_philos);
 	i = 0;
-	while (i < data->num_philos)
+	while (i < data->info->num_philos)
 	{
-		// printf("---------------------%d--------------\n", data->info->pid);
-		sem_wait(data->finish);
+		sem_wait(data->sem->finish);
 		i++;
 	}
-	printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
 	kill(data->pid, SIGTERM);
 	return (NULL);
 }
 
-int	observe(t_info *info, t_philo *philo, t_sem *sem, pid_t	pid)
+int	observe(t_info *info, t_sem *sem, pid_t pid)
 {
-	// t_data		data;
+	t_data		data;
 	pthread_t	checker;
 
-	// data.info = info;
-	// data.info->pid = pid;
-	// data.philo = philo;
-	// data.sem = sem;
-	// data.pid = pid;
-	// printf("---------==-----%d-%d-%d------------\n", pid, info->pid, data.info->pid);
-	if (pthread_create(&checker, NULL, check_ate, &(t_ob){info->num_philos, pid, sem->finish}))
+	data.info = info;
+	data.pid = pid;
+	data.sem = sem;
+	// printf("pid : %d\nn_philo : %d\n", data.pid, data.info->num_philos);
+	if (pthread_create(&checker, NULL, check_ate, &data))
 		return (1);
+	pthread_join(checker, NULL);
 	return (0);
 }
 

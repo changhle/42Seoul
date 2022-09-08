@@ -71,11 +71,9 @@ int	philosopher(t_info *info, t_philo *philo, t_sem *sem)
 			return (1);
 		i++;
 	}
-	printf("======================================\n");
 	if (info->num_eat != -1)
-		if (observe(info, philo, sem, pid[0]))
+		if (observe(info, sem, pid[0]))
 			return (1);
-	printf("################\n");
 	i = 0;
 	waitpid(0, &status, 0);
 	while (i < info->num_philos)

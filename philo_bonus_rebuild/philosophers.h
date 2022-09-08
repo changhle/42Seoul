@@ -1,7 +1,7 @@
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
 
-// # include <stdio.h>
+# include <stdio.h>
 // # include <pthread.h>
 // # include <sys/time.h>
 // # include <stdlib.h>
@@ -48,6 +48,7 @@ typedef struct s_data
 	t_info	*info;
 	t_philo	*philo;
 	t_sem	*sem;
+	pid_t	pid;
 } t_data;
 
 typedef struct s_ob
@@ -63,7 +64,9 @@ void	*check_philo(void *temp);
 void	take_fork(t_philo *philo, t_sem *sem);
 void	realse_fork(t_sem *sem);
 void	init_philo(t_info *info, t_philo *philo, long long time, unsigned int i);
-int	observe(t_info *info, t_philo *philo, t_sem *sem, pid_t pid);
+// int	observe(t_info *info, t_philo *philo, t_sem *sem, pid_t pid);
+// int	observe(t_ob *data);
+int	observe(t_info *info, t_sem *sem, pid_t pid);
 
 int ft_atoi(const char *str);
 long long cur_time(void);
