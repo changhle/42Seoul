@@ -10,16 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+// #include <stdlib.h>
 #include "so_long.h"
-#include "../libft/libft.h"
+// #include "../libft/libft.h"
 #include "../mlx/mlx.h"
-
-#define KEY_ESC 53
-#define KEY_W 13
-#define KEY_A 0
-#define KEY_S 1
-#define KEY_D 2
 
 static void	init_info(t_info *info)
 {
@@ -48,10 +42,7 @@ int	main(int argc, char **argv)
 	sprite.info = &info;
 	sprite.ptr = &ptr;
 	sprite.fps = 0;
-	printf("------1\n");
 	mlx_loop_hook(ptr.mlx, &print_sprite_image, &sprite);
-	printf("------2\n");
 	mlx_loop(ptr.mlx);
-	printf("------3\n");
 	return (0);
 }
