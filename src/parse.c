@@ -6,14 +6,14 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 19:42:06 by changhle          #+#    #+#             */
-/*   Updated: 2022/08/17 16:03:33 by changhle         ###   ########.fr       */
+/*   Updated: 2022/09/09 16:57:15 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include "so_long.h"
-#include "./libft/libft.h"
-#include "./get_next_line/get_next_line.h"
+#include "../libft/libft.h"
+#include "../get_next_line/get_next_line.h"
 
 static int	parse_map(char *filename, t_info *info)
 {
@@ -82,6 +82,12 @@ static void	check_element(t_info *info)
 				info->map[i] = '0';
 			else
 				info->player = i;
+		}
+		else if (i / 20 > 0 && i % 20 == 0 && info->map[i] == '0'
+			&& info->patrol == 0)
+		{
+			info->map[i] = 'M';
+			info->patrol = i;
 		}
 	}
 	if (info->exit == 0)

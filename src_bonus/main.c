@@ -6,26 +6,13 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 19:41:22 by changhle          #+#    #+#             */
-/*   Updated: 2022/09/10 04:25:54 by changhle         ###   ########.fr       */
+/*   Updated: 2022/09/10 07:36:46 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <stdlib.h>
 #include "so_long.h"
-// #include "../libft/libft.h"
+#include "../libft/libft.h"
 #include "../mlx/mlx.h"
-
-static void	init_info(t_info *info)
-{
-	info->map = NULL;
-	info->height = 0;
-	info->width = 0;
-	info->exit = 0;
-	info->collect = 0;
-	info->player = 0;
-	info->patrol = 0;
-	info->walk = 0;
-}
 
 int	main(int argc, char **argv)
 {
@@ -33,7 +20,7 @@ int	main(int argc, char **argv)
 	t_ptr		ptr;
 	t_sprite	sprite;
 
-	init_info(&info);
+	ft_memset(&info, 0, sizeof(t_info));
 	parse(argc, argv, &info);
 	xpm_to_image(&info, &ptr);
 	mlx_string_put(ptr.mlx, ptr.mlx_win, 2, 14, 0xFFFFFF, "MOVE: 0");
@@ -41,7 +28,7 @@ int	main(int argc, char **argv)
 	mlx_hook(ptr.mlx_win, 17, 0, &exit_game, "Press red button!");
 	sprite.info = &info;
 	sprite.ptr = &ptr;
-	sprite.fps = 0;
+	sprite.count = 0;
 	mlx_loop_hook(ptr.mlx, &print_sprite_image, &sprite);
 	mlx_loop(ptr.mlx);
 	return (0);

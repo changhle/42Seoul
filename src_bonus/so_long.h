@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 19:42:19 by changhle          #+#    #+#             */
-/*   Updated: 2022/09/10 04:24:55 by changhle         ###   ########.fr       */
+/*   Updated: 2022/09/10 08:17:08 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ typedef struct s_ptr
 	void	*mlx;
 	void	*mlx_win;
 	void	*wall_ptr;
-	void	*wall_1_ptr;
+	void	*wall_move_ptr;
 	void	*tile_ptr;
-	void	*exit_ptr;
+	void	*exit_ptr[2];
 	void	*collect_ptr;
 	void	*player_ptr[4];
 	void	*patrol_ptr[4];
@@ -43,7 +43,7 @@ typedef struct s_sprite
 {
 	t_info	*info;
 	t_ptr	*ptr;
-	int		fps;
+	int		count;
 }	t_sprite;
 
 void	parse(int argc, char **argv, t_info *info);
@@ -54,7 +54,6 @@ char	*delete_newline(char *str);
 void	print_image(t_info *info, t_ptr *ptr);
 void	put_image(t_info *info, t_ptr *ptr, unsigned int x, unsigned int y);
 int		print_sprite_image(t_sprite *sprite);
-// void	print_move_image(t_info *info, t_ptr *ptr, unsigned int target, unsigned int move);
 int		key_press(int keycode, t_info *info);
 char	*ft_free_strjoin(char const *s1, char const *s2);
 

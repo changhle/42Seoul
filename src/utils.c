@@ -6,13 +6,13 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 19:42:51 by changhle          #+#    #+#             */
-/*   Updated: 2022/08/17 15:57:10 by changhle         ###   ########.fr       */
+/*   Updated: 2022/09/09 05:35:34 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "./libft/libft.h"
+#include "../libft/libft.h"
 
 int	exit_game(char *str)
 {
