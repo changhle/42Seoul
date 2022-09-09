@@ -6,12 +6,13 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 19:41:22 by changhle          #+#    #+#             */
-/*   Updated: 2022/08/17 16:13:16 by changhle         ###   ########.fr       */
+/*   Updated: 2022/09/09 05:32:28 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "so_long.h"
+#include "./libft/libft.h"
 #include "./mlx/mlx.h"
 
 #define KEY_ESC 53
@@ -39,6 +40,7 @@ int	main(int argc, char **argv)
 	init_info(&info);
 	parse(argc, argv, &info);
 	xpm_to_image(&info, &ptr);
+	mlx_string_put(ptr.mlx, ptr.mlx_win, 5, 15, 0xFFFFFF, "MOVE : 0");
 	mlx_key_hook(ptr.mlx_win, key_press, &info);
 	mlx_hook(ptr.mlx_win, 17, 0, &exit_game, "Press red button!");
 	mlx_loop(ptr.mlx);

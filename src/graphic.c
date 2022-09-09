@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 19:41:42 by changhle          #+#    #+#             */
-/*   Updated: 2022/08/17 02:42:35 by changhle         ###   ########.fr       */
+/*   Updated: 2022/09/09 05:28:34 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static void	put_image(t_info *info, t_ptr *ptr, unsigned int x, unsigned int y)
 	unsigned int	loc;
 
 	loc = y * info->width + x;
+	if (x == 0 && y == 0)
+		return ;
 	if (info->map[loc] == '1')
 		mlx_put_image_to_window(ptr->mlx, ptr->mlx_win,
 			ptr->wall_ptr, x * 64, y * 64);
