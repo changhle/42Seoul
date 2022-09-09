@@ -34,10 +34,16 @@ typedef struct s_ptr
 	void	*wall_1_ptr;
 	void	*tile_ptr;
 	void	*exit_ptr;
-	void	*collect_ptr[6];
-	void	*player_ptr[6];
-	void	*patrol_ptr[6];
+	void	*collect_ptr[4];
+	void	*player_ptr[4];
+	void	*patrol_ptr[4];
 }	t_ptr;
+
+typedef struct s_sprite
+{
+	t_info	*info;
+	t_ptr	*ptr;
+}	t_sprite;
 
 void	parse(int argc, char **argv, t_info *info);
 void	xpm_to_image(t_info *info, t_ptr *ptr);
@@ -46,7 +52,8 @@ void	print_error(char *str);
 char	*delete_newline(char *str);
 void	print_image(t_info *info, t_ptr *ptr);
 void	put_image(t_info *info, t_ptr *ptr, unsigned int x, unsigned int y);
-void	print_move_image(t_info *info, t_ptr *ptr, unsigned int target, unsigned int move);
+void	print_sprite_image(t_sprite *sprite);
+// void	print_move_image(t_info *info, t_ptr *ptr, unsigned int target, unsigned int move);
 int		key_press(int keycode, t_info *info);
 char	*ft_free_strjoin(char const *s1, char const *s2);
 

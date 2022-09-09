@@ -38,12 +38,12 @@ void	put_image(t_info *info, t_ptr *ptr, unsigned int x, unsigned int y)
 	if (info->map[loc] == 'C')
 		mlx_put_image_to_window(ptr->mlx, ptr->mlx_win,
 			ptr->collect_ptr, x * 64, y * 64);
-	if (info->map[loc] == 'P')
-		mlx_put_image_to_window(ptr->mlx, ptr->mlx_win,
-			ptr->player_ptr, x * 64, y * 64);
-	if (info->map[loc] == 'M')
-		mlx_put_image_to_window(ptr->mlx, ptr->mlx_win,
-			ptr->patrol_ptr, x * 64, y * 64);
+	// if (info->map[loc] == 'P')
+	// 	mlx_put_image_to_window(ptr->mlx, ptr->mlx_win,
+	// 		ptr->player_ptr, x * 64, y * 64);
+	// if (info->map[loc] == 'M')
+	// 	mlx_put_image_to_window(ptr->mlx, ptr->mlx_win,
+	// 		ptr->patrol_ptr, x * 64, y * 64);
 }
 
 void	print_image(t_info *info, t_ptr *ptr)
@@ -73,7 +73,7 @@ void	print_sprite_image(t_sprite *sprite)
 	info = sprite->info;
 	ptr = sprite->ptr;
 	i = 0;
-	while (i < 6)
+	while (i < 4)
 	{
 		mlx_put_image_to_window(ptr->mlx, ptr->mlx_win,
 			ptr->player_ptr[i], (info->player % info->width) * 64,
@@ -122,27 +122,10 @@ void	xpm_to_image(t_info *info, t_ptr *ptr)
 			"../images/tile.xpm", &width, &height);
 	ptr->exit_ptr = mlx_xpm_file_to_image(ptr->mlx,
 			"../images/exit.xpm", &width, &height);
-	xpm_to_collect_image(ptr, width, height);
 	xpm_to_player_image(ptr, width, height);
 	xpm_to_patrol_image(ptr, width, height);
 	info->ptr = ptr;
 	print_image(info, ptr);
-}
-
-void	xpm_to_collect_image(t_ptr *ptr, int width, int height)
-{
-	ptr->collect_ptr[0] = mlx_xpm_file_to_image(ptr->mlx,
-			"../images/collect00.xpm", &width, &height);
-	ptr->collect_ptr[1] = mlx_xpm_file_to_image(ptr->mlx,
-			"../images/collect01.xpm", &width, &height);
-	ptr->collect_ptr[2] = mlx_xpm_file_to_image(ptr->mlx,
-			"../images/collect02.xpm", &width, &height);
-	ptr->collect_ptr[3] = mlx_xpm_file_to_image(ptr->mlx,
-			"../images/collect03.xpm", &width, &height);
-	ptr->collect_ptr[4] = mlx_xpm_file_to_image(ptr->mlx,
-			"../images/collect04.xpm", &width, &height);
-	ptr->collect_ptr[5] = mlx_xpm_file_to_image(ptr->mlx,
-			"../images/collect05.xpm", &width, &height);
 }
 
 void	xpm_to_player_image(t_ptr *ptr, int width, int height)
@@ -155,10 +138,6 @@ void	xpm_to_player_image(t_ptr *ptr, int width, int height)
 			"../images/player02.xpm", &width, &height);
 	ptr->player_ptr[3] = mlx_xpm_file_to_image(ptr->mlx,
 			"../images/player03.xpm", &width, &height);
-	ptr->player_ptr[4] = mlx_xpm_file_to_image(ptr->mlx,
-			"../images/player04.xpm", &width, &height);
-	ptr->player_ptr[5] = mlx_xpm_file_to_image(ptr->mlx,
-			"../images/player05.xpm", &width, &height);
 }
 
 void	xpm_to_patrol_image(t_ptr *ptr, int width, int height)
@@ -171,8 +150,4 @@ void	xpm_to_patrol_image(t_ptr *ptr, int width, int height)
 			"../images/patrol02.xpm", &width, &height);
 	ptr->patrol_ptr[3] = mlx_xpm_file_to_image(ptr->mlx,
 			"../images/patrol03.xpm", &width, &height);
-	ptr->patrol_ptr[4] = mlx_xpm_file_to_image(ptr->mlx,
-			"../images/patrol04.xpm", &width, &height);
-	ptr->patrol_ptr[5] = mlx_xpm_file_to_image(ptr->mlx,
-			"../images/patrol05.xpm", &width, &height);
 }
