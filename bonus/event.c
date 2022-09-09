@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 19:41:55 by changhle          #+#    #+#             */
-/*   Updated: 2022/09/09 17:52:39 by changhle         ###   ########.fr       */
+/*   Updated: 2022/09/09 21:50:45 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ static void	wasd_press(t_info *info, int move)
 			info->map[info->player - move] = 'P';
 			info->map[info->player] = '0';
 			info->player -= move;
-			// print_move_image(info, info->ptr, info->player, move);
-			put_image(info, info->ptr, (info->player + move) % info->width,
-				(info->player + move) / info->width);
+			print_move_image(info, info->ptr, info->player, move);
+			// put_image(info, info->ptr, (info->player + move) % info->width,
+			// 	(info->player + move) / info->width);
 			put_image(info, info->ptr, 0, 0);
 			// print_image(info, info->ptr);
 			str = ft_itoa(info->walk);
@@ -61,9 +61,9 @@ static void	patrol_move(t_info *info, int move)
 		// if (info->map[info->patrol] == 'M')
 		info->map[info->patrol] = '0';
 		info->patrol -= move;
-			put_image(info, info->ptr, (info->patrol + move) % info->width,
-				(info->patrol + move) / info->width);
-		// print_move_image(info, info->ptr, info->patrol, move);
+		// put_image(info, info->ptr, (info->patrol + move) % info->width,
+		// 	(info->patrol + move) / info->width);
+		print_move_image(info, info->ptr, info->patrol, move);
 		// print_image(info, info->ptr);
 		if (info->player == info->patrol
 			|| info->player == info->patrol + move)

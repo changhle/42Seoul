@@ -6,12 +6,15 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/15 19:42:19 by changhle          #+#    #+#             */
-/*   Updated: 2022/09/09 19:20:38 by changhle         ###   ########.fr       */
+/*   Updated: 2022/09/10 04:24:55 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
+
+#include <stdio.h>
+#include <unistd.h>
 
 typedef struct s_info
 {
@@ -33,16 +36,23 @@ typedef struct s_ptr
 	void	*wall_ptr;
 	void	*wall_1_ptr;
 	void	*tile_ptr;
-	void	*exit_ptr;
-	void	*collect_ptr[4];
-	void	*player_ptr[4];
-	void	*patrol_ptr[4];
+	void	*exit_ptr[1];
+	void	*collect_ptr[1];
+	void	*player00_ptr;
+	void	*player01_ptr;
+	void	*player02_ptr;
+	void	*player03_ptr;
+	void	*patrol00_ptr;
+	void	*patrol01_ptr;
+	void	*patrol02_ptr;
+	void	*patrol03_ptr;
 }	t_ptr;
 
 typedef struct s_sprite
 {
 	t_info	*info;
 	t_ptr	*ptr;
+	int		fps;
 }	t_sprite;
 
 void	parse(int argc, char **argv, t_info *info);
@@ -52,8 +62,8 @@ void	print_error(char *str);
 char	*delete_newline(char *str);
 void	print_image(t_info *info, t_ptr *ptr);
 void	put_image(t_info *info, t_ptr *ptr, unsigned int x, unsigned int y);
-void	print_sprite_image(t_sprite *sprite);
-// void	print_move_image(t_info *info, t_ptr *ptr, unsigned int target, unsigned int move);
+int		print_sprite_image(t_sprite *sprite);
+void	print_move_image(t_info *info, t_ptr *ptr, unsigned int target, unsigned int move);
 int		key_press(int keycode, t_info *info);
 char	*ft_free_strjoin(char const *s1, char const *s2);
 
