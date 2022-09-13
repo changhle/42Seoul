@@ -5,14 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/12 21:41:33 by changhle          #+#    #+#             */
-/*   Updated: 2022/09/12 22:08:08 by changhle         ###   ########.fr       */
+/*   Created: 2022/09/13 22:58:30 by changhle          #+#    #+#             */
+/*   Updated: 2022/09/13 23:09:07 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sys/time.h>
 #include <stdlib.h>
-#include <semaphore.h>
 #include <stdio.h>
 #include <unistd.h>
 #include "philosophers.h"
@@ -55,19 +54,21 @@ long long	cur_time(void)
 	struct timeval	timeval;
 
 	gettimeofday(&timeval, NULL);
-	return (timeval.tv_sec * 1000 + timeval.tv_usec / 1000);
+	return ((timeval.tv_sec * 1000) + (timeval.tv_usec / 1000));
 }
 
-void	print_state(t_philo *philo, t_sem *sem, const char *str)
+void	print_state(t_philo *philo, char *str)
 {
-	sem_wait(sem->print);
-	printf("%lld %d %s\n", cur_time() - philo->start_time,
-		philo->id, str);
-	sem_post(sem->print);
+	pthread_mutex_lock(&philo->info->print);
+	if (!philo->info->die
+		&& !(philo->info->full_philo == philo->info->num_philos))
+		printf("%lld %d %s\n", cur_time() - philo->info->start_time,
+			philo->id, str);
+	pthread_mutex_unlock(&philo->info->print);
 }
 
 void	wait_time(long long start, long long delay)
 {
-	while (cur_time() - start <= delay)
+	while (cur_time() - start < delay)
 		usleep(100);
 }

@@ -1,120 +1,87 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philosopher.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/12 21:41:22 by changhle          #+#    #+#             */
+/*   Updated: 2022/09/12 21:41:23 by changhle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stdlib.h>
+#include <unistd.h>
+#include <pthread.h>
+#include <semaphore.h>
 #include "philosophers.h"
 
-void	check_philo(t_info *info, t_philo *philo)
+static void	philo_eating(t_info *info, t_philo *philo, t_sem *sem)
+{
+	take_fork(philo, sem);
+	philo->last_eat = cur_time();
+	print_state(philo, sem, "is eating");
+	wait_time(philo->last_eat, info->time_eat);
+	philo->eat_count++;
+	if (philo->eat_count == info->num_eat)
+		sem_post(sem->finish);
+	realse_fork(sem);
+}
+
+static void	philo_sleeping(t_info *info, t_philo *philo, t_sem *sem)
+{
+	print_state(philo, sem, "is sleeping");
+	wait_time(cur_time(), info->time_sleep);
+}
+
+static void	philo_thinking(t_info *info, t_philo *philo, t_sem *sem)
+{
+	print_state(philo, sem, "is thinking");
+	usleep(1000);
+}
+
+static void	philo_process(t_info *info, t_philo *philo, t_sem *sem)
+{
+	t_data		data;
+	pthread_t	checker;
+
+	data.info = info;
+	data.philo = philo;
+	data.sem = sem;
+	if (pthread_create(&checker, NULL, check_philo, &data))
+		exit(1);
+	while (1)
+	{
+		philo_eating(info, philo, sem);
+		philo_sleeping(info, philo, sem);
+		philo_thinking(info, philo, sem);
+	}
+}
+
+int	philosopher(t_info *info, t_philo *philo, t_sem *sem)
 {
 	int			i;
+	pid_t		*pid;
 	long long	time;
 
-	while (1)
-	{
-		i = 0;
-		while (i < info->num_philos)
-		{
-			time = cur_time();
-			if ((time - philo[i].last_eat) >= info->time_die)
-			{
-				info->die = 1;
-				pthread_mutex_lock(&info->print);
-				printf("%lld %d %s\n", time - info->start_time, philo[i].id, "died");
-				pthread_mutex_unlock(&info->print);
-				return ;
-			}
-			if (info->full_philo == info->num_philos)
-				return ;
-			i++;
-		}
-	}
-}
-
-void	take_fork(t_philo *philo)
-{
-	if (philo->id % 2)
-	{
-		pthread_mutex_lock(&philo->left->fork);
-		print_state(philo, "has taken a fork");
-		pthread_mutex_lock(&philo->right->fork);
-		print_state(philo, "has taken a fork");
-	}
-	else
-	{
-		pthread_mutex_lock(&philo->right->fork);
-		print_state(philo, "has taken a fork");
-		pthread_mutex_lock(&philo->left->fork);
-		print_state(philo, "has taken a fork");
-	}
-}
-
-int	philo_eating(t_philo *philo)
-{
-	take_fork(philo);
-	philo->last_eat = cur_time();
-	print_state(philo, "is eating");
-	wait_time(philo->last_eat, philo->info->time_eat);
-	philo->eat_count++;
-	if (philo->eat_count == philo->info->num_eat)
-		philo->info->full_philo++;
-	pthread_mutex_unlock(&philo->right->fork);
-	pthread_mutex_unlock(&philo->left->fork);
-	if (philo->info->die || (philo->info->full_philo == philo->info->num_philos))
+	pid = malloc(sizeof(pid_t) * info->num_philos);
+	if (!pid)
 		return (1);
-	return (0);
-}
-
-int	philo_sleeping(t_philo *philo)
-{
-	print_state(philo, "is sleeping");
-	wait_time(cur_time(), philo->info->time_sleep);
-	if (philo->info->die || (philo->info->full_philo == philo->info->num_philos))
-		return (1);
-	return (0);
-}
-
-int	philo_thinking(t_philo *philo)
-{
-	print_state(philo, "is thinking");
-	usleep(1000);
-	if (philo->info->die || (philo->info->full_philo == philo->info->num_philos))
-		return (1);
-	return (0);
-}
-
-void	*philo_thread(void *temp)
-{
-	t_philo	*philo;
-
-	philo = (t_philo *)temp;
-	if (philo->id % 2)
-		usleep(1000);
-	while (1)
-	{
-		if (philo_eating(philo))
-			return (NULL);
-		if (philo_sleeping(philo))
-			return (NULL);
-		if (philo_thinking(philo))
-			return (NULL);
-	}
-}
-
-int	philosopher(t_info *info, t_philo *philo)
-{
-	int	i;
-
 	i = 0;
-	info->start_time = cur_time();
+	time = cur_time();
 	while (i < info->num_philos)
 	{
-		philo[i].last_eat = cur_time();
-		if (pthread_create(&philo[i].thread, NULL, philo_thread, &philo[i]))
+		init_philo(info, philo, time, i);
+		pid[i] = fork();
+		if (pid[i] == 0)
+			philo_process(info, philo, sem);
+		else if (pid[i] == -1)
 			return (1);
 		i++;
 	}
-	check_philo(info, philo);
-	i = 0;
-	while (i < info->num_philos)
-	{
-		pthread_join(philo[i].thread, NULL);
-		i++;
-	}
+	if (info->num_eat != -1)
+		if (observe(info, sem, pid[0]))
+			return (1);
+	wait_process(info, pid);
 	return (0);
 }

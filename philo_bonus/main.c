@@ -1,100 +1,64 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/12 21:41:01 by changhle          #+#    #+#             */
+/*   Updated: 2022/09/12 21:41:02 by changhle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <semaphore.h>
+#include <fcntl.h>
+#include <sys/stat.h>
 #include "philosophers.h"
 
-int	init_philo(t_info *info, t_philo *philo)
+static int	init_sem(t_info *info, t_sem *sem)
 {
-	int	i;
-
-	i = 0;
-	while (i < info->num_philos)
-	{
-		philo[i].id = i + 1;
-		philo[i].left = &philo[(i + 1) % info->num_philos];
-		philo[i].right = &philo[i];
-		philo[i].eat_count = 0;
-		philo[i].info = info;
-		i++;
-	}
-	return (0);
-}
-
-int	init_fork_mutex(unsigned int num_philos, t_philo *philo)
-{
-	int	i;
-
-	i = 0;
-	while (i < num_philos)
-	{
-		if (pthread_mutex_init(&philo[i].fork, NULL))
-		{
-			while (i > 0)
-			{
-				pthread_mutex_destroy(&philo[i].fork);
-				i--;
-			}
-			return (1);
-		}
-		i++;
-	}
-	return (0);
-}
-
-int	init_mutex(t_info *info, t_philo *philo)
-{
-	if (pthread_mutex_init(&info->print, NULL))
+	sem_unlink("lock");
+	sem_unlink("fork");
+	sem_unlink("print");
+	sem_unlink("finish");
+	sem->lock = sem_open("lock", O_CREAT | O_EXCL, S_IRUSR | S_IWUSR,
+			info->num_philos / 2);
+	sem->fork = sem_open("fork", O_CREAT | O_EXCL, S_IRUSR | S_IWUSR,
+			info->num_philos);
+	sem->print = sem_open("print", O_CREAT | O_EXCL, S_IRUSR | S_IWUSR, 1);
+	sem->finish = sem_open("finish", O_CREAT | O_EXCL, S_IRUSR | S_IWUSR, 0);
+	if (sem->lock == SEM_FAILED
+		|| sem->fork == SEM_FAILED
+		|| sem->print == SEM_FAILED
+		|| sem->finish == SEM_FAILED)
 		return (1);
-	if (pthread_mutex_init(&info->event, NULL))
-	{
-		pthread_mutex_destroy(&info->print);
-		return(1);
-	}
-	if (init_fork_mutex(info->num_philos, philo))
-	{
-		pthread_mutex_destroy(&info->print);
-		pthread_mutex_destroy(&info->event);
-		return(1);
-	}
 	return (0);
 }
 
-void	destroy_mutex(t_info *info, t_philo *philo)
+static void	destroy_sem(t_sem *sem)
 {
-	int	i;
-
-	pthread_mutex_destroy(&info->print);
-	pthread_mutex_destroy(&info->event);
-	i = 0;
-	while (i < info->num_philos)
-	{
-		pthread_mutex_destroy(&philo[i].fork);
-		i++;
-	}
-}
-
-void	print_error(void)
-{
-	printf("Error!\n");
+	sem_unlink("lock");
+	sem_unlink("fork");
+	sem_unlink("print");
+	sem_unlink("finish");
+	sem_close(sem->lock);
+	sem_close(sem->fork);
+	sem_close(sem->print);
+	sem_close(sem->finish);
 }
 
 int	main(int argc, char **argv)
 {
 	t_info	info;
-	t_philo	*philo;
+	t_sem	sem;
+	t_philo	philo;
 
 	if (parse(argc, argv, &info))
 		return (1);
-	philo = malloc(sizeof(t_philo) * info.num_philos);
-	if (!philo)
+	if (init_sem(&info, &sem))
 		return (1);
-	if (init_philo(&info, philo))
+	if (philosopher(&info, &philo, &sem))
 		return (1);
-	if (init_mutex(&info, philo))
-	{
-		free(philo);
-		return (1);
-	}
-	if (philosopher(&info, philo))
-		return (1);
-	destroy_mutex(&info, philo);
-	free(philo);
+	destroy_sem(&sem);
 	return (0);
 }

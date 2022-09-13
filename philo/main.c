@@ -1,84 +1,99 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/13 22:58:03 by changhle          #+#    #+#             */
+/*   Updated: 2022/09/13 23:22:41 by changhle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stdlib.h>
 #include "philosophers.h"
 
-int	init_philo_fork(t_val *val, int argc)
+static t_philo	*init_philo(t_info *info, t_philo *philo)
 {
 	int	i;
 
-	pthread_mutex_init(&val->print, NULL);
-	val->philo_fork = malloc(sizeof(pthread_mutex_t) * val->num_of_philos);
-	if (!val->philo_fork)
-		return (1);
+	philo = malloc(sizeof(t_philo) * info->num_philos);
+	if (!philo)
+		return (NULL);
 	i = 0;
-	while (i < val->num_of_philos)
+	while (i < info->num_philos)
 	{
-		pthread_mutex_init(&val->philo_fork[i], NULL);
-		i++;
-	}
-	return (0);
-}
-
-int	init_val(t_val *val, int argc, char **argv)
-{
-	val->num_of_philos = ft_atoi(argv[1]);
-	val->time_to_die = ft_atoi(argv[2]);
-	val->time_to_eat = ft_atoi(argv[3]);
-	val->time_to_sleep = ft_atoi(argv[4]);
-	if (val->time_to_die < 0 || val->time_to_eat < 0
-		|| val->time_to_sleep < 0 || val->num_of_philos < 0)
-		return (1);
-	if (argc == 6)
-	{
-		val->must_eat = ft_atoi(argv[5]);
-		if (val->must_eat < 0)
-			return (1);
-	}
-	val->die = 0;
-	val->finish = 0;
-	val->start_time = cur_time();
-	return (0);
-}
-
-int	init_philo(t_philo *philo, t_val *val)
-{
-	int	i;
-
-	// philo = malloc(sizeof(t_philo) * val->num_of_philos);
-	// if (!philo)
-	// 	return (1);
-	i = 0;
-	while (i < val->num_of_philos)
-	{
-		philo[i].philo_num = i + 1;
-		philo[i].val = val;
-		philo[i].last_time = cur_time();
+		philo[i].id = i + 1;
+		philo[i].left = &philo[(i + 1) % info->num_philos];
+		philo[i].right = &philo[i];
 		philo[i].eat_count = 0;
+		philo[i].info = info;
+		i++;
+	}
+	return (philo);
+}
+
+static int	init_fork_mutex(unsigned int num_philos, t_philo *philo)
+{
+	int	i;
+
+	i = 0;
+	while (i < num_philos)
+	{
+		if (pthread_mutex_init(&philo[i].fork, NULL))
+		{
+			while (i > 0)
+			{
+				i--;
+				pthread_mutex_destroy(&philo[i].fork);
+			}
+			return (1);
+		}
 		i++;
 	}
 	return (0);
+}
+
+static int	init_mutex(t_info *info, t_philo *philo)
+{
+	if (pthread_mutex_init(&info->print, NULL))
+		return (1);
+	if (init_fork_mutex(info->num_philos, philo))
+	{
+		pthread_mutex_destroy(&info->print);
+		return (1);
+	}
+	return (0);
+}
+
+static void	destroy_mutex(t_info *info, t_philo *philo)
+{
+	int	i;
+
+	pthread_mutex_destroy(&info->print);
+	i = 0;
+	while (i < info->num_philos)
+	{
+		pthread_mutex_destroy(&philo[i].fork);
+		i++;
+	}
 }
 
 int	main(int argc, char **argv)
 {
-	int		ret;
-	t_val	val;
+	t_info	info;
 	t_philo	*philo;
 
-	if (argc != 5 && argc != 6)
-		return (0);
-	memset(&val, 0, sizeof(t_val));
-	ret = init_val(&val, argc, argv);
-	if (ret)
-		return (0);
-	ret = init_philo_fork(&val, argc);
-	if (ret)
-		return (0);
-	philo = malloc(sizeof(t_philo) * val.num_of_philos);
-	ret = init_philo(philo, &val);
-	if (ret)
-		return (0);
-	// printf("prev philo\n");
-	ret = philosopher(philo, &val);
-	// printf("next philo\n");
-	if (ret)
-		return (0);
+	if (parse(argc, argv, &info))
+		return (1);
+	philo = init_philo(&info, philo);
+	if (!philo)
+		return (1);
+	if (init_mutex(&info, philo))
+		return (1);
+	if (philosopher(&info, philo))
+		return (1);
+	destroy_mutex(&info, philo);
+	free(philo);
+	return (0);
 }

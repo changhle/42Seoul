@@ -1,39 +1,55 @@
-#ifndef PHIOSOPHERS_H
-# define PHIOSOPHERS_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philosophers.h                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/13 22:58:26 by changhle          #+#    #+#             */
+/*   Updated: 2022/09/13 23:40:55 by changhle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-# include <stdio.h>
+#ifndef PHILOSOPHERS_H
+# define PHILOSOPHERS_H
+
 # include <pthread.h>
-# include <sys/time.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <string.h>
 
-typedef struct s_val
+typedef struct s_info
 {
-	int				num_of_philos;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
-	int				must_eat;
-	int				die;
-	int				finish;
+	unsigned int	num_philos;
+	unsigned int	time_die;
+	unsigned int	time_eat;
+	unsigned int	time_sleep;
+	unsigned int	num_eat;
+	unsigned int	full_philo;
+	unsigned int	die;
 	long long		start_time;
-	pthread_mutex_t	*philo_fork;
 	pthread_mutex_t	print;
-} t_val;
+	pthread_mutex_t	event;
+}	t_info;
 
 typedef struct s_philo
 {
-	t_val		*val;
-	pthread_t	thread;
-	int			philo_num;
-	int			eat_count;
-	long long	last_time;
-} t_philo;
+	unsigned int	id;
+	unsigned int	eat_count;
+	long long		last_eat;
+	pthread_mutex_t	fork;
+	pthread_t		thread;
+	struct s_philo	*left;
+	struct s_philo	*right;
+	struct s_info	*info;
+}	t_philo;
 
-void		ft_swap(int *a, int *b);
-int			philosopher(t_philo *philo, t_val *val);
-long long	cur_time(void);
+int			parse(int argc, char **argv, t_info *info);
+int			philosopher(t_info *info, t_philo *philo);
+void		take_fork(t_philo *philo);
+void		realse_fork(t_philo *philo);
+void		check_philo(t_info *info, t_philo *philo);
+
 int			ft_atoi(const char *str);
+long long	cur_time(void);
+void		print_state(t_philo *philo, char *str);
+void		wait_time(long long start, long long delay);
 
 #endif
