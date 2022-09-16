@@ -3,27 +3,77 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: changhle <changhle@student.42.fr>          +#+  +:+       +#+        */
+/*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 18:09:22 by changhle          #+#    #+#             */
-/*   Updated: 2021/12/15 16:11:51 by changhle         ###   ########.fr       */
+/*   Updated: 2022/09/16 04:09:12 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
+t_lst	*search_fd(t_lst **lst, int fd)
+{
+	t_lst	*new;
+	t_lst	*tmp;
+
+	tmp = *lst;
+	while (tmp)
+	{
+		if (tmp->fd == fd)
+			return (tmp);
+		tmp = tmp->next;
+	}
+	if (!tmp)
+	{
+		new = malloc(sizeof(t_lst));
+		new->fd = fd;
+		new->str = NULL;
+		new->next = *lst;
+		*lst = new;
+	}
+	return (*lst);
+}
+
+void	remove_node(t_lst **lst, int fd)
+{
+	t_lst	*tmp;
+	t_lst	*prev;
+
+	tmp = *lst;
+	prev = NULL;
+	while (tmp)
+	{
+		if (tmp->fd == fd)
+			break ;
+		prev = tmp;
+		tmp = tmp->next;
+	}
+	if (!prev)
+		*lst = tmp->next;
+	else
+		prev->next = tmp->next;
+	free(tmp->str);
+	free(tmp);
+}
+
 char	*get_next_line(int fd)
 {
-	char		*str;
-	static char	*s_str[OPEN_MAX];
+	char			*str;
+	t_lst			*s_lst;
+	static t_lst	*lst;
 
-	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	s_str[fd] = ft_read_str(fd, s_str[fd]);
-	if (!s_str[fd])
+	s_lst = search_fd(&lst, fd);
+	s_lst->str = ft_read_str(fd, s_lst->str);
+	if (!s_lst->str || !s_lst->str[0])
+	{
+		remove_node(&lst, fd);
 		return (NULL);
-	str = ft_get_str(s_str[fd]);
-	s_str[fd] = ft_get_remain_str(s_str[fd]);
+	}
+	str = ft_get_str(s_lst->str);
+	s_lst->str = ft_get_remain_str(s_lst->str);
 	return (str);
 }
 
