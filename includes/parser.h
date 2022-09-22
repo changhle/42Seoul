@@ -26,6 +26,7 @@ struct s_token_info
 	int		space;
 	int		buf_index;
 	int		flag;
+	int		buf_size;
 	char	quote;
 	char	*buf;
 };
