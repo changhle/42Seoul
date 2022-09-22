@@ -7,6 +7,7 @@
 
 static void	test_print_token(t_token_list *token_list)
 {
+	printf("\n=================TOKEN=================\n\n");
 	while (token_list)
 	{
 		printf("token : %s\n", token_list->token);
@@ -17,7 +18,38 @@ static void	test_print_token(t_token_list *token_list)
 		else if (token_list->token_type == PIPE)
 			printf("type : PIPE\n");
 		token_list = token_list->next;
-		printf("=================\n");
+		if (token_list)
+			printf("------------------\n");
+	}
+}
+
+static void	test_print_unit(t_parsed_list *parsed_head)
+{
+	int	i;
+
+	printf("\n=================CMD=================\n\n");
+	if (parsed_head && parsed_head->parsed_unit->cmd)
+	{
+		i = 0;
+		while (parsed_head->parsed_unit->cmd[i])
+		{
+			printf("cmd[%d] : %s\n", i, parsed_head->parsed_unit->cmd[i]);
+			i++;
+		}
+	}
+	while (parsed_head->next)
+	{
+		if (parsed_head->next->parsed_unit->cmd)
+		{
+			printf("-------PIPE-------\n");
+			i = 0;
+			while (parsed_head->next->parsed_unit->cmd[i])
+			{
+				printf("cmd[%d] : %s\n", i, parsed_head->next->parsed_unit->cmd[i]);
+				i++;
+			}
+		}
+		parsed_head = parsed_head->next;
 	}
 }
 
@@ -91,7 +123,9 @@ int	parse(char *line, t_parsed_list **parsed_head)
 	if (ret_value == FAILURE)
 		return (ret_value);
 	test_print_token(token_head);
+	*parsed_head = NULL;
 	ret_value = mini_parse(token_head, parsed_head);
+	test_print_unit(*parsed_head);
 	free_token_list(token_head);
 	return (ret_value);
 }
