@@ -20,6 +20,7 @@ static void	add_token(t_token_list **token, t_token_info *info)
 		new->token_type = REDIRECT;
 	else
 		new->token_type = WORD;
+	info->buf[info->buf_index] = '\0';
 	new->token = ft_strdup(info->buf);
 	new->next = NULL;
 	if (!(*token))
@@ -30,7 +31,7 @@ static void	add_token(t_token_list **token, t_token_info *info)
 			tmp = tmp->next;
 		tmp->next = new;
 	}
-	ft_memset(info->buf, 0, ft_strlen(info->buf));
+	ft_memset(info->buf, 0, info->buf_size);
 	info->buf_index = 0;
 }
 
@@ -57,7 +58,8 @@ void	tokenizer(char *line, t_token_list **token)
 	init_token(line, &info);
 	while (*line)
 	{
-		if (*line == '\'' || *line == '\"')
+		if ((*line == '\'' || *line == '\"') && info.quote == 0
+			|| *line == info.quote)
 			info.quote = set_quote(info.quote, *line);
 		else if (is_space(*line) && info.quote == 0)
 			add_token(token, &info);
