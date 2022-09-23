@@ -50,17 +50,15 @@ int	observe(t_info *info, t_sem *sem, pid_t pid)
 
 void	*check_philo(void *temp)
 {
-	long long	time;
 	t_data		*data;
 
 	data = (t_data *)temp;
 	while (1)
 	{
-		time = cur_time();
-		if (time - data->philo->last_eat > data->info->time_die)
+		if (cur_time() - data->philo->last_eat > data->info->time_die)
 		{
 			sem_wait(data->sem->print);
-			printf("%lld %d %s\n", time - data->philo->start_time,
+			printf("%lld %d %s\n", cur_time() - data->philo->start_time,
 				data->philo->id, "died");
 			exit(0);
 		}
