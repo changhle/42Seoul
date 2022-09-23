@@ -41,7 +41,7 @@ typedef struct s_philo
 }	t_philo;
 
 int			parse(int argc, char **argv, t_info *info);
-int			philosopher(t_info *info, t_philo *philo);
+int			philosophers(t_info *info, t_philo *philo);
 void		take_fork(t_philo *philo);
 void		realse_fork(t_philo *philo);
 void		check_philo(t_info *info, t_philo *philo);

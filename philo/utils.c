@@ -68,6 +68,6 @@ void	wait_time(long long start, long long delay)
 
 int	ft_print_error(char *str)
 {
-	printf("Error\n%s\n", str);
+	printf("%s\n", str);
 	return (1);
 }

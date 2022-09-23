@@ -68,7 +68,7 @@ static void	*philo_thread(void *temp)
 	}
 }
 
-int	philosopher(t_info *info, t_philo *philo)
+int	philosophers(t_info *info, t_philo *philo)
 {
 	int	i;
 

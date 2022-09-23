@@ -85,14 +85,14 @@ int	main(int argc, char **argv)
 	t_philo	*philo;
 
 	if (parse(argc, argv, &info))
-		return (ft_print_error("parse failed!"));
+		return (ft_print_error("arg error!"));
 	philo = init_philo(&info, philo);
 	if (!philo)
-		return (ft_print_error("philo init failed!"));
+		return (ft_print_error("philo init error!"));
 	if (init_mutex(&info, philo))
-		return (ft_print_error("mutex init failed!"));
-	if (philosopher(&info, philo))
-		return (ft_print_error("pthread create failed!"));
+		return (ft_print_error("mutex init error!"));
+	if (philosophers(&info, philo))
+		return (ft_print_error("pthread create error!"));
 	destroy_mutex(&info, philo);
 	free(philo);
 	return (0);
