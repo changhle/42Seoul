@@ -40,6 +40,7 @@ static void	test_print_unit(t_parsed_list *parsed_head)
 				printf("cmd[%d] : %s\n", i, parsed_head->parsed_unit->cmd[i]);
 				i++;
 			}
+			printf("-----------------------------\n");
 		}
 		tmp = parsed_head->parsed_unit->redir_in_list;
 		if (tmp)
@@ -52,8 +53,7 @@ static void	test_print_unit(t_parsed_list *parsed_head)
 				printf("REDIR_TYPE : REDIR_IN_APPEND\n");
 			printf("FILENAME : %s\n", tmp->filename);
 			tmp = tmp->next;
-			if (tmp)
-				printf("-----------------------------\n");
+			printf("-----------------------------\n");
 		}
 		tmp = parsed_head->parsed_unit->redir_out_list;
 		if (tmp)
@@ -66,8 +66,7 @@ static void	test_print_unit(t_parsed_list *parsed_head)
 				printf("REDIR_TYPE : REDIR_OUT_APPEND\n");
 			printf("FILENAME : %s\n", tmp->filename);
 			tmp = tmp->next;
-			if (tmp)
-				printf("-----------------------------\n");
+			printf("-----------------------------\n");
 		}
 		parsed_head = parsed_head->next;
 		if (parsed_head)
