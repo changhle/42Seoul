@@ -32,6 +32,14 @@ void	take_fork(t_philo *philo)
 
 void	realse_fork(t_philo *philo)
 {
-	pthread_mutex_unlock(&philo->right->fork);
-	pthread_mutex_unlock(&philo->left->fork);
+	if (philo->id % 2)
+	{
+		pthread_mutex_unlock(&philo->left->fork);
+		pthread_mutex_unlock(&philo->right->fork);
+	}
+	else
+	{
+		pthread_mutex_unlock(&philo->right->fork);
+		pthread_mutex_unlock(&philo->left->fork);
+	}
 }

@@ -26,7 +26,6 @@ typedef struct s_info
 	unsigned int	die;
 	long long		start_time;
 	pthread_mutex_t	print;
-	pthread_mutex_t	event;
 }	t_info;
 
 typedef struct s_philo
@@ -51,5 +50,6 @@ int			ft_atoi(const char *str);
 long long	cur_time(void);
 void		print_state(t_philo *philo, char *str);
 void		wait_time(long long start, long long delay);
+int			ft_print_error(char *str);
 
 #endif

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <unistd.h>
 #include "philosophers.h"
 
 void	check_philo(t_info *info, t_philo *philo)
@@ -24,7 +25,7 @@ void	check_philo(t_info *info, t_philo *philo)
 		while (i < info->num_philos)
 		{
 			time = cur_time();
-			if ((time - philo[i].last_eat) >= info->time_die)
+			if ((time - philo[i].last_eat) > info->time_die)
 			{
 				info->die = 1;
 				pthread_mutex_lock(&info->print);
@@ -37,5 +38,6 @@ void	check_philo(t_info *info, t_philo *philo)
 				return ;
 			i++;
 		}
+		usleep(1000);
 	}
 }
