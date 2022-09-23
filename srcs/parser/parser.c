@@ -26,30 +26,52 @@ static void	test_print_token(t_token_list *token_list)
 static void	test_print_unit(t_parsed_list *parsed_head)
 {
 	int	i;
+	t_redirect_list	*tmp;
 
-	printf("\n=================CMD=================\n\n");
-	if (parsed_head && parsed_head->parsed_unit->cmd)
+	printf("\n=================UNIT=================\n\n");
+	while (parsed_head)
 	{
-		i = 0;
-		while (parsed_head->parsed_unit->cmd[i])
+		if (parsed_head->parsed_unit->cmd)
 		{
-			printf("cmd[%d] : %s\n", i, parsed_head->parsed_unit->cmd[i]);
-			i++;
-		}
-	}
-	while (parsed_head->next)
-	{
-		if (parsed_head->next->parsed_unit->cmd)
-		{
-			printf("-------PIPE-------\n");
 			i = 0;
-			while (parsed_head->next->parsed_unit->cmd[i])
+			printf("-------------CMD-------------\n");
+			while (parsed_head->parsed_unit->cmd[i])
 			{
-				printf("cmd[%d] : %s\n", i, parsed_head->next->parsed_unit->cmd[i]);
+				printf("cmd[%d] : %s\n", i, parsed_head->parsed_unit->cmd[i]);
 				i++;
 			}
 		}
+		tmp = parsed_head->parsed_unit->redir_in_list;
+		if (tmp)
+			printf("\n----------REDIR__IN----------\n");
+		while (tmp)
+		{
+			if (tmp->redir_type == 1)
+				printf("REDIR_TYPE : REDIR_IN\n");
+			else if (tmp->redir_type == 2)
+				printf("REDIR_TYPE : REDIR_IN_APPEND\n");
+			printf("FILENAME : %s\n", tmp->filename);
+			tmp = tmp->next;
+			if (tmp)
+				printf("-----------------------------\n");
+		}
+		tmp = parsed_head->parsed_unit->redir_out_list;
+		if (tmp)
+			printf("\n----------REDIR_OUT----------\n");
+		while (tmp)
+		{
+			if (tmp->redir_type == 3)
+				printf("REDIR_TYPE : REDIR_OUT\n");
+			else if (tmp->redir_type == 4)
+				printf("REDIR_TYPE : REDIR_OUT_APPEND\n");
+			printf("FILENAME : %s\n", tmp->filename);
+			tmp = tmp->next;
+			if (tmp)
+				printf("-----------------------------\n");
+		}
 		parsed_head = parsed_head->next;
+		if (parsed_head)
+			printf("\n=================PIPE=================\n\n");
 	}
 }
 

@@ -58,7 +58,7 @@ void	tokenizer(char *line, t_token_list **token)
 	init_token(line, &info);
 	while (*line)
 	{
-		if ((*line == '\'' || *line == '\"') && info.quote == 0
+		if (((*line == '\'' || *line == '\"') && info.quote == 0)
 			|| *line == info.quote)
 			info.quote = set_quote(info.quote, *line);
 		else if (is_space(*line) && info.quote == 0)
