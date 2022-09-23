@@ -49,7 +49,7 @@ typedef struct s_data
 }	t_data;
 
 int			parse(int argc, char **argv, t_info *info);
-int			philosopher(t_info *info, t_philo *philo, t_sem *sem);
+int			philosophers(t_info *info, t_philo *philo, t_sem *sem);
 void		*check_philo(void *temp);
 void		take_fork(t_philo *philo, t_sem *sem);
 void		realse_fork(t_sem *sem);

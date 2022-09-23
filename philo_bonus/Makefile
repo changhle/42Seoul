@@ -4,8 +4,8 @@ NAME = philo
 SRCS = main.c \
 		monitor.c \
 		parse.c\
-		philosopher.c \
-		philosopher_utils.c \
+		philosophers.c \
+		philosophers_utils.c \
 		utils.c
 
 OBJS = $(SRCS:.c=.o)

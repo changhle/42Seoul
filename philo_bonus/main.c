@@ -57,7 +57,7 @@ int	main(int argc, char **argv)
 		return (1);
 	if (init_sem(&info, &sem))
 		return (1);
-	if (philosopher(&info, &philo, &sem))
+	if (philosophers(&info, &philo, &sem))
 		return (1);
 	destroy_sem(&sem);
 	return (0);

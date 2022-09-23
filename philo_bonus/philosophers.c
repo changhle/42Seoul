@@ -58,7 +58,7 @@ static void	philo_process(t_info *info, t_philo *philo, t_sem *sem)
 	}
 }
 
-int	philosopher(t_info *info, t_philo *philo, t_sem *sem)
+int	philosophers(t_info *info, t_philo *philo, t_sem *sem)
 {
 	int			i;
 	pid_t		*pid;
