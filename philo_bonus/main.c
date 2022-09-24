@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:41:01 by changhle          #+#    #+#             */
-/*   Updated: 2022/09/12 21:41:02 by changhle         ###   ########.fr       */
+/*   Updated: 2022/09/25 05:49:09 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ int	main(int argc, char **argv)
 	t_philo	philo;
 
 	if (parse(argc, argv, &info))
-		return (1);
+		return (ft_print_error("arg error!"));
 	if (init_sem(&info, &sem))
-		return (1);
+		return (ft_print_error("semaphore init error!"));
 	if (philosophers(&info, &philo, &sem))
 		return (1);
 	destroy_sem(&sem);

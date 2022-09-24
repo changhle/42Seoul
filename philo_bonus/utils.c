@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:41:33 by changhle          #+#    #+#             */
-/*   Updated: 2022/09/12 22:08:08 by changhle         ###   ########.fr       */
+/*   Updated: 2022/09/25 05:49:30 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,6 @@
 #include <stdio.h>
 #include <unistd.h>
 #include "philosophers.h"
-
-static int	ft_isdigit(int c)
-{
-	if (c >= 48 && c <= 57)
-		return (1);
-	return (0);
-}
 
 int	ft_atoi(const char *str)
 {
@@ -39,10 +32,10 @@ int	ft_atoi(const char *str)
 			sign = -1;
 		str++;
 	}
-	if (!ft_isdigit(*str) || sign == -1)
+	if (*str < 48 || *str > 57 || sign == -1)
 		return (-1);
 	result = 0;
-	while (ft_isdigit(*str))
+	while (*str >= 48 && *str <= 57)
 	{
 		result = result * 10 + *str - 48;
 		str++;
@@ -70,4 +63,10 @@ void	wait_time(long long start, long long delay)
 {
 	while (cur_time() - start <= delay)
 		usleep(100);
+}
+
+int	ft_print_error(char *str)
+{
+	printf("%s\n", str);
+	return (1);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   observe.c                                          :+:      :+:    :+:   */
+/*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:41:13 by changhle          #+#    #+#             */
-/*   Updated: 2022/09/12 21:41:14 by changhle         ###   ########.fr       */
+/*   Updated: 2022/09/25 05:49:13 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	*check_ate(void	*temp)
 	return (NULL);
 }
 
-int	observe(t_info *info, t_sem *sem, pid_t pid)
+int	monitor(t_info *info, t_sem *sem, pid_t pid)
 {
 	t_data		data;
 	pthread_t	checker;

@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 22:58:03 by changhle          #+#    #+#             */
-/*   Updated: 2022/09/13 23:22:41 by changhle         ###   ########.fr       */
+/*   Updated: 2022/09/25 05:49:37 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	main(int argc, char **argv)
 	if (init_mutex(&info, philo))
 		return (ft_print_error("mutex init error!"));
 	if (philosophers(&info, philo))
-		return (ft_print_error("pthread create error!"));
+		return (ft_print_error("thread create error!"));
 	destroy_mutex(&info, philo);
 	free(philo);
 	return (0);

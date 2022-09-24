@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosopher.c                                      :+:      :+:    :+:   */
+/*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:41:22 by changhle          #+#    #+#             */
-/*   Updated: 2022/09/12 21:41:23 by changhle         ###   ########.fr       */
+/*   Updated: 2022/09/25 05:49:24 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	philosophers(t_info *info, t_philo *philo, t_sem *sem)
 
 	pid = malloc(sizeof(pid_t) * info->num_philos);
 	if (!pid)
-		return (1);
+		return (ft_print_error("alloc error!"));
 	i = 0;
 	time = cur_time();
 	while (i < info->num_philos)
@@ -76,12 +76,12 @@ int	philosophers(t_info *info, t_philo *philo, t_sem *sem)
 		if (pid[i] == 0)
 			philo_process(info, philo, sem);
 		else if (pid[i] == -1)
-			return (1);
+			return (ft_print_error("fork error!"));
 		i++;
 	}
 	if (info->num_eat != -1)
-		if (observe(info, sem, pid[0]))
-			return (1);
+		if (monitor(info, sem, pid[0]))
+			return (ft_print_error("thread create error!"));
 	wait_process(info, pid);
 	return (0);
 }
