@@ -28,9 +28,19 @@ t_parsed_list	*add_node(t_parsed_list **node)
 	return (new);
 }
 
+void	free_old_cmd(char **cmd)
+{
+	int	i;
+
+	i = 0;
+	while (cmd[i])
+		free(cmd[i++]);
+	free(cmd);
+}
+
 void	add_cmd(t_parsed_unit *node, char *token)
 {
-	int	n;
+	int		n;
 	char	**tmp;
 
 	n = 0;
@@ -44,15 +54,14 @@ void	add_cmd(t_parsed_unit *node, char *token)
 		n = 0;
 		while (node->cmd[n])
 		{
-			tmp[n] = node->cmd[n];
+			tmp[n] = ft_strdup(node->cmd[n]);
 			n++;
 		}
+		free_old_cmd(node->cmd);
 	}
 	tmp[n] = ft_strdup(token);
 	tmp[n + 1] = NULL;
-	// free(node->cmd);
 	node->cmd = tmp;
-	n = 0;
 }
 
 void	add_redirect_node(t_redirect_list **head,
@@ -115,6 +124,5 @@ int	mini_parse(t_token_list *token, t_parsed_list **parsed_head)
 			node = add_node(parsed_head);
 		token = token->next;
 	}
-	(void) parsed_head; ///////////// temp
 	return (ret_value);
 }

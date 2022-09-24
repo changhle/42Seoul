@@ -6,6 +6,8 @@ typedef enum e_token_type	t_token_type;
 typedef struct s_token_info	t_token_info;
 typedef struct s_token_list	t_token_list;
 
+struct t_parsed_list;
+
 enum e_token_type
 {
 	WORD = 0,

@@ -72,5 +72,6 @@ int				execute(t_parsed_list *parsed__list, char **envp);
 */
 void			ft_pwd(void);
 void			ft_exit(int exit_value);
+int				ft_cd(char **cmd);
 
 #endif

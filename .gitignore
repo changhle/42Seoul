@@ -17,8 +17,9 @@ file2
 # executable
 minishell
 
-# ref
+# gitignore
+.gitignore
+
+#ref
 pipex
 pipex/*
-.jaham-shell
-.jaham-shell/*

@@ -8,7 +8,7 @@ PARSER_SRCS		:=	parser.c tokenizer.c tokenizer_utils.c lexer.c \
 PARSER_SRCS		:=	$(addprefix $(PARSER_DIR)/, $(PARSER_SRCS))
 
 EXECUTOR_DIR	:=	executor
-EXECUTOR_SRCS	:=	executor.c free_parsed_list.c
+EXECUTOR_SRCS	:=	executor.c free_parsed_list.c check_cmd_valid.c
 EXECUTOR_SRCS	:=	$(addprefix $(EXECUTOR_DIR)/, $(EXECUTOR_SRCS))
 
 BUILTIN_DIR		:=	builtin
