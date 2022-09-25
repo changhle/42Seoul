@@ -10,6 +10,7 @@ typedef struct s_parsed_unit	t_parsed_unit;
 typedef struct s_parsed_list	t_parsed_list;
 typedef enum e_redirect_type	t_redirect_type;
 typedef struct s_redirect_list	t_redirect_list;
+typedef struct s_env_list		t_env_list;
 
 enum e_bool
 {
@@ -30,6 +31,14 @@ enum e_redirect_type
 	REDIR_IN_APPEND,	// <<
 	REDIR_OUT,			// >
 	REDIR_OUT_APPEND	// >>
+};
+
+struct s_env_list
+{
+	char				*env;
+	char				*key;
+	char				*value;
+	struct s_env_list	*next;
 };
 
 struct s_redirect_list

@@ -16,8 +16,8 @@
 
 static void	write_exit_without_newline(void)
 {
-	write(STDOUT_FILENO, "\x1b[1A", 4);
-	write(STDOUT_FILENO, "\033[11C", 5);
+	// write(STDOUT_FILENO, "\x1b[1A", 4);
+	// write(STDOUT_FILENO, "\033[11C", 5);
 	write(STDOUT_FILENO, "exit\n", 5);
 }
 
