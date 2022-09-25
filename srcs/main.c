@@ -62,6 +62,7 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc != 1)
 		return (argc_error(argc, argv));
+	env = NULL;
 	init_env(envp, &env);
 	printf_shell_banner();
 	ret_value = loop_readline(envp);
