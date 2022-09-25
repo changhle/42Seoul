@@ -36,11 +36,13 @@ int	loop_readline(char **envp)
 			break ;
 		}
 		if (ft_strlen(line))
+		{
 			add_history(line);
-		ret_value = parse(line, &parsed_list);
-		ft_free((void **)&line);
-		if (ret_value == SUCCESS)
-			ret_value = execute(parsed_list, envp);
+			ret_value = parse(line, &parsed_list);
+			ft_free((void **)&line);
+			if (ret_value == SUCCESS)
+				ret_value = execute(parsed_list, envp);
+		}
 	}
 	return (ret_value);
 }

@@ -12,10 +12,10 @@ static void	print_arg(int argc, char **argv)
 		flag = 1;
 	else
 		flag = 0;
-	i = 1;
+	i = flag + 1;
 	while (i < argc)
 	{
-		ft_putstr_fd(argv[i + flag], STDOUT_FILENO);
+		ft_putstr_fd(argv[i], STDOUT_FILENO);
 		i++;
 		if (i < argc)
 			ft_putstr_fd(" ", STDOUT_FILENO);
