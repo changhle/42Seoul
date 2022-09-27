@@ -40,14 +40,19 @@ static void	buf_check(t_token_list **token, t_token_info *info, char c)
 	if (ft_strchr("><", c) && info->buf[0] == c)
 	{
 		info->buf[info->buf_index++] = c;
+		info->buf[info->buf_index] = '\0';
 		add_token(token, info);
 	}
 	else if (!ft_strchr("><|", info->buf[0]) && !ft_strchr("><|", c))
+	{
 		info->buf[info->buf_index++] = c;
+		info->buf[info->buf_index] = '\0';
+	}
 	else
 	{
 		add_token(token, info);
 		info->buf[info->buf_index++] = c;
+		info->buf[info->buf_index] = '\0';
 	}
 }
 
@@ -69,7 +74,10 @@ void	tokenizer(char *line, t_token_list **token)
 			if (info.quote == 0)
 				buf_check(token, &info, *line);
 			else
+			{
 				info.buf[info.buf_index++] = *line;
+				info.buf[info.buf_index] = '\0';
+			}
 		}
 		line++;
 	}

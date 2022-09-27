@@ -1,6 +1,8 @@
 #ifndef PARSER_H
 # define PARSER_H
 
+# include "minishell.h"
+
 typedef enum e_token_type		t_token_type;
 
 typedef struct s_token_info		t_token_info;
@@ -56,10 +58,11 @@ int				is_redirect(char *str);
 /*
 **	expander
 */
-void			expander(t_token_list **token, t_env_list **env);
+// void			expander(t_token_list **token, t_env_list **env);
+char			*expander(char *line, t_env_list **env);
 void			init_expand(t_expand_info *info);
 char			*comb_str(char *s1, char *s2);
-char			*remove_quote(char *str);
+void			remove_quote(t_token_list **token);
 
 /*
 **	lexer && parser

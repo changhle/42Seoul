@@ -138,12 +138,14 @@ int	parse(char *line, t_parsed_list **parsed_head, t_env_list **env_list)
 
 	if (not_interpret(line))
 		return (FAILURE); // need to free token_list to handle leaks before return
+	line = expander(line, env_list);
 	token_head = NULL;
 	tokenizer(line, &token_head);
 	ret_value = lexer(&token_head);
 	if (ret_value == FAILURE)
 		return (ret_value);
-	expander(&token_head, env_list);
+	remove_quote(&token_head);
+	// expander(&token_head, env_list);
 	test_print_token(token_head);
 	*parsed_head = NULL;
 	ret_value = mini_parse(token_head, parsed_head);
