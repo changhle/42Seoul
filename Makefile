@@ -4,7 +4,7 @@ SHELL_SRCS		:=	$(addprefix $(SHELL_DIR)/, $(SHELL_SRCS))
 
 PARSER_DIR		:=	parser
 PARSER_SRCS		:=	parser.c tokenizer.c tokenizer_utils.c lexer.c \
-					mini_parse.c
+					mini_parse.c expander.c expander_utils.c
 PARSER_SRCS		:=	$(addprefix $(PARSER_DIR)/, $(PARSER_SRCS))
 
 EXECUTOR_DIR	:=	executor

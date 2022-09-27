@@ -104,7 +104,7 @@ void	add_redirect(t_parsed_unit *node, t_token_list *token)
 
 int	mini_parse(t_token_list *token, t_parsed_list **parsed_head)
 {
-	int	ret_value;
+	int				ret_value;
 	t_parsed_list	*node;
 
 	ret_value = 0; ///////////// temp
@@ -117,7 +117,7 @@ int	mini_parse(t_token_list *token, t_parsed_list **parsed_head)
 		else if (token->token_type == REDIRECT)
 		{
 			if (token->next->token_type == WORD)
-			add_redirect(node->parsed_unit, token);
+				add_redirect(node->parsed_unit, token);
 			token = token->next;
 		}
 		else if (token->token_type == PIPE)
