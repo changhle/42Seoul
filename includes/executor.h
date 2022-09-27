@@ -2,11 +2,51 @@
 # define EXECUTOR_H
 
 # include "minishell.h"
+# include <stdlib.h>
 
-int		exec_command(t_parsed_unit *parsed_unit, char **envp);
-int		exec_last_command(t_parsed_unit *parsed_unit, char **envp);
+typedef struct s_context	t_context;
+typedef struct s_pipe_info	t_pipe_info;
 
-int		check_cmd_valid(t_parsed_list *parsed_list, char **envp);
-void	free_parsed_list(t_parsed_list **parsed_list);
+enum e_exit_status
+{
+	ERROR_EXIT = 125,
+	SIGNAL_EXIT = 128,
+	SIG_CONT = 0x13
+};
+
+struct s_pipe_info
+{
+	t_bool	is_first;
+	t_bool	is_last;
+	int		inpipe_fd;
+	// int		outpipe_fd;
+};
+
+struct s_context
+{
+	t_parsed_list	*parsed_head;
+	t_env_list		*env_head;
+	char			**envp;
+	size_t			process_cnt;
+	t_pipe_info		*pipe_info;
+	pid_t			last_pid;
+};
+
+int			exec_command_unit(t_parsed_unit *parsed_unit, t_context *context);
+
+void		init_context(
+			t_context *context,
+			t_parsed_list **parsed_list,
+			t_env_list *env_list
+			);
+
+void		free_parsed_list(t_parsed_list **parsed_list);
+
+int			check_cmd_valid(t_parsed_list *parsed_list, t_env_list *env_list);
+t_ret_value	get_command(char **cmd, char **path);
+t_bool		is_builtin(char *command);
+
+int			get_infile_fd(t_redirect_list *redir_in_list);
+int			get_outfile_fd(t_redirect_list *redir_out_list);
 
 #endif

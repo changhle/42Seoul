@@ -6,7 +6,7 @@
 /*   By: ljeongin <ljeongin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 13:47:20 by ljeongin          #+#    #+#             */
-/*   Updated: 2022/08/08 09:59:13 by ljeongin         ###   ########.fr       */
+/*   Updated: 2022/09/27 10:20:14 by ljeongin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*gnl_read_join(t_backup_list *here)
 	return (ret_line);
 }
 
-void	gnl_split_line(t_context *ubox, t_backup_list *here)
+void	gnl_split_line(t_cont *ubox, t_backup_list *here)
 {
 	char	*index;
 
@@ -113,7 +113,7 @@ char	*get_next_line(int fd)
 {
 	static t_backup_list	*head;
 	t_backup_list			*here;
-	t_context				ubox;
+	t_cont				ubox;
 
 	if (BUFFER_SIZE <= 0)
 		return (NULL);

@@ -21,7 +21,7 @@ static void	free_parsed_unit(t_parsed_unit *parsed_unit)
 {
 	int	i;
 
-	if (!parsed_unit)
+	if (!parsed_unit->cmd)
 		return ;
 	i = 0;
 	while (parsed_unit->cmd[i])
@@ -34,7 +34,7 @@ static void	free_parsed_unit(t_parsed_unit *parsed_unit)
 	parsed_unit->redir_in_list = NULL;
 	parsed_unit->redir_out_list = NULL;
 }
-
+#include <stdio.h>
 void	free_parsed_list(t_parsed_list **parsed_list)
 {
 	t_parsed_list	*tmp;

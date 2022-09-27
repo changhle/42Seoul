@@ -1,10 +1,11 @@
 #ifndef PARSER_H
 # define PARSER_H
 
-typedef enum e_token_type	t_token_type;
+typedef enum e_token_type		t_token_type;
 
-typedef struct s_token_info	t_token_info;
-typedef struct s_token_list	t_token_list;
+typedef struct s_token_info		t_token_info;
+typedef struct s_token_list		t_token_list;
+typedef struct s_expand_info	t_expand_info;
 
 struct t_parsed_list;
 
@@ -33,6 +34,15 @@ struct s_token_info
 	char	*buf;
 };
 
+struct s_expand_info
+{
+	int		index;
+	int		start;
+	int		quote;
+	char	*buf;
+	char	*env_buf;
+};
+
 /*
 **	tokenizer
 */
@@ -42,6 +52,14 @@ void			init_token(char *line, t_token_info *info);
 char			set_quote(char quote, char c);
 int				is_space(char c);
 int				is_redirect(char *str);
+
+/*
+**	expander
+*/
+void			expander(t_token_list **token, t_env_list **env);
+void			init_expand(t_expand_info *info);
+char			*comb_str(char *s1, char *s2);
+char			*remove_quote(char *str);
 
 /*
 **	lexer && parser

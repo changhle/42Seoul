@@ -131,7 +131,7 @@ void	free_token_list(t_token_list *token_list)
 	re-parse (a.k.a. mini_parse)
 */
 
-int	parse(char *line, t_parsed_list **parsed_head)
+int	parse(char *line, t_parsed_list **parsed_head, t_env_list **env_list)
 {
 	t_token_list	*token_head;
 	int				ret_value;
@@ -143,6 +143,7 @@ int	parse(char *line, t_parsed_list **parsed_head)
 	ret_value = lexer(&token_head);
 	if (ret_value == FAILURE)
 		return (ret_value);
+	expander(&token_head, env_list);
 	test_print_token(token_head);
 	*parsed_head = NULL;
 	ret_value = mini_parse(token_head, parsed_head);

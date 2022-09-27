@@ -6,7 +6,7 @@
 /*   By: ljeongin <ljeongin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 13:47:07 by ljeongin          #+#    #+#             */
-/*   Updated: 2022/08/08 09:59:08 by ljeongin         ###   ########.fr       */
+/*   Updated: 2022/09/27 10:19:57 by ljeongin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ typedef struct s_backup_list
 	struct s_backup_list	*next;
 }				t_backup_list;
 
-typedef struct s_context
+typedef struct s_cont
 {
 	char	*line;
 	char	*ret;
-}				t_context;
+}				t_cont;
 
 char			*get_next_line(int fd);
 char			*gnl_read_join(t_backup_list *here);
-void			gnl_split_line(t_context *ubox, t_backup_list *here);
+void			gnl_split_line(t_cont *ubox, t_backup_list *here);
 t_backup_list	*gnl_search_add_list(t_backup_list **head, int fd);
 void			gnl_del_list(t_backup_list **head, t_backup_list *cur);
 size_t			gnl_strlen(const char *s);

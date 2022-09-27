@@ -2,48 +2,114 @@
 #include "executor.h"
 #include "libft.h"
 
-// static t_bool	is_builtin(char *command)
+#include <unistd.h>
+
+static int	exec_builtin(char **cmd, t_context *context) ///////////////
+{
+	if (ft_iseq(cmd[0], "echo"))
+		return (FAILURE); // return (ft_echo());
+	if (ft_iseq(cmd[0], "cd"))
+		return (FAILURE); // return (ft_cd());
+	if (ft_iseq(cmd[0], "pwd"))
+		return (FAILURE); // return (ft_pwd());
+	if (ft_iseq(cmd[0], "export"))
+		return (FAILURE); // return (ft_export());
+	if (ft_iseq(cmd[0], "unset"))
+		return (FAILURE); // return (ft_unset());
+	if (ft_iseq(cmd[0], "env"))
+		return (FAILURE); // return (ft_env());
+	if (ft_iseq(cmd[0], "exit"))
+		return (FAILURE); // return (ft_exit());
+	(void)context; return (SUCCESS);
+}
+
+static int	get_infd(t_parsed_unit *parsed_unit, t_pipe_info *pipe_info)
+{
+	int	infd;
+
+	if (!parsed_unit->redir_in_list)
+	{
+		if (pipe_info->is_first)
+			infd = STDIN_FILENO;
+		else
+			infd = pipe_info->inpipe_fd;
+	}
+	else
+	{
+		if (!pipe_info->is_first)
+			close(pipe_info->inpipe_fd);
+		infd = get_infile_fd(parsed_unit->redir_in_list);
+	}
+	return (infd);
+}
+
+// static int	get_outfd(t_parsed_unit *parsed_unit) //, t_pipe_info *pipe_info)
 // {
-// 	return (
-// 		ft_iseq(command, "echo")
-// 		|| ft_iseq(command, "cd")
-// 		|| ft_iseq(command, "pwd")
-// 		|| ft_iseq(command, "export")
-// 		|| ft_iseq(command, "unset")
-// 		|| ft_iseq(command, "env")
-// 		|| ft_iseq(command, "exit")
-// 	);
-// }
+// 	int	outfd;
 
-// static t_bool	are_all_valid_infile()
-// {}
-
-// static int	open_infile(t_redirect_list *redir_in_list)
-// {
-// 	t_redirect_list	*head;
-
-// 	head = redir_in_list;
-// 	if (!are_all_valid_infile(redir_in_list))
-// 		return (-1);
+// 	// if (!parsed_unit->redir_in_list)
+// 	// {
+// 	// 	if (pipe_info->is_last)
+// 	// 		outfd = STDOUT_FILENO;
+// 	// }
+// 	if (!parsed_unit->redir_out_list)
+// 		outfd = STDOUT_FILENO;
+// 	else
+// 		outfd = get_outfile_fd(parsed_unit->redir_out_list);
+// 	return (outfd);
 // }
 
 // static t_ret_value	get_infd_outfd(
-// 	int *infd, int *outfd, t_parsed_unit *parsed_unit
+// 	int *infd, int *outfd, t_parsed_unit *parsed_unit, t_pipe_info *pipe_info
 // 	)
 // {
-// 	infd = open_infile(parsed_unit->redir_in_list);
-// 	if (infd == -1)
+// 	*infd = get_infd(parsed_unit, pipe_info);
+// 	if (*infd == -1)
 // 		return (FAILURE);
-// }
-
-// int	exec_command(t_parsed_unit *parsed_unit, char **envp, t_bool is_last_cmd)
-// {
-// 	int	infd;
-// 	int	outfd;
-
-// 	if (get_infd_outfd(&infd, &outfd, parsed_unit) != SUCCESS)
+// 	*outfd = get_outfd(parsed_unit); //, pipe_info);
+// 	if (*outfd == -1)
 // 		return (FAILURE);
-// 	(void)*parsed_unit;
-// 	(void)**envp; ///////////// temp
 // 	return (SUCCESS);
 // }
+
+static void	child_process(char **cmd, int pipeline[2], char **envp, int infd)
+{
+	close(pipeline[0]);
+	if (infd != STDIN_FILENO)
+	{
+		dup2(infd, STDIN_FILENO);
+		close(infd);
+	}
+	dup2(pipeline[1], STDOUT_FILENO);
+	close(pipeline[1]);
+	if (execve(cmd[0], cmd, envp) < 0)
+		exit(1);
+}
+
+int	exec_command_unit(t_parsed_unit *parsed_unit, t_context *context)
+{
+	int	pipeline[2];
+	int	infd;
+	// int	outfd;
+
+	if (!context->pipe_info->is_last)
+		pipe(pipeline);
+	// if (get_infd_outfd(&infd, &outfd, parsed_unit, context->pipe_info) != SUCCESS)
+	// 	return (FAILURE);
+	infd = get_infd(parsed_unit, context->pipe_info);
+	if (is_builtin(parsed_unit->cmd[0]))
+		exec_builtin(parsed_unit->cmd, context);
+	else
+	{
+		context->last_pid = fork();
+		if (context->last_pid < 0)
+			; // error_exit
+		if (context->last_pid == 0)
+			child_process(parsed_unit->cmd, pipeline, context->envp, infd);
+	}
+	if (infd != STDIN_FILENO)
+	close(infd);
+	close(pipeline[1]);
+	context->pipe_info->inpipe_fd = pipeline[0];
+	return (FALSE); /////////// temp
+}

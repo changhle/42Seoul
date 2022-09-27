@@ -69,12 +69,12 @@ char			*read_shell_line(char *prompt);
 /*
 **	parser
 */
-int				parse(char *line, t_parsed_list **parsed_head);
+int				parse(char *line, t_parsed_list **parsed_head, t_env_list **env_list);
 
 /*
 **	executor
 */
-int				execute(t_parsed_list *parsed__list, char **envp);
+int				execute(t_parsed_list *parsed__list, t_env_list **env_list);
 
 /*
 **	builtin
