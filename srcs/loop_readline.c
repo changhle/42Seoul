@@ -38,6 +38,10 @@ static t_env_list	*add_env_node(t_env_list **env)
 
 	tmp = *env;
 	new = ft_malloc(sizeof(t_env_list));
+	new->env = NULL;
+	new->key = NULL;
+	new->value = NULL;
+	new->next = NULL;
 	if (!tmp)
 		*env = new;
 	else
@@ -88,6 +92,7 @@ int	loop_readline(char **envp)
 {
 	int				ret_value;
 	char			*line;
+	char			*tmp;
 	t_env_list		*env_list;
 	t_parsed_list	*parsed_list;
 
@@ -99,14 +104,17 @@ int	loop_readline(char **envp)
 		line = read_shell_line("\033[0;34mminishell$\033[0m ");
 		if (!line)
 			return (write_exit_without_newline());
+		tmp = line;
+		line = ft_strtrim(line, " \t\r\v\f\n");
 		if (ft_strlen(line))
 		{
 			add_history(line);
 			ret_value = parse(line, &parsed_list, &env_list);
-			ft_free((void **)&line);
 			if (ret_value == SUCCESS)
 				ret_value = execute(parsed_list, &env_list);
 		}
+		ft_free((void **)&line);
+		ft_free((void **)&tmp);
 	}
 	free_env_list(env_list);
 	return (ret_value);

@@ -2,6 +2,7 @@
 #include "readline.h"
 #include <unistd.h>
 #include <signal.h>
+#include <stdlib.h>
 #include <termios.h>
 
 void	sig_handler(int signo)
@@ -12,6 +13,12 @@ void	sig_handler(int signo)
 		rl_replace_line("", 1);
 		rl_on_new_line();
 		rl_redisplay();
+	}
+	else if (signo == SIGTERM)
+	{
+		write(1, "\n", 1);
+		rl_replace_line("", 1);
+		rl_on_new_line();
 	}
 }
 
@@ -29,5 +36,6 @@ char	*read_shell_line(const char *prompt)
 	tcsetattr(STDOUT_FILENO, TCSANOW, &new_term);
 	line = readline(prompt);
 	tcsetattr(STDOUT_FILENO, TCSANOW, &old_term);
+	signal(SIGQUIT, sig_handler);
 	return (line);
 }

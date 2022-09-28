@@ -35,16 +35,14 @@ static void	replace_env(char *token, t_env_list **env,
 	}
 	while (1)
 	{
-		if (is_space(token[info->index + 1])
-			|| token[info->index + 1] == '$'
-			|| token[info->index + 1] == '\''
-			|| token[info->index + 1] == '\"'
-			|| token[info->index + 1] == '\0')
+		if (!ft_isalnum(token[info->index + 1])
+			&& token[info->index + 1] != '_')
 		{
 			info->env_buf = ft_substr(token, info->start,
 					info->index - info->start + 1);
 			info->buf = comb_str(info->buf, find_env(info->env_buf, env));
 			info->start = info->index + 1;
+			free(info->env_buf);
 			break ;
 		}
 		info->index++;
@@ -70,30 +68,3 @@ char	*expander(char *line, t_env_list **env)
 			ft_substr(line, info.start, info.index - info.start + 1));
 	return (info.buf);
 }
-// void	expander(t_token_list **token, t_env_list **env)
-// {
-// 	t_expand_info	info;
-// 	t_token_list	*tmp;
-
-// 	tmp = *token;
-// 	while (tmp)
-// 	{
-// 		init_expand(&info);
-// 		while (tmp->token[info.index])
-// 		{
-// 			if (tmp->token[info.index] == '\''
-// 				|| tmp->token[info.index] == '\"')
-// 				info.quote = set_quote(info.quote, tmp->token[info.index]);
-// 			if ((info.quote == 0 || info.quote == '\"')
-// 				&& tmp->token[info.index] == '$')
-// 				replace_env(tmp->token, env, &info);
-// 			info.index++;
-// 		}
-// 		info.buf = comb_str(info.buf,
-// 				ft_substr(tmp->token, info.start, info.index - info.start + 1));
-// 		info.buf = remove_quote(info.buf);
-// 		free(tmp->token);
-// 		tmp->token = info.buf;
-// 		tmp = tmp->next;
-// 	}
-// }

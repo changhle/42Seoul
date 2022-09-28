@@ -33,21 +33,13 @@ int	is_space(char c)
 
 int	is_redirect(char *str)
 {
-	if (ft_strncmp("<", str, ft_strlen(str)) == 0
-		|| ft_strncmp("\'<\'", str, ft_strlen(str)) == 0
-		|| ft_strncmp("\"<\"", str, ft_strlen(str)) == 0)
+	if (ft_strncmp("<", str, ft_strlen(str)) == 0)
 		return (REDIR_IN);
-	else if (ft_strncmp("<<", str, ft_strlen(str)) == 0
-		|| ft_strncmp("\'<<\'", str, ft_strlen(str)) == 0
-		|| ft_strncmp("\"<<\"", str, ft_strlen(str)) == 0)
+	else if (ft_strncmp("<<", str, ft_strlen(str)) == 0)
 		return (REDIR_IN_APPEND);
-	else if (ft_strncmp(">", str, ft_strlen(str)) == 0
-		|| ft_strncmp("\'>\'", str, ft_strlen(str)) == 0
-		|| ft_strncmp("\">\"", str, ft_strlen(str)) == 0)
+	else if (ft_strncmp(">", str, ft_strlen(str)) == 0)
 		return (REDIR_OUT);
-	else if (ft_strncmp(">>", str, ft_strlen(str)) == 0
-		|| ft_strncmp("\'>>\'", str, ft_strlen(str)) == 0
-		|| ft_strncmp("\">>\"", str, ft_strlen(str)) == 0)
+	else if (ft_strncmp(">>", str, ft_strlen(str)) == 0)
 		return (REDIR_OUT_APPEND);
 	return (0);
 }

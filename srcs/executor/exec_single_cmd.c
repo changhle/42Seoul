@@ -40,6 +40,10 @@ int	exec_single_cmd(t_parsed_unit *parsed_unit, t_context *context)
 	if (context->last_pid < 0)
 		exit(1); ///// error
 	if (context->last_pid == 0)
+	{
 		child_process(parsed_unit->cmd, infd, outfd, context->envp);
+		write(1, "\n", 1);
+	}
+	signal(SIGINT, SIG_IGN);
 	return (SUCCESS);
 };

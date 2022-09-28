@@ -143,13 +143,17 @@ int	parse(char *line, t_parsed_list **parsed_head, t_env_list **env_list)
 	tokenizer(line, &token_head);
 	ret_value = lexer(&token_head);
 	if (ret_value == FAILURE)
+	{
+		free(line);
+		free_token_list(token_head);
 		return (ret_value);
+	}
 	remove_quote(&token_head);
-	// expander(&token_head, env_list);
 	// test_print_token(token_head);
 	*parsed_head = NULL;
 	ret_value = mini_parse(token_head, parsed_head);
 	// test_print_unit(*parsed_head);
 	free_token_list(token_head);
+	free(line);
 	return (ret_value);
 }
