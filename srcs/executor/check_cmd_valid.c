@@ -28,8 +28,11 @@ static void	free_path(char **path)
 	ft_free((void **)&path);
 }
 
-static int	command_not_found(char *cmd, char **path)
+static int	command_not_found(
+	char *cmd, t_redirect_list *redir_in_list, char **path
+	)
 {
+	get_infile_fd(redir_in_list);
 	printf("minishell: %s: command not found\n", cmd);
 	free_path(path);
 	return (127);
@@ -68,7 +71,10 @@ int	check_cmd_valid(t_parsed_list *parsed_list, t_env_list *env_list)
 			continue ;
 		}
 		if (get_command(parsed_list->parsed_unit->cmd, path) != SUCCESS)
-			return (command_not_found(parsed_list->parsed_unit->cmd[0], path));
+			return (command_not_found(
+				parsed_list->parsed_unit->cmd[0],
+				parsed_list->parsed_unit->redir_in_list,
+				path));
 		add_nl_if_redir_append(parsed_list->parsed_unit->redir_in_list);
 		parsed_list = parsed_list->next;
 	}

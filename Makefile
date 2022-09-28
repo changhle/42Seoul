@@ -9,8 +9,11 @@ PARSER_SRCS		:=	$(addprefix $(PARSER_DIR)/, $(PARSER_SRCS))
 
 EXECUTOR_DIR	:=	executor
 EXECUTOR_SRCS	:=	executor.c free_parsed_list.c check_cmd_valid.c \
-					exec_command.c get_infile_fd.c get_outfile_fd.c \
-					get_command.c init_context.c
+					exec_command.c \
+					exec_single_cmd.c exec_first_cmd.c exec_last_cmd.c \
+					exec_mid_cmd.c \
+					get_infile_fd.c get_outfile_fd.c get_command.c \
+					init_context.c
 EXECUTOR_SRCS	:=	$(addprefix $(EXECUTOR_DIR)/, $(EXECUTOR_SRCS))
 
 BUILTIN_DIR		:=	builtin
@@ -62,12 +65,12 @@ $(READLINE)		:
 clean			:
 	$(RM) $(OBJS)
 	$(MAKE) -C $(LIBFT_DIR) clean
-	$(MAKE) -C $(READLINE_DIR) clean
 
 .PHONY			:	fclean
 fclean			:	clean
 	$(RM) $(NAME)
 	$(MAKE) -C $(LIBFT_DIR) fclean
+	#$(MAKE) -C $(READLINE_DIR) clean
 
 .PHONY			:	re
 re				:

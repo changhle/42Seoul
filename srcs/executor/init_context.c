@@ -33,11 +33,8 @@ void	init_context(
 	t_context *context, t_parsed_list **parsed_list, t_env_list *env_list
 	)
 {
-	t_pipe_info	pipe_info;
-
-	pipe_info.is_first = TRUE;
-	pipe_info.is_last = FALSE;
-	context->pipe_info = &pipe_info;
+	context->pipe_info.is_first = TRUE;
+	context->pipe_info.is_last = FALSE;
 	context->process_cnt = 0;
 	context->parsed_head = *parsed_list;
 	context->env_head = env_list;

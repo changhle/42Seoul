@@ -45,9 +45,9 @@ int	execute(t_parsed_list *parsed_list, t_env_list **env)
 	while (parsed_list)
 	{
 		if (!parsed_list->next)
-			context.pipe_info->is_last = TRUE;
+			context.pipe_info.is_last = TRUE;
 		ret_value = exec_command_unit(parsed_list->parsed_unit, &context);
-		context.pipe_info->is_first = FALSE;
+		context.pipe_info.is_first = FALSE;
 		parsed_list = parsed_list->next;
 		context.process_cnt += (ret_value == SUCCESS);
 	}

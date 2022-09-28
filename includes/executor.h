@@ -6,6 +6,7 @@
 
 typedef struct s_context	t_context;
 typedef struct s_pipe_info	t_pipe_info;
+typedef struct s_temp_info	t_temp_info;
 
 enum e_exit_status
 {
@@ -19,7 +20,6 @@ struct s_pipe_info
 	t_bool	is_first;
 	t_bool	is_last;
 	int		inpipe_fd;
-	// int		outpipe_fd;
 };
 
 struct s_context
@@ -28,11 +28,22 @@ struct s_context
 	t_env_list		*env_head;
 	char			**envp;
 	size_t			process_cnt;
-	t_pipe_info		*pipe_info;
+	t_pipe_info		pipe_info;
 	pid_t			last_pid;
 };
 
+struct s_temp_info
+{
+	int	pipeline[2];
+	int	infd;
+	int	outfd;
+};
+
 int			exec_command_unit(t_parsed_unit *parsed_unit, t_context *context);
+int			exec_single_cmd(t_parsed_unit *parsed_unit, t_context *context);
+int			exec_first_cmd(t_parsed_unit *parsed_unit, t_context *context);
+int			exec_last_cmd(t_parsed_unit *parsed_unit, t_context *context);
+int			exec_mid_cmd(t_parsed_unit *parsed_unit, t_context *context);
 
 void		init_context(
 			t_context *context,
