@@ -71,5 +71,8 @@ int				lexer(t_token_list **head);
 int				mini_parse(
 	t_token_list *token_head, t_parsed_list **parsed_head
 	);
+void			add_redirect_node(t_redirect_list **head,
+	t_token_list *token, t_redirect_type type);
+void			free_old_cmd(char **cmd);
 
 #endif

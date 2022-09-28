@@ -1,5 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
+// #include <stdlib.h>
 
 #include "minishell.h"
 #include "parser.h"
@@ -11,8 +10,8 @@ t_parsed_list	*add_node(t_parsed_list **node)
 	t_parsed_list	*tmp;
 
 	tmp = *node;
-	new = malloc(sizeof(t_parsed_list));
-	new->parsed_unit = malloc(sizeof(t_parsed_unit));
+	new = ft_malloc(sizeof(t_parsed_list));
+	new->parsed_unit = ft_malloc(sizeof(t_parsed_unit));
 	new->parsed_unit->cmd = NULL;
 	new->parsed_unit->redir_in_list = NULL;
 	new->parsed_unit->redir_out_list = NULL;
@@ -26,16 +25,6 @@ t_parsed_list	*add_node(t_parsed_list **node)
 		tmp->next = new;
 	}
 	return (new);
-}
-
-void	free_old_cmd(char **cmd)
-{
-	int	i;
-
-	i = 0;
-	while (cmd[i])
-		free(cmd[i++]);
-	free(cmd);
 }
 
 void	add_cmd(t_parsed_unit *node, char *token)
@@ -64,27 +53,6 @@ void	add_cmd(t_parsed_unit *node, char *token)
 	node->cmd = tmp;
 }
 
-void	add_redirect_node(t_redirect_list **head,
-	t_token_list *token, t_redirect_type type)
-{
-	t_redirect_list	*new;
-	t_redirect_list	*tmp;
-
-	tmp = *head;
-	new = ft_malloc(sizeof(t_redirect_list));
-	new->redir_type = type;
-	new->filename = ft_strdup(token->next->token);
-	new->next = NULL;
-	if (!tmp)
-		*head = new;
-	else
-	{
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new;
-	}
-}
-
 void	add_redirect(t_parsed_unit *node, t_token_list *token)
 {
 	t_redirect_type	type;
@@ -100,6 +68,23 @@ void	add_redirect(t_parsed_unit *node, t_token_list *token)
 		node->redir_in_list = tmp;
 	else
 		node->redir_out_list = tmp;
+}
+
+static void	add_null_cmd(t_parsed_list **parsed_head)
+{
+	t_parsed_list	*node;
+
+	node = *parsed_head;
+	while (node)
+	{
+		if (!node->parsed_unit->cmd
+			&& node->parsed_unit->redir_in_list
+			&& node->parsed_unit->redir_in_list->redir_type == REDIR_IN_APPEND)
+		{
+			add_cmd(node->parsed_unit, "");
+		}
+		node = node->next;
+	}
 }
 
 int	mini_parse(t_token_list *token, t_parsed_list **parsed_head)
@@ -124,5 +109,6 @@ int	mini_parse(t_token_list *token, t_parsed_list **parsed_head)
 			node = add_node(parsed_head);
 		token = token->next;
 	}
+	add_null_cmd(parsed_head);
 	return (ret_value);
 }
