@@ -18,7 +18,8 @@ EXECUTOR_SRCS	:=	executor.c free_parsed_list.c check_cmd_valid.c \
 EXECUTOR_SRCS	:=	$(addprefix $(EXECUTOR_DIR)/, $(EXECUTOR_SRCS))
 
 BUILTIN_DIR		:=	builtin
-BUILTIN_SRCS	:=	ft_pwd.c ft_exit.c
+BUILTIN_SRCS	:=	ft_pwd.c ft_exit.c ft_echo.c ft_cd.c ft_env.c \
+					ft_export.c ft_unset.c
 BUILTIN_SRCS	:=	$(addprefix $(BUILTIN_DIR)/, $(BUILTIN_SRCS))
 
 

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljeongin <ljeongin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 11:28:16 by ljeongin          #+#    #+#             */
-/*   Updated: 2022/09/20 14:13:46 by ljeongin         ###   ########.fr       */
+/*   Updated: 2022/09/30 04:13:47 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <stdlib.h>
 #include <stdio.h>
 
 #include "minishell.h"

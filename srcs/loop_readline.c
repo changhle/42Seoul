@@ -31,7 +31,7 @@ static void	free_env_list(t_env_list *env_list)
 	}
 }
 
-static t_env_list	*add_env_node(t_env_list **env)
+t_env_list	*add_env_node(t_env_list **env)
 {
 	t_env_list	*new;
 	t_env_list	*tmp;

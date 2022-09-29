@@ -63,6 +63,7 @@ struct s_parsed_list
 
 void			printf_shell_banner(void);
 
+t_env_list		*add_env_node(t_env_list **env);
 int				loop_readline(char **envp);
 char			*read_shell_line(char *prompt);
 
@@ -83,5 +84,8 @@ void			ft_pwd(void);
 void			ft_exit(int exit_value);
 int				ft_cd(char **argv);
 void			ft_echo(char **argv);
+int				ft_env(char **cmd, t_env_list **env_list);
+int				ft_export(char **cmd, t_env_list **env_list);
+int				ft_unset(char **cmd, t_env_list **env_list);
 
 #endif
