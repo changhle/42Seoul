@@ -15,8 +15,8 @@ int	lexer(t_token_list **head)
 	t_token_list	*token;
 
 	token = *head;
-	if (!token)
-		return (syntax_error("newline"));
+	// if (!token)
+	// 	return (syntax_error("newline"));
 	while (token)
 	{
 		if (token->token_type != WORD && !token->next)
