@@ -27,8 +27,8 @@ static void	replace_env(char *token, t_env_list **env,
 	info->buf = comb_str(info->buf,
 			ft_substr(token, info->start, info->index - info->start));
 	info->start = info->index + 1;
-	if (token[info->index + 1] == '\''
-		|| token[info->index + 1] == '\"')
+	if ((token[info->index + 1] == '\''	|| token[info->index + 1] == '\"')
+		&& info->quote == 0)
 	{
 		info->start++;
 		return ;
