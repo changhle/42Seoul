@@ -9,14 +9,25 @@ void	sig_handler(int signo)
 {
 	if (signo == SIGINT)
 	{
-		write(1, "\n", 1);
+		write(STDOUT_FILENO, "\n", 1);
 		rl_replace_line("", 1);
 		rl_on_new_line();
 		rl_redisplay();
 	}
-	else if (signo == SIGTERM)
+}
+
+void	sig_handler_dfl(int signo)
+{
+	if (signo == SIGINT)
 	{
-		write(1, "\n", 1);
+		write(STDOUT_FILENO, "\n", 1);
+		rl_replace_line("", 1);
+		rl_on_new_line();
+	}
+	else if (signo == SIGQUIT)
+	{
+		write(STDOUT_FILENO, "Quit: 3", 7);
+		write(STDOUT_FILENO, "\n", 1);
 		rl_replace_line("", 1);
 		rl_on_new_line();
 	}
@@ -36,6 +47,7 @@ char	*read_shell_line(const char *prompt)
 	tcsetattr(STDOUT_FILENO, TCSANOW, &new_term);
 	line = readline(prompt);
 	tcsetattr(STDOUT_FILENO, TCSANOW, &old_term);
-	signal(SIGQUIT, sig_handler);
+	signal(SIGINT, sig_handler_dfl);
+	signal(SIGQUIT, sig_handler_dfl);
 	return (line);
 }

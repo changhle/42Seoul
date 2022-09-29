@@ -42,11 +42,7 @@ int	exec_first_cmd(t_parsed_unit *parsed_unit, t_context *context)
 	if (context->last_pid < 0)
 		exit(FAILURE); ///// error
 	if (context->last_pid == 0)
-	{
 		child_process(parsed_unit->cmd, &temp_info, context->envp);
-		write(1, "\n", 1);
-	}
-	signal(SIGINT, SIG_IGN);
 	close(temp_info.pipeline[1]);
 	if (temp_info.infd != STDIN_FILENO)
 		close(temp_info.infd);
