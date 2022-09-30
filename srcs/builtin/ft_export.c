@@ -4,56 +4,6 @@
 #include "minishell.h"
 #include "libft.h"
 
-static char	**copy_env_key(t_env_list **env_list)
-{
-	int			n;
-	char		**key;
-	t_env_list	*tmp;
-
-	tmp = *env_list;
-	n = 0;
-	while (tmp)
-	{
-		tmp = tmp->next;
-		n++;
-	}
-	key = ft_malloc(sizeof(char **) * (n + 1));
-	tmp = *env_list;
-	n = 0;
-	while (tmp)
-	{
-		key[n] = tmp->key;
-		tmp = tmp->next;
-		n++;
-	}
-	key[n] = NULL;
-	return (key);
-}
-
-static void	sort_key(char **key)
-{
-	int		i;
-	int		j;
-	char	*tmp;
-
-	i = 0;
-	while (key[i + 1])
-	{
-		j = i + 1;
-		while (key[j])
-		{
-			if (ft_memcmp(key[i], key[j], ft_strlen(key[i]) + 1) > 0)
-			{
-				tmp = key[i];
-				key[i] = key[j];
-				key[j] = tmp;
-			}
-			j++;
-		}
-		i++;
-	}
-}
-
 static void	print_export(char **key, t_env_list **env_list)
 {
 	int			i;
@@ -110,21 +60,25 @@ int	ft_export(char **cmd, t_env_list **env_list)
 	int			i;
 	char		**key;
 
-	if (!(*env_list))
-		return (0);
-	i = 0;
+	i = 1;
 	if (!cmd[1])
 	{
 		key = copy_env_key(env_list);
 		if (key[1])
 			sort_key(key);
 		print_export(key, env_list);
-		free(key);
 	}
 	else
 	{
 		while (cmd[i])
+		{
+			key = get_key(cmd[i]);
+			ft_unset(key, env_list);
+			free(key[0]);
+			free(key[1]);
 			add_export(cmd[i++], env_list);
+		}
 	}
+	free(key);
 	return (0);
 }

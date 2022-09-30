@@ -86,6 +86,9 @@ int				ft_cd(char **argv);
 void			ft_echo(char **argv);
 int				ft_env(char **cmd, t_env_list **env_list);
 int				ft_export(char **cmd, t_env_list **env_list);
+char			**copy_env_key(t_env_list **env_list);
+void			sort_key(char **key);
+char			**get_key(char *str);
 int				ft_unset(char **cmd, t_env_list **env_list);
 
 #endif

@@ -14,8 +14,9 @@ static void	print_env(t_env_list **env_list)
 		if (tmp->value)
 		{
 			ft_putstr_fd(tmp->key, STDOUT_FILENO);
-			ft_putstr_fd("\n", STDOUT_FILENO);
+			ft_putstr_fd("=", STDOUT_FILENO);
 			ft_putstr_fd(tmp->value, STDOUT_FILENO);
+			ft_putstr_fd("\n", STDOUT_FILENO);
 		}
 		tmp = tmp->next;
 	}

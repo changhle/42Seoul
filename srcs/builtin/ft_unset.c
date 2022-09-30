@@ -17,6 +17,8 @@ static void	remove_export(char *str, t_env_list **env_list)
 		prev = tmp;
 		tmp = tmp->next;
 	}
+	if (!tmp)
+		return ;
 	if (!prev)
 		*env_list = tmp->next;
 	else
@@ -31,8 +33,6 @@ int	ft_unset(char **cmd, t_env_list **env_list)
 {
 	int	i;
 
-	if (!(*env_list))
-		return (0);
 	i = 1;
 	while (cmd[i])
 		remove_export(cmd[i++], env_list);
