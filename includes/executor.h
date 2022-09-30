@@ -44,6 +44,7 @@ int			exec_single_cmd(t_parsed_unit *parsed_unit, t_context *context);
 int			exec_first_cmd(t_parsed_unit *parsed_unit, t_context *context);
 int			exec_last_cmd(t_parsed_unit *parsed_unit, t_context *context);
 int			exec_mid_cmd(t_parsed_unit *parsed_unit, t_context *context);
+int			exec_builtin(char **cmd, t_env_list **env_list);
 
 void		init_context(
 			t_context *context,

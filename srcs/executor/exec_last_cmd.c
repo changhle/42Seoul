@@ -5,7 +5,7 @@
 #include <unistd.h>
 #include <stdio.h> ///////// temp
 
-static void	child_process(char **cmd, t_temp_info *temp_info, char **envp)
+static void	child_process(char **cmd, t_temp_info *temp_info, t_context *context)
 {
 	dup2(temp_info->infd, STDIN_FILENO);
 	close(temp_info->infd);
@@ -16,10 +16,11 @@ static void	child_process(char **cmd, t_temp_info *temp_info, char **envp)
 	}
 	if (is_builtin(cmd[0]))
 	{
-		printf("exec_builtin: %s\n", cmd[0]); /// return exec_builtin();
+		exec_builtin(cmd, &context->env_head);
+		// printf("exec_builtin: %s\n", cmd[0]); /// return exec_builtin();
 		exit(SUCCESS);
 	}
-	if (execve(cmd[0], cmd, envp) < 0)
+	if (execve(cmd[0], cmd, context->envp) < 0)
 		exit(FAILURE); /// error
 }
 
@@ -39,7 +40,7 @@ int	exec_last_cmd(t_parsed_unit *parsed_unit, t_context *context)
 	if (context->last_pid < 0)
 		exit(FAILURE); ///// error
 	if (context->last_pid == 0)
-		child_process(parsed_unit->cmd, &temp_info, context->envp);
+		child_process(parsed_unit->cmd, &temp_info, context);
 	if (parsed_unit->redir_in_list)
 		close(context->pipe_info.inpipe_fd);
 	close(temp_info.infd);

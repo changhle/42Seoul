@@ -24,7 +24,7 @@ static void	print_arg(int argc, char **argv)
 		ft_putstr_fd("\n", STDOUT_FILENO);
 }
 
-void	ft_echo(char **argv)
+int	ft_echo(char **argv)
 {
 	int	i;
 	int	argc;
@@ -36,4 +36,5 @@ void	ft_echo(char **argv)
 		ft_putstr_fd("\n", STDOUT_FILENO);
 	else
 		print_arg(argc, argv);
+	return (0);
 }

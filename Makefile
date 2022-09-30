@@ -12,7 +12,7 @@ EXECUTOR_DIR	:=	executor
 EXECUTOR_SRCS	:=	executor.c free_parsed_list.c check_cmd_valid.c \
 					exec_command.c \
 					exec_single_cmd.c exec_first_cmd.c exec_last_cmd.c \
-					exec_mid_cmd.c \
+					exec_mid_cmd.c exec_builtin.c \
 					get_infile_fd.c get_outfile_fd.c get_command.c \
 					init_context.c
 EXECUTOR_SRCS	:=	$(addprefix $(EXECUTOR_DIR)/, $(EXECUTOR_SRCS))

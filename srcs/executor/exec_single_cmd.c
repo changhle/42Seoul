@@ -35,7 +35,8 @@ int	exec_single_cmd(t_parsed_unit *parsed_unit, t_context *context)
 	else
 		outfd = STDOUT_FILENO;
 	if (is_builtin(parsed_unit->cmd[0]))
-		return (printf("exec_builtin: %s\n", parsed_unit->cmd[0])); /// return exec_builtin();
+		return (exec_builtin(parsed_unit->cmd, &context->env_head));
+		// return (printf("exec_builtin: %s\n", parsed_unit->cmd[0])); /// return exec_builtin();
 	context->last_pid = fork();
 	if (context->last_pid < 0)
 		exit(1); ///// error
