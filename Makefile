@@ -27,7 +27,8 @@ SRCS_DIR		:=	srcs
 SRCS			:=	main.c loop_readline.c \
 					$(PARSER_SRCS) \
 					$(SHELL_SRCS) \
-					$(EXECUTOR_SRCS)
+					$(EXECUTOR_SRCS) \
+					$(BUILTIN_SRCS)
 SRCS			:=	$(addprefix $(SRCS_DIR)/, $(SRCS))
 OBJS			:=	$(SRCS:.c=.o)
 

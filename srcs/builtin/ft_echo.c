@@ -26,7 +26,6 @@ static void	print_arg(int argc, char **argv)
 
 int	ft_echo(char **argv)
 {
-	int	i;
 	int	argc;
 
 	argc = 0;
