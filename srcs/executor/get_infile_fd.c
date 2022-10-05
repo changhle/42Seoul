@@ -1,107 +1,50 @@
-#include "minishell.h"
 #include "executor.h"
 #include "libft.h"
-#include "get_next_line.h"
 
 #include <fcntl.h>
-#include <stdio.h>
 #include <unistd.h>
-#include <sys/stat.h>
 
-static int	exec_heredoc(char *limiter)
+static void	add_nl_to_limiter(t_redirect_list *redir_in_list)
 {
-	char	*input;
+	char	*tmp;
 
-	ft_putstr_fd("> ", STDOUT_FILENO);
-	input = get_next_line(STDIN_FILENO);
-	if (!input)
-		return (-1);
-	while (input && !ft_iseq(input, limiter))
-	{
-		free(input);
-		ft_putstr_fd("> ", STDOUT_FILENO);
-		input = get_next_line(STDIN_FILENO);
-	}
-	if (!input)
-		return (-1);
-	free(input);
-	return (SUCCESS);
+	tmp = ft_strjoin(redir_in_list->filename, "\n");
+	ft_free((void **)&redir_in_list->filename);
+	redir_in_list->filename = tmp;
 }
 
-static int	get_heredoc_fd(char *limiter)
+static int	open_infile(t_redirect_list *redir_in_list, t_bool *is_no_heredoc)
 {
-	char	*input;
-	int		pipeline[2];
-
-	if (pipe(pipeline) < 0)
-		return (-1);
-	ft_putstr_fd("> ", STDOUT_FILENO);
-	input = get_next_line(STDIN_FILENO);
-	if (!input)
-		return (-1);
-	while (input && !ft_iseq(input, limiter))
-	{
-		ft_putstr_fd(input, pipeline[1]);
-		free(input);
-		ft_putstr_fd("> ", STDOUT_FILENO);
-		input = get_next_line(STDIN_FILENO);
-	}
-	if (!input)
-		return (-1);
-	free(input);
-	close(pipeline[1]);
-	return (pipeline[0]);
-}
-
-static t_bool	is_valid_infile(char *filename)
-{
-	struct stat	buf;
-
-	if (lstat(filename, &buf) == 0)
-		return (TRUE);
-	return (FALSE);
-}
-
-static t_bool	are_all_valid_infile(t_redirect_list *redir_in_list)
-{
-	t_bool	ret_value;
-	t_bool	error_printed;
-
-	ret_value = TRUE;
-	error_printed = FALSE;
-	while (redir_in_list)
-	{
-		if (redir_in_list->redir_type == REDIR_IN_APPEND)
-			exec_heredoc(redir_in_list->filename);
-		else
-		{
-			if (!is_valid_infile(redir_in_list->filename))
-			{
-				ret_value = FALSE;
-				if (error_printed == FALSE)
-				{
-					printf("minishell: %s: No such file or directory\n",
-							redir_in_list->filename);
-					error_printed = TRUE;
-				}
-			}
-		}
-		redir_in_list = redir_in_list->next;
-	}
-	return (ret_value);
+	if (redir_in_list->redir_type == REDIR_IN_APPEND)
+		return (get_heredoc_fd(redir_in_list->filename, is_no_heredoc));
+	*is_no_heredoc = FALSE;
+	return (open(redir_in_list->filename, O_RDONLY));
 }
 
 int	get_infile_fd(t_redirect_list *redir_in_list)
 {
-	if (!redir_in_list)
-		return (STDIN_FILENO);
-	if (!are_all_valid_infile(redir_in_list))
-		return (-1);
-	while (redir_in_list && redir_in_list->next)
+	int		fd;
+	char	*err_filename;
+	t_bool	is_no_heredoc;
+
+	err_filename = NULL;
+	while (redir_in_list)
+	{
+		if (redir_in_list->redir_type == REDIR_IN_APPEND)
+			add_nl_to_limiter(redir_in_list);
+		fd = open_infile(redir_in_list, &is_no_heredoc);
+		if (fd == -1 && !err_filename
+			&& !(redir_in_list->redir_type == REDIR_IN_APPEND))
+			err_filename = redir_in_list->filename;
+		if (fd != -1 && redir_in_list->next)
+			ft_close(fd);
 		redir_in_list = redir_in_list->next;
-	if (redir_in_list->redir_type == REDIR_IN_APPEND)
-		return (get_heredoc_fd(redir_in_list->filename));
-	if (!is_valid_infile(redir_in_list->filename))
+	}
+	if (err_filename || is_no_heredoc)
+	{
+		if (err_filename)
+			print_minishell_error(err_filename, NULL, 0);
 		return (-1);
-	return (open(redir_in_list->filename, O_RDONLY));
+	}
+	return (fd);
 }

@@ -5,26 +5,17 @@
 #include "libft.h"
 #include "minishell.h"
 
-static int cd_error(char *str)
+int	ft_cd(char **cmd)
 {
-	ft_putstr_fd("minishell: cd: ", STDOUT_FILENO);
-	ft_putstr_fd(str, STDOUT_FILENO);
-	ft_putstr_fd("\n", STDOUT_FILENO);
-	return (1);
-}
-
-int	ft_cd(char **argv)
-{
-	int	argc;
-
-	argc = 0;
-	while (argv[argc])
-		argc++;
-	if (argc < 2)
-		return (cd_error("no argument"));
-	else if (argc > 2)
-		return (cd_error("too many arguments"));
-	if (chdir(argv[1]) == -1)
-		return (cd_error(strerror(errno)));
+	if (cmd[1])
+	{
+		if (chdir(cmd[1]) == -1)
+		{
+			ft_putstr_fd("minishell: cd: ", STDERR_FILENO);
+			ft_putstr_fd(strerror(errno), STDERR_FILENO);
+			ft_putstr_fd("\n", STDERR_FILENO);
+			return (1);
+		}
+	}
 	return (0);
 }

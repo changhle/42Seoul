@@ -1,8 +1,8 @@
-#include "minishell.h"
 #include "executor.h"
 #include "libft.h"
 
 #include <sys/wait.h>
+#include <unistd.h>
 
 static int	wait_child(size_t cmd_cnt, pid_t last_pid)
 {
@@ -19,41 +19,44 @@ static int	wait_child(size_t cmd_cnt, pid_t last_pid)
 			ret = status;
 	}
 	if (WIFEXITED(ret))
+	{
 		return (WEXITSTATUS(ret));
+	}
 	if (WIFSIGNALED(ret))
+	{
+		if (WTERMSIG(ret) == SIGQUIT)
+			ft_putstr_fd("Quit: 3", STDERR_FILENO);
+		ft_putstr_fd("\n", STDERR_FILENO);
 		return (WTERMSIG(ret) + SIGNAL_EXIT);
-	if (WIFSTOPPED(ret))
-		return (WSTOPSIG(ret) + SIGNAL_EXIT);
-	return (SIG_CONT + SIGNAL_EXIT);
+	}
+	return (FAILURE);
 }
 
-static int	invalid_command_return(t_parsed_list **head, char **envp)
+static void	exec_command_unit(
+	t_parsed_unit *parsed_unit, t_exec_info *exec_info
+	)
 {
-	free_parsed_list(head);
-	ft_free((void **)&envp);
-	return (127);
+	if (exec_info->is_first && exec_info->is_last)
+		exec_single_cmd(parsed_unit, exec_info);
+	else
+		exec_multiple_cmd(parsed_unit, exec_info);
 }
 
-int	execute(t_parsed_list *parsed_list, t_env_list **env)
+void	execute(t_parsed_list *parsed_list, t_env_list **env)
 {
-	int				ret_value;
-	t_context		context;
+	t_exec_info		exec_info;
 
-	init_context(&context, &parsed_list, *env);
-	if (check_cmd_valid(parsed_list, *env) != SUCCESS)
-		return (invalid_command_return(&context.parsed_head, context.envp));
+	init_exec_info(&exec_info, &parsed_list, *env);
 	while (parsed_list)
 	{
 		if (!parsed_list->next)
-			context.pipe_info.is_last = TRUE;
-		ret_value = exec_command_unit(parsed_list->parsed_unit, &context);
-		context.pipe_info.is_first = FALSE;
+			exec_info.is_last = TRUE;
+		exec_command_unit(parsed_list->parsed_unit, &exec_info);
+		exec_info.is_first = FALSE;
 		parsed_list = parsed_list->next;
-		context.process_cnt += (ret_value == SUCCESS);
 	}
-	ret_value = wait_child(context.process_cnt, context.last_pid);
-	free_parsed_list(&context.parsed_head);
-	ft_free((void **)&context.envp);
-	// return (ret_value);
-	return (SUCCESS); ///////////// /temp
+	if (exec_info.process_cnt > 0)
+		set_exit_status(wait_child(exec_info.process_cnt, exec_info.last_pid));
+	free_parsed_list(&exec_info.parsed_head);
+	ft_free((void **)&exec_info.envp);
 }

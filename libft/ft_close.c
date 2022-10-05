@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_malloc.c                                        :+:      :+:    :+:   */
+/*   ft_close.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljeongin <ljeongin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/10 19:55:17 by ljeongin          #+#    #+#             */
-/*   Updated: 2022/09/19 19:03:48 by ljeongin         ###   ########.fr       */
+/*   Created: 2022/10/02 13:01:16 by ljeongin          #+#    #+#             */
+/*   Updated: 2022/10/02 20:18:12 by ljeongin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
+#include <unistd.h>
 
-void	*ft_malloc(size_t size)
+void	ft_close(int fd)
 {
-	void	*ret;
-
-	ret = malloc(size);
-	if (!ret)
-		ft_perror_exit("malloc() error");
-	return (ret);
+	if (fd < 3)
+		return ;
+	if (close(fd) < 0)
+		ft_perror_exit("close() error");
 }

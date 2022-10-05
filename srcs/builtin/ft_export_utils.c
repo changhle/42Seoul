@@ -53,26 +53,43 @@ void	sort_key(char **key)
 	}
 }
 
-char	**get_key(char *str)
+char	*get_key(char *str)
 {
 	int		i;
-	char	**key;
+	char	*key;
 
-	key = ft_malloc(sizeof(char **) * 3);
-	key[0] = ft_strdup("unset");
 	if (ft_strchr(str, '='))
 	{
 		i = 0;
 		while (str[i])
 		{
 			if (str[i] == '=')
-				break;
+				break ;
 			i++;
 		}
-		key[1] = ft_substr(str, 0, i);
+		key = ft_substr(str, 0, i);
 	}
 	else
-		key[1] = ft_strdup(str);
-	key[2] = NULL;
+		key = ft_strdup(str);
+	return (key);
+}
+
+char	*get_value(char *str)
+{
+	int		i;
+	char	*key;
+
+	key = NULL;
+	if (ft_strchr(str, '='))
+	{
+		i = 0;
+		while (str[i])
+		{
+			if (str[i] == '=')
+				break ;
+			i++;
+		}
+		key = ft_substr(str, i + 1, ft_strlen(str) - i - 1);
+	}
 	return (key);
 }

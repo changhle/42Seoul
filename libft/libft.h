@@ -6,7 +6,7 @@
 /*   By: ljeongin <ljeongin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 16:47:57 by ljeongin          #+#    #+#             */
-/*   Updated: 2022/09/21 10:52:04 by ljeongin         ###   ########.fr       */
+/*   Updated: 2022/10/04 20:17:46 by ljeongin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,10 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void(*del)(void *));
 int		ft_iseq(const char *s1, const char *s2);
 void	*ft_malloc(size_t size);
 void	ft_free(void **ptr);
+void	ft_close(int fd);
+void	ft_dup2(int fd1, int fd2);
+void	ft_pipe(int pipefd[2]);
+void	ft_perror(char *str);
+void	ft_perror_exit(char *str);
 
 #endif

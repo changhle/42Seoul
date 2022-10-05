@@ -30,7 +30,9 @@ int	ft_env(char **cmd, t_env_list **env_list)
 		print_env(env_list);
 	else
 	{
-		printf("env: %s: No such file or directory\n", cmd[1]);
+		ft_putstr_fd("env: ", STDERR_FILENO);
+		ft_putstr_fd(cmd[1], STDERR_FILENO);
+		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
 		return (1);
 	}
 	return (0);

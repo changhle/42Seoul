@@ -1,10 +1,9 @@
-#include "minishell.h"
 #include "executor.h"
 #include "libft.h"
 
 static void	free_redirect_list(t_redirect_list *redirect_list)
 {
-	t_redirect_list *tmp;
+	t_redirect_list	*tmp;
 
 	while (redirect_list)
 	{
@@ -34,7 +33,7 @@ static void	free_parsed_unit(t_parsed_unit *parsed_unit)
 	parsed_unit->redir_in_list = NULL;
 	parsed_unit->redir_out_list = NULL;
 }
-#include <stdio.h>
+
 void	free_parsed_list(t_parsed_list **parsed_list)
 {
 	t_parsed_list	*tmp;

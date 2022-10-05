@@ -3,37 +3,37 @@
 #include "libft.h"
 #include "minishell.h"
 
-static void	print_arg(int argc, char **argv)
+static void	print_arg(char **cmd)
 {
 	int	i;
 	int	flag;
 
-	if (ft_iseq(argv[1], "-n"))
+	if (ft_strncmp(cmd[1], "-n", 2) == 0)
 		flag = 1;
 	else
 		flag = 0;
 	i = flag + 1;
-	while (i < argc)
+	while (cmd[i])
 	{
-		ft_putstr_fd(argv[i], STDOUT_FILENO);
+		ft_putstr_fd(cmd[i], STDOUT_FILENO);
 		i++;
-		if (i < argc)
+		if (cmd[i])
 			ft_putstr_fd(" ", STDOUT_FILENO);
 	}
 	if (flag == 0)
 		ft_putstr_fd("\n", STDOUT_FILENO);
 }
 
-int	ft_echo(char **argv)
+int	ft_echo(char **cmd)
 {
-	int	argc;
+	int	i;
 
-	argc = 0;
-	while (argv[argc])
-		argc++;
-	if (argc < 2)
+	i = 0;
+	while (cmd[i])
+		i++;
+	if (i < 2)
 		ft_putstr_fd("\n", STDOUT_FILENO);
 	else
-		print_arg(argc, argv);
+		print_arg(cmd);
 	return (0);
 }

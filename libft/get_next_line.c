@@ -6,11 +6,12 @@
 /*   By: ljeongin <ljeongin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/20 13:47:20 by ljeongin          #+#    #+#             */
-/*   Updated: 2022/09/27 10:20:14 by ljeongin         ###   ########.fr       */
+/*   Updated: 2022/10/04 20:15:50 by ljeongin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "libft.h"
 
 char	*gnl_read_join(t_backup_list *here)
 {
@@ -76,9 +77,7 @@ t_backup_list	*gnl_search_add_list(t_backup_list **head, int fd)
 			return (index);
 		index = index->next;
 	}
-	new_list = malloc(sizeof(t_backup_list));
-	if (!new_list)
-		return (NULL);
+	new_list = ft_malloc(sizeof(t_backup_list));
 	new_list->next = *head;
 	*head = new_list;
 	new_list->fd = fd;
@@ -113,23 +112,13 @@ char	*get_next_line(int fd)
 {
 	static t_backup_list	*head;
 	t_backup_list			*here;
-	t_cont				ubox;
+	t_cont					ubox;
 
-	if (BUFFER_SIZE <= 0)
-		return (NULL);
 	here = gnl_search_add_list(&head, fd);
-	if (!here)
-		return (NULL);
 	if (!here->backup)
 		here->backup = gnl_strdup("");
-	if (!here->backup)
-	{
-		gnl_del_list(&head, here);
-		return (NULL);
-	}
 	ubox.line = gnl_read_join(here);
-	free(here->backup);
-	here->backup = NULL;
+	ft_free((void **)&here->backup);
 	if (ubox.line == 0)
 		ubox.ret = NULL;
 	else

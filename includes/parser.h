@@ -9,7 +9,7 @@ typedef struct s_token_info		t_token_info;
 typedef struct s_token_list		t_token_list;
 typedef struct s_expand_info	t_expand_info;
 
-struct t_parsed_list;
+struct							s_parsed_list;
 
 enum e_token_type
 {
@@ -68,11 +68,14 @@ void			remove_quote(t_token_list **token);
 **	lexer && parser
 */
 int				lexer(t_token_list **head);
-int				mini_parse(
-	t_token_list *token_head, t_parsed_list **parsed_head
-	);
-void			add_redirect_node(t_redirect_list **head,
-	t_token_list *token, t_redirect_type type);
+void			mini_parse(
+					t_token_list *token_head, t_parsed_list **parsed_head
+					);
+void			add_redirect_node(
+					t_redirect_list **head,
+					t_token_list *token,
+					t_redirect_type type
+					);
 void			free_old_cmd(char **cmd);
 
 #endif

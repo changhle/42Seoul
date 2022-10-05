@@ -1,5 +1,6 @@
 SHELL_DIR		:=	shell
-SHELL_SRCS		:=	shell.c shell_banner.c
+SHELL_SRCS		:=	shell.c shell_banner.c \
+					loop_readline.c set_env_list.c
 SHELL_SRCS		:=	$(addprefix $(SHELL_DIR)/, $(SHELL_SRCS))
 
 PARSER_DIR		:=	parser
@@ -9,12 +10,11 @@ PARSER_SRCS		:=	parser.c tokenizer.c tokenizer_utils.c \
 PARSER_SRCS		:=	$(addprefix $(PARSER_DIR)/, $(PARSER_SRCS))
 
 EXECUTOR_DIR	:=	executor
-EXECUTOR_SRCS	:=	executor.c free_parsed_list.c check_cmd_valid.c \
-					exec_command.c \
-					exec_single_cmd.c exec_first_cmd.c exec_last_cmd.c \
-					exec_mid_cmd.c exec_builtin.c \
-					get_infile_fd.c get_outfile_fd.c get_command.c \
-					init_context.c
+EXECUTOR_SRCS	:=	executor.c free_parsed_list.c get_cmd_with_path.c \
+					exec_builtin.c \
+					init_exec_info.c exec_single_cmd.c exec_multiple_cmd.c \
+					get_infile_fd.c get_outfile_fd.c here_doc.c \
+					executor_util.c
 EXECUTOR_SRCS	:=	$(addprefix $(EXECUTOR_DIR)/, $(EXECUTOR_SRCS))
 
 BUILTIN_DIR		:=	builtin
@@ -24,9 +24,9 @@ BUILTIN_SRCS	:=	$(addprefix $(BUILTIN_DIR)/, $(BUILTIN_SRCS))
 
 
 SRCS_DIR		:=	srcs
-SRCS			:=	main.c loop_readline.c \
-					$(PARSER_SRCS) \
+SRCS			:=	main.c \
 					$(SHELL_SRCS) \
+					$(PARSER_SRCS) \
 					$(EXECUTOR_SRCS) \
 					$(BUILTIN_SRCS)
 SRCS			:=	$(addprefix $(SRCS_DIR)/, $(SRCS))
@@ -42,7 +42,7 @@ READLINE		:=	$(READLINE_DIR)/libreadline.a \
 					$(READLINE_DIR)/libhistory.a
 
 CC				:=	gcc
-CFLAGS			:=	-Wall -Werror -Wextra -D READLINE_LIBRARY
+CFLAGS			:=	-g -Wall -Werror -Wextra -D READLINE_LIBRARY
 RM				:=	rm -f
 
 NAME			:=	minishell

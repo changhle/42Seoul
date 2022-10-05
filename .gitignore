@@ -16,10 +16,3 @@ file2
 
 # executable
 minishell
-
-# gitignore
-.gitignore
-
-#ref
-pipex
-pipex/*

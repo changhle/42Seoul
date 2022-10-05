@@ -1,9 +1,29 @@
 #include <stdlib.h>
+#include <unistd.h>
 
 #include "minishell.h"
 #include "libft.h"
 
-static void	remove_export(char *str, t_env_list **env_list)
+static int	is_valid(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isalpha(str[i]) && str[i] != '_')
+		{
+			ft_putstr_fd("minishell: unset: `", STDERR_FILENO);
+			ft_putstr_fd(str, STDERR_FILENO);
+			ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
+void	remove_export(char *str, t_env_list **env_list)
 {
 	t_env_list	*tmp;
 	t_env_list	*prev;
@@ -32,9 +52,14 @@ static void	remove_export(char *str, t_env_list **env_list)
 int	ft_unset(char **cmd, t_env_list **env_list)
 {
 	int	i;
+	int	ret_value;
 
 	i = 1;
+	ret_value = 0;
 	while (cmd[i])
+	{
+		ret_value = is_valid(cmd[i]);
 		remove_export(cmd[i++], env_list);
+	}
 	return (0);
 }

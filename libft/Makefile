@@ -6,7 +6,7 @@
 #    By: ljeongin <ljeongin@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/16 21:21:34 by ljeongin          #+#    #+#              #
-#    Updated: 2022/09/24 14:19:42 by ljeongin         ###   ########.fr        #
+#    Updated: 2022/10/04 20:18:39 by ljeongin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SRCS		=	ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isalnum.c \
 				ft_lstnew.c ft_lstadd_front.c ft_lstsize.c \
 				ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c \
 				ft_lstclear.c ft_lstiter.c ft_lstmap.c \
-				ft_iseq.c ft_malloc.c ft_free.c \
+				ft_iseq.c ft_malloc.c ft_free.c ft_perror.c \
+				ft_close.c ft_dup2.c ft_pipe.c \
 				get_next_line.c get_next_line_utils.c
 
 OBJS		=	$(SRCS:.c=.o)

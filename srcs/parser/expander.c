@@ -11,6 +11,8 @@ static char	*find_env(char *str, t_env_list **env)
 
 	if (*str == '\0')
 		return (ft_strdup("$"));
+	else if (ft_iseq(str, "?"))
+		return (ft_itoa(g_status));
 	tmp = *env;
 	while (tmp)
 	{
@@ -36,7 +38,8 @@ static void	replace_env(char *token, t_env_list **env,
 	while (1)
 	{
 		if (!ft_isalnum(token[info->index + 1])
-			&& token[info->index + 1] != '_')
+			&& token[info->index + 1] != '_'
+			&& token[info->index + 1] != '?')
 		{
 			info->env_buf = ft_substr(token, info->start,
 					info->index - info->start + 1);

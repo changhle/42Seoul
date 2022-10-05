@@ -78,8 +78,7 @@ static void	add_null_cmd(t_parsed_list **parsed_head)
 	while (node)
 	{
 		if (!node->parsed_unit->cmd
-			&& node->parsed_unit->redir_in_list
-			&& node->parsed_unit->redir_in_list->redir_type == REDIR_IN_APPEND)
+			&& node->parsed_unit->redir_in_list)
 		{
 			add_cmd(node->parsed_unit, "");
 		}
@@ -87,12 +86,10 @@ static void	add_null_cmd(t_parsed_list **parsed_head)
 	}
 }
 
-int	mini_parse(t_token_list *token, t_parsed_list **parsed_head)
+void	mini_parse(t_token_list *token, t_parsed_list **parsed_head)
 {
-	int				ret_value;
 	t_parsed_list	*node;
 
-	ret_value = 0; ///////////// temp
 	if (token)
 		node = add_node(parsed_head);
 	while (token)
@@ -110,5 +107,4 @@ int	mini_parse(t_token_list *token, t_parsed_list **parsed_head)
 		token = token->next;
 	}
 	add_null_cmd(parsed_head);
-	return (ret_value);
 }

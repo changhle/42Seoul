@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_malloc.c                                        :+:      :+:    :+:   */
+/*   ft_dup2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljeongin <ljeongin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/10 19:55:17 by ljeongin          #+#    #+#             */
-/*   Updated: 2022/09/19 19:03:48 by ljeongin         ###   ########.fr       */
+/*   Created: 2022/10/02 13:03:36 by ljeongin          #+#    #+#             */
+/*   Updated: 2022/10/02 13:03:41 by ljeongin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
+#include <unistd.h>
 
-void	*ft_malloc(size_t size)
+void	ft_dup2(int fd1, int fd2)
 {
-	void	*ret;
-
-	ret = malloc(size);
-	if (!ret)
-		ft_perror_exit("malloc() error");
-	return (ret);
+	if (fd1 == -1)
+		return ;
+	if (dup2(fd1, fd2) < 0) {
+		ft_perror_exit("dup2() error");
+	}
+	ft_close(fd1);
 }

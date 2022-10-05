@@ -1,10 +1,9 @@
-#include "minishell.h"
 #include "executor.h"
 #include "libft.h"
 
 #include <stddef.h>
 
-static char **get_envp(t_env_list *env_list)
+static char	**get_envp(t_env_list *env_list)
 {
 	t_env_list	*index;
 	char		**ret;
@@ -29,14 +28,14 @@ static char **get_envp(t_env_list *env_list)
 	return (ret);
 }
 
-void	init_context(
-	t_context *context, t_parsed_list **parsed_list, t_env_list *env_list
+void	init_exec_info(
+	t_exec_info *exec_info, t_parsed_list **parsed_list, t_env_list *env_list
 	)
 {
-	context->pipe_info.is_first = TRUE;
-	context->pipe_info.is_last = FALSE;
-	context->process_cnt = 0;
-	context->parsed_head = *parsed_list;
-	context->env_head = env_list;
-	context->envp = get_envp(env_list);
+	exec_info->is_first = TRUE;
+	exec_info->is_last = FALSE;
+	exec_info->process_cnt = 0;
+	exec_info->parsed_head = *parsed_list;
+	exec_info->env_head = env_list;
+	exec_info->envp = get_envp(env_list);
 }

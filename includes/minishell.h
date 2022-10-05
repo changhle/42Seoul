@@ -1,10 +1,8 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <stddef.h>
-
-typedef enum e_bool			t_bool;
-typedef enum e_ret_value	t_ret_value;
+typedef enum e_bool				t_bool;
+typedef enum e_ret_value		t_ret_value;
 
 typedef struct s_parsed_unit	t_parsed_unit;
 typedef struct s_parsed_list	t_parsed_list;
@@ -26,11 +24,10 @@ enum e_ret_value
 
 enum e_redirect_type
 {
-	// set redirect_type = 0 when there's no redirection
-	REDIR_IN = 1,		// <
-	REDIR_IN_APPEND,	// <<
-	REDIR_OUT,			// >
-	REDIR_OUT_APPEND	// >>
+	REDIR_IN = 1,
+	REDIR_IN_APPEND,
+	REDIR_OUT,
+	REDIR_OUT_APPEND
 };
 
 struct s_env_list
@@ -61,34 +58,52 @@ struct s_parsed_list
 	struct s_parsed_list	*next;
 };
 
+/*
+**	global var
+*/
+extern			int	g_status;
+
+/*
+**	shell
+*/
+
 void			printf_shell_banner(void);
 
-t_env_list		*add_env_node(t_env_list **env);
-int				loop_readline(char **envp);
+void			loop_readline(char **envp);
 char			*read_shell_line(char *prompt);
+
+void			init_env(char **envp, t_env_list **env);
+t_env_list		*add_env_node(t_env_list **env);
+void			free_env_list(t_env_list *env_list);
 
 /*
 **	parser
 */
-int				parse(char *line, t_parsed_list **parsed_head, t_env_list **env_list);
+int				parse(
+					char *line,
+					t_parsed_list **parsed_head,
+					t_env_list **env_list
+					);
 
 /*
 **	executor
 */
-int				execute(t_parsed_list *parsed__list, t_env_list **env_list);
+void			execute(t_parsed_list *parsed__list, t_env_list **env_list);
 
 /*
 **	builtin
 */
 int				ft_pwd(void);
-int				ft_exit(int exit_value);
+int				ft_exit(char **cmd);
 int				ft_cd(char **argv);
 int				ft_echo(char **argv);
 int				ft_env(char **cmd, t_env_list **env_list);
 int				ft_export(char **cmd, t_env_list **env_list);
 char			**copy_env_key(t_env_list **env_list);
 void			sort_key(char **key);
-char			**get_key(char *str);
+char			*get_key(char *str);
+char			*get_value(char *str);
 int				ft_unset(char **cmd, t_env_list **env_list);
+void			remove_export(char *str, t_env_list **env_list);
 
 #endif

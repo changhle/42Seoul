@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "libft.h"
 
 size_t	gnl_strlen(const char *s)
 {
@@ -44,9 +45,7 @@ char	*gnl_strdup(const char *s)
 
 	i = 0;
 	len = gnl_strlen(s);
-	ret = malloc(sizeof(char) * (len + 1));
-	if (!ret)
-		return (NULL);
+	ret = ft_malloc(sizeof(char) * (len + 1));
 	while (s[i] && i < len)
 	{
 		ret[i] = s[i];
