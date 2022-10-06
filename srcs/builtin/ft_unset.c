@@ -4,22 +4,25 @@
 #include "minishell.h"
 #include "libft.h"
 
+static	int	print_error(char *str)
+{
+	ft_putstr_fd("minishell: unset: `", STDERR_FILENO);
+	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
+	return (1);
+}
+
 static int	is_valid(char *str)
 {
 	int	i;
 
 	if (!ft_isalpha(str[0]) && str[0] != '_')
-		return (1);
+		return (print_error(str));
 	i = 1;
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]) && !ft_isalpha(str[i]) && str[i] != '_')
-		{
-			ft_putstr_fd("minishell: unset: `", STDERR_FILENO);
-			ft_putstr_fd(str, STDERR_FILENO);
-			ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
-			return (1);
-		}
+			return (print_error(str));
 		i++;
 	}
 	return (0);

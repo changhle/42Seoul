@@ -33,33 +33,33 @@ static void	print_export(char **key, t_env_list **env_list)
 	}
 }
 
+static	int	print_error(char *str)
+{
+	ft_putstr_fd("minishell: export: `", STDERR_FILENO);
+	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
+	ft_free((void **)&str);
+	return (1);
+}
+
 static int	is_valid(char *str)
 {
 	int	i;
 
 	if (!ft_isalpha(str[0]) && str[0] != '_')
-	{
-		ft_free((void **)&str);
-		return (1);
-	}
+		return (print_error(str));
 	i = 1;
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]) && !ft_isalpha(str[i]) && str[i] != '_')
-		{
-			ft_putstr_fd("minishell: export: `", STDERR_FILENO);
-			ft_putstr_fd(str, STDERR_FILENO);
-			ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
-			ft_free((void **)&str);
-			return (1);
-		}
+			return (print_error(str));
 		i++;
 	}
 	ft_free((void **)&str);
 	return (0);
 }
 
-static void	add_export(char *key, char *value, t_env_list **env_list)
+void	add_export(char *key, char *value, t_env_list **env_list)
 {
 	t_env_list	*node;
 
