@@ -4,7 +4,7 @@
 
 #include <stdio.h>
 #include <signal.h>
-#include <wait.h>
+#include <sys/wait.h>
 
 static int	wait_child(pid_t pid)
 {

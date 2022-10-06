@@ -8,8 +8,7 @@ static int	is_valid(char *str)
 {
 	int	i;
 
-	
-	if (!ft_isalpha(str[i]) && str[i] != '_')
+	if (!ft_isalpha(str[0]) && str[0] != '_')
 		return (1);
 	i = 1;
 	while (str[i])

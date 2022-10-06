@@ -48,7 +48,9 @@ void	add_cmd(t_parsed_unit *node, char *token)
 		}
 		free_old_cmd(node->cmd);
 	}
-	tmp[n] = ft_strdup(token);
+	tmp[n] = NULL;
+	if (token)
+		tmp[n] = ft_strdup(token);
 	tmp[n + 1] = NULL;
 	node->cmd = tmp;
 }
@@ -101,9 +103,10 @@ void	mini_parse(t_token_list *token, t_parsed_list **parsed_head)
 			add_cmd(node->parsed_unit, token->token);
 		else if (token->token_type == REDIRECT)
 		{
-			if (token->next->token_type == WORD)
-				add_redirect(node->parsed_unit, token);
+			add_redirect(node->parsed_unit, token);
 			token = token->next;
+			if (!token)
+				break ;
 		}
 		else if (token->token_type == PIPE)
 			node = add_node(parsed_head);

@@ -6,7 +6,8 @@ SHELL_SRCS		:=	$(addprefix $(SHELL_DIR)/, $(SHELL_SRCS))
 PARSER_DIR		:=	parser
 PARSER_SRCS		:=	parser.c tokenizer.c tokenizer_utils.c \
 					expander.c expander_utils.c remove_quote.c \
-					lexer.c mini_parser.c mini_parser_utils.c
+					lexer.c mini_parser.c mini_parser_utils.c \
+					word_split.c
 PARSER_SRCS		:=	$(addprefix $(PARSER_DIR)/, $(PARSER_SRCS))
 
 EXECUTOR_DIR	:=	executor
@@ -51,7 +52,7 @@ NAME			:=	minishell
 all				:	$(NAME)
 
 $(NAME)			:	$(OBJS) $(LIBFT) $(READLINE)
-	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LIBFT) \
+	$(CC) -g $(CFLAGS) -o $@ $(OBJS) $(LIBFT) \
 	-L$(READLINE_DIR) -lreadline -lhistory -lncurses
 
 %.o				:	%.c

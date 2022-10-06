@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "minishell.h"
 #include "parser.h"
@@ -14,7 +15,7 @@ void	add_redirect_node(t_redirect_list **head,
 	new = ft_malloc(sizeof(t_redirect_list));
 	new->redir_type = type;
 	new->filename = NULL;
-	if (token->next->token)
+	if (token->next->token && token->next->token_type == WORD)
 		new->filename = ft_strdup(token->next->token);
 	new->next = NULL;
 	if (!tmp)

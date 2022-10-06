@@ -17,6 +17,8 @@ char	*comb_str(char *s1, char *s2)
 {
 	char	*ret;
 
+	if (!s2)
+		return (s1);
 	ret = ft_strjoin(s1, s2);
 	free(s1);
 	free(s2);

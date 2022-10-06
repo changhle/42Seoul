@@ -49,6 +49,7 @@ struct s_expand_info
 **	tokenizer
 */
 void			tokenizer(char *line, t_token_list **token);
+void			free_token_list(t_token_list *token_list);
 
 void			init_token(char *line, t_token_info *info);
 char			set_quote(char quote, char c);

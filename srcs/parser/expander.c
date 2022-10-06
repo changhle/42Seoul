@@ -75,11 +75,9 @@ static void	replace_env(char *token, t_env_list **env,
 
 void	expander(t_token_list **token_list, t_env_list **env)
 {
-	t_token_list	*prev;
 	t_token_list	*tmp;
 	t_expand_info	info;
 
-	prev = NULL;
 	tmp = *token_list;
 	while (tmp)
 	{
@@ -97,8 +95,10 @@ void	expander(t_token_list **token_list, t_env_list **env)
 		info.buf = comb_str(info.buf,
 			ft_substr(tmp->token, info.start, info.index - info.start + 1));
 		ft_free((void **)&tmp->token);
-		prev = tmp;
-		tmp->token = info.buf;
+		if (info.buf[0] == '\0')
+			ft_free((void **)&info.buf);
+		else
+			tmp->token = info.buf;
 		tmp = tmp->next;
 	}
 }
