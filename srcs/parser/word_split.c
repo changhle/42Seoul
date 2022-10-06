@@ -7,8 +7,8 @@ static void	add_token(t_token_list *node, t_token_list **token,
 	t_token_list	*new;
 	t_token_list	*tmp;
 
-	// if (node->token[0] != '\0' && info->buf[0] == '\0')
-	// 	return ;
+	if (node->token && node->token[0] != '\0' && info->buf[0] == '\0')
+		return ;
 	tmp = *token;
 	new = ft_malloc(sizeof(t_token_list));
 	new->token_type = node->token_type;
