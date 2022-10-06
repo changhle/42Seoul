@@ -13,7 +13,9 @@ void	add_redirect_node(t_redirect_list **head,
 	tmp = *head;
 	new = ft_malloc(sizeof(t_redirect_list));
 	new->redir_type = type;
-	new->filename = ft_strdup(token->next->token);
+	new->filename = NULL;
+	if (token->next->token)
+		new->filename = ft_strdup(token->next->token);
 	new->next = NULL;
 	if (!tmp)
 		*head = new;

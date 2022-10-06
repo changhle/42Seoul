@@ -5,15 +5,10 @@
 #include <unistd.h>
 #include <string.h>
 
-extern int	g_exit_status;
-
-void	set_exit_status(int exit_value)
-{
-	g_exit_status = exit_value;
-}
-
 t_bool	is_builtin(char *command)
 {
+	if (!command)
+		return (FALSE);
 	return (
 		ft_iseq(command, "echo")
 		|| ft_iseq(command, "cd")

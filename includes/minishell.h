@@ -61,7 +61,7 @@ struct s_parsed_list
 /*
 **	global var
 */
-extern			int	g_status;
+extern int						g_exit_status;
 
 /*
 **	shell

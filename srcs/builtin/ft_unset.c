@@ -8,10 +8,13 @@ static int	is_valid(char *str)
 {
 	int	i;
 
-	i = 0;
+	
+	if (!ft_isalpha(str[i]) && str[i] != '_')
+		return (1);
+	i = 1;
 	while (str[i])
 	{
-		if (!ft_isalpha(str[i]) && str[i] != '_')
+		if (!ft_isdigit(str[i]) && !ft_isalpha(str[i]) && str[i] != '_')
 		{
 			ft_putstr_fd("minishell: unset: `", STDERR_FILENO);
 			ft_putstr_fd(str, STDERR_FILENO);

@@ -37,18 +37,25 @@ static int	is_valid(char *str)
 {
 	int	i;
 
-	i = 0;
+	if (!ft_isalpha(str[0]) && str[0] != '_')
+	{
+		ft_free((void **)&str);
+		return (1);
+	}
+	i = 1;
 	while (str[i])
 	{
-		if (!ft_isalpha(str[i]) && str[i] != '_' && str[i] != '=')
+		if (!ft_isdigit(str[i]) && !ft_isalpha(str[i]) && str[i] != '_')
 		{
 			ft_putstr_fd("minishell: export: `", STDERR_FILENO);
 			ft_putstr_fd(str, STDERR_FILENO);
 			ft_putstr_fd("': not a valid identifier\n", STDERR_FILENO);
+			ft_free((void **)&str);
 			return (1);
 		}
 		i++;
 	}
+	ft_free((void **)&str);
 	return (0);
 }
 
@@ -93,7 +100,7 @@ int	ft_export(char **cmd, t_env_list **env_list)
 	{
 		while (cmd[i])
 		{
-			ret_value = is_valid(cmd[i]);
+			ret_value = is_valid(get_key(cmd[i]));
 			if (!ret_value)
 				add_export(get_key(cmd[i]), get_value(cmd[i]), env_list);
 			i++;

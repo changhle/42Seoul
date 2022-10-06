@@ -78,9 +78,12 @@ static void	add_null_cmd(t_parsed_list **parsed_head)
 	while (node)
 	{
 		if (!node->parsed_unit->cmd
-			&& node->parsed_unit->redir_in_list)
+			&& (node->parsed_unit->redir_in_list
+				|| node->parsed_unit->redir_out_list))
 		{
-			add_cmd(node->parsed_unit, "");
+			// add_cmd(node->parsed_unit, "");
+			node->parsed_unit->cmd = ft_malloc(sizeof(char *));
+			node->parsed_unit->cmd[0] = NULL;
 		}
 		node = node->next;
 	}

@@ -56,7 +56,6 @@ int			get_heredoc_fd(char *limiter, t_bool *is_no_heredoc);
 **	util
 */
 t_bool		is_builtin(char *command);
-void		set_exit_status(int exit_value);
 void		print_minishell_error(char *str, char *desc, int err_num);
 
 #endif

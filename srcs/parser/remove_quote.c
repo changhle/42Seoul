@@ -33,9 +33,12 @@ void	remove_quote(t_token_list **token)
 	tmp = *token;
 	while (tmp)
 	{
-		buf = remove_quote_helper(tmp->token);
-		free(tmp->token);
-		tmp->token = buf;
+		if (tmp->token)
+		{
+			buf = remove_quote_helper(tmp->token);
+			free(tmp->token);
+			tmp->token = buf;
+		}
 		tmp = tmp->next;
 	}
 }

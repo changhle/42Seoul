@@ -59,10 +59,11 @@ int				is_redirect(char *str);
 **	expander
 */
 // void			expander(t_token_list **token, t_env_list **env);
-char			*expander(char *line, t_env_list **env);
+void			expander(t_token_list **s_token_list, t_env_list **env);
 void			init_expand(t_expand_info *info);
 char			*comb_str(char *s1, char *s2);
 void			remove_quote(t_token_list **token);
+t_token_list	*word_split(t_token_list **token_list);
 
 /*
 **	lexer && parser

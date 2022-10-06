@@ -38,7 +38,7 @@ void	loop_readline(char **envp)
 	init_env(envp, &env_list);
 	while (1)
 	{
-		line = read_shell_line("\033[0;34mminishell$\033[0m ");
+		line = read_shell_line("\001\033[0;34m\002minishell$\001\033[0m\002 ");
 		if (!line)
 			write_exit_without_newline();
 		if (is_valid_line(&line))

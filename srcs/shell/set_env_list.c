@@ -56,8 +56,7 @@ void	init_env(char **envp, t_env_list **env)
 		{
 			if (envp[i][j] == '=')
 			{
-				envp[i][j] = '\0';
-				node->key = ft_strdup(envp[i]);
+				node->key = ft_substr(envp[i], 0, j);
 				node->value = ft_strdup(&envp[i][j + 1]);
 				break ;
 			}

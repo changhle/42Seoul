@@ -59,7 +59,7 @@ void	get_cmd_with_path(char **cmd, t_env_list *env_list)
 {
 	char	**path;
 
-	if (is_builtin(cmd[0]))
+	if (!cmd[0] || is_builtin(cmd[0]))
 		return ;
 	path = get_path(env_list);
 	get_command(cmd, path);

@@ -19,9 +19,7 @@ static int	wait_child(size_t cmd_cnt, pid_t last_pid)
 			ret = status;
 	}
 	if (WIFEXITED(ret))
-	{
 		return (WEXITSTATUS(ret));
-	}
 	if (WIFSIGNALED(ret))
 	{
 		if (WTERMSIG(ret) == SIGQUIT)
@@ -56,7 +54,7 @@ void	execute(t_parsed_list *parsed_list, t_env_list **env)
 		parsed_list = parsed_list->next;
 	}
 	if (exec_info.process_cnt > 0)
-		set_exit_status(wait_child(exec_info.process_cnt, exec_info.last_pid));
+		g_exit_status = wait_child(exec_info.process_cnt, exec_info.last_pid);
 	free_parsed_list(&exec_info.parsed_head);
 	ft_free((void **)&exec_info.envp);
 }

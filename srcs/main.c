@@ -4,8 +4,6 @@
 #include "minishell.h"
 #include "libft.h"
 
-int	g_status = 0;
-
 static int	argc_error(int argc, char **argv)
 {
 	if (argc > 1)
