@@ -75,6 +75,20 @@
 // 	}
 // }
 
+static int	print_error(char c)
+{
+	if (c == '\'' || c == '\"')
+		ft_putstr_fd("minishell: syntax error near unclosed quote `",
+			STDERR_FILENO);
+	else
+		ft_putstr_fd("minishell: syntax error near unexpected char `",
+			STDERR_FILENO);
+	ft_putchar_fd(c, STDERR_FILENO);
+	ft_putstr_fd("\'\n", STDERR_FILENO);
+	g_exit_status = 1;
+	return (1);
+}
+
 int	not_interpret(char *line)
 {
 	char	quote;
@@ -85,21 +99,11 @@ int	not_interpret(char *line)
 		if (*line == '\'' || *line == '\"')
 			quote = set_quote(quote, *line);
 		else if (quote == 0 && (*line == '\\' || *line == ';'))
-		{
-			ft_putstr_fd("minishell: syntax error near unexpected char `", STDERR_FILENO);
-			ft_putchar_fd((*line), STDERR_FILENO);
-			ft_putstr_fd("\'\n", STDERR_FILENO);
-			return (1);
-		}
+			return (print_error(*line));
 		line++;
 	}
 	if (quote != 0)
-	{
-		ft_putstr_fd("minishell: syntax error near unclosed quote `", STDERR_FILENO);
-		ft_putchar_fd(quote, STDERR_FILENO);
-		ft_putstr_fd("\'\n", STDERR_FILENO);
-		return (1);
-	}
+		return (print_error(quote));
 	return (0);
 }
 
@@ -125,18 +129,12 @@ int	parse(char *line, t_parsed_list **parsed_head, t_env_list **env_list)
 	int				ret_value;
 
 	if (not_interpret(line))
-	{
-		g_exit_status = 1;
-		return (FAILURE); // need to free token_list to handle leaks before return
-	}
-	// line = expander(line, env_list);
+		return (FAILURE);
 	token_head = NULL;
 	tokenizer(line, &token_head);
 	ret_value = lexer(&token_head);
 	if (ret_value == FAILURE)
 	{
-		g_exit_status = 258;
-		// free(line);
 		free_token_list(token_head);
 		return (ret_value);
 	}
@@ -150,6 +148,5 @@ int	parse(char *line, t_parsed_list **parsed_head, t_env_list **env_list)
 	mini_parse(token_head, parsed_head);
 	// test_print_unit(*parsed_head);
 	free_token_list(token_head);
-	// free(line);
 	return (ret_value);
 }

@@ -41,11 +41,6 @@ void	word_split_helper(t_token_list *node, t_token_list **token)
 		add_token(node, token, &info);
 		return ;
 	}
-	// if (!node->token || node->token[0] == '\0')
-	// {
-	// 	// add_token(node, token, &info);
-	// 	return ;
-	// }
 	i = 0;
 	init_token(node->token, &info);
 	while (node->token[i])
@@ -56,28 +51,22 @@ void	word_split_helper(t_token_list *node, t_token_list **token)
 			add_token(node, token, &info);
 		else if ((!is_space(node->token[i]) && info.quote == 0)
 			|| info.quote != 0)
-		{
 			info.buf[info.buf_index++] = node->token[i];
-			info.buf[info.buf_index] = '\0';
-		}
 		i++;
 	}
-	if (node->token[i] == '\0')
-		add_token(node, token, &info);
+	add_token(node, token, &info);
 	ft_free((void **)&info.buf);
 }
-#include <stdio.h>
+
 t_token_list	*word_split(t_token_list **token_list)
 {
 	t_token_list	*token;
 	t_token_list	*tmp;
-	// t_token_list	*tmp_free;
 
 	token = NULL;
 	tmp = *token_list;
 	while (tmp)
 	{
-		// tmp_free = tmp;
 		word_split_helper(tmp, &token);
 		tmp = tmp->next;
 	}

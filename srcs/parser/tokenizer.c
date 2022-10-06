@@ -13,14 +13,13 @@ static void	add_token(t_token_list **token, t_token_info *info)
 	if (info->buf[0] == '\0')
 		return ;
 	tmp = *token;
-	new = malloc(sizeof(t_token_list));
+	new = ft_malloc(sizeof(t_token_list));
 	if (ft_strncmp("|", info->buf, ft_strlen(info->buf)) == 0)
 		new->token_type = PIPE;
 	else if (is_redirect(info->buf))
 		new->token_type = REDIRECT;
 	else
 		new->token_type = WORD;
-	info->buf[info->buf_index] = '\0';
 	new->token = ft_strdup(info->buf);
 	new->next = NULL;
 	if (!(*token))
@@ -80,5 +79,5 @@ void	tokenizer(char *line, t_token_list **token)
 		line++;
 	}
 	add_token(token, &info);
-	free(info.buf);
+	ft_free((void **)&info.buf);
 }

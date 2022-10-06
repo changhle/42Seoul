@@ -36,7 +36,7 @@ void	remove_quote(t_token_list **token)
 		if (tmp->token)
 		{
 			buf = remove_quote_helper(tmp->token);
-			free(tmp->token);
+			ft_free((void **)&tmp->token);
 			tmp->token = buf;
 		}
 		tmp = tmp->next;

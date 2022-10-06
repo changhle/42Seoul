@@ -47,8 +47,6 @@ char	*read_shell_line(const char *prompt)
 	tcsetattr(STDOUT_FILENO, TCSANOW, &new_term);
 	line = readline(prompt);
 	tcsetattr(STDOUT_FILENO, TCSANOW, &old_term);
-	// signal(SIGINT, sig_handler_dfl);
-	// signal(SIGQUIT, sig_handler_dfl);
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
 	return (line);

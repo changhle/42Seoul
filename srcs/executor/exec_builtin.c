@@ -4,7 +4,7 @@
 int	exec_builtin(char **cmd, t_env_list **env_list)
 {
 	if (ft_iseq(cmd[0], "cd"))
-		g_exit_status = (ft_cd(cmd));
+		g_exit_status = (ft_cd(cmd, env_list));
 	if (ft_iseq(cmd[0], "echo"))
 		g_exit_status = (ft_echo(cmd));
 	if (ft_iseq(cmd[0], "exit"))

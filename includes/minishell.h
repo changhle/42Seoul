@@ -95,10 +95,11 @@ void			execute(t_parsed_list *parsed__list, t_env_list **env_list);
 */
 int				ft_pwd(void);
 int				ft_exit(char **cmd);
-int				ft_cd(char **argv);
+int				ft_cd(char **argv, t_env_list **env_list);
 int				ft_echo(char **argv);
 int				ft_env(char **cmd, t_env_list **env_list);
 int				ft_export(char **cmd, t_env_list **env_list);
+void			add_export(char *key, char *value, t_env_list **env_list);
 char			**copy_env_key(t_env_list **env_list);
 void			sort_key(char **key);
 char			*get_key(char *str);

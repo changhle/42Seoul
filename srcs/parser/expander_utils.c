@@ -20,7 +20,7 @@ char	*comb_str(char *s1, char *s2)
 	if (!s2)
 		return (s1);
 	ret = ft_strjoin(s1, s2);
-	free(s1);
-	free(s2);
+	ft_free((void **)&s1);
+	ft_free((void **)&s2);
 	return (ret);
 }
