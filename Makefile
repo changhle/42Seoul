@@ -15,7 +15,7 @@ EXECUTOR_SRCS	:=	executor.c free_parsed_list.c get_cmd_with_path.c \
 					exec_builtin.c \
 					init_exec_info.c exec_single_cmd.c exec_multiple_cmd.c \
 					get_infile_fd.c get_outfile_fd.c here_doc.c \
-					executor_util.c
+					print_minishell_error.c
 EXECUTOR_SRCS	:=	$(addprefix $(EXECUTOR_DIR)/, $(EXECUTOR_SRCS))
 
 BUILTIN_DIR		:=	builtin
@@ -52,7 +52,7 @@ NAME			:=	minishell
 all				:	$(NAME)
 
 $(NAME)			:	$(OBJS) $(LIBFT) $(READLINE)
-	$(CC) -g $(CFLAGS) -o $@ $(OBJS) $(LIBFT) \
+	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LIBFT) \
 	-L$(READLINE_DIR) -lreadline -lhistory -lncurses
 
 %.o				:	%.c

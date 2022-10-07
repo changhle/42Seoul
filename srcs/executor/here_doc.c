@@ -48,7 +48,7 @@ static int	heredoc_child(char *limiter, int pipeline[2])
 	exit(SUCCESS);
 }
 
-int	get_heredoc_fd(char *limiter, t_bool *is_no_heredoc)
+int	get_heredoc_fd(char *limiter, t_bool *heredoc_sigint)
 {
 	int		pipeline[2];
 	pid_t	pid;
@@ -65,9 +65,9 @@ int	get_heredoc_fd(char *limiter, t_bool *is_no_heredoc)
 	if (child_stat != SUCCESS)
 	{
 		ft_close(pipeline[0]);
-		*is_no_heredoc = TRUE;
+		*heredoc_sigint = TRUE;
 		return (-1);
 	}
-	*is_no_heredoc = FALSE;
+	*heredoc_sigint = FALSE;
 	return (pipeline[0]);
 }

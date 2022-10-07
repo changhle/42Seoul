@@ -3,12 +3,28 @@
 #include "libft.h"
 #include "minishell.h"
 
+static int	ft_isflag(char *str)
+{
+	int	i;
+
+	if (str[0] != '-')
+		return (0);
+	i = 1;
+	while (str[i])
+	{
+		if (str[i] != 'n')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 static void	print_arg(char **cmd)
 {
 	int	i;
 	int	flag;
 
-	if (ft_strncmp(cmd[1], "-n", 2) == 0)
+	if (ft_isflag(cmd[1]))
 		flag = 1;
 	else
 		flag = 0;

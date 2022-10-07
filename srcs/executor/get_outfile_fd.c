@@ -10,7 +10,7 @@ static int	open_outfile(char *filename, int is_append)
 
 	if (!filename)
 	{
-		ft_putstr_fd("minishell: ambiguous redirect\n", STDERR_FILENO);
+		print_minishell_error(NULL, "ambiguous redirect", 1);
 		return (-1);
 	}
 	if (is_append)
@@ -29,9 +29,9 @@ int	get_outfile_fd(t_redirect_list *redir_out_list)
 	while (redir_out_list && redir_out_list->next)
 	{
 		fd = open_outfile(
-			redir_out_list->filename,
-			redir_out_list->redir_type == REDIR_OUT_APPEND
-			);
+				redir_out_list->filename,
+				redir_out_list->redir_type == REDIR_OUT_APPEND
+				);
 		if (fd == -1)
 			return (-1);
 		ft_close(fd);

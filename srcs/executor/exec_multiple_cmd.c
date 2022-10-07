@@ -3,7 +3,6 @@
 
 #include <signal.h>
 #include <unistd.h>
-#include <stdlib.h>
 
 static t_bool	get_infd_outfd(
 	t_parsed_unit	*parsed_unit, t_exec_info *exec_info, t_fd_data *fd_data

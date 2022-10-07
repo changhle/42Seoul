@@ -9,7 +9,7 @@ void	init_token(char *line, t_token_info *info)
 	info->buf_index = 0;
 	info->quote = 0;
 	info->buf_size = ft_strlen(line);
-	info->buf = ft_calloc(info->buf_size, sizeof(char));
+	info->buf = ft_calloc(info->buf_size + 1, sizeof(char));
 	if (!info->buf)
 		exit(0);
 }

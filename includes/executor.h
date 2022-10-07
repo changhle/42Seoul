@@ -37,6 +37,7 @@ void		exec_multiple_cmd(
 				t_parsed_unit *parsed_unit, t_exec_info *exec_info
 				);
 int			exec_builtin(char **cmd, t_env_list **env_list);
+t_bool		is_builtin(char *command);
 
 void		init_exec_info(
 				t_exec_info *exec_info,
@@ -50,12 +51,8 @@ void		get_cmd_with_path(char **cmd, t_env_list *env_list);
 
 int			get_infile_fd(t_redirect_list *redir_in_list);
 int			get_outfile_fd(t_redirect_list *redir_out_list);
-int			get_heredoc_fd(char *limiter, t_bool *is_no_heredoc);
+int			get_heredoc_fd(char *limiter, t_bool *heredoc_sigint);
 
-/*
-**	util
-*/
-t_bool		is_builtin(char *command);
 void		print_minishell_error(char *str, char *desc, int err_num);
 
 #endif

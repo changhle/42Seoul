@@ -3,7 +3,6 @@
 
 #include <signal.h>
 #include <unistd.h>
-#include <stdlib.h>
 
 static void	get_infd_outfd(t_parsed_unit *parsed_unit, int *infd, int *outfd)
 {
