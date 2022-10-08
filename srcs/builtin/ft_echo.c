@@ -3,20 +3,29 @@
 #include "libft.h"
 #include "minishell.h"
 
-static int	ft_isflag(char *str)
+static int	check_n_option(char **cmd)
 {
-	int	i;
+	int		i;
+	int		j;
+	int		ret;
+	t_bool	is_n_option;
 
-	if (str[0] != '-')
-		return (0);
+	ret = 0;
 	i = 1;
-	while (str[i])
+	while (cmd[i][0] == '-')
 	{
-		if (str[i] != 'n')
-			return (0);
+		j = 0;
+		while (cmd[i][++j] == 'n')
+			is_n_option = TRUE;
+		if (cmd[i][j] != '\0')
+			is_n_option = FALSE;
+		if (is_n_option)
+			ret++;
+		else
+			return (ret);
 		i++;
 	}
-	return (1);
+	return (ret);
 }
 
 static void	print_arg(char **cmd)
@@ -24,8 +33,8 @@ static void	print_arg(char **cmd)
 	int	i;
 	int	flag;
 
-	if (ft_isflag(cmd[1]))
-		flag = 1;
+	if (cmd[1][0] == '-')
+		flag = check_n_option(cmd);
 	else
 		flag = 0;
 	i = flag + 1;

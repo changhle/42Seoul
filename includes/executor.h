@@ -1,11 +1,16 @@
 #ifndef EXECUTOR_H
 # define EXECUTOR_H
 
-# include "minishell.h"
 # include <stdlib.h>
 
-typedef struct s_exec_info	t_exec_info;
-typedef struct s_fd_data	t_fd_data;
+typedef enum e_bool				t_bool;
+typedef struct s_parsed_list	t_parsed_list;
+typedef struct s_parsed_unit	t_parsed_unit;
+typedef struct s_redirect_list	t_redirect_list;
+typedef struct s_env_list		t_env_list;
+
+typedef struct s_exec_info		t_exec_info;
+typedef struct s_fd_data		t_fd_data;
 
 enum e_exit_status
 {
@@ -15,7 +20,7 @@ enum e_exit_status
 
 struct s_exec_info
 {
-	t_parsed_list	*parsed_head;
+	t_parsed_list	*parsed_idx;
 	t_env_list		*env_head;
 	char			**envp;
 	size_t			process_cnt;
@@ -32,27 +37,28 @@ struct s_fd_data
 	int	outfd;
 };
 
-void		exec_single_cmd(t_parsed_unit *parsed_unit, t_exec_info *exec_info);
-void		exec_multiple_cmd(
-				t_parsed_unit *parsed_unit, t_exec_info *exec_info
-				);
-int			exec_builtin(char **cmd, t_env_list **env_list);
-t_bool		is_builtin(char *command);
+void	init_exec_info(t_exec_info *exec_info, t_env_list *env_list);
 
-void		init_exec_info(
-				t_exec_info *exec_info,
-				t_parsed_list **parsed_list,
-				t_env_list *env_list
-				);
+void	exec_single_cmd(t_parsed_unit *parsed_unit, t_exec_info *exec_info);
+void	exec_multiple_cmd(
+			t_parsed_unit *parsed_unit, t_exec_info *exec_info
+			);
+int		exec_builtin(char **cmd, t_env_list **env_list);
+t_bool	is_builtin(char *command);
 
-void		free_parsed_list(t_parsed_list **parsed_list);
+void	get_cmd_with_path(char **cmd, t_env_list *env_list);
 
-void		get_cmd_with_path(char **cmd, t_env_list *env_list);
+int		get_infile_fd(t_redirect_list *redir_in_list);
+int		get_outfile_fd(t_redirect_list *redir_out_list);
+int		get_heredoc_fd(char *limiter, t_bool *heredoc_sigint);
 
-int			get_infile_fd(t_redirect_list *redir_in_list);
-int			get_outfile_fd(t_redirect_list *redir_out_list);
-int			get_heredoc_fd(char *limiter, t_bool *heredoc_sigint);
-
-void		print_minishell_error(char *str, char *desc, int err_num);
+void	get_infd_outfd(
+			t_parsed_unit *parsed_unit,
+			t_exec_info *exec_info,
+			t_fd_data *fd_data
+			);
+void	child_process(char **cmd, t_fd_data fd_data, t_exec_info *exec_info);
+void	ft_execve(char **cmd, char **envp, t_env_list *env_list);
+void	print_minishell_error(char *str, char *desc, int err_num);
 
 #endif

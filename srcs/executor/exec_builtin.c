@@ -1,4 +1,6 @@
+#include "minishell.h"
 #include "executor.h"
+#include "builtin.h"
 #include "libft.h"
 
 t_bool	is_builtin(char *command)
@@ -19,18 +21,18 @@ t_bool	is_builtin(char *command)
 int	exec_builtin(char **cmd, t_env_list **env_list)
 {
 	if (ft_iseq(cmd[0], "cd"))
-		g_exit_status = ft_cd(cmd, env_list);
+		g_exit_status = (ft_cd(cmd, env_list));
 	if (ft_iseq(cmd[0], "echo"))
-		g_exit_status = ft_echo(cmd);
+		g_exit_status = (ft_echo(cmd));
 	if (ft_iseq(cmd[0], "exit"))
-		g_exit_status = ft_exit(cmd);
+		g_exit_status = (ft_exit(cmd));
 	if (ft_iseq(cmd[0], "pwd"))
-		g_exit_status = ft_pwd();
+		g_exit_status = (ft_pwd());
 	if (ft_iseq(cmd[0], "env"))
-		g_exit_status = ft_env(cmd, env_list);
+		g_exit_status = (ft_env(cmd, env_list));
 	if (ft_iseq(cmd[0], "export"))
-		g_exit_status = ft_export(cmd, env_list);
+		g_exit_status = (ft_export(cmd, env_list));
 	if (ft_iseq(cmd[0], "unset"))
-		g_exit_status = ft_unset(cmd, env_list);
+		g_exit_status = (ft_unset(cmd, env_list));
 	return (g_exit_status);
 }

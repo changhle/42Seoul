@@ -46,6 +46,7 @@ void	init_env(char **envp, t_env_list **env)
 	int			j;
 	t_env_list	*node;
 
+	*env = NULL;
 	i = 0;
 	while (envp[i])
 	{

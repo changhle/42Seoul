@@ -2,6 +2,7 @@
 #include <unistd.h>
 
 #include "minishell.h"
+#include "builtin.h"
 #include "libft.h"
 
 static	int	print_error(char *str)
@@ -66,5 +67,5 @@ int	ft_unset(char **cmd, t_env_list **env_list)
 		ret_value = is_valid(cmd[i]);
 		remove_export(cmd[i++], env_list);
 	}
-	return (0);
+	return (ret_value);
 }

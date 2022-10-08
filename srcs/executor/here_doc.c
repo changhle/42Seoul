@@ -1,8 +1,10 @@
+#include "minishell.h"
 #include "executor.h"
 #include "libft.h"
-#include "get_next_line.h"
 
 #include <stdio.h>
+#include "readline.h"
+#include <unistd.h>
 #include <signal.h>
 #include <sys/wait.h>
 
@@ -14,14 +16,12 @@ static int	wait_child(pid_t pid)
 	wait_val = waitpid(pid, &status, 0);
 	if (wait_val == -1)
 		return (FAILURE);
-	if (WIFEXITED(status))
-		return (WEXITSTATUS(status));
 	if (WIFSIGNALED(status))
 	{
 		ft_putstr_fd("\n", STDERR_FILENO);
 		return (WTERMSIG(status) + SIGNAL_EXIT);
 	}
-	return (FAILURE);
+	return (WEXITSTATUS(status));
 }
 
 static int	heredoc_child(char *limiter, int pipeline[2])
@@ -33,8 +33,7 @@ static int	heredoc_child(char *limiter, int pipeline[2])
 	ft_close(pipeline[0]);
 	while (1)
 	{
-		ft_putstr_fd("> ", STDOUT_FILENO);
-		input = get_next_line(STDIN_FILENO);
+		input = readline("> ");
 		if (!input || ft_iseq(input, limiter))
 		{
 			if (input)

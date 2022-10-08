@@ -128,6 +128,7 @@ int	parse(char *line, t_parsed_list **parsed_head, t_env_list **env_list)
 	t_token_list	*tmp;
 	int				ret_value;
 
+	*parsed_head = NULL;
 	if (not_interpret(line))
 		return (FAILURE);
 	token_head = NULL;

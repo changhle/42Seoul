@@ -1,3 +1,5 @@
+#include "minishell.h"
+
 #include <stdio.h>
 #include "readline.h"
 #include <unistd.h>
@@ -13,6 +15,7 @@ void	sig_handler(int signo)
 		rl_replace_line("", 1);
 		rl_on_new_line();
 		rl_redisplay();
+		g_exit_status = 1;
 	}
 }
 
@@ -45,6 +48,7 @@ char	*read_shell_line(const char *prompt)
 	new_term = old_term;
 	new_term.c_lflag &= ~(ECHOCTL);
 	tcsetattr(STDOUT_FILENO, TCSANOW, &new_term);
+	rl_outstream = stderr;
 	line = readline(prompt);
 	tcsetattr(STDOUT_FILENO, TCSANOW, &old_term);
 	signal(SIGINT, SIG_IGN);

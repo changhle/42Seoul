@@ -2,6 +2,8 @@
 #include <unistd.h>
 
 #include "minishell.h"
+#include "builtin.h"
+#include "shell.h"
 #include "libft.h"
 
 static void	print_export(char **key, t_env_list **env_list)

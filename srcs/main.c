@@ -1,8 +1,9 @@
-#include <stdio.h>
 #include <unistd.h>
 
 #include "minishell.h"
 #include "libft.h"
+
+extern char	**environ;
 
 static int	argc_error(int argc, char **argv)
 {
@@ -15,11 +16,11 @@ static int	argc_error(int argc, char **argv)
 	return (127);
 }
 
-int	main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv)
 {
 	if (argc != 1)
 		return (argc_error(argc, argv));
 	printf_shell_banner();
-	loop_readline(envp);
+	loop_readline(environ);
 	return (SUCCESS);
 }

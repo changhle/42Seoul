@@ -1,3 +1,4 @@
+#include "minishell.h"
 #include "executor.h"
 #include "libft.h"
 
@@ -18,8 +19,6 @@ static int	wait_child(size_t cmd_cnt, pid_t last_pid)
 		if (wait_val == last_pid)
 			ret = status;
 	}
-	if (WIFEXITED(ret))
-		return (WEXITSTATUS(ret));
 	if (WIFSIGNALED(ret))
 	{
 		if (WTERMSIG(ret) == SIGQUIT)
@@ -27,7 +26,7 @@ static int	wait_child(size_t cmd_cnt, pid_t last_pid)
 		ft_putstr_fd("\n", STDERR_FILENO);
 		return (WTERMSIG(ret) + SIGNAL_EXIT);
 	}
-	return (FAILURE);
+	return (WEXITSTATUS(ret));
 }
 
 static void	exec_command_unit(
@@ -40,11 +39,11 @@ static void	exec_command_unit(
 		exec_multiple_cmd(parsed_unit, exec_info);
 }
 
-void	execute(t_parsed_list *parsed_list, t_env_list **env)
+void	execute(t_parsed_list *parsed_list, t_env_list **env_list)
 {
 	t_exec_info		exec_info;
 
-	init_exec_info(&exec_info, &parsed_list, *env);
+	init_exec_info(&exec_info, *env_list);
 	while (parsed_list)
 	{
 		if (!parsed_list->next)
@@ -55,6 +54,5 @@ void	execute(t_parsed_list *parsed_list, t_env_list **env)
 	}
 	if (exec_info.process_cnt > 0)
 		g_exit_status = wait_child(exec_info.process_cnt, exec_info.last_pid);
-	free_parsed_list(&exec_info.parsed_head);
 	ft_free((void **)&exec_info.envp);
 }

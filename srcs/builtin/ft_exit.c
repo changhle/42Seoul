@@ -54,6 +54,6 @@ int	ft_exit(char **cmd)
 		else
 			exit(ft_atoi(cmd[1]));
 	}
-	exit(SUCCESS);
+	exit(g_exit_status);
 	return (FAILURE);
 }

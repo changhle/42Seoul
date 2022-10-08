@@ -1,3 +1,4 @@
+#include "minishell.h"
 #include "executor.h"
 #include "libft.h"
 

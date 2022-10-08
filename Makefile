@@ -1,6 +1,7 @@
 SHELL_DIR		:=	shell
 SHELL_SRCS		:=	shell.c shell_banner.c \
-					loop_readline.c set_env_list.c
+					loop_readline.c set_env_list.c \
+					free_parsed_list.c
 SHELL_SRCS		:=	$(addprefix $(SHELL_DIR)/, $(SHELL_SRCS))
 
 PARSER_DIR		:=	parser
@@ -11,11 +12,10 @@ PARSER_SRCS		:=	parser.c tokenizer.c tokenizer_utils.c \
 PARSER_SRCS		:=	$(addprefix $(PARSER_DIR)/, $(PARSER_SRCS))
 
 EXECUTOR_DIR	:=	executor
-EXECUTOR_SRCS	:=	executor.c free_parsed_list.c get_cmd_with_path.c \
-					exec_builtin.c \
-					init_exec_info.c exec_single_cmd.c exec_multiple_cmd.c \
-					get_infile_fd.c get_outfile_fd.c here_doc.c \
-					print_minishell_error.c
+EXECUTOR_SRCS	:=	executor.c exec_cmd.c \
+					exec_cmd_util.c get_cmd_with_path.c \
+					init_exec_info.c exec_builtin.c \
+					get_infile_fd.c get_outfile_fd.c here_doc.c
 EXECUTOR_SRCS	:=	$(addprefix $(EXECUTOR_DIR)/, $(EXECUTOR_SRCS))
 
 BUILTIN_DIR		:=	builtin

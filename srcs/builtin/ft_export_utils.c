@@ -1,6 +1,7 @@
 #include <stdlib.h>
 
 #include "minishell.h"
+#include "builtin.h"
 #include "libft.h"
 
 char	**copy_env_key(t_env_list **env_list)
