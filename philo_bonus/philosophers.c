@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:41:22 by changhle          #+#    #+#             */
-/*   Updated: 2022/09/25 05:49:24 by changhle         ###   ########.fr       */
+/*   Updated: 2022/10/12 19:08:50 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	philo_eating(t_info *info, t_philo *philo, t_sem *sem)
 	print_state(philo, sem, "is eating");
 	wait_time(philo->last_eat, info->time_eat);
 	philo->eat_count++;
-	if (philo->eat_count == info->num_eat)
+	if (philo->eat_count >= info->num_eat)
 		sem_post(sem->finish);
 	realse_fork(sem);
 }
