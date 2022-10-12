@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 22:58:08 by changhle          #+#    #+#             */
-/*   Updated: 2022/09/25 05:49:39 by changhle         ###   ########.fr       */
+/*   Updated: 2022/10/12 19:04:54 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	check_philo(t_info *info, t_philo *philo)
 				pthread_mutex_unlock(&info->print);
 				return ;
 			}
-			if (info->full_philo == info->num_philos)
+			if (info->full_philo >= info->num_philos)
 				return ;
 			i++;
 		}

@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 22:58:22 by changhle          #+#    #+#             */
-/*   Updated: 2022/09/25 05:49:42 by changhle         ###   ########.fr       */
+/*   Updated: 2022/10/12 19:03:07 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ static int	philo_eating(t_philo *philo)
 	print_state(philo, "is eating");
 	wait_time(philo->last_eat, philo->info->time_eat);
 	philo->eat_count++;
-	if (philo->eat_count == philo->info->num_eat)
+	if (philo->eat_count >= philo->info->num_eat)
 		philo->info->full_philo++;
 	realse_fork(philo);
 	if (philo->info->die
-		|| (philo->info->full_philo == philo->info->num_philos))
+		|| (philo->info->full_philo >= philo->info->num_philos))
 		return (1);
 	return (0);
 }
