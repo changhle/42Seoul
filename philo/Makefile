@@ -6,31 +6,26 @@
 #    By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/25 05:49:49 by changhle          #+#    #+#              #
-#    Updated: 2022/09/25 05:49:50 by changhle         ###   ########.fr        #
+#    Updated: 2022/10/12 19:14:48 by changhle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = cc
-CFLALGS = -Wall -Werror -Wextra
-NAME = philo
-SRCS = main.c \
-		monitor.c \
-		parse.c\
-		philosophers.c \
-		philosophers_utils.c \
-		utils.c
+CC		=	cc
+CFLALGS	=	-Wall -Werror -Wextra
+NAME	=	philo
+SRCS	=	main.c monitor.c parse.c utils.c \
+			philosophers.c philosophers_utils.c
+OBJS	=	$(SRCS:.c=.o)
 
-OBJS = $(SRCS:.c=.o)
+all		:	$(NAME)
 
-all : $(NAME)
-
-$(NAME) : $(OBJS)
+$(NAME)	:	$(OBJS)
 	$(CC) $(CFLALGS) $(OBJS) -pthread -o $(NAME)
 
-clean :
+clean	:
 	rm -f $(OBJS)
 
-fclean : clean
+fclean	:	clean
 	rm -rf $(NAME)
 
-re : fclean all
+re		:	fclean all
