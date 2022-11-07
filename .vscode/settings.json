@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"__threading_support": "c",
+		"memory": "c",
+		"philosophers.h": "c",
+		"signal.h": "c"
+	}
+}

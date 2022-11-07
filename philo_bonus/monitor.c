@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:41:13 by changhle          #+#    #+#             */
-/*   Updated: 2022/09/25 05:49:13 by changhle         ###   ########.fr       */
+/*   Updated: 2022/11/07 16:02:36 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <signal.h>
 #include "philosophers.h"
 
-void	*check_ate(void	*temp)
+static void	*check_ate(void	*temp)
 {
 	int		i;
 	t_data	*data;
@@ -34,17 +34,20 @@ void	*check_ate(void	*temp)
 	return (NULL);
 }
 
-int	monitor(t_info *info, t_sem *sem, pid_t pid)
+int	monitor(t_info *info, t_sem *sem, pid_t *pid)
 {
 	t_data		data;
 	pthread_t	checker;
 
-	data.info = info;
-	data.pid = pid;
-	data.sem = sem;
-	if (pthread_create(&checker, NULL, check_ate, &data))
-		return (1);
-	pthread_join(checker, NULL);
+	if (info->num_eat != -1)
+	{
+		data.info = info;
+		data.pid = pid[0];
+		data.sem = sem;
+		if (pthread_create(&checker, NULL, check_ate, &data))
+			return (1);
+	}
+	wait_process(info, pid);
 	return (0);
 }
 

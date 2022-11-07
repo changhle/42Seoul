@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:41:22 by changhle          #+#    #+#             */
-/*   Updated: 2022/10/12 19:08:50 by changhle         ###   ########.fr       */
+/*   Updated: 2022/11/07 15:57:26 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,7 @@ int	philosophers(t_info *info, t_philo *philo, t_sem *sem)
 			return (ft_print_error("fork error!"));
 		i++;
 	}
-	if (info->num_eat != -1)
-		if (monitor(info, sem, pid[0]))
-			return (ft_print_error("thread create error!"));
-	wait_process(info, pid);
+	monitor(info, sem, pid);
+	free(pid);
 	return (0);
 }

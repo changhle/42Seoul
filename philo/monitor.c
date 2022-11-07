@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 22:58:08 by changhle          #+#    #+#             */
-/*   Updated: 2022/10/12 19:04:54 by changhle         ###   ########.fr       */
+/*   Updated: 2022/10/30 19:22:42 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 void	check_philo(t_info *info, t_philo *philo)
 {
-	int			i;
+	int	i;
 
 	while (1)
 	{

@@ -6,13 +6,13 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:41:10 by changhle          #+#    #+#             */
-/*   Updated: 2022/09/25 05:49:17 by changhle         ###   ########.fr       */
+/*   Updated: 2022/11/07 16:03:19 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	parse_man_opt(char **argv, t_info *info)
+static int	parse_man_opt(char **argv, t_info *info)
 {
 	info->num_philos = ft_atoi(argv[1]);
 	info->time_die = ft_atoi(argv[2]);
@@ -25,7 +25,7 @@ int	parse_man_opt(char **argv, t_info *info)
 	return (0);
 }
 
-int	parse_add_opt(char **argv, t_info *info)
+static int	parse_add_opt(char **argv, t_info *info)
 {
 	info->num_eat = ft_atoi(argv[5]);
 	if (info->num_eat == -1)

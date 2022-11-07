@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:41:27 by changhle          #+#    #+#             */
-/*   Updated: 2022/09/25 05:49:27 by changhle         ###   ########.fr       */
+/*   Updated: 2022/11/07 15:27:11 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void		take_fork(t_philo *philo, t_sem *sem);
 void		realse_fork(t_sem *sem);
 void		init_philo(t_info *info, t_philo *philo,
 				long long time, unsigned int i);
-int			monitor(t_info *info, t_sem *sem, pid_t pid);
+int			monitor(t_info *info, t_sem *sem, pid_t *pid);
 void		wait_process(t_info *info, pid_t *pid);
 
 int			ft_atoi(const char *str);

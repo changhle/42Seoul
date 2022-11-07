@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:41:01 by changhle          #+#    #+#             */
-/*   Updated: 2022/09/25 05:49:09 by changhle         ###   ########.fr       */
+/*   Updated: 2022/11/07 16:00:20 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static void	destroy_sem(t_sem *sem)
 	sem_close(sem->lock);
 	sem_close(sem->fork);
 	sem_close(sem->print);
-	sem_close(sem->finish);
 }
 
 int	main(int argc, char **argv)
