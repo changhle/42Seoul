@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:41:22 by changhle          #+#    #+#             */
-/*   Updated: 2022/11/07 15:57:26 by changhle         ###   ########.fr       */
+/*   Updated: 2022/11/09 03:07:12 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@
 static void	philo_eating(t_info *info, t_philo *philo, t_sem *sem)
 {
 	take_fork(philo, sem);
+	sem_wait(sem->event);
 	philo->last_eat = cur_time();
+	sem_post(sem->event);
 	print_state(philo, sem, "is eating");
 	wait_time(philo->last_eat, info->time_eat);
 	philo->eat_count++;
@@ -75,8 +77,11 @@ int	philosophers(t_info *info, t_philo *philo, t_sem *sem)
 		pid[i] = fork();
 		if (pid[i] == 0)
 			philo_process(info, philo, sem);
-		else if (pid[i] == -1)
+		if (pid[i] == -1)
+		{
+			wait_process(info, sem, pid, i);
 			return (ft_print_error("fork error!"));
+		}
 		i++;
 	}
 	monitor(info, sem, pid);

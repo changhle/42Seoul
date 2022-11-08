@@ -6,11 +6,11 @@
 #    By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/25 05:49:53 by changhle          #+#    #+#              #
-#    Updated: 2022/10/12 19:16:04 by changhle         ###   ########.fr        #
+#    Updated: 2022/11/09 03:13:11 by changhle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC		=	gcc
+CC		=	cc
 CFLALGS	=	-Wall -Werror -Wextra
 NAME	=	philo
 SRCS	=	main.c monitor.c parse.c utils.c \

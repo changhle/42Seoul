@@ -6,16 +6,16 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 22:58:03 by changhle          #+#    #+#             */
-/*   Updated: 2022/09/25 05:49:37 by changhle         ###   ########.fr       */
+/*   Updated: 2022/11/09 01:33:18 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "philosophers.h"
 
-static t_philo	*init_philo(t_info *info, t_philo *philo)
+static t_philo *init_philo(t_info *info, t_philo *philo)
 {
-	int	i;
+	int i;
 
 	philo = malloc(sizeof(t_philo) * info->num_philos);
 	if (!philo)
@@ -33,9 +33,9 @@ static t_philo	*init_philo(t_info *info, t_philo *philo)
 	return (philo);
 }
 
-static int	init_fork_mutex(unsigned int num_philos, t_philo *philo)
+static int init_fork_mutex(unsigned int num_philos, t_philo *philo)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (i < num_philos)
@@ -54,10 +54,15 @@ static int	init_fork_mutex(unsigned int num_philos, t_philo *philo)
 	return (0);
 }
 
-static int	init_mutex(t_info *info, t_philo *philo)
+static int init_mutex(t_info *info, t_philo *philo)
 {
 	if (pthread_mutex_init(&info->print, NULL))
 		return (1);
+	if (pthread_mutex_init(&info->event, NULL))
+	{
+		pthread_mutex_destroy(&info->event);
+		return (1);
+	}
 	if (init_fork_mutex(info->num_philos, philo))
 	{
 		pthread_mutex_destroy(&info->print);
@@ -66,11 +71,12 @@ static int	init_mutex(t_info *info, t_philo *philo)
 	return (0);
 }
 
-static void	destroy_mutex(t_info *info, t_philo *philo)
+static void destroy_mutex(t_info *info, t_philo *philo)
 {
-	int	i;
+	int i;
 
 	pthread_mutex_destroy(&info->print);
+	pthread_mutex_destroy(&info->event);
 	i = 0;
 	while (i < info->num_philos)
 	{
@@ -79,10 +85,10 @@ static void	destroy_mutex(t_info *info, t_philo *philo)
 	}
 }
 
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	t_info	info;
-	t_philo	*philo;
+	t_info info;
+	t_philo *philo;
 
 	if (parse(argc, argv, &info))
 		return (ft_print_error("arg error!"));

@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 22:58:30 by changhle          #+#    #+#             */
-/*   Updated: 2022/10/30 19:27:34 by changhle         ###   ########.fr       */
+/*   Updated: 2022/11/09 01:16:16 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,12 @@ long long	cur_time(void)
 void	print_state(t_philo *philo, char *str)
 {
 	pthread_mutex_lock(&philo->info->print);
+	pthread_mutex_lock(&philo->info->event);
 	if (!philo->info->die
 		&& !(philo->info->full_philo == philo->info->num_philos))
 		printf("%lld %d %s\n", cur_time() - philo->info->start_time,
 			philo->id, str);
+	pthread_mutex_unlock(&philo->info->event);
 	pthread_mutex_unlock(&philo->info->print);
 }
 

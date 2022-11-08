@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:41:27 by changhle          #+#    #+#             */
-/*   Updated: 2022/11/07 15:27:11 by changhle         ###   ########.fr       */
+/*   Updated: 2022/11/09 03:10:12 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_info
 	unsigned int	time_eat;
 	unsigned int	time_sleep;
 	unsigned int	num_eat;
+	pthread_t		checker;
 }	t_info;
 
 typedef struct s_philo
@@ -36,6 +37,7 @@ typedef struct s_sem
 {
 	sem_t	*fork;
 	sem_t	*lock;
+	sem_t	*event;
 	sem_t	*print;
 	sem_t	*finish;
 }	t_sem;
@@ -56,7 +58,7 @@ void		realse_fork(t_sem *sem);
 void		init_philo(t_info *info, t_philo *philo,
 				long long time, unsigned int i);
 int			monitor(t_info *info, t_sem *sem, pid_t *pid);
-void		wait_process(t_info *info, pid_t *pid);
+void		wait_process(t_info *info, t_sem *sem, pid_t *pid, int process_num);
 
 int			ft_atoi(const char *str);
 long long	cur_time(void);

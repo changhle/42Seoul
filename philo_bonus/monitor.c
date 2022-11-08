@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:41:13 by changhle          #+#    #+#             */
-/*   Updated: 2022/11/07 16:02:36 by changhle         ###   ########.fr       */
+/*   Updated: 2022/11/09 03:10:41 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,16 @@ static void	*check_ate(void	*temp)
 int	monitor(t_info *info, t_sem *sem, pid_t *pid)
 {
 	t_data		data;
-	pthread_t	checker;
 
 	if (info->num_eat != -1)
 	{
 		data.info = info;
 		data.pid = pid[0];
 		data.sem = sem;
-		if (pthread_create(&checker, NULL, check_ate, &data))
+		if (pthread_create(&info->checker, NULL, check_ate, &data))
 			return (1);
 	}
-	wait_process(info, pid);
+	wait_process(info, sem, pid, info->num_philos);
 	return (0);
 }
 
@@ -58,6 +57,7 @@ void	*check_philo(void *temp)
 	data = (t_data *)temp;
 	while (1)
 	{
+		sem_wait(data->sem->event);
 		if (cur_time() - data->philo->last_eat > data->info->time_die)
 		{
 			sem_wait(data->sem->print);
@@ -65,6 +65,7 @@ void	*check_philo(void *temp)
 				data->philo->id, "died");
 			exit(0);
 		}
+		sem_post(data->sem->event);
 		usleep(1000);
 	}
 }
