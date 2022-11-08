@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:41:33 by changhle          #+#    #+#             */
-/*   Updated: 2022/09/25 05:49:30 by changhle         ###   ########.fr       */
+/*   Updated: 2022/11/09 03:34:43 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ int	ft_atoi(const char *str)
 			sign = -1;
 		str++;
 	}
-	if (*str < 48 || *str > 57 || sign == -1)
-		return (-1);
 	result = 0;
 	while (*str >= 48 && *str <= 57)
 	{
 		result = result * 10 + *str - 48;
 		str++;
 	}
+	if (*str != '\0' || sign == -1)
+		return (0);
 	return (result * sign);
 }
 

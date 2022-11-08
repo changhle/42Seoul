@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:41:27 by changhle          #+#    #+#             */
-/*   Updated: 2022/11/09 03:10:12 by changhle         ###   ########.fr       */
+/*   Updated: 2022/11/09 03:47:56 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PHILOSOPHERS_H
 
 # include <semaphore.h>
+# include <stdio.h>
 
 typedef struct s_info
 {

@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:41:13 by changhle          #+#    #+#             */
-/*   Updated: 2022/11/09 03:10:41 by changhle         ###   ########.fr       */
+/*   Updated: 2022/11/09 03:50:39 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	monitor(t_info *info, t_sem *sem, pid_t *pid)
 {
 	t_data		data;
 
-	if (info->num_eat != -1)
+	if (info->num_eat > 0)
 	{
 		data.info = info;
 		data.pid = pid[0];
