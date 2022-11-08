@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:41:18 by changhle          #+#    #+#             */
-/*   Updated: 2022/11/09 03:11:45 by changhle         ###   ########.fr       */
+/*   Updated: 2022/11/09 04:00:12 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,6 @@ void	wait_process(t_info *info, t_sem *sem, pid_t *pid, int process_num)
 		sem_post(sem->finish);
 		i++;
 	}
-	pthread_join(info->checker, NULL);
+	if (info->num_eat > 0)
+		pthread_join(info->checker, NULL);
 }
