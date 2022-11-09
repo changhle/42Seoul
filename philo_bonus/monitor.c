@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:41:13 by changhle          #+#    #+#             */
-/*   Updated: 2022/11/09 03:50:39 by changhle         ###   ########.fr       */
+/*   Updated: 2022/11/09 20:10:29 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	*check_ate(void	*temp)
 	return (NULL);
 }
 
-int	monitor(t_info *info, t_sem *sem, pid_t *pid)
+void	monitor(t_info *info, t_sem *sem, pid_t *pid)
 {
 	t_data		data;
 
@@ -43,11 +43,9 @@ int	monitor(t_info *info, t_sem *sem, pid_t *pid)
 		data.info = info;
 		data.pid = pid[0];
 		data.sem = sem;
-		if (pthread_create(&info->checker, NULL, check_ate, &data))
-			return (1);
+		pthread_create(&info->checker, NULL, check_ate, &data);
 	}
 	wait_process(info, sem, pid, info->num_philos);
-	return (0);
 }
 
 void	*check_philo(void *temp)

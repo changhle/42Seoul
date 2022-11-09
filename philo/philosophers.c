@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 22:58:22 by changhle          #+#    #+#             */
-/*   Updated: 2022/11/09 03:38:24 by changhle         ###   ########.fr       */
+/*   Updated: 2022/11/09 20:16:47 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include "philosophers.h"
 
-static int philo_eating(t_philo *philo)
+static int	philo_eating(t_philo *philo)
 {
 	int	ret;
 
@@ -33,13 +33,14 @@ static int philo_eating(t_philo *philo)
 	pthread_mutex_unlock(&philo->info->event);
 	realse_fork(philo);
 	pthread_mutex_lock(&philo->info->event);
-	if (philo->info->die || (philo->info->full_philo == philo->info->num_philos))
+	if (philo->info->die
+		|| (philo->info->full_philo >= philo->info->num_philos))
 		ret = 1;
 	pthread_mutex_unlock(&philo->info->event);
 	return (ret);
 }
 
-static int philo_sleeping(t_philo *philo)
+static int	philo_sleeping(t_philo *philo)
 {
 	int	ret;
 
@@ -47,13 +48,14 @@ static int philo_sleeping(t_philo *philo)
 	print_state(philo, "is sleeping");
 	wait_time(cur_time(), philo->info->time_sleep);
 	pthread_mutex_lock(&philo->info->event);
-	if (philo->info->die || (philo->info->full_philo == philo->info->num_philos))
+	if (philo->info->die
+		|| (philo->info->full_philo >= philo->info->num_philos))
 		ret = 1;
 	pthread_mutex_unlock(&philo->info->event);
 	return (ret);
 }
 
-static int philo_thinking(t_philo *philo)
+static int	philo_thinking(t_philo *philo)
 {
 	int	ret;
 
@@ -61,15 +63,16 @@ static int philo_thinking(t_philo *philo)
 	print_state(philo, "is thinking");
 	usleep(1000);
 	pthread_mutex_lock(&philo->info->event);
-	if (philo->info->die || (philo->info->full_philo == philo->info->num_philos))
+	if (philo->info->die
+		|| (philo->info->full_philo >= philo->info->num_philos))
 		ret = 1;
 	pthread_mutex_unlock(&philo->info->event);
 	return (ret);
 }
 
-static void *philo_thread(void *temp)
+static void	*philo_thread(void *temp)
 {
-	t_philo *philo;
+	t_philo	*philo;
 
 	philo = (t_philo *)temp;
 	if (philo->id % 2)
@@ -85,9 +88,9 @@ static void *philo_thread(void *temp)
 	}
 }
 
-int philosophers(t_info *info, t_philo *philo)
+int	philosophers(t_info *info, t_philo *philo)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	info->start_time = cur_time();

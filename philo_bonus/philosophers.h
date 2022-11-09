@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:41:27 by changhle          #+#    #+#             */
-/*   Updated: 2022/11/09 03:47:56 by changhle         ###   ########.fr       */
+/*   Updated: 2022/11/09 19:44:47 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define PHILOSOPHERS_H
 
 # include <semaphore.h>
-# include <stdio.h>
 
 typedef struct s_info
 {
@@ -58,7 +57,7 @@ void		take_fork(t_philo *philo, t_sem *sem);
 void		realse_fork(t_sem *sem);
 void		init_philo(t_info *info, t_philo *philo,
 				long long time, unsigned int i);
-int			monitor(t_info *info, t_sem *sem, pid_t *pid);
+void		monitor(t_info *info, t_sem *sem, pid_t *pid);
 void		wait_process(t_info *info, t_sem *sem, pid_t *pid, int process_num);
 
 int			ft_atoi(const char *str);
