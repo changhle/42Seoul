@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:41:18 by changhle          #+#    #+#             */
-/*   Updated: 2022/11/09 19:26:50 by changhle         ###   ########.fr       */
+/*   Updated: 2022/11/10 14:50:26 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <pthread.h>
 #include "philosophers.h"
 
-void	init_philo(t_info *info, t_philo *philo, long long time, unsigned int i)
+void	init_philo(t_philo *philo, long long time, unsigned int i)
 {
 	philo->id = i + 1;
 	philo->eat_count = 0;
@@ -40,10 +40,11 @@ void	realse_fork(t_sem *sem)
 	sem_post(sem->lock);
 }
 
-void	wait_process(t_info *info, t_sem *sem, pid_t *pid, int process_num)
+void	wait_process(t_info *info, t_sem *sem, pid_t *pid,
+	unsigned int process_num)
 {
-	int	i;
-	int	status;
+	unsigned int	i;
+	int				status;
 
 	i = 0;
 	if (process_num == info->num_philos)

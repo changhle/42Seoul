@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:41:22 by changhle          #+#    #+#             */
-/*   Updated: 2022/11/09 20:10:19 by changhle         ###   ########.fr       */
+/*   Updated: 2022/11/10 14:49:34 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	philo_sleeping(t_info *info, t_philo *philo, t_sem *sem)
 	wait_time(cur_time(), info->time_sleep);
 }
 
-static void	philo_thinking(t_info *info, t_philo *philo, t_sem *sem)
+static void	philo_thinking(t_philo *philo, t_sem *sem)
 {
 	print_state(philo, sem, "is thinking");
 	usleep(1000);
@@ -56,15 +56,15 @@ static void	philo_process(t_info *info, t_philo *philo, t_sem *sem)
 	{
 		philo_eating(info, philo, sem);
 		philo_sleeping(info, philo, sem);
-		philo_thinking(info, philo, sem);
+		philo_thinking(philo, sem);
 	}
 }
 
 int	philosophers(t_info *info, t_philo *philo, t_sem *sem)
 {
-	int			i;
-	pid_t		*pid;
-	long long	time;
+	unsigned int	i;
+	long long		time;
+	pid_t			*pid;
 
 	pid = malloc(sizeof(pid_t) * info->num_philos);
 	if (!pid)
@@ -73,7 +73,7 @@ int	philosophers(t_info *info, t_philo *philo, t_sem *sem)
 	time = cur_time();
 	while (i < info->num_philos)
 	{
-		init_philo(info, philo, time, i);
+		init_philo(philo, time, i);
 		pid[i] = fork();
 		if (pid[i] == 0)
 			philo_process(info, philo, sem);

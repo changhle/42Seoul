@@ -6,12 +6,12 @@
 #    By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/25 05:49:49 by changhle          #+#    #+#              #
-#    Updated: 2022/10/12 19:14:48 by changhle         ###   ########.fr        #
+#    Updated: 2022/11/10 14:40:12 by changhle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		=	cc
-CFLALGS	=	-Wall -Werror -Wextra
+CFLAGS	=	-Wall -Werror -Wextra
 NAME	=	philo
 SRCS	=	main.c monitor.c parse.c utils.c \
 			philosophers.c philosophers_utils.c
@@ -19,8 +19,11 @@ OBJS	=	$(SRCS:.c=.o)
 
 all		:	$(NAME)
 
+%.o		:	%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
 $(NAME)	:	$(OBJS)
-	$(CC) $(CFLALGS) $(OBJS) -pthread -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -pthread -o $(NAME)
 
 clean	:
 	rm -f $(OBJS)

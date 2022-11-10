@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 22:58:22 by changhle          #+#    #+#             */
-/*   Updated: 2022/11/09 20:16:47 by changhle         ###   ########.fr       */
+/*   Updated: 2022/11/10 15:04:56 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	philo_eating(t_philo *philo)
 	wait_time(philo->last_eat, philo->info->time_eat);
 	pthread_mutex_lock(&philo->info->event);
 	philo->eat_count++;
-	if (philo->eat_count >= philo->info->num_eat)
+	if (philo->info->num_eat && philo->eat_count >= philo->info->num_eat)
 		philo->info->full_philo++;
 	pthread_mutex_unlock(&philo->info->event);
 	realse_fork(philo);
@@ -90,7 +90,7 @@ static void	*philo_thread(void *temp)
 
 int	philosophers(t_info *info, t_philo *philo)
 {
-	int	i;
+	unsigned int	i;
 
 	i = 0;
 	info->start_time = cur_time();

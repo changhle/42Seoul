@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:41:10 by changhle          #+#    #+#             */
-/*   Updated: 2022/11/09 03:33:58 by changhle         ###   ########.fr       */
+/*   Updated: 2022/11/10 14:47:06 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ static int	parse_add_opt(char **argv, t_info *info)
 
 int	parse(int argc, char **argv, t_info *info)
 {
-	int	ret;
-
 	if (argc == 5)
 		return (parse_man_opt(argv, info));
 	else if (argc == 6)

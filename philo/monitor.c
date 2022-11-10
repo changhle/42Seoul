@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 22:58:08 by changhle          #+#    #+#             */
-/*   Updated: 2022/11/09 19:35:02 by changhle         ###   ########.fr       */
+/*   Updated: 2022/11/10 14:42:49 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static int	check_time_die(t_info *info, t_philo philo)
 
 void	check_philo(t_info *info, t_philo *philo)
 {
-	int	i;
+	unsigned int	i;
 
 	while (1)
 	{

@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:41:13 by changhle          #+#    #+#             */
-/*   Updated: 2022/11/09 20:10:29 by changhle         ###   ########.fr       */
+/*   Updated: 2022/11/10 14:46:58 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 
 static void	*check_ate(void	*temp)
 {
-	int		i;
-	t_data	*data;
+	unsigned int	i;
+	t_data			*data;
 
 	data = (t_data *)temp;
 	i = 0;

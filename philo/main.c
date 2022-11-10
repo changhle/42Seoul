@@ -6,7 +6,7 @@
 /*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 22:58:03 by changhle          #+#    #+#             */
-/*   Updated: 2022/11/09 19:31:06 by changhle         ###   ########.fr       */
+/*   Updated: 2022/11/10 14:42:37 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static t_philo	*init_philo(t_info *info, t_philo *philo)
 {
-	int	i;
+	unsigned int	i;
 
 	philo = malloc(sizeof(t_philo) * info->num_philos);
 	if (!philo)
@@ -35,7 +35,7 @@ static t_philo	*init_philo(t_info *info, t_philo *philo)
 
 static int	init_fork_mutex(unsigned int num_philos, t_philo *philo)
 {
-	int	i;
+	unsigned int	i;
 
 	i = 0;
 	while (i < num_philos)
@@ -73,7 +73,7 @@ static int	init_mutex(t_info *info, t_philo *philo)
 
 static void	destroy_mutex(t_info *info, t_philo *philo)
 {
-	int	i;
+	unsigned int	i;
 
 	pthread_mutex_destroy(&info->print);
 	pthread_mutex_destroy(&info->event);
@@ -92,6 +92,7 @@ int	main(int argc, char **argv)
 
 	if (parse(argc, argv, &info))
 		return (ft_print_error("arg error!"));
+	philo = NULL;
 	philo = init_philo(&info, philo);
 	if (!philo)
 		return (ft_print_error("philo init error!"));
