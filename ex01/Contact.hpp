@@ -1,10 +1,5 @@
 #include <iostream>
 
-class PhoneBook {
-	private:
-
-};
-
 class Contact {
 	private:
 		std::string	first_name;
@@ -13,4 +8,6 @@ class Contact {
 		std::string	phone_number;
 		std::string	darkest_secret;
 
+	public:
+		Contact();
 };
