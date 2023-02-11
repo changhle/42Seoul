@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Contact.hpp"
 
 class PhoneBook {
@@ -7,7 +6,8 @@ class PhoneBook {
 
 	public:
 		PhoneBook();
-		void	Add();
-		void	Search();
-		void	Exit();
+		void	add_contact();
+		void	search_contact();
+		void	exit_();
+		~PhoneBook();
 };
