@@ -1,5 +1,9 @@
 #include "Contact.hpp"
 
+#define ADD		1
+#define SEARCH	2
+#define EXIT	0
+
 class PhoneBook {
 	private:
 		int		index;

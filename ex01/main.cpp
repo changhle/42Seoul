@@ -1,19 +1,47 @@
 #include "PhoneBook.hpp"
 
+int	cmd_input()
+{
+	std::string	cmd;
+	int			cmd_type;
+	int			i;
+
+	std::cout << "Prompt : ";
+	std::cin >> cmd;
+	i = 0;
+	while (cmd[i])
+	{
+		cmd[i] = static_cast<char>(std::toupper(cmd[i]));
+		i++;
+	}
+	if (cmd == "ADD")
+		cmd_type = ADD;
+	else if (cmd == "SEARCH")
+		cmd_type = SEARCH;
+	if (cmd == "EXIT")
+		cmd_type = EXIT;
+	return (cmd_type);	
+}
+
 int	main()
 {
-	std::string	input;
+	int			cmd_type;
 	PhoneBook	pb;
 
 	while (42)
 	{
-		std::cout << "Prompt : ";
-		std::cin >> input;
-		if (input.compare("ADD") == 0)
+		cmd_type = cmd_input();
+		switch (cmd_type)
+		{
+		case ADD:
 			pb.add();
-		else if (input.compare("SEARCH") == 0)
-			pb.search();
-		else if (input.compare("EXIT") == 0)
 			break;
+		case SEARCH:
+			pb.search();
+		case EXIT:
+			return (0);
+		default:
+			break;
+		}
 	}
 }
