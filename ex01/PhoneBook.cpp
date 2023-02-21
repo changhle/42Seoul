@@ -7,6 +7,13 @@ PhoneBook::PhoneBook()
 	index = 0;
 }
 
+std::string	cut_string(std::string str)
+{
+	if (str.length() > 10)
+		return (str.substr(0, 9) + '.');
+	return (str);
+}
+
 void	PhoneBook::add()
 {
 	std::string	first_name;
@@ -40,31 +47,36 @@ void	PhoneBook::search()
 		std::cout << "No contact!" << std::endl;
 		return;
 	}
-	i = 0;
-	while (i < index)
+	while (42)
 	{
-		std::cout << std::setw(10) << i << "|";
-		std::cout << std::setw(10) << contact[i].get_first_name() << "|";
-		std::cout << std::setw(10) << contact[i].get_last_name() << "|";
-		std::cout << std::setw(10) << contact[i].get_nickname() << std::endl;
-		i++;
-		if (i == 8)
-			break;
+		i = 0;
+		while (i < index)
+		{
+			std::cout << std::setw(10) << i << "|";
+			std::cout << std::setw(10) << cut_string(contact[i].get_first_name()) << "|";
+			std::cout << std::setw(10) << cut_string(contact[i].get_last_name()) << "|";
+			std::cout << std::setw(10) << cut_string(contact[i].get_nickname()) << std::endl;
+			i++;
+			if (i == 8)
+				break;
+		}
+		std::cout << "\nIndex : ";
+		std::cin >> input;
+		if (std::cin.fail() || input > 7 || input + 1 > index)
+		{
+			std::cin.clear();
+			std::cout << "Out of range!" << std::endl;
+			std::cin.ignore(100, '\n');
+		}
+		else
+		{
+			std::cout << "First name : " << contact[input].get_first_name() << std::endl;
+			std::cout << "Last name : " << contact[input].get_last_name() << std::endl;
+			std::cout << "Nickname : " << contact[input].get_nickname() << std::endl;
+			std::cout << "Phone number : " << contact[input].get_phone_number() << std::endl;
+			std::cout << "Darkest secret : " << contact[input].get_darkest_secret() << std::endl << std::endl;
+			std::cin.ignore(100, '\n');
+			return;
+		}
 	}
-	std::cout << "\nIndex : ";
-	std::cin >> input;
-	if (std::cin.fail() || input > 7 || input + 1 > index)
-	{
-		std::cin.clear();
-		std::cout << "Out of range!" << std::endl;
-	}
-	else
-	{
-		std::cout << "First name : " << contact[input].get_first_name() << std::endl;
-		std::cout << "Last name : " << contact[input].get_last_name() << std::endl;
-		std::cout << "Nickname : " << contact[input].get_nickname() << std::endl;
-		std::cout << "Phone number : " << contact[input].get_phone_number() << std::endl;
-		std::cout << "Darkest secret : " << contact[input].get_darkest_secret() << std::endl << std::endl;
-	}
-	std::cin.ignore(100, '\n');
 }
