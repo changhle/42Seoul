@@ -29,9 +29,9 @@ int	main()
 			pb.add();
 		else if (cmd == "SEARCH")
 			pb.search();
-		else if (cmd == "EXIT")
+		else if (std::cin.eof() || cmd == "EXIT")
 			break;
-		// std::cin.clear();
-		// std::cin.ignore(255, '\n');
+		else
+			std::cout << "Non-Existent Commands!" << std::endl;
 	}
 }

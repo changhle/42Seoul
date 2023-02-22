@@ -14,6 +14,13 @@ std::string	cut_string(std::string str)
 	return (str);
 }
 
+void	ft_getline(std::string&str)
+{
+	getline(std::cin, str);
+	if (std::cin.eof())
+		std::exit(0);
+}
+
 void	PhoneBook::add()
 {
 	std::string	first_name;
@@ -23,15 +30,15 @@ void	PhoneBook::add()
 	std::string	darkest_secret;
 
 	std::cout << "First name : ";
-	getline(std::cin, first_name);
+	ft_getline(first_name);
 	std::cout << "Last name : ";
-	getline(std::cin, last_name);
+	ft_getline(last_name);
 	std::cout << "Nickname : ";
-	getline(std::cin, nickname);
+	ft_getline(nickname);
 	std::cout << "Phone number : ";
-	getline(std::cin, phone_number);
+	ft_getline(phone_number);
 	std::cout << "Darkest secret : ";
-	getline(std::cin, darkest_secret);
+	ft_getline(darkest_secret);
 	std::cout << std::endl;
 	contact[index % 8] = Contact(first_name, last_name, nickname, phone_number, darkest_secret);
 	index++;
@@ -62,7 +69,9 @@ void	PhoneBook::search()
 		}
 		std::cout << "\nIndex : ";
 		std::cin >> input;
-		if (std::cin.fail() || input > 7 || input + 1 > index)
+		if (std::cin.eof())
+			std::exit(0);
+		else if (std::cin.fail() || input > 7 || input + 1 > index)
 		{
 			std::cin.clear();
 			std::cout << "Out of range!" << std::endl;

@@ -23,7 +23,6 @@ class Contact {
 		std::string	get_nickname();
 		std::string	get_phone_number();
 		std::string	get_darkest_secret();
-		// ~Contact();
 };
 
 #endif

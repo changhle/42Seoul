@@ -32,7 +32,7 @@ Account::~Account()
 void	Account::_displayTimestamp()
 {
 	time_t	t;
-	char	str[15];
+	char	str[16];
 
 	time(&t);
 	strftime(str, sizeof(str), "%Y%m%d_%H%M%S", localtime(&t));
