@@ -10,4 +10,5 @@ int	main()
 	heap->announce();
 	randomChump("stack");
 	delete heap;
+	return (0);
 }
