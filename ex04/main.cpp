@@ -7,6 +7,8 @@ std::string	readFileContent(std::ifstream &input)
 	std::string	str;
 	std::string	buf;
 
+	int i;
+	i = 0;
 	while (!input.eof())
 	{
 		getline(input, buf);
@@ -14,7 +16,10 @@ std::string	readFileContent(std::ifstream &input)
 			str += buf;
 		if (!input.eof())
 			str += "\n";
+		std::cout << i << std::endl;
+		i++;
 	}
+	std::cout << str << std::endl;
 	return (str);
 }
 
@@ -28,12 +33,12 @@ std::string	replaceString(std::string from, std::string to, std::string str)
 		pos = str.find(from);
 		if (pos == std::string::npos)
 			break;
-		sub_str = str.substr(0, pos);
+		sub_str += str.substr(0, pos);
 		sub_str += to;
-		sub_str += str.substr(pos + from.length(), str.length() - (pos + from.length()));
-		str = sub_str;
+		str = str.substr(pos + from.length(), str.length() - (pos + from.length()));
 	}
-	return (str);
+	sub_str += str;
+	return (sub_str);
 }
 
 int	main(int argc, char **argv)
