@@ -34,4 +34,5 @@ int	main()
 		else
 			std::cout << "Non-Existent Commands!" << std::endl;
 	}
+	return (0);
 }
