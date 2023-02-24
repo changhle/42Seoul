@@ -1,4 +1,4 @@
-#include "StringReplace.hpp"
+#include <iostream>
 #include <fstream>
 #include <string>
 
@@ -11,11 +11,9 @@ std::string	readFileContent(std::ifstream &input)
 	{
 		getline(input, buf);
 		if (buf.length() != 0)
-		{
 			str += buf;
-			if (!input.eof())
-				str += "\n";
-		}
+		if (!input.eof())
+			str += "\n";
 	}
 	return (str);
 }
@@ -30,22 +28,30 @@ std::string	replaceString(std::string from, std::string to, std::string str)
 		pos = str.find(from);
 		if (pos == std::string::npos)
 			break;
-		sub_str = substr(0, )
+		sub_str = str.substr(0, pos);
+		sub_str += to;
+		sub_str += str.substr(pos + from.length(), str.length() - (pos + from.length()));
+		str = sub_str;
 	}
+	return (str);
 }
 
 int	main(int argc, char **argv)
 {
+	std::string	fileName(argv[1]);
+
 	if (argc != 4)
 	{
 		std::cout << "Argument error!" << std::endl;
 		return (1);
 	}
-	std::ifstream	input(argv[1]);
-	if (!input.is_open())
+	std::ifstream	input(fileName);
+	std::ofstream	output(fileName + ".replace");
+	if (!input.is_open() || !output.is_open())
 	{
 		std::cout << "File open error!" << std::endl;
 		return (1);
 	}
-	replaceString(argv[2], argv[3], readFileContent(input));
+	output << replaceString(argv[2], argv[3], readFileContent(input));
+	return (0);
 }
