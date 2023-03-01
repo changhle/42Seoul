@@ -20,7 +20,7 @@ Fixed::Fixed(const float num)
 
 Fixed::Fixed(const Fixed& fixed) {
 	std::cout << "Copy constructor called" << '\n';
-	fixed_point_value = fixed.getRawBits();
+	*this = fixed;
 }
 
 Fixed& Fixed::operator=(const Fixed& fixed) {
@@ -40,6 +40,20 @@ void Fixed::setRawBits(int const raw)
 
 int Fixed::getRawBits(void) const
 {
-	std::cout << "getRawBits member function called" << std::endl;
 	return (fixed_point_value);
+}
+
+float Fixed::toFloat(void) const
+{
+	return ((float)fixed_point_value / 256);
+}
+
+int Fixed::toInt(void) const
+{
+	return (fixed_point_value >> fractional_bits);
+}
+
+std::ostream& operator<<(std::ostream &os, const Fixed& fixed) {
+	os << fixed.toFloat();
+	return (os);
 }

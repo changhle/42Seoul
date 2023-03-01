@@ -1,16 +1,16 @@
 CXX		= c++ -std=c++98
-CFLAGS	= -Wall -Werror -Wextra
+CXXFLAGS	= -Wall -Werror -Wextra
 NAME	= Fixed
 SRCS	= Fixed.cpp main.cpp
 OBJS	= $(SRCS:.cpp=.o)
 
 all		: $(NAME)
 
-%.o		: %.c
-	$(CXX) $(CFLAGS) -c $< -o $@
+%.o		: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 $(NAME)	: $(OBJS)
-	$(CXX) $(CFLAGS) $(OBJS) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
 clean	:
 	rm -rf $(OBJS)
