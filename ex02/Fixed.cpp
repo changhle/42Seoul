@@ -2,35 +2,29 @@
 #include <cmath>
 
 Fixed::Fixed() {
-	std::cout << "Default constructor called" << '\n';
 	fixed_point_value = 0;
 }
 
 Fixed::Fixed(const int num)
 {
-	std::cout << "Int constructor called" << std::endl;
 	fixed_point_value = num << fractional_bits;
 }
 
 Fixed::Fixed(const float num)
 {
-	std::cout << "Float constructor called" << std::endl;
 	fixed_point_value = roundf(num * 256);
 }
 
 Fixed::Fixed(const Fixed& fixed) {
-	std::cout << "Copy constructor called" << '\n';
 	*this = fixed;
 }
 
 Fixed& Fixed::operator=(const Fixed& fixed) {
-	std::cout << "Copy assignment operator called" << '\n';
 	fixed_point_value = fixed.getRawBits();
 	return (*this);
 }
 
 Fixed::~Fixed() {
-	std::cout << "Destructor called" << '\n';
 }
 
 void Fixed::setRawBits(int const raw)
@@ -56,4 +50,108 @@ int Fixed::toInt(void) const
 std::ostream& operator<<(std::ostream &os, const Fixed& fixed) {
 	os << fixed.toFloat();
 	return (os);
+}
+
+bool	Fixed::operator>(const Fixed& obj) const
+{
+	return (this->getRawBits() > obj.getRawBits());
+}
+
+bool	Fixed::operator<(const Fixed& obj) const
+{
+	return (this->getRawBits() < obj.getRawBits());
+}
+
+bool	Fixed::operator>=(const Fixed& obj) const
+{
+	return (this->getRawBits() >= obj.getRawBits());
+}
+
+bool	Fixed::operator<=(Fixed const& obj) const
+{
+	return (this->getRawBits() <= obj.getRawBits());
+}
+
+bool	Fixed::operator==(const Fixed& obj) const
+{
+	return (this->getRawBits() == obj.getRawBits());
+}
+
+bool	Fixed::operator!=(const Fixed& obj) const
+{
+	return (this->getRawBits() != obj.getRawBits());
+}
+
+Fixed	Fixed::operator+(const Fixed& obj) const
+{
+	return (this->toFloat() - obj.toFloat());
+}
+
+Fixed	Fixed::operator-(const Fixed& obj) const
+{
+	return (this->toFloat() - obj.toFloat());
+}
+
+Fixed	Fixed::operator*(const Fixed& obj) const
+{
+	return (this->toFloat() * obj.toFloat());
+}
+
+Fixed	Fixed::operator/(const Fixed& obj) const
+{
+	return (this->toFloat() / obj.toFloat());
+}
+
+Fixed&	Fixed::operator++(void)
+{
+	++fixed_point_value;
+	return (*this);
+}
+
+const Fixed	Fixed::operator++(int)
+{
+	const Fixed	tmp(*this);
+	fixed_point_value++;
+	return (tmp);
+}
+
+Fixed&	Fixed::operator--(void)
+{
+	--fixed_point_value;
+	return (*this);
+}
+
+const Fixed	Fixed::operator--(int)
+{
+	const Fixed	tmp(*this);
+	fixed_point_value--;
+	return (*this);
+}
+
+Fixed&	Fixed::min(Fixed& ref1, Fixed& ref2)
+{
+	if (ref1 <= ref2)
+		return (ref1);
+	return (ref2);
+}
+
+const Fixed&	Fixed::min(const Fixed& ref1, const Fixed& ref2)
+{
+	if (ref1 <= ref2)
+		return (ref1);
+	return (ref2);
+}
+
+Fixed&	Fixed::max(Fixed& ref1, Fixed& ref2)
+{
+	if (ref1 <= ref2)
+		return (ref2);
+	return (ref1);
+}
+
+const Fixed&	Fixed::max(const Fixed& ref1, const Fixed& ref2)
+{
+	if (ref1 <= ref2)
+		return (ref2);
+	return (ref1);
 }
