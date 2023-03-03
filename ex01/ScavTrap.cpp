@@ -17,11 +17,8 @@ ScavTrap::ScavTrap(std::string name) {
 }
 
 ScavTrap::ScavTrap(const ScavTrap& obj) {
-	name = obj.name;
-	HitPoints = obj.HitPoints;
-	EnergyPoints = obj.EnergyPoints;
-	AttackDamage = obj.AttackDamage;
 	std::cout << "ScavTrap Copy constructor" << std::endl;;
+	*this = obj;
 }
 
 ScavTrap::~ScavTrap() {

@@ -17,11 +17,8 @@ ClapTrap::ClapTrap(std::string name) {
 }
 
 ClapTrap::ClapTrap(const ClapTrap& obj) {
-	name = obj.name;
-	HitPoints = obj.HitPoints;
-	EnergyPoints = obj.EnergyPoints;
-	AttackDamage = obj.AttackDamage;
 	std::cout << "ClapTrap Copy constructor" << std::endl;;
+	*this = obj;
 }
 
 ClapTrap::~ClapTrap() {

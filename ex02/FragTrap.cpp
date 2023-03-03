@@ -17,11 +17,8 @@ FragTrap::FragTrap(std::string name) {
 }
 
 FragTrap::FragTrap(const FragTrap& obj) {
-	name = obj.name;
-	HitPoints = obj.HitPoints;
-	EnergyPoints = obj.EnergyPoints;
-	AttackDamage = obj.AttackDamage;
 	std::cout << "FragTrap Copy constructor" << std::endl;;
+	*this = obj;
 }
 
 FragTrap::~FragTrap() {

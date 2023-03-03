@@ -1,8 +1,8 @@
-CXX		= c++ -std=c++98
+CXX			= c++ -std=c++98
 CXXFLAGS	= -Wall -Werror -Wextra
-NAME	= FragTrap
-SRCS	= FragTrap.cpp ClapTrap.cpp main.cpp
-OBJS	= $(SRCS:.cpp=.o)
+NAME		= FragTrap
+SRCS		= FragTrap.cpp ClapTrap.cpp main.cpp
+OBJS		= $(SRCS:.cpp=.o)
 
 all		: $(NAME)
 
