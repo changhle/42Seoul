@@ -2,7 +2,7 @@
 #include <cmath>
 
 Fixed::Fixed() {
-	std::cout << "Default constructor called" << '\n';
+	std::cout << "Default constructor called" << std::endl;
 	fixed_point_value = 0;
 }
 
@@ -19,18 +19,18 @@ Fixed::Fixed(const float num)
 }
 
 Fixed::Fixed(const Fixed& fixed) {
-	std::cout << "Copy constructor called" << '\n';
+	std::cout << "Copy constructor called" << std::endl;
 	*this = fixed;
 }
 
 Fixed& Fixed::operator=(const Fixed& fixed) {
-	std::cout << "Copy assignment operator called" << '\n';
+	std::cout << "Copy assignment operator called" << std::endl;
 	fixed_point_value = fixed.getRawBits();
 	return (*this);
 }
 
 Fixed::~Fixed() {
-	std::cout << "Destructor called" << '\n';
+	std::cout << "Destructor called" << std::endl;
 }
 
 void Fixed::setRawBits(int const raw)

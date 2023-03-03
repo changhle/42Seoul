@@ -24,8 +24,7 @@ Fixed& Fixed::operator=(const Fixed& fixed) {
 	return (*this);
 }
 
-Fixed::~Fixed() {
-}
+Fixed::~Fixed() {}
 
 void Fixed::setRawBits(int const raw)
 {
@@ -84,7 +83,7 @@ bool	Fixed::operator!=(const Fixed& obj) const
 
 Fixed	Fixed::operator+(const Fixed& obj) const
 {
-	return (this->toFloat() - obj.toFloat());
+	return (this->toFloat() + obj.toFloat());
 }
 
 Fixed	Fixed::operator-(const Fixed& obj) const
