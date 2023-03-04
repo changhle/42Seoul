@@ -1,5 +1,5 @@
-#ifndef Cat_HPP
-#define Cat_HPP
+#ifndef CAT_HPP
+#define CAT_HPP
 
 #include "Animal.hpp"
 
@@ -9,8 +9,7 @@ class Cat : public Animal {
 		Cat(const Cat& obj);
 		~Cat();
 		Cat& operator=(const Cat& obj);
-		// std::string	getType();
-		void		makeSound();
+		void	makeSound() const;
 };
 
 #endif
