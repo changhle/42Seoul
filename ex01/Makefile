@@ -1,7 +1,7 @@
 CXX			= c++ -std=c++98
 CXXFLAGS	= -Wall -Werror -Wextra
-NAME		= convert
-SRCS		= ScalarConverter.cpp main.cpp
+NAME		= Serializer
+SRCS		= Serializer.cpp main.cpp
 OBJS		= $(SRCS:.cpp=.o)
 
 all		: $(NAME)
