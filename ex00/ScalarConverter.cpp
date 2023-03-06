@@ -61,7 +61,7 @@ void	ScalarConverter::printFloat(double value, bool flag)
 	else if (value == static_cast<long long>(value))
 		std::cout << value << ".0f" << std::endl;
 	else
-		std::cout << static_cast<float>(value) << std::endl;
+		std::cout << static_cast<float>(value) << "f" << std::endl;
 }
 
 void	ScalarConverter::printDouble(double value, bool flag)
