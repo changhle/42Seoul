@@ -32,6 +32,17 @@ void	Span::addNumber(int num)
 	vec.push_back(num);
 }
 
+void	Span::addRandNumber(unsigned int size)
+{
+	if (vec.size() + size > N)
+		throw std::out_of_range("Cannot add any more");
+	srand(time(NULL));
+	for (unsigned int i = 0; i < size; i++)
+	{
+		vec.push_back(rand() % 1000000);
+	}
+}
+
 int	Span::shortestSpan()
 {
 	if (vec.size() < 2)
