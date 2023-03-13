@@ -1,7 +1,7 @@
 CXX			= c++ -std=c++98
 CXXFLAGS	= -Wall -Werror -Wextra
-NAME		= easyfind
-SRCS		= main.cpp
+NAME		= ex01
+SRCS		= Span.cpp main.cpp
 OBJS		= $(SRCS:.cpp=.o)
 
 all		: $(NAME)

@@ -27,7 +27,24 @@ Span& Span::operator=(const Span& obj)
 
 void	Span::addNumber(int num)
 {
-	if (vec.end() )
+	if (vec.size() >= N)
+		throw std::out_of_range("Cannot add any more");
+	vec.push_back(num);
 }
-int		shortestSpan();
-int		longestSpan();
+
+int	Span::shortestSpan()
+{
+	if (vec.size() < 2)
+		throw std::range_error("Size is less than 2");
+	std::vector<int>	tmp = vec;
+	std::sort(tmp.begin(), tmp.end());
+	std::adjacent_difference(tmp.begin(), tmp.end(), tmp.begin());
+	return (*std::min_element(tmp.begin() + 1, tmp.end()));
+}
+
+int	Span::longestSpan()
+{
+	if (vec.size() < 2)
+		throw std::range_error("Size is less than 2");
+	return (*std::max_element(vec.begin(), vec.end()) - *std::min_element(vec.begin(), vec.end()));
+}
