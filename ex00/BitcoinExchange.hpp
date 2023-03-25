@@ -8,15 +8,16 @@
 
 class BitcoinExchange {
 	private:
-		std::map<std::string, int>	m;
+		std::map<std::string, double>	m;
 		BitcoinExchange(const BitcoinExchange& obj);
 		BitcoinExchange& operator=(const BitcoinExchange& obj);
-	
+		void	calculateValue(std::string date, double value);
+
 	public:
 		BitcoinExchange();
 		~BitcoinExchange();
-		void	storeDataBase();
-		void	showDataBase();
+		void	storeDefaultDatabase();
+		void	showInputDatabase(std::string input_file_name);
 };
 
 #endif
