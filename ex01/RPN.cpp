@@ -1,6 +1,6 @@
 #include "RPN.hpp"
 
-int	calculate(int operand_a, int operand_b, char oper)
+double	calculate(double operand_a, double operand_b, char oper)
 {
 	if (oper == '+')
 		return (operand_a + operand_b);
@@ -14,10 +14,10 @@ int	calculate(int operand_a, int operand_b, char oper)
 
 void	RPN(char *expr)
 {
-	std::stack<int>	stack;
+	std::stack<double>	stack;
 	std::string		oper = "+-*/";
-	int				operand_a;
-	int				operand_b;
+	double			operand_a;
+	double			operand_b;
 	int				i;
 
 	i = 0;
