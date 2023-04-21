@@ -11,6 +11,7 @@ class BitcoinExchange {
 		std::map<std::string, double>	m;
 		BitcoinExchange(const BitcoinExchange& obj);
 		BitcoinExchange& operator=(const BitcoinExchange& obj);
+		int		isValidDate(std::string date);
 		void	calculateValue(std::string date, double value);
 
 	public:
