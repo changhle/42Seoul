@@ -1,23 +1,11 @@
 #include "RPN.hpp"
 
-double	calculate(double operand_a, double operand_b, char oper)
-{
-	if (oper == '+')
-		return (operand_a + operand_b);
-	else if (oper == '-')
-		return (operand_a - operand_b);
-	else if (oper == '*')
-		return (operand_a * operand_b);
-	else
-		return (operand_a / operand_b);
-}
+RPN::RPN() {}
+RPN::~RPN() {}
 
-void	RPN(char *expr)
+void	RPN::simulateRpn(char *expr)
 {
-	std::stack<double>	stack;
 	std::string		oper = "+-*/";
-	double			operand_a;
-	double			operand_b;
 	int				i;
 
 	i = 0;
@@ -33,7 +21,7 @@ void	RPN(char *expr)
 				stack.pop();
 				operand_a = stack.top();
 				stack.pop();
-				stack.push(calculate(operand_a, operand_b, expr[i]));
+				stack.push(calculate(expr[i]));
 			}
 			else
 			{
@@ -55,4 +43,16 @@ void	RPN(char *expr)
 		std::cerr << "Error" << std::endl;
 		return;
 	}
+}
+
+double	RPN::calculate(char oper)
+{
+	if (oper == '+')
+		return (operand_a + operand_b);
+	else if (oper == '-')
+		return (operand_a - operand_b);
+	else if (oper == '*')
+		return (operand_a * operand_b);
+	else
+		return (operand_a / operand_b);
 }
