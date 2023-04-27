@@ -25,13 +25,13 @@ void	RPN::simulateRpn(char *expr)
 			}
 			else
 			{
-				std::cerr << "Error" << std::endl;
+				std::cout << "Error" << std::endl;
 				return;
 			}
 		}
 		else if (expr[i] != ' ')
 		{
-			std::cerr << "Error" << std::endl;
+			std::cout << "Error" << std::endl;
 			return;
 		}
 		i++;
@@ -40,7 +40,7 @@ void	RPN::simulateRpn(char *expr)
 		std::cout << stack.top() << std::endl;
 	else
 	{
-		std::cerr << "Error" << std::endl;
+		std::cout << "Error" << std::endl;
 		return;
 	}
 }

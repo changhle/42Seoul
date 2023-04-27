@@ -8,23 +8,20 @@ void	printError(std::string str)
 
 int	main(int argc, char **argv)
 {
+	BitcoinExchange	btc;
+
 	try
 	{
 		if (argc != 2)
 			throw std::invalid_argument("Error: could not open file.");
 		std::ifstream	input(argv[1]);
-		
+		btc.storeDefaultDatabase();
+		btc.showInputDatabase(argv[1]);
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cout << e.what() << std::endl;
 		return (1);
 	}
-	BitcoinExchange	btc;
 
-	btc.storeDefaultDatabase();
-	btc.showInputDatabase(argv[1]);
-	// btc.showDatabase();
-	// BitcoinExchange::storeDatabase();
-	// BitcoinExchange::showDatabase();
 }

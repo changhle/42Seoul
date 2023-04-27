@@ -3,24 +3,29 @@
 
 #include <iostream>
 #include <vector>
+#include <deque>
+#include <ctime>
 #include <sstream>
 
 class PmergeMe {
 	private:
 		std::vector<int>	v;
+		std::deque<int>		d;
 		int					len;
 		int count;
 		PmergeMe(const PmergeMe& obj);
 		PmergeMe& operator=(const PmergeMe& obj);
+		void	vectorInsertSort(int left, int right);
+		void	vectorMerge(int left, int right);
+		void	dequeInsertSort(int left, int right);
+		void	dequeMerge(int left, int right);
+		void	showArg();
 
 	public:
 		PmergeMe();
 		~PmergeMe();
 		void	insertArg(std::string arg);
-		void	mergeSort();
-		void	insertSort(int left, int right);
-		void	vectorMergeSort(int left, int right);
-		void	showArg();
+		void	sortSimulator();
 };
 
 #endif

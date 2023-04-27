@@ -96,7 +96,7 @@ void	BitcoinExchange::calculateValue(std::string date, double value)
 				else
 					data_rate = (*--it).second;
 			}
-			if (value > INT_MAX)
+			if (value > 1000)
 				std::cout << "Error: too large a number." << std::endl;
 			else if (value >= 0)
 				std::cout << date << " => " << value << " = " << data_rate * value << std::endl;
