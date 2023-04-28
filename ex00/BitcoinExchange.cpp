@@ -7,7 +7,7 @@ void	BitcoinExchange::storeDefaultDatabase()
 	std::string		date;
 	std::string		rate;
 	unsigned long	pos;
-	double			double_rate;
+	double			double_rate = 0;
 
 	if (!input.is_open())
 		throw std::invalid_argument("Error: could not open file.");
@@ -53,7 +53,12 @@ void	BitcoinExchange::showInputDatabase(std::string input_file_name)
 			{
 				std::stringstream	ss(value);
 				ss >> value_double;
-				calculateValue(date, value_double);
+				if (value_double > 1000)
+					std::cout << "Error: too large a number." << std::endl;
+				else if (value_double < 0)
+					std::cout << "Error: not a positive number." << std::endl;
+				else
+					calculateValue(date, value_double);
 			}
 		}
 		else
@@ -88,23 +93,22 @@ void	BitcoinExchange::calculateValue(std::string date, double value)
 		if ((*it).first >= date)
 		{
 			if ((*it).first == date)
+			{
 				data_rate = (*it).second;
+				std::cout << std::setprecision(10) << date << " => " << value << " = " << data_rate * value << std::endl;
+			}
+			else if (it == m.begin())
+				std::cout << "Error: bad input => " << date << std::endl;
 			else
 			{
-				if (it == m.begin())
-					std::cout << "Error: bad input => " << date << std::endl;
-				else
-					data_rate = (*--it).second;
+				data_rate = (*--it).second;
+				std::cout << std::setprecision(10) << date << " => " << value << " = " << data_rate * value << std::endl;
 			}
-			if (value > 1000)
-				std::cout << "Error: too large a number." << std::endl;
-			else if (value >= 0)
-				std::cout << date << " => " << value << " = " << data_rate * value << std::endl;
-			else
-				std::cout << "Error: not a positive number." << std::endl;
 			return;
 		}
 	}
+	if (it == m.end())
+		std::cout << std::setprecision(10) << date << " => " << value << " = " << (*--it).second * value << std::endl;
 }
 
 BitcoinExchange::BitcoinExchange() {}
