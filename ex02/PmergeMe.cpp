@@ -8,6 +8,20 @@ PmergeMe::PmergeMe()
 
 PmergeMe::~PmergeMe() {}
 
+int	PmergeMe::checkArg(std::string arg)
+{
+	int	i;
+
+	i = 0;
+	while (arg[i])
+	{
+		if (!std::isdigit(arg[i]) && arg[i] != ' ')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 void	PmergeMe::insertArg(std::string arg)
 {
 	std::stringstream	ss(arg);
@@ -17,10 +31,13 @@ void	PmergeMe::insertArg(std::string arg)
 	{
 		int					num;
 		std::stringstream	ss_int(temp);
-		ss_int >> num;
-		v.push_back(num);
-		d.push_back(num);
-		len++;
+		if (temp.length() > 0)
+		{
+			ss_int >> num;
+			v.push_back(num);
+			d.push_back(num);
+			len++;
+		}
 	}
 }
 

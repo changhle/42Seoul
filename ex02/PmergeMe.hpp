@@ -24,6 +24,7 @@ class PmergeMe {
 	public:
 		PmergeMe();
 		~PmergeMe();
+		int		checkArg(std::string arg);
 		void	insertArg(std::string arg);
 		void	sortSimulator();
 };

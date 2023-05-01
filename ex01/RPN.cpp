@@ -1,9 +1,9 @@
-#include "RPN.hpp"
+#include "Rpn.hpp"
 
-RPN::RPN() {}
-RPN::~RPN() {}
+Rpn::Rpn() {}
+Rpn::~Rpn() {}
 
-void	RPN::simulateRpn(char *expr)
+void	Rpn::simulateRpn(char *expr)
 {
 	std::string		oper = "+-*/";
 	int				i;
@@ -11,7 +11,7 @@ void	RPN::simulateRpn(char *expr)
 	i = 0;
 	while (expr[i])
 	{
-		if (expr[i] >= '0' && expr[i] <= '9')
+		if (std::isdigit(expr[i]))
 			stack.push(expr[i] - '0');
 		else if (oper.find(expr[i]) != std::string::npos)
 		{
@@ -45,7 +45,7 @@ void	RPN::simulateRpn(char *expr)
 	}
 }
 
-double	RPN::calculate(char oper)
+double	Rpn::calculate(char oper)
 {
 	if (oper == '+')
 		return (operand_a + operand_b);

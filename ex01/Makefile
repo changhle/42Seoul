@@ -1,7 +1,7 @@
 CXX			= c++ -std=c++98
 CXXFLAGS	= -Wall -Werror -Wextra
-NAME		= RPN
-SRCS		= RPN.cpp main.cpp
+NAME		= Rpn
+SRCS		= Rpn.cpp main.cpp
 OBJS		= $(SRCS:.cpp=.o)
 
 all		: $(NAME)

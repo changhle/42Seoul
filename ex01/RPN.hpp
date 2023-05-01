@@ -6,29 +6,20 @@
 #include <string>
 #include <stack>
 
-class RPN {
+class Rpn {
 	private:
 		std::stack<double>	stack;
 		double	operand_a;
 		double	operand_b;
-		RPN(const RPN& obj);
-		RPN& operator=(const RPN& obj);
+		Rpn(const Rpn& obj);
+		Rpn& operator=(const Rpn& obj);
 		double	calculate(char oper);
 
 	public:
-		RPN();
-		~RPN();
+		Rpn();
+		~Rpn();
 		void	simulateRpn(char *expr);
 
 };
 
 #endif
-
-
-// RPN::RPN(const RPN& obj) {
-// 	std::cout << "[RPN] Copy constructor" << '\n';
-// }
-// RPN& RPN::operator=(const RPN& obj) {
-// 	std::cout << "[RPN] Copy assignment operator" << '\n';
-// 	return (*this);
-// }
