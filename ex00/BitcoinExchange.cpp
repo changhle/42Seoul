@@ -21,9 +21,12 @@ void	BitcoinExchange::storeDefaultDatabase()
 			date = line.substr(0, pos);
 			rate = line.substr(pos + 1, line.length() - pos - 1);
 		}
-		std::stringstream	ss(rate);
-		ss >> double_rate;
-		m.insert(std::pair<std::string, double>(date, double_rate));
+		if (!isValidDate(date) && !isValidValue(rate))
+		{
+			std::stringstream	ss(rate);
+			ss >> double_rate;
+			m.insert(std::pair<std::string, double>(date, double_rate));
+		}
 	}
 }
 
@@ -47,7 +50,7 @@ void	BitcoinExchange::showInputDatabase(std::string input_file_name)
 		{
 			date = line.substr(0, pos - 1);
 			value = line.substr(pos + 2, line.length() - pos - 2);
-			if (isValidDate(date))
+			if (isValidDate(date) || isValidValue(value))
 				std::cout << "Error: bad input => " << date << std::endl;
 			else
 			{
@@ -69,6 +72,8 @@ void	BitcoinExchange::showInputDatabase(std::string input_file_name)
 int	BitcoinExchange::isValidDate(std::string date)
 {
 	int	i = 0;
+	int	i_year, i_month, i_day;
+	std::string	year, month, day;
 
 	while (date[i])
 	{
@@ -80,6 +85,39 @@ int	BitcoinExchange::isValidDate(std::string date)
 	}
 	if (i != 10)
 		return (1);
+	year = date.substr(0, 4);
+	month = date.substr(5, 2);
+	day = date.substr(8, 2);
+	std::stringstream	ss_year(year), ss_month(month), ss_day(day);
+	ss_year >> i_year;
+	ss_month >> i_month;
+	ss_day >> i_day;
+	if (i_year < 1 || (i_month < 1 || i_month > 12) || (i_day < 1 || i_day > 31))
+		return (1);
+	if ((i_month < 8 && i_month % 2 == 0 && i_day > 30)
+		|| (i_month > 7 && i_month % 2 == 1 && i_day > 30))
+		return (1);
+	if (i_month == 2)
+	{
+		if (i_year % 4 == 0 && (i_year % 400 == 0 || i_year % 100 != 0) && i_day > 29)
+			return (1);
+		else if (!(i_year % 4 == 0 && (i_year % 400 == 0 || i_year % 100 != 0)) && i_day > 28)
+			return (1);
+	}
+	return (0);
+}
+
+int	BitcoinExchange::isValidValue(std::string value)
+{
+	int	i;
+
+	i = 0;
+	while (value[i])
+	{
+		if (!std::isdigit(value[i]) && value[i] != '.' && value[i] != '+' && value[i] != '-')
+			return (1);
+		i++;
+	}
 	return (0);
 }
 
