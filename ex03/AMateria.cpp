@@ -30,5 +30,6 @@ std::string const &AMateria::getType() const
 
 void AMateria::use(ICharacter& target)
 {
-
+	std::cout << "this is AMateria's use func!" << std::endl;
+	(void)target;
 }

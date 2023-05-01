@@ -5,7 +5,7 @@
 #include "AMateria.hpp"
 #include "ICharacter.hpp"
 
-class Character {
+class Character : public ICharacter{
 	private:
 		AMateria*	inventory[4];
 		std::string	name;
