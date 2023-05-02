@@ -6,18 +6,26 @@ int	main(int argc, char **argv)
 
 	if (argc < 2)
 	{
-		std::cout << "Arguments Error!" << std::endl;
+		std::cout << "Error" << std::endl;
 		return (1);
 	}
 	for (int i = 1; i < argc; i++)
 	{
 		if (pmg.checkArg(argv[i]))
 		{
-			std::cout << "Arguments include none digit!" << std::endl;
+			std::cout << "Error" << std::endl;
 			return (1);
 		}
 	}
-	for (int i = 1; i < argc; i++)
-		pmg.insertArg(argv[i]);
-	pmg.sortSimulator();
+	try
+	{
+		for (int i = 1; i < argc; i++)
+			pmg.insertArg(argv[i]);
+		pmg.sortSimulator();
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;;
+	}
+	
 }

@@ -11,8 +11,8 @@ class PmergeMe {
 	private:
 		std::vector<int>	v;
 		std::deque<int>		d;
-		int					len;
-		int count;
+		int					size;
+		// int count;
 		PmergeMe(const PmergeMe& obj);
 		PmergeMe& operator=(const PmergeMe& obj);
 		void	vectorInsertSort(int left, int right);

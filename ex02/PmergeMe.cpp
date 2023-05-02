@@ -2,8 +2,8 @@
 
 PmergeMe::PmergeMe()
 {
-	len	= 0;
-	count = 0;
+	size = 0;
+	// count = 0;
 }
 
 PmergeMe::~PmergeMe() {}
@@ -29,14 +29,16 @@ void	PmergeMe::insertArg(std::string arg)
 
 	while (getline(ss, temp, ' '))
 	{
-		int					num;
+		unsigned int		num;
 		std::stringstream	ss_int(temp);
 		if (temp.length() > 0)
 		{
 			ss_int >> num;
+			if (num <= 0 || num > INT_MAX)
+				throw std::invalid_argument("Error");
 			v.push_back(num);
 			d.push_back(num);
-			len++;
+			size++;
 		}
 	}
 }
@@ -49,15 +51,15 @@ void	PmergeMe::sortSimulator()
 	std::cout << "Before: ";
 	showArg();
 	v_start = clock();
-	vectorMerge(0, len - 1);
+	vectorMerge(0, size - 1);
 	v_end = clock();
 	d_start = clock();
-	dequeMerge(0, len - 1);
+	dequeMerge(0, size - 1);
 	d_end = clock();
 	std::cout << "After: ";
 	showArg();
-	std::cout << "Time to process a range of 5 elements with std::vector : " << v_end - v_start << " ms" << std::endl;
-	std::cout << "Time to process a range of 5 elements with std::deque : " << d_end - d_start << " ms" << std::endl;
+	std::cout << "Time to process a range of " << size << " elements with std::vector : " << v_end - v_start << " ms" << std::endl;
+	std::cout << "Time to process a range of " << size << " elements with std::deque : " << d_end - d_start << " ms" << std::endl;
 }
 
 void	PmergeMe::vectorInsertSort(int left, int right)
@@ -72,7 +74,7 @@ void	PmergeMe::vectorInsertSort(int left, int right)
 			v[j + 1] = v[j];
 		v[j + 1] = key;
 	}
-	count++;
+	// count++;
 }
 
 void	PmergeMe::vectorMerge(int left, int right)
@@ -122,7 +124,7 @@ void	PmergeMe::dequeInsertSort(int left, int right)
 			d[j + 1] = d[j];
 		d[j + 1] = key;
 	}
-	count++;
+	// count++;
 }
 
 void	PmergeMe::dequeMerge(int left, int right)
@@ -162,7 +164,7 @@ void	PmergeMe::dequeMerge(int left, int right)
 
 void	PmergeMe::showArg()
 {
-	for (int i = 0; i < len && (v[i] == d[i]); i++)
+	for (int i = 0; i < size && (v[i] == d[i]); i++)
 		std::cout << v[i] << " ";
 	std::cout << std::endl;
 }

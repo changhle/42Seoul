@@ -25,7 +25,7 @@ void	BitcoinExchange::storeDefaultDatabase()
 		{
 			std::stringstream	ss(rate);
 			ss >> double_rate;
-			m.insert(std::pair<std::string, double>(date, double_rate));
+			m[date] = double_rate;
 		}
 	}
 }
@@ -112,6 +112,8 @@ int	BitcoinExchange::isValidValue(std::string value)
 	int	i;
 
 	i = 0;
+	if (value.length() == 0)
+		return (1);
 	while (value[i])
 	{
 		if (!std::isdigit(value[i]) && value[i] != '.' && value[i] != '+' && value[i] != '-')
