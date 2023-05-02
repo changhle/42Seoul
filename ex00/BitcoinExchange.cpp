@@ -56,9 +56,9 @@ void	BitcoinExchange::showInputDatabase(std::string input_file_name)
 			{
 				std::stringstream	ss(value);
 				ss >> value_double;
-				if (value_double > 1000)
+				if (value_double >= 1000)
 					std::cout << "Error: too large a number." << std::endl;
-				else if (value_double < 0)
+				else if (value_double <= 0)
 					std::cout << "Error: not a positive number." << std::endl;
 				else
 					calculateValue(date, value_double);
