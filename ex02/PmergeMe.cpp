@@ -3,7 +3,6 @@
 PmergeMe::PmergeMe()
 {
 	size = 0;
-	// count = 0;
 }
 
 PmergeMe::~PmergeMe() {}
@@ -74,7 +73,6 @@ void	PmergeMe::vectorInsertSort(int left, int right)
 			v[j + 1] = v[j];
 		v[j + 1] = key;
 	}
-	// count++;
 }
 
 void	PmergeMe::vectorMerge(int left, int right)
@@ -124,7 +122,6 @@ void	PmergeMe::dequeInsertSort(int left, int right)
 			d[j + 1] = d[j];
 		d[j + 1] = key;
 	}
-	// count++;
 }
 
 void	PmergeMe::dequeMerge(int left, int right)
