@@ -46,7 +46,7 @@ void	BitcoinExchange::showInputDatabase(std::string input_file_name)
 	{
 		getline(input, line);
 		pos = line.find('|');
-		if (pos != std::string::npos)
+		if (pos != std::string::npos && line[pos - 1] == ' ' && line[pos + 1] == ' ')
 		{
 			date = line.substr(0, pos - 1);
 			value = line.substr(pos + 2, line.length() - pos - 2);
