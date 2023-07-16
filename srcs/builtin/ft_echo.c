@@ -6,28 +6,24 @@
 static int	check_n_option(char **cmd)
 {
 	int		i;
-	int		j;
 	int		ret;
 	t_bool	is_n_option;
 
 	ret = 0;
-	i = 1;
-	while (cmd[i][0] == '-')
+	if (cmd[1][0] == '-')
 	{
-		j = 0;
-		while (cmd[i][++j] == 'n')
+		i = 0;
+		while (cmd[1][++i] == 'n')
 			is_n_option = TRUE;
-		if (cmd[i][j] != '\0')
+		if (cmd[1][i] != '\0')
 			is_n_option = FALSE;
 		if (is_n_option)
 			ret++;
 		else
 			return (ret);
-		i++;
 	}
 	return (ret);
 }
-
 static void	print_arg(char **cmd)
 {
 	int	i;
