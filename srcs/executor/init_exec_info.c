@@ -1,29 +1,17 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   init_exec_info.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ljeongin <ljeongin@student.42seoul.kr>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/10 18:37:27 by ljeongin          #+#    #+#             */
-/*   Updated: 2022/10/10 20:50:12 by ljeongin         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 #include "executor.h"
 #include "libft.h"
 
 #include <stddef.h>
 
-static char	**get_envp(t_env_list **env_list)
+static char	**get_envp(t_env_list *env_list)
 {
 	t_env_list	*index;
 	char		**ret;
 	size_t		cnt;
 	size_t		i;
 
-	index = *env_list;
+	index = env_list;
 	cnt = 0;
 	while (index)
 	{
@@ -32,17 +20,16 @@ static char	**get_envp(t_env_list **env_list)
 	}
 	ret = ft_malloc(sizeof(char *) * (cnt + 1));
 	i = 0;
-	index = *env_list;
 	while (i < cnt)
 	{
-		ret[i++] = index->env;
-		index = index->next;
+		ret[i++] = env_list->env;
+		env_list = env_list->next;
 	}
 	ret[i] = NULL;
 	return (ret);
 }
 
-void	init_exec_info(t_exec_info *exec_info, t_env_list **env_list)
+void	init_exec_info(t_exec_info *exec_info, t_env_list *env_list)
 {
 	exec_info->is_first = TRUE;
 	exec_info->is_last = FALSE;

@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   executor.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ljeongin <ljeongin@student.42seoul.kr>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/10 18:37:11 by ljeongin          #+#    #+#             */
-/*   Updated: 2022/10/10 20:49:43 by ljeongin         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 #include "executor.h"
 #include "libft.h"
@@ -55,7 +43,7 @@ void	execute(t_parsed_list *parsed_list, t_env_list **env_list)
 {
 	t_exec_info		exec_info;
 
-	init_exec_info(&exec_info, env_list);
+	init_exec_info(&exec_info, *env_list);
 	while (parsed_list)
 	{
 		if (!parsed_list->next)

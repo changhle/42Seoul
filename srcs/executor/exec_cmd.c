@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   exec_cmd.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ljeongin <ljeongin@student.42seoul.kr>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/10 18:37:08 by ljeongin          #+#    #+#             */
-/*   Updated: 2022/10/10 20:49:21 by ljeongin         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 #include "executor.h"
 #include "libft.h"
@@ -52,7 +40,7 @@ void	exec_single_cmd(t_parsed_unit *parsed_unit, t_exec_info *exec_info)
 	get_infd_outfd(parsed_unit, exec_info, &fd_data);
 	if (parsed_unit->cmd[0] && is_builtin(parsed_unit->cmd[0]))
 	{
-		single_cmd_builtin(parsed_unit->cmd, exec_info->env_head, fd_data);
+		single_cmd_builtin(parsed_unit->cmd, &exec_info->env_head, fd_data);
 		return ;
 	}
 	exec_info->last_pid = fork();

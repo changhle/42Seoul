@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   here_doc.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ljeongin <ljeongin@student.42seoul.kr>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/10 18:37:23 by ljeongin          #+#    #+#             */
-/*   Updated: 2022/10/10 18:37:25 by ljeongin         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 #include "executor.h"
 #include "libft.h"
@@ -53,7 +41,6 @@ static int	heredoc_child(char *limiter, int pipeline[2])
 			break ;
 		}
 		ft_putstr_fd(input, pipeline[1]);
-		ft_putstr_fd("\n", pipeline[1]);
 		ft_free((void **)&input);
 	}
 	ft_close(pipeline[1]);

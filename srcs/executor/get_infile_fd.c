@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_infile_fd.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ljeongin <ljeongin@student.42seoul.kr>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/10 18:37:18 by ljeongin          #+#    #+#             */
-/*   Updated: 2022/10/11 18:37:49 by ljeongin         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 #include "executor.h"
 #include "libft.h"
@@ -18,16 +6,15 @@
 #include <unistd.h>
 
 static int	open_infile(
-	t_redirect_list *redir_in_list, t_bool *heredoc_sigint, int *ambi_error
+	t_redirect_list *redir_in_list, t_bool *heredoc_sigint, t_bool *ambi_error
 	)
 {
 	if (!redir_in_list->filename)
 	{
-		*ambi_error = 1;
+		*ambi_error = TRUE;
 		return (-1);
 	}
-	if (*ambi_error == -1)
-		*ambi_error = 0;
+	*ambi_error = FALSE;
 	if (redir_in_list->redir_type == REDIR_IN_APPEND)
 		return (get_heredoc_fd(redir_in_list->filename, heredoc_sigint));
 	*heredoc_sigint = FALSE;
@@ -47,11 +34,10 @@ int	get_infile_fd(t_redirect_list *redir_in_list)
 {
 	int		fd;
 	char	*err_filename;
-	int		ambiguous_error;
 	t_bool	heredoc_sigint;
+	t_bool	ambiguous_error;
 
 	err_filename = NULL;
-	ambiguous_error = -1;
 	while (redir_in_list)
 	{
 		fd = open_infile(redir_in_list, &heredoc_sigint, &ambiguous_error);
@@ -64,7 +50,7 @@ int	get_infile_fd(t_redirect_list *redir_in_list)
 			ft_close(fd);
 		redir_in_list = redir_in_list->next;
 	}
-	if (ambiguous_error == 1 || err_filename)
+	if (ambiguous_error || err_filename)
 		return (print_error(err_filename));
 	return (fd);
 }

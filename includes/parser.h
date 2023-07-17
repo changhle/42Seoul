@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ljeongin <ljeongin@student.42seoul.kr>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/10 18:41:29 by changhle          #+#    #+#             */
-/*   Updated: 2022/10/11 18:37:56 by ljeongin         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef PARSER_H
 # define PARSER_H
 
@@ -27,7 +15,8 @@ enum e_token_type
 {
 	WORD = 0,
 	REDIRECT,
-	PIPE
+	PIPE,
+	DQUOTE
 };
 
 struct s_token_list
@@ -49,7 +38,7 @@ struct s_token_info
 
 struct s_expand_info
 {
-	int		i;
+	int		index;
 	int		start;
 	int		quote;
 	char	*buf;
@@ -70,9 +59,12 @@ int				is_redirect(char *str);
 /*
 **	expander
 */
+// void			expander(t_token_list **token, t_env_list **env);
 void			expander(t_token_list **s_token_list, t_env_list **env);
 void			init_expand(t_expand_info *info);
 char			*comb_str(char *s1, char *s2);
+void			remove_quote(t_token_list **token);
+t_token_list	*word_split(t_token_list **token_list);
 
 /*
 **	lexer && parser

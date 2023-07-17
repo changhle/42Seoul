@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_export.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ljeongin <ljeongin@student.42seoul.kr>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/10 18:42:21 by changhle          #+#    #+#             */
-/*   Updated: 2022/10/10 20:47:44 by ljeongin         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <stdlib.h>
 #include <unistd.h>
 
@@ -76,7 +64,6 @@ static int	is_valid(char *str)
 void	add_export(char *key, char *value, t_env_list **env_list)
 {
 	t_env_list	*node;
-	char		*key_with_sep;
 
 	if (value)
 		remove_export(key, env_list);
@@ -93,9 +80,6 @@ void	add_export(char *key, char *value, t_env_list **env_list)
 	node = add_env_node(env_list);
 	node->key = key;
 	node->value = value;
-	key_with_sep = ft_strjoin(key, "=");
-	node->env = ft_strjoin(key_with_sep, value);
-	free(key_with_sep);
 }
 
 int	ft_export(char **cmd, t_env_list **env_list)

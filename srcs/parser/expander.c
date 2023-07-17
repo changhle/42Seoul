@@ -1,27 +1,9 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   expander.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/10 18:42:41 by changhle          #+#    #+#             */
-/*   Updated: 2022/10/11 11:13:33 by changhle         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 #include "parser.h"
 #include "libft.h"
 
+#include <stdio.h>
 #include <stdlib.h>
-
-static void	buffer_join(char *str, t_expand_info *info)
-{
-	info->buf = comb_str(info->buf,
-			ft_substr(str, info->start, info->i - info->start));
-	info->start = info->i + 1;
-}
 
 static char	*find_env(char *str, t_env_list **env)
 {
@@ -41,19 +23,13 @@ static char	*find_env(char *str, t_env_list **env)
 	return (NULL);
 }
 
-static void	replace_token(t_token_list *token, t_expand_info *info)
-{
-	ft_free((void **)&token->token);
-	if (info->buf)
-		token->token = ft_strdup(info->buf);
-	ft_free((void **)&info->buf);
-}
-
 static void	replace_env(char *token, t_env_list **env,
 	t_expand_info *info)
 {
-	buffer_join(token, info);
-	if ((token[info->i + 1] == '\'' || token[info->i + 1] == '\"')
+	info->buf = comb_str(info->buf,
+			ft_substr(token, info->start, info->index - info->start));
+	info->start = info->index + 1;
+	if ((token[info->index + 1] == '\'' || token[info->index + 1] == '\"')
 		&& info->quote == 0)
 	{
 		info->start++;
@@ -61,19 +37,18 @@ static void	replace_env(char *token, t_env_list **env,
 	}
 	while (1)
 	{
-		if ((!ft_isalnum(token[info->i + 1])
-				&& token[info->i + 1] != '_'
-				&& token[info->i + 1] != '?')
-			|| token[info->i] == '?')
+		if (!ft_isalnum(token[info->index + 1])
+			&& token[info->index + 1] != '_'
+			&& token[info->index + 1] != '?')
 		{
 			info->env_buf = ft_substr(token, info->start,
-					info->i - info->start + 1);
+					info->index - info->start + 1);
 			info->buf = comb_str(info->buf, find_env(info->env_buf, env));
-			info->start = info->i + 1;
+			info->start = info->index + 1;
 			ft_free((void **)&info->env_buf);
 			break ;
 		}
-		info->i++;
+		info->index++;
 	}
 }
 
@@ -86,21 +61,22 @@ void	expander(t_token_list **token_list, t_env_list **env)
 	while (tmp)
 	{
 		init_expand(&info);
-		while (tmp->token[info.i])
+		while (tmp->token[info.index])
 		{
-			if (tmp->token[info.i] == '\'' || tmp->token[info.i] == '\"')
-			{
-				if (info.quote == 0 || info.quote == tmp->token[info.i])
-					buffer_join(tmp->token, &info);
-				info.quote = set_quote(info.quote, tmp->token[info.i]);
-			}
+			if (tmp->token[info.index] == '\''
+				|| tmp->token[info.index] == '\"')
+				info.quote = set_quote(info.quote, tmp->token[info.index]);
 			if ((info.quote == 0 || info.quote == '\"')
-				&& tmp->token[info.i] == '$')
+				&& tmp->token[info.index] == '$')
 				replace_env(tmp->token, env, &info);
-			info.i++;
+			info.index++;
 		}
-		buffer_join(tmp->token, &info);
-		replace_token(tmp, &info);
+		info.buf = comb_str(info.buf,
+				ft_substr(tmp->token, info.start, info.index - info.start + 1));
+		ft_free((void **)&tmp->token);
+		if (info.buf[0] != '\0')
+			tmp->token = ft_strdup(info.buf);
+		ft_free((void **)&info.buf);
 		tmp = tmp->next;
 	}
 }
