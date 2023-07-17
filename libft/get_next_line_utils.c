@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljeongin <ljeongin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: changhle <changhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/20 13:47:42 by ljeongin          #+#    #+#             */
-/*   Updated: 2022/08/08 09:59:16 by ljeongin         ###   ########.fr       */
+/*   Created: 2022/03/20 13:47:42 by changhle          #+#    #+#             */
+/*   Updated: 2023/07/17 21:12:44 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

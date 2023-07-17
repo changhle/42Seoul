@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_outfile_fd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljeongin <ljeongin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: changhle <changhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/10 18:37:20 by ljeongin          #+#    #+#             */
-/*   Updated: 2022/10/10 18:37:22 by ljeongin         ###   ########.fr       */
+/*   Created: 2022/10/10 18:37:20 by changhle          #+#    #+#             */
+/*   Updated: 2023/07/17 21:12:44 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

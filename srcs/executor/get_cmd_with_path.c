@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_cmd_with_path.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljeongin <ljeongin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: changhle <changhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/10 18:37:14 by ljeongin          #+#    #+#             */
-/*   Updated: 2022/10/10 20:50:00 by ljeongin         ###   ########.fr       */
+/*   Created: 2022/10/10 18:37:14 by changhle          #+#    #+#             */
+/*   Updated: 2023/07/17 21:12:44 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

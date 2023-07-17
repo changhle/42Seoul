@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_exec_info.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljeongin <ljeongin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: changhle <changhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/10 18:37:27 by ljeongin          #+#    #+#             */
-/*   Updated: 2022/10/10 20:50:12 by ljeongin         ###   ########.fr       */
+/*   Created: 2022/10/10 18:37:27 by changhle          #+#    #+#             */
+/*   Updated: 2023/07/17 21:12:44 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

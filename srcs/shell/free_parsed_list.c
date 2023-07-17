@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_parsed_list.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljeongin <ljeongin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: changhle <changhle@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/10 18:38:45 by ljeongin          #+#    #+#             */
-/*   Updated: 2022/10/10 18:38:47 by ljeongin         ###   ########.fr       */
+/*   Created: 2022/10/10 18:38:45 by changhle          #+#    #+#             */
+/*   Updated: 2023/07/17 21:12:44 by changhle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
