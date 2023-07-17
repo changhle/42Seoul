@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_cmd_with_path.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ljeongin <ljeongin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/10 18:37:14 by ljeongin          #+#    #+#             */
+/*   Updated: 2022/10/10 20:50:00 by ljeongin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 #include "executor.h"
 #include "libft.h"
@@ -5,19 +17,19 @@
 #include <stdio.h>
 #include <sys/stat.h>
 
-static char	**get_path(t_env_list *env_list)
+static char	**get_path(t_env_list **env_list)
 {
 	char	**ret;
 
-	while (env_list && ft_strncmp(env_list->key, "PATH", 4))
-		env_list = env_list->next;
-	if (!env_list)
+	while ((*env_list) && ft_strncmp((*env_list)->key, "PATH", 4))
+		(*env_list) = (*env_list)->next;
+	if (!(*env_list))
 	{
 		ret = ft_malloc(sizeof(char *));
 		ret[0] = NULL;
 	}
 	else
-		ret = ft_split(env_list->value, ':');
+		ret = ft_split((*env_list)->value, ':');
 	return (ret);
 }
 
@@ -56,7 +68,7 @@ static void	get_command(char **cmd, char **path)
 	ft_free((void **)&cmd_with_slash);
 }
 
-void	get_cmd_with_path(char **cmd, t_env_list *env_list)
+void	get_cmd_with_path(char **cmd, t_env_list **env_list)
 {
 	char	**path;
 

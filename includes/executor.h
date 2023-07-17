@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   executor.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ljeongin <ljeongin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/10 18:39:06 by ljeongin          #+#    #+#             */
+/*   Updated: 2022/10/10 20:46:41 by ljeongin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef EXECUTOR_H
 # define EXECUTOR_H
 
@@ -21,7 +33,7 @@ enum e_exit_status
 struct s_exec_info
 {
 	t_parsed_list	*parsed_idx;
-	t_env_list		*env_head;
+	t_env_list		**env_head;
 	char			**envp;
 	size_t			process_cnt;
 	pid_t			last_pid;
@@ -37,7 +49,7 @@ struct s_fd_data
 	int	outfd;
 };
 
-void	init_exec_info(t_exec_info *exec_info, t_env_list *env_list);
+void	init_exec_info(t_exec_info *exec_info, t_env_list **env_list);
 
 void	exec_single_cmd(t_parsed_unit *parsed_unit, t_exec_info *exec_info);
 void	exec_multiple_cmd(
@@ -46,7 +58,7 @@ void	exec_multiple_cmd(
 int		exec_builtin(char **cmd, t_env_list **env_list);
 t_bool	is_builtin(char *command);
 
-void	get_cmd_with_path(char **cmd, t_env_list *env_list);
+void	get_cmd_with_path(char **cmd, t_env_list **env_list);
 
 int		get_infile_fd(t_redirect_list *redir_in_list);
 int		get_outfile_fd(t_redirect_list *redir_out_list);
@@ -58,7 +70,6 @@ void	get_infd_outfd(
 			t_fd_data *fd_data
 			);
 void	child_process(char **cmd, t_fd_data fd_data, t_exec_info *exec_info);
-void	ft_execve(char **cmd, char **envp, t_env_list *env_list);
 void	print_minishell_error(char *str, char *desc, int err_num);
 
 #endif

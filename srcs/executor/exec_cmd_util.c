@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_cmd_util.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/10 18:37:05 by ljeongin          #+#    #+#             */
+/*   Updated: 2022/10/10 20:55:23 by changhle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 #include "executor.h"
 #include "libft.h"
@@ -25,33 +37,39 @@ void	get_infd_outfd(
 		fd_data->outfd = fd_data->pipeline[1];
 }
 
-void	ft_execve(char **cmd, char **envp, t_env_list *env_list)
+static void	execve_error(char **cmd)
 {
 	struct stat	buf;
 
+	if (lstat(cmd[0], &buf) == 0)
+	{
+		print_minishell_error(cmd[0], NULL, 126);
+		exit(126);
+	}
+	else
+	{
+		print_minishell_error(cmd[0], NULL, 127);
+		exit(127);
+	}
+}
+
+static void	ft_execve(char **cmd, char **envp, t_env_list **env_list)
+{
+	t_env_list	*index;
+
+	index = *env_list;
 	if (!ft_strchr(cmd[0], '/'))
 	{
-		while (env_list && ft_strncmp(env_list->key, "PATH", 4))
-			env_list = env_list->next;
-		if (env_list)
+		while (index && ft_strncmp(index->key, "PATH", 4))
+			index = index->next;
+		if (index)
 		{
 			print_minishell_error(cmd[0], "command not found", 127);
 			exit(127);
 		}
 	}
 	if (execve(cmd[0], cmd, envp) < 0)
-	{
-		if (lstat(cmd[0], &buf) == 0)
-		{
-			print_minishell_error(cmd[0], NULL, 126);
-			exit(126);
-		}
-		else
-		{
-			print_minishell_error(cmd[0], NULL, 127);
-			exit(127);
-		}
-	}
+		execve_error(cmd);
 }
 
 void	child_process(char **cmd, t_fd_data fd_data, t_exec_info *exec_info)
@@ -70,7 +88,7 @@ void	child_process(char **cmd, t_fd_data fd_data, t_exec_info *exec_info)
 	if (!cmd[0])
 		exit(SUCCESS);
 	if (is_builtin(cmd[0]))
-		exit(exec_builtin(cmd, &exec_info->env_head));
+		exit(exec_builtin(cmd, exec_info->env_head));
 	ft_execve(cmd, exec_info->envp, exec_info->env_head);
 }
 
