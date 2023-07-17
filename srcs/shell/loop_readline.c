@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   loop_readline.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ljeongin <ljeongin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/10 18:38:49 by ljeongin          #+#    #+#             */
+/*   Updated: 2022/10/10 18:38:56 by ljeongin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include <stdlib.h>
 #include <readline/history.h>
@@ -30,7 +42,6 @@ static t_bool	is_valid_line(char	**line)
 
 void	loop_readline(char **envp)
 {
-	int				ret_value;
 	char			*line;
 	t_env_list		*env_list;
 	t_parsed_list	*parsed_list;
@@ -45,8 +56,7 @@ void	loop_readline(char **envp)
 			add_history(line);
 		if (is_valid_line(&line))
 		{
-			ret_value = parse(line, &parsed_list, &env_list);
-			if (ret_value == SUCCESS)
+			if (parse(line, &parsed_list, &env_list) == SUCCESS)
 				execute(parsed_list, &env_list);
 			free_parsed_list(&parsed_list);
 		}

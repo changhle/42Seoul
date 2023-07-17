@@ -1,79 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/10 18:43:00 by changhle          #+#    #+#             */
+/*   Updated: 2022/10/11 11:18:09 by changhle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include <unistd.h>
-#include <stdio.h>
 
 #include "minishell.h"
 #include "parser.h"
 #include "libft.h"
-
-// static void	test_print_token(t_token_list *token_list)
-// {
-// 	printf("\n=================TOKEN=================\n\n");
-// 	while (token_list)
-// 	{
-// 		printf("token : %s\n", token_list->token);
-// 		if (token_list->token_type == WORD)
-// 			printf("type : WORD\n");
-// 		else if (token_list->token_type == REDIRECT)
-// 			printf("type : REDIRECT\n");
-// 		else if (token_list->token_type == PIPE)
-// 			printf("type : PIPE\n");
-// 		token_list = token_list->next;
-// 		if (token_list)
-// 			printf("------------------\n");
-// 	}
-// }
-
-// static void	test_print_unit(t_parsed_list *parsed_head)
-// {
-// 	int	i;
-// 	t_redirect_list	*tmp;
-
-// 	printf("\n=================UNIT=================\n\n");
-// 	while (parsed_head)
-// 	{
-// 		if (parsed_head->parsed_unit->cmd)
-// 		{
-// 			i = 0;
-// 			printf("-------------CMD-------------\n");
-// 			while (parsed_head->parsed_unit->cmd[i])
-// 			{
-// 				printf("cmd[%d] : %s\n", i, parsed_head->parsed_unit->cmd[i]);
-// 				i++;
-// 			}
-// 			printf("-----------------------------\n");
-// 		}
-// 		tmp = parsed_head->parsed_unit->redir_in_list;
-// 		if (tmp)
-// 			printf("\n----------REDIR__IN----------\n");
-// 		while (tmp)
-// 		{
-// 			if (tmp->redir_type == 1)
-// 				printf("REDIR_TYPE : REDIR_IN\n");
-// 			else if (tmp->redir_type == 2)
-// 				printf("REDIR_TYPE : REDIR_IN_APPEND\n");
-// 			printf("FILENAME : %s\n", tmp->filename);
-// 			tmp = tmp->next;
-// 			printf("-----------------------------\n");
-// 		}
-// 		tmp = parsed_head->parsed_unit->redir_out_list;
-// 		if (tmp)
-// 			printf("\n----------REDIR_OUT----------\n");
-// 		while (tmp)
-// 		{
-// 			if (tmp->redir_type == 3)
-// 				printf("REDIR_TYPE : REDIR_OUT\n");
-// 			else if (tmp->redir_type == 4)
-// 				printf("REDIR_TYPE : REDIR_OUT_APPEND\n");
-// 			printf("FILENAME : %s\n", tmp->filename);
-// 			tmp = tmp->next;
-// 			printf("-----------------------------\n");
-// 		}
-// 		parsed_head = parsed_head->next;
-// 		if (parsed_head)
-// 			printf("\n=================PIPE=================\n\n");
-// 	}
-// }
 
 static int	print_error(char c)
 {
@@ -89,7 +31,7 @@ static int	print_error(char c)
 	return (1);
 }
 
-int	not_interpret(char *line)
+static int	not_interpret(char *line)
 {
 	char	quote;
 
@@ -125,7 +67,6 @@ void	free_token_list(t_token_list *token_list)
 int	parse(char *line, t_parsed_list **parsed_head, t_env_list **env_list)
 {
 	t_token_list	*token_head;
-	t_token_list	*tmp;
 	int				ret_value;
 
 	*parsed_head = NULL;
@@ -140,14 +81,8 @@ int	parse(char *line, t_parsed_list **parsed_head, t_env_list **env_list)
 		return (ret_value);
 	}
 	expander(&token_head, env_list);
-	tmp = token_head;
-	token_head = word_split(&token_head);
-	// test_print_token(token_head);
-	free_token_list(tmp);
-	remove_quote(&token_head);
 	*parsed_head = NULL;
 	mini_parse(token_head, parsed_head);
-	// test_print_unit(*parsed_head);
 	free_token_list(token_head);
 	return (ret_value);
 }

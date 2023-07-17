@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ljeongin <ljeongin@student.42seoul.kr>     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/10/10 18:39:57 by ljeongin          #+#    #+#              #
+#    Updated: 2022/10/10 18:39:58 by ljeongin         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 SHELL_DIR		:=	shell
 SHELL_SRCS		:=	shell.c shell_banner.c \
 					loop_readline.c set_env_list.c \
@@ -6,9 +18,8 @@ SHELL_SRCS		:=	$(addprefix $(SHELL_DIR)/, $(SHELL_SRCS))
 
 PARSER_DIR		:=	parser
 PARSER_SRCS		:=	parser.c tokenizer.c tokenizer_utils.c \
-					expander.c expander_utils.c remove_quote.c \
-					lexer.c mini_parser.c mini_parser_utils.c \
-					word_split.c
+					expander.c expander_utils.c \
+					lexer.c mini_parser.c mini_parser_utils.c
 PARSER_SRCS		:=	$(addprefix $(PARSER_DIR)/, $(PARSER_SRCS))
 
 EXECUTOR_DIR	:=	executor
@@ -43,7 +54,7 @@ READLINE		:=	$(READLINE_DIR)/libreadline.a \
 					$(READLINE_DIR)/libhistory.a
 
 CC				:=	gcc
-CFLAGS			:=	-g -Wall -Werror -Wextra -D READLINE_LIBRARY
+CFLAGS			:=	-Wall -Werror -Wextra -D READLINE_LIBRARY
 RM				:=	rm -f
 
 NAME			:=	minishell
@@ -59,11 +70,11 @@ $(NAME)			:	$(OBJS) $(LIBFT) $(READLINE)
 	$(CC) $(CFLAGS) -I$(INCS_DIR) -I$(LIBFT_DIR) -I$(READLINE_DIR) -c $< -o $@
 
 $(LIBFT)		:
-	$(MAKE) -j -C $(LIBFT_DIR) all
+	$(MAKE) -C $(LIBFT_DIR) all
 
 $(READLINE)		:
 	cd $(READLINE_DIR); ./configure
-	$(MAKE) -j -C $(READLINE_DIR) all
+	$(MAKE) -C $(READLINE_DIR) all
 
 .PHONY			:	clean
 clean			:
@@ -74,7 +85,7 @@ clean			:
 fclean			:	clean
 	$(RM) $(NAME)
 	$(MAKE) -C $(LIBFT_DIR) fclean
-	#$(MAKE) -C $(READLINE_DIR) clean
+	$(MAKE) -C $(READLINE_DIR) clean
 
 .PHONY			:	re
 re				:

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_echo.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ljeongin <ljeongin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/10 18:42:03 by changhle          #+#    #+#             */
+/*   Updated: 2022/10/11 18:38:06 by ljeongin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 
 #include "libft.h"
@@ -6,24 +18,28 @@
 static int	check_n_option(char **cmd)
 {
 	int		i;
+	int		j;
 	int		ret;
 	t_bool	is_n_option;
 
 	ret = 0;
-	if (cmd[1][0] == '-')
+	i = 1;
+	while (cmd[i] && cmd[i][0] == '-')
 	{
-		i = 0;
-		while (cmd[1][++i] == 'n')
+		j = 0;
+		while (cmd[i][++j] == 'n')
 			is_n_option = TRUE;
-		if (cmd[1][i] != '\0')
+		if (cmd[i][j] != '\0')
 			is_n_option = FALSE;
 		if (is_n_option)
 			ret++;
 		else
 			return (ret);
+		i++;
 	}
 	return (ret);
 }
+
 static void	print_arg(char **cmd)
 {
 	int	i;

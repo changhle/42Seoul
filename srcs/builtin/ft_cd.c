@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_cd.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/10 18:41:43 by changhle          #+#    #+#             */
+/*   Updated: 2022/10/10 18:41:44 by changhle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include <string.h>
 #include <errno.h>
@@ -13,6 +25,7 @@ static int	change_dir(char *dir, t_env_list **env_list)
 	old_pwd = getcwd(NULL, 0);
 	if (chdir(dir) == -1)
 	{
+		ft_free((void **)&old_pwd);
 		ft_putstr_fd("minishell: cd: ", STDERR_FILENO);
 		ft_putstr_fd(dir, STDERR_FILENO);
 		ft_putstr_fd(": ", STDERR_FILENO);

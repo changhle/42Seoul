@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_unset.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: changhle <changhle@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/10 18:42:27 by changhle          #+#    #+#             */
+/*   Updated: 2022/10/10 18:42:28 by changhle         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include <unistd.h>
 
@@ -52,6 +64,7 @@ void	remove_export(char *str, t_env_list **env_list)
 	free(tmp->key);
 	if (tmp->value)
 		free(tmp->value);
+	free(tmp->env);
 	free(tmp);
 }
 
