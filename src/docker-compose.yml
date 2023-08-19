@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  mariadb:
+    image: mariadb
+    build: ./requirements/mariadb
+    networks: inception
+
+  wordpress:
+    image: wordpress
+    build: ./requiremnets/wordpress
+    networks: inception
+
+  nginx:
+    image: nginx
+    build: ./requirements/nginx
+    networks: inception
+
+networks:
+  inception:
+    driver: bridge
