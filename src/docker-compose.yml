@@ -3,18 +3,36 @@ version: "3"
 services:
   mariadb:
     image: mariadb
+    container_name: mariadb
     build: ./requirements/mariadb
-    networks: inception
+    expose:
+      - 3306
+    networks:
+      - inception
+    tty: true
+    restart: always
 
   wordpress:
     image: wordpress
-    build: ./requiremnets/wordpress
-    networks: inception
+    container_name: wordpress
+    build: ./requirements/wordpress
+    expose:
+      - 9000
+    networks:
+      - inception
+    tty: true
+    restart: always
 
   nginx:
     image: nginx
+    container_name: nginx
     build: ./requirements/nginx
-    networks: inception
+    ports:
+      - 443:443
+    networks:
+      - inception
+    tty: true
+    restart: always
 
 networks:
   inception:
