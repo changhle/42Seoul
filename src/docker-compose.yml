@@ -1,14 +1,20 @@
 version: "3"
 
+volumes:
+  data: {}
+
 services:
   mariadb:
     image: mariadb
     container_name: mariadb
     build: ./requirements/mariadb
+    env_file:
+      - .env
     expose:
       - 3306
     networks:
-      - inception
+      inception:
+        ipv4_address: 172.31.0.10
     tty: true
     restart: always
 
@@ -16,10 +22,15 @@ services:
     image: wordpress
     container_name: wordpress
     build: ./requirements/wordpress
+    env_file:
+      - .env
     expose:
       - 9000
+    volumes:
+      - data:/var/www/html
     networks:
-      - inception
+      inception:
+        ipv4_address: 172.31.0.11
     tty: true
     restart: always
 
@@ -27,13 +38,25 @@ services:
     image: nginx
     container_name: nginx
     build: ./requirements/nginx
+    env_file:
+      - .env
     ports:
       - 443:443
+    volumes:
+      - data:/var/www/html
     networks:
-      - inception
+      inception:
+        ipv4_address: 172.31.0.12
     tty: true
     restart: always
 
 networks:
   inception:
     driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.31.0.0/16
+# networks:
+#   inception:
+#     driver: bridge
