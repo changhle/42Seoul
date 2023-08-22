@@ -5,3 +5,7 @@ all:
 
 clean:
 	docker-compose -f $(SRC) down
+
+fclean:
+	docker-compose -f $(SRC) down --rmi all
+	docker volume rm src_data
