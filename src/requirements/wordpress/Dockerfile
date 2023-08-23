@@ -2,6 +2,6 @@ FROM debian:buster
 
 COPY ./tools/setup.sh /setup.sh
 RUN chmod +x /setup.sh
-# ENTRYPOINT ["/setup.sh"]
-# CMD ["php-fpm7.3", "-F"]
+ENTRYPOINT ["/setup.sh"]
+CMD ["php-fpm7.3", "-F"]
 # CMD ["service", "php7.3-fpm", "start"]
