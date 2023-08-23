@@ -8,4 +8,4 @@ clean:
 
 fclean:
 	docker-compose -f $(SRC) down --rmi all
-	docker volume rm src_data
+	docker volume rm src_mariadb_volume src_wordpress_volume
