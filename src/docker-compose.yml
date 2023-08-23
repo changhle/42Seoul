@@ -12,6 +12,8 @@ services:
       - .env
     expose:
       - 3306
+    volumes:
+      - data:/var/lib/mysql
     networks:
       inception:
         ipv4_address: 172.31.0.10
