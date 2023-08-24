@@ -8,4 +8,3 @@ mysql -uroot -p$MARIADB_ROOT_PWD -e "FLUSH PRIVILEGES;"
 service mysql stop
 
 exec mysqld
-# exec "$@"

@@ -11,4 +11,3 @@ RUN	sed -i "s/bind-address/#bind-address/" /etc/mysql/mariadb.conf.d/50-server.c
 COPY ./tools/setup.sh /setup.sh
 RUN chmod +x /setup.sh
 ENTRYPOINT ["/setup.sh"]
-# CMD ["mysqld"]
