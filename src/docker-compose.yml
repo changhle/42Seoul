@@ -2,7 +2,20 @@ version: "3"
 
 volumes:
   mariadb_volume:
+    name: mariadb_volume
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/changhle/data/mariadb
+      o: bind
+
   wordpress_volume:
+    name: wordpress_volume
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/changhle/data/wordpress
+      o: bind
 
 services:
   mariadb:

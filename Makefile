@@ -1,11 +1,17 @@
-SRC = ./src/docker-compose.yml
+COMPOSE = ./src/docker-compose.yml
 
 all:
-	docker-compose -f $(SRC) up -d --build
+	docker-compose -f $(COMPOSE) up -d --build
 
 clean:
-	docker-compose -f $(SRC) down
+	docker-compose -f $(COMPOSE) down
 
 fclean:
-	docker-compose -f $(SRC) down --rmi all
-	docker volume rm src_mariadb_volume src_wordpress_volume
+	docker-compose -f $(COMPOSE) down --rmi all
+	docker volume rm mariadb_volume wordpress_volume
+
+re:
+	make fclean
+	make all
+
+.PHONY: all clean fclean re
