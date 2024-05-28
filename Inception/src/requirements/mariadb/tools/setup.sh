@@ -1,0 +1,10 @@
+#!/bin/bash
+
+service mysql start
+mysql -uroot -p$MARIADB_ROOT_PWD -e "CREATE DATABASE IF NOT EXISTS $MARIADB_DATABASE;"
+mysql -uroot -p$MARIADB_ROOT_PWD -e "CREATE USER IF NOT EXISTS '$MARIADB_USER'@'%' IDENTIFIED BY '$MARIADB_PWD';"
+mysql -uroot -p$MARIADB_ROOT_PWD -e "GRANT ALL PRIVILEGES ON $MARIADB_DATABASE.* TO '$MARIADB_USER'@'%' IDENTIFIED BY '$MARIADB_PWD';"
+mysql -uroot -p$MARIADB_ROOT_PWD -e "FLUSH PRIVILEGES;"
+service mysql stop
+
+exec mysqld
