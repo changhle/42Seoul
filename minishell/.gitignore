@@ -1,0 +1,18 @@
+# object files
+*.o
+
+# archive files
+*.a
+
+# dummy file
+.DS_Store
+test.c
+a.out
+file1
+file2
+
+# vscode
+.vscode
+
+# executable
+minishell
