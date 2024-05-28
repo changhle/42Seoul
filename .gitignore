@@ -1,0 +1,13 @@
+*.vscode
+
+
+#test file
+test.c
+
+#obj
+*.o
+
+#exec
+a.out
+ircserv
+bircd
